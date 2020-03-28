@@ -1,0 +1,29 @@
+id	name	element	description	imagepath	power	attack	defense
+65	Air Funnel	AIR	Technique to create a cannon for small projectiles.	src/res/image/Air Funnel.png	2	4	0
+66	Air Scooter	AIR	A form of transportation invented by Aang.	src/res/image/Air Scooter.png	2	2	4
+67	Airbender Staff	AIR	A wooden stave used primarily by airbenders to augment their bending.	src/res/image/Airbender Staff.png	2	2	2
+68	Airbender Upgraded Staff	AIR	Upgraded staff made by Mechanist for Aang at the Fire Nation Invasion.	src/res/image/Airbender Upgraded Staff.png	2	3	3
+69	Asphyxiation	AIR	Manipulates the flow of air within a person's respiratory system and prevents any new intake of breath by forming a ball of air around the head.	src/res/image/Asphyxiation.png	3	-3	-3
+70	Glider	AIR	Aerial transportation made by Mechanist, inspired from Air nomad gliders.	src/res/image/Glider.png	1	2	-1
+71	Hot Air Balloon	AIR	Air balloon created by Mechanist, originally developed for the Fire Nation	src/res/image/Hot Air Balloon.png	3	3	2
+72	Crystal Armor	EARTH	Armor made of crystal that makes the person cannot move.	src/res/image/Crystal Armor.png	3	-4	2
+73	Earth Sink	EARTH	Make the person sink to the ground.	src/res/image/Earth Sink.png	2	-4	2
+74	Lavabending	EARTH	Manipulate molten earth.	src/res/image/Lavabending.png	4	4	-2
+75	Metalbending	EARTH	Ability to bend metal.	src/res/image/Metalbending.png	4	1	3
+76	Rock Gloves	EARTH	Favored weapons of Ba Sing Se's secret police force, known as the Dai Li.	src/res/image/Rock Gloves.png	1	-2	-2
+77	Slinky Tank	EARTH	Stone vehicles provided both transportation and protection during the invasion of the Fire Nation.	src/res/image/Slinky Tank.png	3	-1	5
+78	Surface Rocks	EARTH	Largse rocks used as projectiles of Royal Earthbender Guards.	src/res/image/Surface Rocks.png	2	3	0
+79	Blue Fire	FIRE	Bend completely blue flames, which are hotter than the orange flames.	src/res/image/Blue Fire.png	3	3	0
+80	Combustionbending	FIRE	Ignite objects with their mind instead of traditional firebending methods.	src/res/image/Combustionbending.png	3	3	0
+81	Fire Armor	FIRE	Fire Nation armor.	src/res/image/Fire Armor.png	1	0	2
+82	Lightningbending	FIRE	Manipulate lightning by separating the yin and yang energies.	src/res/image/Lightningbending.png	4	4	-2
+83	Shozin Comet	FIRE	Formerly known as the Great Comet. A celestial object that passes close to the Earth every one hundred years, just skimming the surface of the upper atmosphere.	src/res/image/Shozin Comet.png	4	4	-1
+84	Trebuchets	FIRE	Large weapons to conduct long-range artilery warfare.	src/res/image/Trebuchets.png	2	2	0
+85	Wall of Flames	FIRE	Wall of concentrated flames acts as a barrier to incoming attacks.	src/res/image/Wall of Flames.png	3	0	3
+86	Bloodbending	WATER	Ability that allows waterbender to manipulate person's movement.	src/res/image/Bloodbending.png	4	4	1
+87	Club	WATER	A blunt force weapon used for striking. Mostly used by Sokka.	src/res/image/Club.png	1	1	1
+88	Full Moon	WATER	Enhance the ability of water bending.	src/res/image/Full Moon.png	4	4	2
+89	Ice Claws	WATER	Drawing water around the fingers and freezing it.	src/res/image/Ice Claws.png	3	3	0
+90	Ice Prison	WATER	This technique covers an opponent in a prison made of ice.	src/res/image/Ice Prison.png	3	-4	2
+91	Tangle Mine	WATER	Military weapons invented by Hakoda to aid the Southern Water Tribe's quest to defeat the Fire Nation.	src/res/image/Tangle Mine.png	2	2	-1
+92	Wolf Armor	WATER	Protective battle gear worn by the warriors of the Southern Water Tribe.	src/res/image/Wolf Armor.png	2	2	1
