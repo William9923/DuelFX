@@ -32,21 +32,21 @@ public class AvatarDuel extends Application {
 
   @Override
   public void start(Stage stage) {
-    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
-//    Text text = new Text();
-//    text.setText("Loading...");
-//    text.setX(50);
-//    text.setY(50);
-//
-//    Text text2 = new Text();
-//    text2.setText("Bitch");
-//    text2.setX(100);
-//    text2.setY(100);
-//
-//    Group root = new Group();
-//    root.getChildren().add(text);
-//    root.getChildren().add(text2);
+    Text text = new Text();
+    text.setText("Loading...");
+    text.setX(50);
+    text.setY(50);
+
+    Text text2 = new Text();
+    text2.setText("Canda hehe");
+    text2.setX(100);
+    text2.setY(100);
+
+    Group root = new Group();
+    root.getChildren().add(text);
+    root.getChildren().add(text2);
 
     Scene scene = new Scene(root, 1280, 720);
 
@@ -56,6 +56,7 @@ public class AvatarDuel extends Application {
 
     try {
       this.loadCards();
+      text.setText("Saya benci Arthur");
       System.out.println("Successful LoadTime");
     } catch (Exception e) {
       System.out.println("Unsuccessful LoadTime");
