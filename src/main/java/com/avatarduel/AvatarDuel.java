@@ -46,7 +46,7 @@ public class AvatarDuel extends Application {
 
     try {
       this.loadCards();
-      text.setText("Avatar Duel!");
+      text.setText("Pikachu Duel!");
     } catch (Exception e) {
       text.setText("Failed to load cards: " + e);
     }
