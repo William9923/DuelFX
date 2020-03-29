@@ -1,9 +1,16 @@
 # IF2210 Project Template
 
 Here is an example of project using gradle as the build tools.
-Try running these commands:
+Try running these commands: <br>
+Linux : <br>
+```bash
+./gradlew run
+```
+Windows : <br>
+```bash
+gradlew run
+```
 
-`./gradlew run`
 
 You will notice that it will open a window that display 'Avatar Duel'.
 In the command line you can see the data that is being read by `CSVReader.java`
