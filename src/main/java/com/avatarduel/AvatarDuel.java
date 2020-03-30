@@ -56,7 +56,7 @@ public class AvatarDuel extends Application {
 
     try {
       this.loadCards();
-      text.setText("Saya benci Arthur");
+      text.setText("IU cinta Arthur");
       System.out.println("Successful LoadTime");
     } catch (Exception e) {
       System.out.println("Unsuccessful LoadTime");
