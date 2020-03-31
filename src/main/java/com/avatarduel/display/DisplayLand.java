@@ -14,7 +14,7 @@ public class DisplayLand implements IDisplay{
         map.put("description", card.getDescription());
         map.put("image_url",card.getImage());
         map.put("element", card.getElement().toString());
-        map.put("type", "Character");
+        map.put("type", card.getType().toString());
         return map;
     }
 }

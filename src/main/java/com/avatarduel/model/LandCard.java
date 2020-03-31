@@ -1,6 +1,7 @@
 package com.avatarduel.model;
 
 import com.avatarduel.display.DisplayLand;
+import com.avatarduel.effect.DoNothingEffect;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,8 @@ public class LandCard extends Card {
         super(id, name, element, description, image);
         this.power = 1; // hard-coded without context power
         this.displayer = new DisplayLand();
+        this.effect = new DoNothingEffect();
+        this.type = CardType.LAND;
     }
 
     public int getPower() {
@@ -26,5 +29,10 @@ public class LandCard extends Card {
         HashMap<String, String> map = displayer.display(this);
         for (Map.Entry<String,String> entry : map.entrySet())
             System.out.println(entry.getKey() + " : "+ entry.getValue());
+    }
+
+    @Override
+    public void doEffect() {
+        effect.showEffect();
     }
 }

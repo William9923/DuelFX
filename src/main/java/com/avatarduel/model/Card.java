@@ -10,7 +10,9 @@ public abstract class Card  {
     protected Element element;
     protected String description;
     protected String image;
+    protected CardType type;
     protected IDisplay displayer;
+    protected IEffect effect;
 
     // constructor
     public Card(String id, String name, String element, String description, String image) {
@@ -62,5 +64,14 @@ public abstract class Card  {
         this.name = name;
     }
 
+    public CardType getType() {
+        return type;
+    }
+
+    public void setType(CardType type) {
+        this.type = type;
+    }
+
     public abstract void show();
+    public abstract void doEffect();
 }

@@ -6,13 +6,19 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 
-import com.avatarduel.model.Element;
+import com.avatarduel.factory.CardFactory;
+import com.avatarduel.model.*;
 import com.avatarduel.util.CSVReader;
 
 public class Loader {
     private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
     private static final String CHARACTER_CSV_FILE_PATH = "card/data/character.csv";
     private static final String SKILL_CSV_FILE_PATH = "card/data/skill_aura.csv";
+    private CardFactory cardFactory;
+
+    public Loader() {
+        cardFactory = new CardFactory();
+    }
 
     public List<String[]> loadCards(String filename) throws IOException, URISyntaxException {
 
@@ -23,39 +29,61 @@ public class Loader {
         return csvRows;
     }
 
-    public List<String[]> loadLand() {
+    public List<Card> loadLand() {
         try{
-            return loadCards(LAND_CSV_FILE_PATH);
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+            List<String[]> list =  loadCards(LAND_CSV_FILE_PATH);
+            List<Card> listCard = new ArrayList<Card>();
+            CardType type = CardType.LAND;
 
-    public List<String[]> loadCharacter() {
-        try{
-            return loadCards(CHARACTER_CSV_FILE_PATH);
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<String[]> loadSkill() {
-        try{
-            return loadCards(SKILL_CSV_FILE_PATH);
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public void printLoadResult(List<String[]> arr) {
-        for (String[] text : arr){
-            for (String txt : text) {
-                System.out.print(txt + "  ");
+            for (String[] component: list) {
+                listCard.add(cardFactory.createCard(component, type));
             }
-            System.out.println();
+            return listCard;
+
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Card> loadCharacter() {
+        try{
+            List<String[]> list =  loadCards(CHARACTER_CSV_FILE_PATH);
+            List<Card> listCard = new ArrayList<Card>();
+            CardType type = CardType.CHARACTER;
+
+            for (String[] component: list) {
+                listCard.add(cardFactory.createCard(component, type));
+            }
+            return listCard;
+
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Card> loadSkill() {
+        try{
+            List<String[]> list =  loadCards(SKILL_CSV_FILE_PATH);
+            List<Card> listCard = new ArrayList<Card>();
+            CardType type = CardType.SKILL;
+
+            for (String[] component: list) {
+                listCard.add(cardFactory.createCard(component, type));
+            }
+            return listCard;
+
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // debugging function
+    public void printLoadResult(List<Card> arr) {
+        for (Card card : arr){
+            card.show();
         }
     }
 

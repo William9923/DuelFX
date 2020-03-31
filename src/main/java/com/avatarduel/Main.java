@@ -12,13 +12,13 @@ public class Main {
 
     public static void testLoader() {
         Loader loader = new Loader();
-        List<String[]> characterCardList;
+        List<Card> characterCardList;
         characterCardList = loader.loadCharacter();
 
-        List<String[]> landCardList;
+        List<Card> landCardList;
         landCardList = loader.loadLand();
 
-        List<String[]> skillCardList;
+        List<Card> skillCardList;
         skillCardList = loader.loadSkill();
 
         System.out.println("Character Card List : ");
@@ -68,7 +68,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World");
         Main.testLoader();
-        Main.testCard();
-        Main.testSkillCard();
+//        Main.testCard();
+//        Main.testSkillCard();
     }
 }

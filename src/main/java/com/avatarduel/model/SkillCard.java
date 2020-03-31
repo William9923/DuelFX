@@ -16,6 +16,7 @@ public class SkillCard extends Card{
         super(id, name, element, description, image);
         this.effect = new AuraEffect();
         this.displayer = new DisplaySkill();
+        this.type = CardType.SKILL;
     }
 
     // Destroy Skill Card
@@ -23,6 +24,7 @@ public class SkillCard extends Card{
         super(id,name,element,description,image);
         this.effect = new DestroyEffect();
         this.displayer = new DisplaySkill();
+        this.type = CardType.SKILL;
     }
 
     // buat sementara untuk Power Up Skill Card
@@ -30,6 +32,7 @@ public class SkillCard extends Card{
         super(id,name, element, description, image);
         this.effect = new PowerUpEffect();
         this.displayer = new DisplaySkill();
+        this.type = CardType.SKILL;
     }
 
     @Override
