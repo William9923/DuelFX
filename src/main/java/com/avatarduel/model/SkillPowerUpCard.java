@@ -13,11 +13,11 @@ public class SkillPowerUpCard extends Card{
 
     @Override
     public void doEffect() {
-
+        effect.showEffect();
     }
 
-    @Override
-    public void show() {
-
-    }
+//    @Override -- > later implement || for debugging purpose
+//    public void show() {
+//
+//    }
 }

@@ -89,5 +89,9 @@ public abstract class Card  {
 
     public abstract void doEffect();
 
-    public abstract void show(); // debugging function
+    // debugging function
+    public void show() {
+        System.out.println("ID : " + getId() + " Name : " + getName());
+        System.out.println("Description : " + getDescription());
+    }
 }

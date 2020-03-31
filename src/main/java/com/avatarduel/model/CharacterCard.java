@@ -49,8 +49,8 @@ public class CharacterCard extends Card{
         effect.showEffect();
     }
 
-    @Override
-    public void show() {
-
-    }
+//    @Override -- > later implement || for debugging purpose
+//    public void show() {
+//
+//    }
 }
