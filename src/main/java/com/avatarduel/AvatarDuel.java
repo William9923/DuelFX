@@ -1,6 +1,8 @@
 package com.avatarduel;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +11,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -44,9 +48,13 @@ public class AvatarDuel extends Application {
     text2.setX(100);
     text2.setY(100);
 
+    Button btn = new Button("see card");
+
+
     Group root = new Group();
     root.getChildren().add(text);
     root.getChildren().add(text2);
+    root.getChildren().add(btn);
 
     Scene scene = new Scene(root, 1280, 720);
 
@@ -54,6 +62,16 @@ public class AvatarDuel extends Application {
     stage.setScene(scene);
     stage.show();
 
+    CardGUI cardGUI = new CardGUI();
+    try {
+      VBox cardGUIBox = cardGUI.get();
+      Scene cardGUIScene = new Scene(cardGUIBox);
+      btn.setOnAction(e -> {
+        stage.setScene(cardGUIScene);
+      });
+    } catch (IOException IOE) {
+      System.out.println("error in file input stream");
+    }
     try {
       this.loadCards();
       text.setText("IU cinta Arthur");
@@ -62,6 +80,7 @@ public class AvatarDuel extends Application {
       System.out.println("Unsuccessful LoadTime");
     }
   }
+
 
   public static void main(String[] args) {
     launch();
