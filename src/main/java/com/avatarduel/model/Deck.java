@@ -23,7 +23,7 @@ public class Deck {
     private void init() {
         List<Card> charCards = loader.loadCharacter();
         List<Card> landCards = loader.loadLand();
-        List<Card> skillCards = loader.loadSkill();
+        List<Card> skillCards = loader.loadSkillAura();
         List<Card> allCards = new ArrayList<Card>();
         allCards.addAll(charCards);
         allCards.addAll(landCards);

@@ -19,22 +19,19 @@ public class CardFactory {
             return new LandCard(String.valueOf(idCard), components[1], components[2], components[3], components[4]);
         }
 
-        if (type.equals(CardType.SKILL)) {
-            if (components.length == 8) { // aura card
-                idCard++;
-                return new SkillCard(String.valueOf(idCard), components[1], components[2], components[3], components[4], components[5], components[6], components[7]);
-            }
+        if (type.equals(CardType.SKILL_AURA)) {
+            idCard++;
+            return new SkillAuraCard(String.valueOf(idCard), components[1], components[2],  components[3], components[4], components[5], components[6], components[7]);
+        }
 
-            if (components.length == 7) { // power up card
-                idCard++;
-                return new SkillCard(String.valueOf(idCard), components[1], components[2], components[3], components[4], components[5], components[6]);
-            }
+        if (type.equals(CardType.SKILL_DESTROY)) {
+            idCard++;
+            return new SkillDestroyCard(String.valueOf(idCard), components[1], components[2], components[3], components[4], components[5]);
+        }
 
-            if (components.length == 6) { // destroy card
-                idCard++;
-                return new SkillCard(String.valueOf(idCard), components[1], components[2], components[3], components[4], components[5], components[6], components[7]);
-            }
-
+        if (type.equals(CardType.SKILL_POWER_UP)) {
+            idCard++;
+            return new SkillPowerUpCard(String.valueOf(idCard), components[1], components[2], components[3], components[4], components[5]);
         }
 
         return null;
