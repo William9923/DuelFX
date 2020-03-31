@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
+
+import com.avatarduel.model.Element;
 import com.avatarduel.util.CSVReader;
 
 public class Loader {
@@ -46,6 +48,25 @@ public class Loader {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void printLoadResult(List<String[]> arr) {
+        for (String[] text : arr){
+            for (String txt : text) {
+                System.out.print(txt + "  ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static Element outputElement(String element) {
+        switch (element) {
+            case "WATER" : return Element.WATER;
+            case "AIR" : return Element.AIR;
+            case "EARTH" : return Element.EARTH;
+            case "FIRE" : return Element.FIRE;
+            default: return Element.AIR; // blom di handle
+        }
     }
 
 }
