@@ -13,7 +13,7 @@
             <Label alignment="CENTER" text="NAMA KARTU" />
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/com/avatarduel/card/image/character/Aang.png" />
+                  <Image url="@../card/image/character/Aang.png" />
                </image>
             </ImageView>
             <Label alignment="TOP_LEFT" prefHeight="112.0" prefWidth="200.0" text="Deskripsi Kartu ada di sini" textAlignment="CENTER" />

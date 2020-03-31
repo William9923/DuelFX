@@ -54,16 +54,20 @@ public class AvatarDuel extends Application {
     Group root = new Group();
     root.getChildren().add(text);
     root.getChildren().add(text2);
+    root.getChildren().add(btn);
 
     Scene scene = new Scene(root, 1280, 720);
 
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
     stage.show();
+
+    CardGUI cardGUI = new CardGUI();
     try {
-      Scene cardGUI = this.getCardGUI();
+      VBox cardGUIBox = cardGUI.get();
+      Scene cardGUIScene = new Scene(cardGUIBox);
       btn.setOnAction(e -> {
-        stage.setScene(cardGUI);
+        stage.setScene(cardGUIScene);
       });
     } catch (IOException IOE) {
       System.out.println("error in file input stream");
@@ -76,14 +80,7 @@ public class AvatarDuel extends Application {
       System.out.println("Unsuccessful LoadTime");
     }
   }
-  private Scene getCardGUI() throws IOException {
-    // ini masi belum bisa, gatau knp
-    FXMLLoader loader = new FXMLLoader();
-    String fxmlDocPath = "C:\\Users\\Asus\\Documents\\GitHub\\CardGameOOP\\src\\main\\java\\com\\avatarduel\\CardGUI.fxml";
-    FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
-    VBox Card = loader.load(fxmlStream);
-    return new Scene(Card);
-  }
+
 
   public static void main(String[] args) {
     launch();
