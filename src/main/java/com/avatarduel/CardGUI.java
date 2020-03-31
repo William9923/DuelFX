@@ -11,8 +11,6 @@ public class CardGUI {
     public VBox get() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/CardGUI.fxml"));
         Parent Card = loader.load();
-
         return new VBox(Card);
     }
-
 }

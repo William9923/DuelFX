@@ -1,6 +1,6 @@
 package com.avatarduel;
 
-import com.avatarduel.Loader;
+import com.avatarduel.util.Loader;
 import com.avatarduel.model.Card;
 import com.avatarduel.model.CharacterCard;
 import com.avatarduel.model.LandCard;
@@ -68,7 +68,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World");
         Main.testLoader();
-//        Main.testCard();
-//        Main.testSkillCard();
+        Main.testCard();
+        Main.testSkillCard();
     }
 }

@@ -1,4 +1,4 @@
-package com.avatarduel;
+package com.avatarduel.util;
 
 
 import java.io.File;
@@ -11,9 +11,9 @@ import com.avatarduel.model.*;
 import com.avatarduel.util.CSVReader;
 
 public class Loader {
-    private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
-    private static final String CHARACTER_CSV_FILE_PATH = "card/data/character.csv";
-    private static final String SKILL_CSV_FILE_PATH = "card/data/skill_aura.csv";
+    private static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";
+    private static final String CHARACTER_CSV_FILE_PATH = "../card/data/character.csv";
+    private static final String SKILL_CSV_FILE_PATH = "../card/data/skill_aura.csv";
     private CardFactory cardFactory;
 
     public Loader() {

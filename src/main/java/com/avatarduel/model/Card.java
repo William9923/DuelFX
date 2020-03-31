@@ -1,6 +1,6 @@
 package com.avatarduel.model;
 
-import com.avatarduel.Loader;
+import com.avatarduel.util.Loader;
 import com.avatarduel.display.IDisplay;
 import com.avatarduel.effect.IEffect;
 
