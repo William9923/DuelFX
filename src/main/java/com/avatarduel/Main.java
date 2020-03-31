@@ -1,14 +1,39 @@
 package com.avatarduel;
 
+import com.avatarduel.model.*;
 import com.avatarduel.util.Loader;
-import com.avatarduel.model.Card;
-import com.avatarduel.model.CharacterCard;
-import com.avatarduel.model.LandCard;
-import com.avatarduel.model.SkillCard;
 
 import java.util.List;
 
 public class Main {
+
+    public static void testDeck() {
+        Deck deck1 = new Deck(10);
+        Deck deck2 = new Deck(5);
+
+        System.out.println("Test Print Out Deck 1:");
+        deck1.printDeck();
+        System.out.println();
+        System.out.println("Test Print Out Deck 2:");
+        deck2.printDeck();
+        System.out.println();
+
+        System.out.println("Test Functionality dari Deck:");
+        System.out.println("Drawing Test:");
+        Card checkFirstCard = deck1.showFirstCard();
+        Card firstCard = deck1.draw();
+
+        if (checkFirstCard.equals(firstCard)){
+            System.out.println("Checking successful");
+        }
+        firstCard.show();
+        System.out.println();
+
+        System.out.println("Shuffle Test:");
+        deck2.shuffle();
+        deck2.printDeck();
+        System.out.println();
+    }
 
     public static void testLoader() {
         Loader loader = new Loader();
@@ -66,9 +91,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
-        Main.testLoader();
-        Main.testCard();
-        Main.testSkillCard();
+        System.out.println("Testing Backend");
+//        Main.testLoader();
+//        Main.testCard();
+//        Main.testSkillCard();
+        Main.testDeck();
     }
 }
