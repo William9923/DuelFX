@@ -2,13 +2,15 @@ package com.avatarduel.model;
 
 import com.avatarduel.Loader;
 import com.avatarduel.display.IDisplay;
+import com.avatarduel.effect.IEffect;
 
-public abstract class Card implements IDisplay {
+public abstract class Card  {
     protected int id;
     protected String name;
     protected Element element;
     protected String description;
     protected String image;
+    protected IDisplay displayer;
 
     // constructor
     public Card(String id, String name, String element, String description, String image) {
@@ -60,4 +62,5 @@ public abstract class Card implements IDisplay {
         this.name = name;
     }
 
+    public abstract void show();
 }
