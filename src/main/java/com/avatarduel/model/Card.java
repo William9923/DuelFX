@@ -1,7 +1,6 @@
 package com.avatarduel.model;
 
-import com.avatarduel.Loader;
-import com.avatarduel.display.IDisplay;
+import com.avatarduel.util.Loader;
 import com.avatarduel.effect.IEffect;
 
 public abstract class Card  {
@@ -11,8 +10,8 @@ public abstract class Card  {
     protected String description;
     protected String image;
     protected CardType type;
-    protected IDisplay displayer;
     protected IEffect effect;
+    protected int power;
 
     // constructor
     public Card(String id, String name, String element, String description, String image) {
@@ -44,6 +43,14 @@ public abstract class Card  {
         return name;
     }
 
+    public int getPower() {
+        return power;
+    }
+
+    public IEffect getEffect() {
+        return effect;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -64,6 +71,10 @@ public abstract class Card  {
         this.name = name;
     }
 
+    public void setPower(int power) {
+        this.power = power;
+    }
+
     public CardType getType() {
         return type;
     }
@@ -72,6 +83,15 @@ public abstract class Card  {
         this.type = type;
     }
 
-    public abstract void show();
+    public void setEffect(IEffect effect) {
+        this.effect = effect;
+    }
+
     public abstract void doEffect();
+
+    // debugging function
+    public void show() {
+        System.out.println("ID : " + getId() + " Name : " + getName());
+        System.out.println("Description : " + getDescription());
+    }
 }

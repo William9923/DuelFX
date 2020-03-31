@@ -1,4 +1,4 @@
-package com.avatarduel;
+package com.avatarduel.util;
 
 
 import java.io.File;
@@ -11,9 +11,12 @@ import com.avatarduel.model.*;
 import com.avatarduel.util.CSVReader;
 
 public class Loader {
-    private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
-    private static final String CHARACTER_CSV_FILE_PATH = "card/data/character.csv";
-    private static final String SKILL_CSV_FILE_PATH = "card/data/skill_aura.csv";
+    private static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";
+    private static final String CHARACTER_CSV_FILE_PATH = "../card/data/character.csv";
+    private static final String SKILL_AURA_CSV_FILE_PATH = "../card/data/skill_aura.csv";
+    private static final String SKILL_DESTROY_CSV_FILE_PATH = "../card/data/skill_destroy.csv";
+    private static final String SKILL_POWER_UP_CSV_FILE_PATH = "../card/data/skill_power_up.csv";
+
     private CardFactory cardFactory;
 
     public Loader() {
@@ -63,11 +66,11 @@ public class Loader {
         return null;
     }
 
-    public List<Card> loadSkill() {
+    public List<Card> loadSkillAura() {
         try{
-            List<String[]> list =  loadCards(SKILL_CSV_FILE_PATH);
+            List<String[]> list =  loadCards(SKILL_AURA_CSV_FILE_PATH);
             List<Card> listCard = new ArrayList<Card>();
-            CardType type = CardType.SKILL;
+            CardType type = CardType.SKILL_AURA;
 
             for (String[] component: list) {
                 listCard.add(cardFactory.createCard(component, type));
@@ -80,6 +83,41 @@ public class Loader {
         return null;
     }
 
+    // cannot be used -> still have not implemented file for Destroy Skill Card
+    public List<Card> loadSkillDestroy() {
+        try{
+            List<String[]> list =  loadCards(SKILL_DESTROY_CSV_FILE_PATH);
+            List<Card> listCard = new ArrayList<Card>();
+            CardType type = CardType.SKILL_DESTROY;
+
+            for (String[] component: list) {
+                listCard.add(cardFactory.createCard(component, type));
+            }
+            return listCard;
+
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // cannot be used -> still have not implemented file for PowerUp Skill Card
+    public List<Card> loadSkillPowerUp() {
+        try{
+            List<String[]> list =  loadCards(SKILL_POWER_UP_CSV_FILE_PATH);
+            List<Card> listCard = new ArrayList<Card>();
+            CardType type = CardType.SKILL_POWER_UP;
+
+            for (String[] component: list) {
+                listCard.add(cardFactory.createCard(component, type));
+            }
+            return listCard;
+
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     // debugging function
     public void printLoadResult(List<Card> arr) {
         for (Card card : arr){

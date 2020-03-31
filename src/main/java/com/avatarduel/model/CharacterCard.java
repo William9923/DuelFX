@@ -1,6 +1,5 @@
 package com.avatarduel.model;
 
-import com.avatarduel.display.DisplayCharacter;
 import com.avatarduel.effect.DestroyEffect;
 import com.avatarduel.effect.DoNothingEffect;
 
@@ -17,7 +16,6 @@ public class CharacterCard extends Card{
         this.attack = Integer.parseInt(attack);
         this.defense = Integer.parseInt(defense);
         this.power = Integer.parseInt(power);
-        this.displayer = new DisplayCharacter();
         this.effect = new DoNothingEffect();
         this.type = CardType.CHARACTER;
     }
@@ -47,14 +45,12 @@ public class CharacterCard extends Card{
     }
 
     @Override
-    public void show() {
-        HashMap<String, String> map = displayer.display(this);
-        for (Map.Entry<String,String> entry : map.entrySet())
-            System.out.println(entry.getKey() + " : "+ entry.getValue());
-    }
-
-    @Override
     public void doEffect() {
         effect.showEffect();
     }
+
+//    @Override -- > later implement || for debugging purpose
+//    public void show() {
+//
+//    }
 }
