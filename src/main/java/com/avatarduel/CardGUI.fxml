@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="card_border" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="303.0" style="-fx-background-color: RED;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox id="card_container" alignment="TOP_CENTER" layoutX="25.0" layoutY="15.0" prefHeight="358.0" prefWidth="248.0" spacing="8.0" style="-fx-background-color: white;">
+         <children>
+            <Label alignment="CENTER" text="NAMA KARTU" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/com/avatarduel/card/image/character/Aang.png" />
+               </image>
+            </ImageView>
+            <Label alignment="TOP_LEFT" prefHeight="112.0" prefWidth="200.0" text="Deskripsi Kartu ada di sini" textAlignment="CENTER" />
+            <HBox alignment="BOTTOM_CENTER" prefHeight="14.0" prefWidth="238.0" spacing="15.0">
+               <children>
+                  <Label text="ATK : 8" />
+                  <Label text="DEF : 9" />
+                  <Label text="POW : 2" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
