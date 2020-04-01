@@ -1,9 +1,13 @@
 package com.avatarduel;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import com.avatarduel.guicontroller.CardGUI;
+import com.avatarduel.model.CharacterCard;
+import com.avatarduel.util.CSVReader;
 import javafx.application.Application;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
