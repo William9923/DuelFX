@@ -87,7 +87,7 @@ public class PowerManager {
         else if(type==Element.WATER){
             return this.current_water -= power;
         }
-        return -1; // throw 
+        return -1; // throw
     }
 
     // To reset every new phase
