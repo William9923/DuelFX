@@ -3,18 +3,79 @@ package com.avatarduel;
 import com.avatarduel.model.*;
 import com.avatarduel.util.Loader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void testField() {
         // Skenarion for Field Functionality
-        System.out.println("\n Test Field");
+        System.out.println("\nTest Field");
         Deck deck = new Deck(20);
         Hand hand = new Hand();
         Field field = new Field(8); // ikutin contoh spek dl, yakni 8 besarny
 
+        for (int i = 0; i < 7; i++) {
+            hand.addCard(deck.draw());
+        }
 
+        List<Card> cardList1 = new ArrayList<>(hand.getCardList());  // inget reference di objek
+        for(Card card : cardList1) {
+            card.show();
+        }
+        System.out.println();
+
+        for (Card card : cardList1) {
+            if (card.getType().equals(CardType.CHARACTER)){
+                field.addCharacterCard(new CharacterCardInField((CharacterCard) card,CharacterState.ATTACK));  // cara panggil character ke arena
+            }
+        }
+
+        for (Card card : cardList1) {
+            if (card.getType().equals(CardType.CHARACTER)){
+                hand.removeCard(card);                          // cara hapus kartu dari tangan user
+            }
+        }
+
+        List<Card> cardList2 = new ArrayList<>(hand.getCardList());  // tes liat isinya
+        for(Card card : cardList2) {
+            card.show();
+        }
+        System.out.println();
+
+        if (field.getCharCardList().size() > 0) {
+            for (Card card : cardList2) {
+                if (card.getType().equals(CardType.SKILL_AURA)){
+                    field.connectCards(field.getCharacterCardByIdx(0),card);  // ini nunjukin cara akses via gui lewat index, dan juga kasi tau cara konekin kartu di field (buat power up dan aura)
+                    // dan nunjukkin bisa banyak koneknya
+                }
+            }
+
+            // mao nunjukkin perbedaan
+            System.out.println("Before giving aura : ");
+            CharacterCardInField holder1 = field.getCharacterCardByIdx(0);  // kasi tau cara ngakses kalo via gui, nanti kan guinya cuman ngasi via index aja infonya jadinya
+            CharacterCard holder2 = (CharacterCard) holder1.getCard();
+            System.out.println("Attack Before Adding AURA : " + holder2.getAttack());
+            System.out.println("Defense Before Adding AURA : " + holder2.getDefense());
+
+            System.out.println("After give aura effect : ");
+            System.out.println("Attack After Adding AURA : " + holder1.getTotalAttack());
+            System.out.println("Defense After Adding AURA : " + holder1.getTotalDefense());
+
+            System.out.println("\nAura Card List : ");
+            List<Card> cardList = holder1.getConnectedCard();
+            SkillAuraCard cardAura; int bonusAttack = 0; int bonusDefense = 0;
+            for (Card card: cardList) {
+                 cardAura = (SkillAuraCard) card;
+                 cardAura.show();
+                 System.out.println("Aura Bonus Attack : " + cardAura.getAttack());
+                 System.out.println("Aura Bonus Defense : " + cardAura.getDefense());
+                 bonusAttack += cardAura.getAttack();
+                 bonusDefense += cardAura.getDefense();
+            }
+            System.out.println("Total Aura Bonus Attack : " + bonusAttack);
+            System.out.println("Total Aura Bonus Defense : " + bonusDefense);
+        }
 
 
     }
@@ -187,5 +248,6 @@ public class Main {
         Main.testSkillCard();
         Main.testDeck();
         Main.testHand();
+        Main.testField();
     }
 }
