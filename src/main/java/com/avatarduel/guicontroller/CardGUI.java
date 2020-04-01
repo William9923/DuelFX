@@ -26,58 +26,28 @@ public class CardGUI {
     @FXML private Label card_pow;
 
     public void setData(CharacterCard card) {
-        this.data = card;
-        card_name.setText(this.data.getName());
-        card_desc.setText(this.data.getDescription());
+        setCard(card);
         card_atk.setText("ATK : " + Integer.toString(card.getAttack()));
         card_def.setText("DEF : " + Integer.toString(card.getDefense()));
         card_pow.setText("POW : " + Integer.toString(card.getPower()));
-        card_img.imageProperty().set(getImage(card.getImage()));
-        switch (card.getElement()) {
-            case WATER:
-                setBorderStyle("water_border");
-                break;
-            case FIRE:
-                setBorderStyle("fire_border");
-                break;
-            case EARTH:
-                setBorderStyle("earth_border");
-                break;
-            case AIR:
-                setBorderStyle("air_border");
-                break;
-        }
     }
     public void setDate(LandCard card) {
-        this.data = card;
-        card_name.setText(this.data.getName());
-        card_desc.setText(this.data.getDescription());
+        setCard(card);
         card_atk.setText("");
         card_def.setText("");
-        card_pow.setText("POW : " + Integer.toString(card.getPower()));
-        card_img.imageProperty().set(getImage(card.getImage()));
-        switch (card.getElement()) {
-            case WATER:
-                setBorderStyle("water_border");
-                break;
-            case FIRE:
-                setBorderStyle("fire_border");
-                break;
-            case EARTH:
-                setBorderStyle("earth_border");
-                break;
-            case AIR:
-                setBorderStyle("air_border");
-                break;
-        }
+        card_pow.setText("");
     }
     public void setDate(SkillAuraCard card) {
-        this.data = card;
-        card_name.setText(this.data.getName());
-        card_desc.setText(this.data.getDescription());
+        setCard(card);
         card_atk.setText("");
         card_def.setText("");
         card_pow.setText("POW : " + Integer.toString(card.getPower()));
+
+    }
+    public void setCard(Card card) {
+        this.data = card;
+        card_name.setText(this.data.getName());
+        card_desc.setText(this.data.getDescription());
         card_img.imageProperty().set(getImage(card.getImage()));
         switch (card.getElement()) {
             case WATER:
@@ -94,6 +64,7 @@ public class CardGUI {
                 break;
         }
     }
+
     @FXML
     public void initialize() {
         card_name.setText("hehe");
