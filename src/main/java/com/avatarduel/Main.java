@@ -7,7 +7,81 @@ import java.util.List;
 
 public class Main {
 
+    public static void testHand() {
+        System.out.println("\nTest Hand : ");
+        Deck deck1 = new Deck (10);
+        Deck deck2 = new Deck (10);
+
+        Hand hand1 = new Hand();
+        Hand hand2 = new Hand();
+
+        System.out.println("Before Drawing : ");
+        deck1.printDeck();
+        System.out.println();
+        deck2.printDeck();
+        System.out.println();
+
+        for (int i = 0; i < 7; i++) {
+            hand1.addCard(deck1.draw());
+            hand2.addCard(deck2.draw());
+        }
+
+        System.out.println("After Drawing : ");
+        deck1.printDeck();
+        System.out.println();
+        deck2.printDeck();
+        System.out.println();
+
+        System.out.println("Card in Hand 1 : ");
+        List<Card> cardList1 = hand1.getCardList();
+        for(Card card : cardList1) {
+            card.show();
+        }
+        System.out.println();
+
+        System.out.println("Card in Hand 2 : ");
+        List<Card> cardList2 = hand2.getCardList();
+        for (Card card : cardList2) {
+            card.show();
+        }
+        System.out.println();
+
+        System.out.println("Test Finding Card : ");
+        Card card1 = hand1.findCardByIndex(5);
+        Card card2 = hand2.findCardByIndex(5);
+
+        card1.show();
+        card2.show();
+
+        System.out.println();
+
+        System.out.println("Testing Contains : ");
+        if (hand1.contain(card1)) {
+            System.out.println("Test contain successful");
+        }
+
+        if (!hand2.contain(card2)) {
+            System.out.println("Test contain unsuccessful");
+        }
+        System.out.println();
+
+        System.out.println("Testing Removing Cards : ");
+        Card cardRemove1 = hand1.removeCard(card1);
+        if (cardRemove1.equals(card1)){
+            System.out.println("Test removing by Card successful");
+        }
+
+        Card cardRemove2 = hand2.removeCardByIndex(5);
+        if (cardRemove2.equals(card2)) {
+            System.out.println("Test removing by index successful");
+        }
+        System.out.println();
+
+        System.out.println("Hand size : " + hand1.cardInHand());
+    }
+
     public static void testDeck() {
+        System.out.println("\nTest Deck : ");
         Deck deck1 = new Deck(10);
         Deck deck2 = new Deck(5);
 
@@ -36,6 +110,7 @@ public class Main {
     }
 
     public static void testLoader() {
+        System.out.println("\nTest Loader : ");
         Loader loader = new Loader();
         List<Card> characterCardList;
         characterCardList = loader.loadCharacter();
@@ -58,6 +133,7 @@ public class Main {
     }
 
     public static void testCard() {
+        System.out.println("\nTest Card : ");
         Card card1;
         card1 = new CharacterCard("17",  "Katara"  ,"WATER"  ,"Waterbending master from Southern Water Tribe, sister of Sokka, and friend of Aang."  ,"src/res/image/character/Katara.png"  ,"13"  ,"7"  ,"5");
 
@@ -73,6 +149,7 @@ public class Main {
     }
 
     public static void testSkillCard() {
+        System.out.println("\nTest Skill Card : ");
         Card card1;
         Card card2;
         Card card3;
@@ -96,5 +173,6 @@ public class Main {
         Main.testCard();
         Main.testSkillCard();
         Main.testDeck();
+        Main.testHand();
     }
 }

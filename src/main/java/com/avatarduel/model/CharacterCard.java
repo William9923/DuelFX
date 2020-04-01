@@ -1,10 +1,6 @@
 package com.avatarduel.model;
 
-import com.avatarduel.effect.DestroyEffect;
 import com.avatarduel.effect.DoNothingEffect;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class CharacterCard extends Card{
     private int attack;

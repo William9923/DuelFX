@@ -2,8 +2,6 @@ package com.avatarduel.model;
 
 import com.avatarduel.effect.DoNothingEffect;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class LandCard extends Card {
     private int power;
