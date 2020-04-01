@@ -8,10 +8,19 @@ import java.util.List;
 public class Main {
 
     public static void testField() {
-        
+        // Skenarion for Field Functionality
+        System.out.println("\n Test Field");
+        Deck deck = new Deck(20);
+        Hand hand = new Hand();
+        Field field = new Field(8); // ikutin contoh spek dl, yakni 8 besarny
+
+
+
+
     }
 
     public static void testHand() {
+        // Skenario for Hand Functionality
         System.out.println("\nTest Hand : ");
         Deck deck1 = new Deck (10);
         Deck deck2 = new Deck (10);

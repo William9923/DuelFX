@@ -93,5 +93,6 @@ public abstract class Card  {
     public void show() {
         System.out.println("ID : " + getId() + " Name : " + getName());
         System.out.println("Description : " + getDescription());
+        System.out.println("Type : " + getType());
     }
 }

@@ -8,7 +8,6 @@ public class Deck {
     private Loader loader;
     private int deckSize;
     private int currSize;
-    // nanti tambahin reference ke player mana
     private Stack<Card> cardStack;
 
     public Deck(int deckSize) {
@@ -24,15 +23,23 @@ public class Deck {
         List<Card> charCards = loader.loadCharacter();
         List<Card> landCards = loader.loadLand();
         List<Card> skillCards = loader.loadSkillAura();
-        List<Card> allCards = new ArrayList<Card>();
-        allCards.addAll(charCards);
-        allCards.addAll(landCards);
-        allCards.addAll(skillCards);
-        for (int i = 0; i < deckSize; i++) {
-            Card card = selectRandom(allCards);
-            card.setId(i+1);
+        int j = 0;
+        for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {
+            Card card = selectRandom(charCards);
+            card.setId(j++);
             cardStack.push(card);
         }
+        for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {
+            Card card = selectRandom(landCards);
+            card.setId(j++);
+            cardStack.push(card);
+        }
+        for (int i = 0; i < Math.round(deckSize * 0.2) ; i++) {
+            Card card = selectRandom(skillCards);
+            card.setId(j++);
+            cardStack.push(card);
+        }
+        shuffle();
     }
 
     public int getCurrSize() {
@@ -72,6 +79,4 @@ public class Deck {
             card.show();
         }
     }
-
-
 }
