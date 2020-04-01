@@ -76,7 +76,8 @@ public class Field {
             {
                 CharacterCardInField itCard = (CharacterCardInField) itr.next();
                 if (itCard.equals(inField)) {
-                    for (Card pairCard : inField.getConnectedCard()) {
+                    List<Card> connectPair = new ArrayList<>(inField.getConnectedCard());
+                    for (Card pairCard : connectPair) {
                         removeSkillCard(pairCard);
                     }
                     itr.remove();

@@ -1,5 +1,6 @@
 package com.avatarduel.model;
 
+import com.avatarduel.type.CardType;
 import com.avatarduel.util.Loader;
 import com.avatarduel.effect.IEffect;
 

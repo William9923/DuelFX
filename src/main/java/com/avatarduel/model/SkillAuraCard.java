@@ -1,6 +1,7 @@
 package com.avatarduel.model;
 
 import com.avatarduel.effect.AuraEffect;
+import com.avatarduel.type.CardType;
 
 public class SkillAuraCard extends Card{
 

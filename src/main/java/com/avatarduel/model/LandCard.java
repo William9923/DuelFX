@@ -1,6 +1,7 @@
 package com.avatarduel.model;
 
 import com.avatarduel.effect.DoNothingEffect;
+import com.avatarduel.type.CardType;
 
 
 public class LandCard extends Card {

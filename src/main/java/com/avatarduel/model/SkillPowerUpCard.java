@@ -1,6 +1,7 @@
 package com.avatarduel.model;
 
 import com.avatarduel.effect.PowerUpEffect;
+import com.avatarduel.type.CardType;
 
 public class SkillPowerUpCard extends Card{
 

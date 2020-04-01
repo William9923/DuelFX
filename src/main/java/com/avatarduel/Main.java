@@ -1,6 +1,8 @@
 package com.avatarduel;
 
 import com.avatarduel.model.*;
+import com.avatarduel.type.CardType;
+import com.avatarduel.type.CharacterState;
 import com.avatarduel.util.Loader;
 
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import java.util.List;
 public class Main {
 
     public static void testField() {
-        // Skenarion for Field Functionality
+        // Skenario for Field Functionality
         System.out.println("\nTest Field");
         Deck deck = new Deck(20);
         Hand hand = new Hand();
@@ -27,7 +29,7 @@ public class Main {
 
         for (Card card : cardList1) {
             if (card.getType().equals(CardType.CHARACTER)){
-                field.addCharacterCard(new CharacterCardInField((CharacterCard) card,CharacterState.ATTACK));  // cara panggil character ke arena
+                field.addCharacterCard(new CharacterCardInField((CharacterCard) card, CharacterState.ATTACK));  // cara panggil character ke arena
             }
         }
 
@@ -75,9 +77,12 @@ public class Main {
             }
             System.out.println("Total Aura Bonus Attack : " + bonusAttack);
             System.out.println("Total Aura Bonus Defense : " + bonusDefense);
+
+            // Example of when a character die:
+            field.removeCharacterCard(holder1); // bubay
+            System.out.println("Size : (harusnya 0) " + field.getSkillCardList().size());
+            System.out.println("Size : " + field.getCharCardList().size());
         }
-
-
     }
 
     public static void testHand() {

@@ -1,8 +1,7 @@
 package com.avatarduel.factory;
 
 import com.avatarduel.model.*;
-
-import java.util.List;
+import com.avatarduel.type.CardType;
 
 public class CardFactory {
 
