@@ -83,7 +83,7 @@ public class PowerHolder {
         else if (type==Element.FIRE){
             return this.current_fire -= power;
         }
-        else if(type==Element.WATER){
+        else if(type==Element.WATER) {
             return this.current_water -= power;
         }
     }
