@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
@@ -8,23 +15,156 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-<left>
-   <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-</left>
-<top>
-   <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-      <children>
-         <WebView prefHeight="200.0" prefWidth="200.0" />
-         <Region />
-      </children>
-   </VBox>
-</top>
-<center>
-   <TextField BorderPane.alignment="CENTER" />
-</center>
-<right>
-   <TreeView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-</right>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="302.0" layoutY="715.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="892.0" spacing="16.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="302.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="892.0" spacing="16.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="75.0" />
+         </children>
+      </HBox>
+      <VBox layoutX="28.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+         <children>
+            <Label text="Yagami Light" />
+            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/com/avatarduel/character/Light_Yagami.jpg" />
+               </image>
+            </ImageView>
+            <Label text="HP: 80" />
+         </children>
+      </VBox>
+      <VBox layoutX="28.0" layoutY="611.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+         <children>
+            <Label text="Kira Yoshikage" />
+            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/com/avatarduel/character/kira_yoshikage.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Label text="HP: 80" />
+         </children>
+      </VBox>
+      <VBox layoutX="28.0" layoutY="216.0" prefHeight="356.0" prefWidth="240.0" style="-fx-background-color: red;">
+         <children>
+            <Label prefHeight="356.0" prefWidth="266.0" text="Ini bakan diganti kartu entar" />
+         </children>
+      </VBox>
+      <VBox layoutX="148.0" layoutY="25.0" prefHeight="163.0" prefWidth="118.0">
+         <children>
+            <Label text="Power:" />
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="148.0" layoutY="634.0" prefHeight="163.0" prefWidth="118.0">
+         <children>
+            <Label text="Power:" />
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="118.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="29.0" prefWidth="57.0" text="1/2" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="302.0" layoutY="198.0" prefHeight="173.0" prefWidth="801.0" spacing="16.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="302.0" layoutY="438.0" prefHeight="173.0" prefWidth="801.0" spacing="16.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <VBox layoutX="1146.0" layoutY="198.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Label text="Deck : 45/50" />
+         </children>
+      </VBox>
+      <VBox layoutX="1146.0" layoutY="438.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
+            <Label text="Deck : 45/50" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
