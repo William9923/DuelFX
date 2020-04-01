@@ -56,6 +56,13 @@ public class Field {
         return null; // throw error
     }
 
+    public Card getSkillCardByIdx(int index) {
+        if(index < fieldSize) {
+            return skillCardList.get(index);
+        }
+        return null;
+    }
+
     public void connectCards(CharacterCardInField card1, Card card2) {
         if (isAbleToAddSkill() && isContainCharacter(card1)) {
             card1.pair(card2);

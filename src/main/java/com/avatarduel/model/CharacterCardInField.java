@@ -19,6 +19,15 @@ public class CharacterCardInField {
         this.hasAttacked = true; // karena kalo baru di summon ga bisa attack kan ya
         this.connectedCard = new ArrayList<>();
     }
+
+    public void refresh() {
+        hasAttacked = false;
+    }
+
+    public boolean canAttack() {
+        return !hasAttacked && state.equals(CharacterState.ATTACK);
+    }
+
     public Card getCard() {
         return card;
     }
