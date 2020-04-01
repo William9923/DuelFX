@@ -1,11 +1,15 @@
 package com.avatarduel.model;
 
-import com.avatarduel.util.Loader;
+import com.avatarduel.util.*;
 
 import java.util.*;
 
 public class Deck {
-    private Loader loader;
+    private CardDAO charDAO;
+    private CardDAO landDAO;
+    private CardDAO skillAuraDAO;
+    // destroy DAO
+    // power up DAO
     private int deckSize;
     private int currSize;
     private Stack<Card> cardStack;
@@ -13,16 +17,18 @@ public class Deck {
     public Deck(int deckSize) {
         this.deckSize = deckSize;
         this.currSize = deckSize;
-        this.loader = new Loader();
+        this.charDAO = new CharacterDAO();
+        this.landDAO = new LandDAO();
+        this.skillAuraDAO = new SkillAuraDAO();
         this.cardStack = new Stack<Card>();
         init();
     }
 
     // init
     private void init() {
-        List<Card> charCards = loader.loadCharacter();
-        List<Card> landCards = loader.loadLand();
-        List<Card> skillCards = loader.loadSkillAura();
+        List<Card> charCards = charDAO.getAllCard();
+        List<Card> landCards = landDAO.getAllCard();
+        List<Card> skillCards = skillAuraDAO.getAllCard();
         int j = 0;
         for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {
             Card card = selectRandom(charCards);
