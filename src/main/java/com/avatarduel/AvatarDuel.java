@@ -34,7 +34,7 @@ public class AvatarDuel extends Application {
 
   @Override
   public void start(Stage stage) throws IOException, URISyntaxException {
-//    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//    Parent root = FXMLLoader.load(getClass().getResource("Board.fxml"));
 
     Text text = new Text();
     text.setText("Loading...");
@@ -66,7 +66,7 @@ public class AvatarDuel extends Application {
     CharacterCard card = new CharacterCard(firstCharacter[0],firstCharacter[1],firstCharacter[2],firstCharacter[3],firstCharacter[4],firstCharacter[5], firstCharacter[6], firstCharacter[7]);
 
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/CardGUI.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Card/CardGUI.fxml"));
       Parent cardGUIBox = loader.load();
       CardGUI controller = loader.getController();
       controller.setData(card);
