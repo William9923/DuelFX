@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Player extends {
+public class Player {
     protected Deck deck;
     protected Field field;
     protected Hand hand;
