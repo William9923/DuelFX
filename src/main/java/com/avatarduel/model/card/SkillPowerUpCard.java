@@ -1,9 +1,10 @@
-package com.avatarduel.model;
+package com.avatarduel.model.card;
 
 import com.avatarduel.effect.PowerUpEffect;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.type.CardType;
 
-public class SkillPowerUpCard extends Card{
+public class SkillPowerUpCard extends Card {
 
     public SkillPowerUpCard(String id, String name, String element, String description, String image, String power) {
         super(id,name, element, description, image);

@@ -1,9 +1,10 @@
-package com.avatarduel.model;
+package com.avatarduel.model.card;
 
 import com.avatarduel.effect.DoNothingEffect;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.type.CardType;
 
-public class CharacterCard extends Card{
+public class CharacterCard extends Card {
     private int attack;
     private int defense;
     private int power;

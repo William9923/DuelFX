@@ -1,6 +1,7 @@
-package com.avatarduel.model;
+package com.avatarduel.model.player_component;
 
-import com.avatarduel.effect.IEffect;
+import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CharacterCardInField;
 
 import java.util.*;
 

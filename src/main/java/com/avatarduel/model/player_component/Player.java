@@ -1,12 +1,15 @@
-package com.avatarduel.model;
+package com.avatarduel.model.player_component;
 
+import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CharacterCard;
+import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.player_component.Deck;
+import com.avatarduel.model.player_component.Field;
+import com.avatarduel.model.player_component.Hand;
+import com.avatarduel.model.player_component.PowerManager;
 import com.avatarduel.type.CardType;
 import com.avatarduel.type.CharacterState;
 import com.avatarduel.type.PlayerType;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class Player {
     protected Deck deck;
@@ -111,5 +114,4 @@ public class Player {
     public boolean checkLose() {
         return healthPoint <= 0;
     }
-
 }

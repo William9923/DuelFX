@@ -1,6 +1,7 @@
-package com.avatarduel.model;
+package com.avatarduel.model.card;
 
 import com.avatarduel.effect.DoNothingEffect;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.type.CardType;
 
 

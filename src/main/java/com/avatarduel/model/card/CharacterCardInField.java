@@ -1,4 +1,4 @@
-package com.avatarduel.model;
+package com.avatarduel.model.card;
 
 import com.avatarduel.type.CardType;
 import com.avatarduel.type.CharacterState;

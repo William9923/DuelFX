@@ -1,5 +1,6 @@
-package com.avatarduel.model;
+package com.avatarduel.model.player_component;
 
+import com.avatarduel.model.card.Card;
 import com.avatarduel.util.*;
 
 import java.util.*;

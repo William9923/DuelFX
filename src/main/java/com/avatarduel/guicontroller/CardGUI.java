@@ -1,18 +1,17 @@
 package com.avatarduel.guicontroller;
 
-import com.avatarduel.model.*;
+import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CharacterCard;
+import com.avatarduel.model.card.LandCard;
+import com.avatarduel.model.card.SkillAuraCard;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.io.File;
-import java.io.IOException;
 
 public class CardGUI {
     private Card data;

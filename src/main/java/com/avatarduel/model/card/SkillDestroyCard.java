@@ -1,9 +1,10 @@
-package com.avatarduel.model;
+package com.avatarduel.model.card;
 
 import com.avatarduel.effect.DestroyEffect;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.type.CardType;
 
-public class SkillDestroyCard extends Card{
+public class SkillDestroyCard extends Card {
 
     // Destroy Skill Card
     public SkillDestroyCard (String id, String name, String element, String description, String image, String power) {

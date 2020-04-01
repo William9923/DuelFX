@@ -1,6 +1,6 @@
 package com.avatarduel.util;
 
-import com.avatarduel.model.Card;
+import com.avatarduel.model.card.Card;
 
 import java.util.List;
 

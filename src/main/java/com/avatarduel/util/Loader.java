@@ -7,8 +7,9 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 import com.avatarduel.factory.CardFactory;
-import com.avatarduel.model.*;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.type.CardType;
+import com.avatarduel.type.Element;
 
 public class Loader {
     private static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";

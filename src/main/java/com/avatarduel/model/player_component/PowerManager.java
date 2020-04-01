@@ -1,4 +1,6 @@
-package com.avatarduel.model;
+package com.avatarduel.model.player_component;
+
+import com.avatarduel.type.Element;
 
 public class PowerManager {
     protected int current_fire;

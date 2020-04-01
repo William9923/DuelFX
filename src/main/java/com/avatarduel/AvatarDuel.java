@@ -6,18 +6,14 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import com.avatarduel.guicontroller.CardGUI;
-import com.avatarduel.model.CharacterCard;
+import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.util.CSVReader;
 import javafx.application.Application;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 

@@ -1,8 +1,7 @@
 package com.avatarduel.util;
 
-import com.avatarduel.model.Card;
-import com.avatarduel.model.CharacterCard;
-import com.avatarduel.model.SkillDestroyCard;
+import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.SkillDestroyCard;
 
 import java.util.ArrayList;
 import java.util.List;
