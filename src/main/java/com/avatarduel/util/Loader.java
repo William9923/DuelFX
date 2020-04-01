@@ -8,7 +8,7 @@ import java.util.*;
 
 import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.*;
-import com.avatarduel.util.CSVReader;
+import com.avatarduel.type.CardType;
 
 public class Loader {
     private static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";

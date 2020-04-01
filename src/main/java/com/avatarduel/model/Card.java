@@ -1,5 +1,6 @@
 package com.avatarduel.model;
 
+import com.avatarduel.type.CardType;
 import com.avatarduel.util.Loader;
 import com.avatarduel.effect.IEffect;
 
@@ -93,5 +94,6 @@ public abstract class Card  {
     public void show() {
         System.out.println("ID : " + getId() + " Name : " + getName());
         System.out.println("Description : " + getDescription());
+        System.out.println("Type : " + getType());
     }
 }

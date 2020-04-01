@@ -1,4 +1,4 @@
-package com.avatarduel.model;
+package com.avatarduel.type;
 
 public enum PlayerType {
     A,

@@ -1,13 +1,9 @@
 package com.avatarduel;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import com.avatarduel.guicontroller.CardGUI;
-import com.avatarduel.model.Card;
-import com.avatarduel.model.CharacterCard;
 import javafx.application.Application;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
@@ -20,10 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import com.avatarduel.model.Element;
-import com.avatarduel.model.Land;
-import com.avatarduel.util.CSVReader;
 
 public class AvatarDuel extends Application {
   private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
@@ -82,7 +74,7 @@ public class AvatarDuel extends Application {
       System.out.println("gasabi bray");
     }
     try {
-      this.loadCards();
+//      this.loadCards();
       text.setText("IU cinta Arthur");
       System.out.println("Successful LoadTime");
     } catch (Exception e) {

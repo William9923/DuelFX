@@ -1,9 +1,7 @@
 package com.avatarduel.model;
 
 import com.avatarduel.effect.AuraEffect;
-import com.avatarduel.effect.DestroyEffect;
-import com.avatarduel.effect.IEffect;
-import com.avatarduel.effect.PowerUpEffect;
+import com.avatarduel.type.CardType;
 
 public class SkillAuraCard extends Card{
 
