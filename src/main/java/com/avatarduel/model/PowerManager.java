@@ -1,6 +1,6 @@
 package com.avatarduel.model;
 
-public class PowerHolder {
+public class PowerManager {
     protected int current_fire;
     protected int current_water;
     protected int current_earth;
@@ -11,7 +11,7 @@ public class PowerHolder {
     protected int total_air;
 
     //constructor
-    public PowerHolder(){
+    public PowerManager(){
         this.current_fire=0;
         this.current_water=0;
         this.current_earth=0;
@@ -70,6 +70,7 @@ public class PowerHolder {
         else if(type==Element.WATER){
             return this.total_water += power;
         }
+        return -1; // throw
     }
 
     //To reduce or or delete power
@@ -86,6 +87,7 @@ public class PowerHolder {
         else if(type==Element.WATER){
             return this.current_water -= power;
         }
+        return -1; // throw 
     }
 
     // To reset every new phase
