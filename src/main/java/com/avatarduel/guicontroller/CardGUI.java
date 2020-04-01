@@ -1,6 +1,6 @@
 package com.avatarduel.guicontroller;
 
-import com.avatarduel.model.Card;
+import com.avatarduel.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CardGUI {
@@ -24,15 +25,87 @@ public class CardGUI {
     @FXML private Label card_def;
     @FXML private Label card_pow;
 
-    public void setData(Card card) {
-        this.data = data;
+    public void setData(CharacterCard card) {
+        this.data = card;
         card_name.setText(this.data.getName());
+        card_desc.setText(this.data.getDescription());
+        card_atk.setText("ATK : " + Integer.toString(card.getAttack()));
+        card_def.setText("DEF : " + Integer.toString(card.getDefense()));
+        card_pow.setText("POW : " + Integer.toString(card.getPower()));
+        card_img.imageProperty().set(getImage(card.getImage()));
+        switch (card.getElement()) {
+            case WATER:
+                setBorderStyle("water_border");
+                break;
+            case FIRE:
+                setBorderStyle("fire_border");
+                break;
+            case EARTH:
+                setBorderStyle("earth_border");
+                break;
+            case AIR:
+                setBorderStyle("air_border");
+                break;
+        }
     }
-    public void coba2() {
-        card_name.setText("aaa");
+    public void setDate(LandCard card) {
+        this.data = card;
+        card_name.setText(this.data.getName());
+        card_desc.setText(this.data.getDescription());
+        card_atk.setText("");
+        card_def.setText("");
+        card_pow.setText("POW : " + Integer.toString(card.getPower()));
+        card_img.imageProperty().set(getImage(card.getImage()));
+        switch (card.getElement()) {
+            case WATER:
+                setBorderStyle("water_border");
+                break;
+            case FIRE:
+                setBorderStyle("fire_border");
+                break;
+            case EARTH:
+                setBorderStyle("earth_border");
+                break;
+            case AIR:
+                setBorderStyle("air_border");
+                break;
+        }
+    }
+    public void setDate(SkillAuraCard card) {
+        this.data = card;
+        card_name.setText(this.data.getName());
+        card_desc.setText(this.data.getDescription());
+        card_atk.setText("");
+        card_def.setText("");
+        card_pow.setText("POW : " + Integer.toString(card.getPower()));
+        card_img.imageProperty().set(getImage(card.getImage()));
+        switch (card.getElement()) {
+            case WATER:
+                setBorderStyle("water_border");
+                break;
+            case FIRE:
+                setBorderStyle("fire_border");
+                break;
+            case EARTH:
+                setBorderStyle("earth_border");
+                break;
+            case AIR:
+                setBorderStyle("air_border");
+                break;
+        }
     }
     @FXML
     public void initialize() {
         card_name.setText("hehe");
+    }
+
+    private void setBorderStyle(String className) {
+        card_border.getStyleClass().removeAll();
+        card_border.getStyleClass().add(className);
+    }
+
+    private Image getImage(String imgpath) {
+        File f = new File("build/resources/main/com/avatarduel/card/" + imgpath.substring(8));
+        return new Image("file:\\" + f.getAbsolutePath());
     }
 }

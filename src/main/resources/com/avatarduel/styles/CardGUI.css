@@ -1,0 +1,18 @@
+:root {
+    -fx-background-color : white;
+}
+.fire_border {
+    -fx-background-color : #F50;
+}
+.water_border {
+    -fx-background-color : #3AF;
+}
+.earth_border {
+    -fx-background-color : #A40;
+}
+.air_border {
+    -fx-background-color : #FFF;
+}
+.container {
+    -fx-background-color : #EEE;
+}
