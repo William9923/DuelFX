@@ -7,6 +7,10 @@ import java.util.List;
 
 public class Main {
 
+    public static void testField() {
+        
+    }
+
     public static void testHand() {
         System.out.println("\nTest Hand : ");
         Deck deck1 = new Deck (10);

@@ -29,7 +29,9 @@ public class Deck {
         allCards.addAll(landCards);
         allCards.addAll(skillCards);
         for (int i = 0; i < deckSize; i++) {
-            cardStack.push(selectRandom(allCards));
+            Card card = selectRandom(allCards);
+            card.setId(i+1);
+            cardStack.push(card);
         }
     }
 
