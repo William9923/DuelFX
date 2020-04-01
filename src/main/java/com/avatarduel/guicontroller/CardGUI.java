@@ -31,15 +31,13 @@ public class CardGUI {
         card_def.setText("DEF : " + Integer.toString(card.getDefense()));
         card_pow.setText("POW : " + Integer.toString(card.getPower()));
     }
-
-    public void setDate(LandCard card) {
+    public void setData(LandCard card) {
         setCard(card);
         card_atk.setText("");
         card_def.setText("");
         card_pow.setText("");
     }
-
-    public void setDate(SkillAuraCard card) {
+    public void setData(SkillAuraCard card) {
         setCard(card);
         card_atk.setText("");
         card_def.setText("");
