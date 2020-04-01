@@ -48,7 +48,7 @@ public class CardGUI {
                 break;
         }
     }
-    public void setDate(LandCard card) {
+    public void setData(LandCard card) {
         this.data = card;
         card_name.setText(this.data.getName());
         card_desc.setText(this.data.getDescription());
@@ -71,7 +71,7 @@ public class CardGUI {
                 break;
         }
     }
-    public void setDate(SkillAuraCard card) {
+    public void setData(SkillAuraCard card) {
         this.data = card;
         card_name.setText(this.data.getName());
         card_desc.setText(this.data.getDescription());
