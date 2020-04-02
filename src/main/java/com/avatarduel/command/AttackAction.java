@@ -36,11 +36,12 @@ public class AttackAction implements ICommand, IValidate{
 
         // artinya menang
         if (diff >= 0) {
+            Player p2 = Game.getInstance().getPlayerByType(defender);
             if (defenseChar.getState().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) {
-                Player p2 = Game.getInstance().getPlayerByType(defender);
                 p2.setHealthPoint(p2.getHealthPoint() - diff);
-                p2.checkLose(); // check lose
+                p2.checkLose(); // check lose --> ini di game manager aja kali ya ??
             }
+            p2.getField().removeCharacterCard(defenseChar); // hancurin kartu lawan
         }
         // else : kalah, do nothing , ato bisa send message biar interaktif
     }
@@ -51,11 +52,11 @@ public class AttackAction implements ICommand, IValidate{
         Field f2 = Game.getInstance().getPlayerByType(defender).getField();
         int currentTurn = Game.getInstance().getCurrentTurn();
         Phase currPhase = Game.getInstance().getCurrentPhase();
-        return (currPhase.equals(Phase.BATTLE_PHASE)
+        return (currPhase.equals(Phase.BATTLE)
                 && currentTurn != 1
-                && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch
+                && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch //
                 && f2.getCharacterCardByIdx(defenseCharacterIdx) != null // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack()
+                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack() && f1.getCharacterCardByIdx(attackCharacterIdx).getCreatedAtTurn() != currentTurn
         );
     }
 }

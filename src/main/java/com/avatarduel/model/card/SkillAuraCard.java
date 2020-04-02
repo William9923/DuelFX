@@ -2,7 +2,7 @@ package com.avatarduel.model.card;
 
 import com.avatarduel.model.type.CardType;
 
-public class SkillAuraCard extends Card {
+public class SkillAuraCard extends SkillCard {
 
     private int attack;
     private int defense;
@@ -32,8 +32,8 @@ public class SkillAuraCard extends Card {
         this.attack = attack;
     }
 
-//    @Override -- > later implement || for debugging purpose
-//    public void show() {
-//
-//    }
+    @Override //-- > later implement || for debugging purpose
+    public void show() {
+
+    }
 }
