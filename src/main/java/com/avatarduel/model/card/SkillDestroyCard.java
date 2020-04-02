@@ -2,7 +2,7 @@ package com.avatarduel.model.card;
 
 import com.avatarduel.model.type.CardType;
 
-public class SkillDestroyCard extends Card {
+public class SkillDestroyCard extends SkillCard {
 
     // Destroy Skill Card
     public SkillDestroyCard (String id, String name, String element, String description, String image, String power) {
@@ -11,8 +11,8 @@ public class SkillDestroyCard extends Card {
         this.power = Integer.parseInt(power);
     }
 
-//    @Override -- > later implement || for debugging purpose
-//    public void show() {
-//
-//    }
+    @Override //-- > later implement || for debugging purpose
+    public void show() {
+
+    }
 }
