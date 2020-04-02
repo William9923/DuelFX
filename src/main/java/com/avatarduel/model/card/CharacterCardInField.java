@@ -1,7 +1,7 @@
 package com.avatarduel.model.card;
 
-import com.avatarduel.type.CardType;
-import com.avatarduel.type.CharacterState;
+import com.avatarduel.model.type.CardType;
+import com.avatarduel.model.type.CharacterState;
 
 import java.util.ArrayList;
 import java.util.Iterator;

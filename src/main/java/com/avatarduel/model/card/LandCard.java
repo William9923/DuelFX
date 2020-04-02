@@ -1,8 +1,6 @@
 package com.avatarduel.model.card;
 
-import com.avatarduel.effect.DoNothingEffect;
-import com.avatarduel.model.card.Card;
-import com.avatarduel.type.CardType;
+import com.avatarduel.model.type.CardType;
 
 
 public class LandCard extends Card {
@@ -10,7 +8,6 @@ public class LandCard extends Card {
     public LandCard(String id, String name, String element, String description, String image) {
         super(id, name, element, description, image);
         this.power = 1; // hard-coded without context power
-        this.effect = new DoNothingEffect();
         this.type = CardType.LAND;
     }
 
@@ -20,11 +17,6 @@ public class LandCard extends Card {
 
     public void setPower(int power) {
         this.power = power;
-    }
-
-    @Override
-    public void doEffect() {
-        effect.showEffect();
     }
 
 //    @Override -- > later implement || for debugging purpose

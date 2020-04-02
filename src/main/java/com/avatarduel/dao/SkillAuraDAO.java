@@ -1,12 +1,14 @@
-package com.avatarduel.util;
+package com.avatarduel.dao;
 
+import com.avatarduel.dao.CardDAO;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.SkillAuraCard;
+import com.avatarduel.util.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillAuraDAO implements CardDAO{
+public class SkillAuraDAO implements CardDAO {
     List<Card> cards;
     Loader loader;
 

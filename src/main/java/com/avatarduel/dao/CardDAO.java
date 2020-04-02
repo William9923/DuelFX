@@ -1,4 +1,4 @@
-package com.avatarduel.util;
+package com.avatarduel.dao;
 
 import com.avatarduel.model.card.Card;
 

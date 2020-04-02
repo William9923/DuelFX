@@ -1,8 +1,6 @@
 package com.avatarduel.model.card;
 
-import com.avatarduel.effect.DoNothingEffect;
-import com.avatarduel.model.card.Card;
-import com.avatarduel.type.CardType;
+import com.avatarduel.model.type.CardType;
 
 public class CharacterCard extends Card {
     private int attack;
@@ -14,7 +12,6 @@ public class CharacterCard extends Card {
         this.attack = Integer.parseInt(attack);
         this.defense = Integer.parseInt(defense);
         this.power = Integer.parseInt(power);
-        this.effect = new DoNothingEffect();
         this.type = CardType.CHARACTER;
     }
 
@@ -40,11 +37,6 @@ public class CharacterCard extends Card {
 
     public void setPower(int power) {
         this.power = power;
-    }
-
-    @Override
-    public void doEffect() {
-        effect.showEffect();
     }
 
 //    @Override -- > later implement || for debugging purpose

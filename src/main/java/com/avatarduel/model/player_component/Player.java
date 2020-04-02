@@ -3,13 +3,9 @@ package com.avatarduel.model.player_component;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.player_component.Deck;
-import com.avatarduel.model.player_component.Field;
-import com.avatarduel.model.player_component.Hand;
-import com.avatarduel.model.player_component.PowerManager;
-import com.avatarduel.type.CardType;
-import com.avatarduel.type.CharacterState;
-import com.avatarduel.type.PlayerType;
+import com.avatarduel.model.type.CardType;
+import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.type.PlayerType;
 
 public class Player {
     protected Deck deck;

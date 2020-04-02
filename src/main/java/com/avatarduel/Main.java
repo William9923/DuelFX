@@ -4,8 +4,8 @@ import com.avatarduel.model.card.*;
 import com.avatarduel.model.player_component.Deck;
 import com.avatarduel.model.player_component.Field;
 import com.avatarduel.model.player_component.Hand;
-import com.avatarduel.type.CardType;
-import com.avatarduel.type.CharacterState;
+import com.avatarduel.model.type.CardType;
+import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.util.Loader;
 
 import java.util.ArrayList;

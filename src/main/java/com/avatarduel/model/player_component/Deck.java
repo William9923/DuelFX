@@ -1,7 +1,10 @@
 package com.avatarduel.model.player_component;
 
+import com.avatarduel.dao.CardDAO;
+import com.avatarduel.dao.CharacterDAO;
+import com.avatarduel.dao.LandDAO;
+import com.avatarduel.dao.SkillAuraDAO;
 import com.avatarduel.model.card.Card;
-import com.avatarduel.util.*;
 
 import java.util.*;
 

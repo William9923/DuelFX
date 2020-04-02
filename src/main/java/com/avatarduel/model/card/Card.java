@@ -1,9 +1,8 @@
 package com.avatarduel.model.card;
 
-import com.avatarduel.type.Element;
-import com.avatarduel.type.CardType;
+import com.avatarduel.model.type.Element;
+import com.avatarduel.model.type.CardType;
 import com.avatarduel.util.Loader;
-import com.avatarduel.effect.IEffect;
 
 public abstract class Card  {
     protected int id;
@@ -12,7 +11,6 @@ public abstract class Card  {
     protected String description;
     protected String image;
     protected CardType type;
-    protected IEffect effect;
     protected int power;
 
     // constructor
@@ -49,10 +47,6 @@ public abstract class Card  {
         return power;
     }
 
-    public IEffect getEffect() {
-        return effect;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -84,12 +78,6 @@ public abstract class Card  {
     public void setType(CardType type) {
         this.type = type;
     }
-
-    public void setEffect(IEffect effect) {
-        this.effect = effect;
-    }
-
-    public abstract void doEffect();
 
     // debugging function
     public void show() {
