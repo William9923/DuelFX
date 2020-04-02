@@ -3,11 +3,11 @@ package com.avatarduel.exception;
 import java.util.*;
 import java.io.*;
 
-public class CardException {
+public class CardInvalidException {
     private String message;
     private String cardType;
 
-    public CardException(String cardType, String message){
+    public CardInvalidException(String cardType, String message){
         this.cardType = cardType;
         this.message = message;
     }

@@ -23,7 +23,7 @@ public class ChangePositionAction  implements ICommand, IValidate{
 
     @Override
     public void execute() {
-
+        //
     }
 
     @Override
