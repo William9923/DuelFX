@@ -12,12 +12,14 @@ public class CharacterCardInField {
     public boolean hasAttacked;
     private CharacterState state;
     private List<Card> connectedCard;
+    private int createdAtTurn;
 
-    public CharacterCardInField(CharacterCard card, CharacterState state) {
+    public CharacterCardInField(CharacterCard card, CharacterState state, int createdAt) {
         this.card = card;
         this.state = state;
         this.hasAttacked = true; // karena kalo baru di summon ga bisa attack kan ya
         this.connectedCard = new ArrayList<>();
+        this.createdAtTurn = createdAt;
     }
 
     public void refresh() {
@@ -90,6 +92,10 @@ public class CharacterCardInField {
         } else {
             return getTotalDefense();
         }
+    }
+
+    public int getCreatedAtTurn() {
+        return createdAtTurn;
     }
 
     public List<Card> getConnectedCard() {

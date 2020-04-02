@@ -28,7 +28,9 @@ public class ChangePositionAction  implements ICommand, IValidate{
 
     @Override
     public boolean validate() {
-        Field f1 = Game.getInstance().getPlayerByType().getField();
+        Field f1 = Game.getInstance().getPlayerByType(p).getField();
         Phase currPhase = Game.getInstance().getCurrentPhase();
+
+
     }
 }

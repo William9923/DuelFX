@@ -55,7 +55,7 @@ public class AttackAction implements ICommand, IValidate{
                 && currentTurn != 1
                 && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch
                 && f2.getCharacterCardByIdx(defenseCharacterIdx) != null // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack()
+                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack() && f1.getCharacterCardByIdx(attackCharacterIdx).getCreatedAtTurn() != currentTurn
         );
     }
 }
