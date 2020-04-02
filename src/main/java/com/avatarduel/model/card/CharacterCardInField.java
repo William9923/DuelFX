@@ -46,6 +46,10 @@ public class CharacterCardInField {
         return bonus;
     }
 
+    public CharacterState getState() {
+        return state;
+    }
+
     public int getBonusDefense() {
         int bonus = 0;
         for (Card card: connectedCard) {
@@ -77,6 +81,14 @@ public class CharacterCardInField {
             if (itCard.equals(card)) {
                 itr.remove();
             }
+        }
+    }
+
+    public int getCurrentTotal() {
+        if (getState().equals(CharacterState.ATTACK)) {
+            return getTotalAttack();
+        } else {
+            return getTotalDefense();
         }
     }
 

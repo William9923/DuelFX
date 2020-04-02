@@ -51,17 +51,17 @@ public class Field {
     }
 
     public CharacterCardInField getCharacterCardByIdx(int index) {
-        if (index < fieldSize) {
+        if (index < fieldSize && index < charCardList.size()) {
             return charCardList.get(index);
         }
         return null; // throw error
     }
 
     public Card getSkillCardByIdx(int index) {
-        if(index < fieldSize) {
+        if(index < fieldSize && index < skillCardList.size()) {
             return skillCardList.get(index);
         }
-        return null;
+        return null; // harusnya throw error
     }
 
     public void connectCards(CharacterCardInField card1, Card card2) {
