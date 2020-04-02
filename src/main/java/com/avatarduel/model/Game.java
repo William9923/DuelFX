@@ -10,6 +10,7 @@ public class Game {
     private Player p1;
     private Player p2;
     private int currentTurn;
+    private PlayerType currentPlayer;
     private Phase currentPhase;
 
     private Game() {
@@ -17,6 +18,7 @@ public class Game {
         this.p2 = new Player(PlayerType.B);
         this.currentTurn = 1; // first turn
         this.currentPhase = Phase.DRAW;
+        this.currentPlayer = PlayerType.A;
     }
 
     public static Game getInstance() {
@@ -48,5 +50,15 @@ public class Game {
 
     public void setCurrentTurn(int currentTurn) {
         this.currentTurn = currentTurn;
+    }
+
+    public Player getPlayerByType(PlayerType type) {
+        if (type.equals(PlayerType.A)) {
+            return p1;
+        } else if (type.equals(PlayerType.B)){ // else
+            return p2;
+        } else {
+            return null; // throw error
+        }
     }
 }

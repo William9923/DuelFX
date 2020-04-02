@@ -1,4 +1,4 @@
 package com.avatarduel.command;
 
-public class Action {
+public class EndTurnAction {
 }
