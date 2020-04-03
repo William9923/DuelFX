@@ -5,10 +5,15 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import com.avatarduel.guicontroller.BoardGUI;
 import com.avatarduel.guicontroller.CardGUI;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.util.CSVReader;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -32,22 +37,16 @@ public class AvatarDuel extends Application {
   public void start(Stage stage) throws IOException, URISyntaxException {
 //    Parent root = FXMLLoader.load(getClass().getResource("Board.fxml"));
 
-    Text text = new Text();
-    text.setText("Loading...");
-    text.setX(50);
-    text.setY(50);
+    Button seeCardBtn = new Button("see card");
+    seeCardBtn.setLayoutX(500);
+    seeCardBtn.setLayoutY(100);
 
-    Text text2 = new Text();
-    text2.setText("Canda hehe");
-    text2.setX(100);
-    text2.setY(100);
-
-    Button btn = new Button("see card");
+    Button seeBoardBtn = new Button("see board");
+    seeBoardBtn.setLayoutX(500);
 
     Group root = new Group();
-    root.getChildren().addAll(text);
-    root.getChildren().add(text2);
-    root.getChildren().add(btn);
+    root.getChildren().add(seeCardBtn);
+    root.getChildren().add(seeBoardBtn);
 
     Scene scene = new Scene(root, 1280, 720);
 
@@ -58,31 +57,40 @@ public class AvatarDuel extends Application {
     File characterCSVFile = new File(getClass().getResource(CHARACTER_CSV_FILE_PATH).toURI());
     CSVReader characterReader = new CSVReader(characterCSVFile, "\t");
     List<String[]> characterRows = characterReader.read();
-    String[] firstCharacter = characterRows.get(16);
-    CharacterCard card = new CharacterCard(firstCharacter[0],firstCharacter[1],firstCharacter[2],firstCharacter[3],firstCharacter[4],firstCharacter[5], firstCharacter[6], firstCharacter[7]);
+
+    FXMLLoader FXMLBoardGUI = new FXMLLoader(getClass().getResource("GUI/Board/Board.fxml"));
+    Parent boardGUI = FXMLBoardGUI.load();
+    Scene board = new Scene(boardGUI);
+    seeBoardBtn.setOnAction(e -> {
+      stage.setScene(board);
+    });
 
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Card/CardGUI.fxml"));
+      FXMLLoader loader = getCardGUI();
       Parent cardGUIBox = loader.load();
+      root.getChildren().add(cardGUIBox);
       CardGUI controller = loader.getController();
-      controller.setData(card);
-      Scene cardGUIScene = new Scene(cardGUIBox);
-      btn.setOnAction(e -> {
-        stage.setScene(cardGUIScene);
+      seeCardBtn.setOnAction(new EventHandler<ActionEvent>() {
+        int i = 1;
+        @Override
+        public void handle(ActionEvent event) {
+          root.getChildren().remove(cardGUIBox);
+          String[] character = characterRows.get(i);
+          i++;
+          CharacterCard card = new CharacterCard(character[0],character[1],character[2],character[3],character[4],character[5], character[6], character[7]);
+          System.out.println(card.getElement());
+          controller.setData(card);
+          root.getChildren().add(cardGUIBox);
+        }
       });
     } catch (IOException IOE) {
       System.out.println("gasabi bray");
     }
-    try {
-//      this.loadCards();
-      text.setText("IU cinta Arthur");
-      System.out.println("Successful LoadTime");
-    } catch (Exception e) {
-      System.out.println("Unsuccessful LoadTime");
-    }
   }
 
-
+  public FXMLLoader getCardGUI() {
+    return new FXMLLoader(getClass().getResource("GUI/Card/CardGUI.fxml"));
+  }
   public static void main(String[] args) {
     launch();
   }

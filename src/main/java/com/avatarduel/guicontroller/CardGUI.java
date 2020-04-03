@@ -10,11 +10,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 
-public class CardGUI {
+public class CardGUI extends VBox {
     private Card data;
+    private final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border"};
     @FXML private AnchorPane card_border;
     @FXML private Label card_name;
     @FXML private ImageView card_img;
@@ -23,6 +25,17 @@ public class CardGUI {
     @FXML private Label card_atk;
     @FXML private Label card_def;
     @FXML private Label card_pow;
+
+    public CardGUI() {
+        System.out.println("CardGUI()");
+    }
+
+    public static CardGUI valueOf(Card card) {
+        System.out.println("valueOf called");
+        CardGUI result = new CardGUI();
+        result.setCard(card);
+        return result;
+    }
 
     public void setData(CharacterCard card) {
         setCard(card);
@@ -64,13 +77,8 @@ public class CardGUI {
         }
     }
 
-    @FXML
-    public void initialize() {
-        card_name.setText("hehe");
-    }
-
     private void setBorderStyle(String className) {
-        card_border.getStyleClass().removeAll();
+        card_border.getStyleClass().removeAll(listBorderClass);
         card_border.getStyleClass().add(className);
     }
 
