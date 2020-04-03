@@ -17,7 +17,6 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 
 public class BoardGUI extends VBox {
-    @FXML private CardGUI selected_card;
 //    private final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border"};
 //    @FXML private AnchorPane card_border;
 //    @FXML private Label card_name;

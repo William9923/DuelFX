@@ -7,11 +7,8 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import com.avatarduel.guicontroller.CardGUI?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.avatarduel.guicontroller.BoardGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.BoardGUI">
    <children>
       <HBox layoutX="302.0" layoutY="715.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="892.0" spacing="16.0">
          <children>
@@ -66,7 +63,6 @@
             <Label text="HP: 80" />
          </children>
       </VBox>
-      <CardGUI fx:id="selected_card"/>
       <VBox layoutX="148.0" layoutY="25.0" prefHeight="163.0" prefWidth="118.0">
          <children>
             <Label text="Power:" />
@@ -605,7 +601,6 @@
                </padding>
             </VBox>
          </children></HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
       <VBox layoutX="1146.0" layoutY="198.0" prefHeight="200.0" prefWidth="100.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
@@ -616,6 +611,11 @@
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="173.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
             <Label text="Deck : 45/50" />
+         </children>
+      </VBox>
+      <VBox layoutX="-3.0" layoutY="195.0" prefHeight="248.0" prefWidth="185.0">
+         <children>
+            <fx:include fx:id="selected_card" source="../Card/CardGUI.fxml" />
          </children>
       </VBox>
    </children>
