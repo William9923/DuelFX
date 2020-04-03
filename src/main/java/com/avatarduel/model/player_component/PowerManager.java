@@ -88,7 +88,7 @@ public class PowerManager {
     }
 
     //To reduce or or delete power
-    public int delete(Element type, int power){
+    public int reduce(Element type, int power){
         if(type==Element.AIR){
             return this.current_air -= power;
         }

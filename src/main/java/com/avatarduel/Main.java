@@ -139,16 +139,31 @@ public class Main {
         }
 
         // test to remove character card from field
+        if (p1.getField().getCharCardList().size() > 1) {
+            p1.getField().removeCharacterCard(p1.getField().getCharacterCardByIdx(1));  // remove second character
+            assert p1.getField().getCharCardList().size() == 1 : "Waw bakaaa ... remove Character gone wrong";
+        }
 
         // test to remove skill card from field
+        if (p1.getField().getSkillCardList().size() > 0) {
+            int size =p1.getField().getSkillCardList().size();
+            p1.getField().removeSkillCard(p1.getField().getSkillCardByIdx(0));
+            assert p1.getField().getSkillCardList().size() == size - 1 : "Removing card skill test unsucessful";
+        }
 
         // test to decrease health point
+        p1.setHealthPoint(p1.getHealthPoint() - 10);
+        assert p1.getHealthPoint() == 70 : "Error decreasing health point";
 
         // test to refresh state of player
+        if (landCard1 != null) {
+            System.out.println("First Element Power Manager Usage : ");
+            int power = p1.getPower().getCurrent(landCard1.getElement());
+            p1.getPower().reduce(landCard1.getElement(),1);
+            p1.getPower().refresh();
 
-
-
-
+            assert  p1.getPower().getCurrent(landCard1.getElement()) == power : "Salah refresh power manager";
+        }
 
     }
 
@@ -391,12 +406,12 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Testing Backend");
-//        Main.testLoader();
-//        Main.testCard();
-//        Main.testSkillCard();
-//        Main.testDeck();
-//        Main.testHand();
-//        Main.testField();
+        Main.testLoader();
+        Main.testCard();
+        Main.testSkillCard();
+        Main.testDeck();
+        Main.testHand();
+        Main.testField();
         Main.testPlayer();
     }
 }
