@@ -85,7 +85,7 @@ public class Main {
         if (field.getCharCardList().size() > 0) {
             for (Card card : cardList2) {
                 if (card.getType().equals(CardType.SKILL_AURA)){
-                    field.connectCards(field.getCharacterCardByIdx(0),card);  // ini nunjukin cara akses via gui lewat index, dan juga kasi tau cara konekin kartu di field (buat power up dan aura)
+                    field.connectCards(field.getCharacterCardByIdx(0),(SkillCard) card);  // ini nunjukin cara akses via gui lewat index, dan juga kasi tau cara konekin kartu di field (buat power up dan aura)
                     // dan nunjukkin bisa banyak koneknya
                 }
             }
@@ -101,8 +101,10 @@ public class Main {
             System.out.println("Attack After Adding AURA : " + holder1.getTotalAttack());
             System.out.println("Defense After Adding AURA : " + holder1.getTotalDefense());
 
+            System.out.println("Aura Card  : " + field.getSkillCardList().size() );
+
             System.out.println("\nAura Card List : ");
-            List<Card> cardList = holder1.getConnectedCard();
+            List<SkillCard> cardList = holder1.getConnectedCard();
             SkillAuraCard cardAura; int bonusAttack = 0; int bonusDefense = 0;
             for (Card card: cardList) {
                  cardAura = (SkillAuraCard) card;
@@ -119,6 +121,8 @@ public class Main {
             field.removeCharacterCard(holder1); // bubay
             System.out.println("Size : (harusnya 0) " + field.getSkillCardList().size());
             System.out.println("Size : " + field.getCharCardList().size());
+
+            System.out.println("Aura Card  : " + field.getSkillCardList().size() );
         }
     }
 
@@ -285,9 +289,9 @@ public class Main {
 //        Main.testLoader();
 //        Main.testCard();
 //        Main.testSkillCard();
-        Main.testDeck();
-        Main.testHand();
-//        Main.testField();
+//        Main.testDeck();
+//        Main.testHand();
+        Main.testField();
 //        Main.testPlayer();
     }
 }

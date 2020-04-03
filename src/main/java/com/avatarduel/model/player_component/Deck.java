@@ -54,9 +54,7 @@ public class Deck extends Stack<Card>{
     }
 
     private Card selectRandom(List<Card> cardList) {
-        int size = cardList.size();
-        Random rand = new Random();
-        return cardList.get(rand.nextInt(size));
+        return cardList.get(new Random().nextInt(cardList.size()));
     }
 
     // shuffle
@@ -78,8 +76,6 @@ public class Deck extends Stack<Card>{
     public void printDeck() {
         List<Card> listCard = new ArrayList<Card>(this);
         Collections.reverse(listCard);
-        for (Card card: listCard) {
-            card.show();
-        }
+        listCard.forEach(card -> card.show());
     }
 }

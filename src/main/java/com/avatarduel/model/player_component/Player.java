@@ -3,6 +3,7 @@ package com.avatarduel.model.player_component;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
@@ -53,7 +54,7 @@ public class Player {
     public void playSkillAuraCard(int indexHand, int indexField) {
         if (hand.get(indexHand).getType().equals(CardType.SKILL_AURA)){
             Card card = hand.remove(indexHand);
-            field.connectCards(field.getCharacterCardByIdx(indexField), card);
+            field.connectCards(field.getCharacterCardByIdx(indexField), (SkillCard) card);
         } // else : throw error
     }
 
@@ -62,7 +63,7 @@ public class Player {
     // play skill power up
     public void playSkillPowerUpCard(int indexHand, int indexField) {
         if (hand.get(indexHand).getType().equals(CardType.SKILL_POWER_UP)){
-            Card card = hand.remove(indexHand);
+            SkillCard card = (SkillCard) hand.remove(indexHand);
             field.connectCards(field.getCharacterCardByIdx(indexField), card);
         } // else : throw error
     }

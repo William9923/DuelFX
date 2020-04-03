@@ -11,7 +11,7 @@ public class CharacterCardInField {
     private CharacterCard card;
     public boolean hasAttacked;
     private CharacterState position;
-    private List<Card> connectedCard;
+    private List<SkillCard> connectedCard;
     private int createdAtTurn;
 
     public CharacterCardInField(CharacterCard card, CharacterState state, int createdAt) {
@@ -71,7 +71,7 @@ public class CharacterCardInField {
         return false;
     }
 
-    public void pair(Card card) {
+    public void pair(SkillCard card) {
         connectedCard.add(card);
     }
 
@@ -98,7 +98,7 @@ public class CharacterCardInField {
         return createdAtTurn;
     }
 
-    public List<Card> getConnectedCard() {
+    public List<SkillCard> getConnectedCard() {
         return connectedCard;
     }
 
