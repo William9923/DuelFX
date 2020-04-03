@@ -7,8 +7,11 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import com.avatarduel.guicontroller.CardGUI?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.avatarduel.guicontroller.BoardGUI">
    <children>
       <HBox layoutX="302.0" layoutY="715.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="892.0" spacing="16.0">
          <children>
@@ -63,11 +66,7 @@
             <Label text="HP: 80" />
          </children>
       </VBox>
-      <VBox layoutX="28.0" layoutY="216.0" prefHeight="356.0" prefWidth="240.0" style="-fx-background-color: red;">
-         <children>
-            <Label prefHeight="356.0" prefWidth="266.0" text="Ini bakan diganti kartu entar" />
-         </children>
-      </VBox>
+      <CardGUI fx:id="selected_card"/>
       <VBox layoutX="148.0" layoutY="25.0" prefHeight="163.0" prefWidth="118.0">
          <children>
             <Label text="Power:" />
@@ -128,49 +127,6 @@
       </VBox>
       <HBox layoutX="302.0" layoutY="198.0" prefHeight="173.0" prefWidth="801.0" spacing="16.0">
          <children>
-            <VBox fx:id="card_container" alignment="TOP_CENTER" prefHeight="148.0" prefWidth="120.0" spacing="8.0" styleClass="container">
-               <children>
-                  <Label fx:id="card_name" alignment="CENTER" text="NAMA KARTU">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="card_img" fitHeight="86.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../card/image/character/Aang.png" />
-                     </image>
-                  </ImageView>
-                  <VBox prefHeight="50.0" prefWidth="110.0">
-                     <children>
-                        <Label fx:id="card_atk" text="ATK : 8">
-                           <font>
-                              <Font size="9.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="card_def" text="DEF : 9">
-                           <font>
-                              <Font size="9.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="card_pow" text="POW : 2">
-                           <font>
-                              <Font size="9.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <padding>
-                        <Insets left="11.0" />
-                     </padding>
-                  </VBox>
-                  <HBox fx:id="card_attributes" alignment="BOTTOM_CENTER" prefHeight="14.0" prefWidth="238.0" spacing="15.0" />
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </VBox>
             <VBox fx:id="card_container1" alignment="TOP_CENTER" prefHeight="148.0" prefWidth="120.0" spacing="8.0" styleClass="container">
                <children>
                   <Label fx:id="card_name1" alignment="CENTER" text="NAMA KARTU">

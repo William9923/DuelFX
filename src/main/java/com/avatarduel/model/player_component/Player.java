@@ -40,7 +40,7 @@ public class Player {
         Card card = hand.findCardByIndex(index);
         if (card.getType().equals(CardType.CHARACTER)){ // kalo ga ini, maka throw error kalo wrong type
             hand.removeCardByIndex(index);  // keluarin dari tangan
-            field.addCharacterCard(new CharacterCardInField((CharacterCard) card,state));  // masukin ke field
+            field.addCharacterCard(new CharacterCardInField((CharacterCard) card,state,0));  // masukin ke field
         } // else : throw error
     }
 

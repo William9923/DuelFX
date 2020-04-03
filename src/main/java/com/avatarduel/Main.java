@@ -32,7 +32,7 @@ public class Main {
 
         for (Card card : cardList1) {
             if (card.getType().equals(CardType.CHARACTER)){
-                field.addCharacterCard(new CharacterCardInField((CharacterCard) card, CharacterState.ATTACK));  // cara panggil character ke arena
+                field.addCharacterCard(new CharacterCardInField((CharacterCard) card, CharacterState.ATTACK, 0));  // cara panggil character ke arena
             }
         }
 
@@ -244,9 +244,6 @@ public class Main {
         card2.show();
         card3.show();
 
-        card1.doEffect();
-        card2.doEffect();
-        card3.doEffect();
     }
 
     public static void main(String[] args) {
