@@ -2,17 +2,19 @@ package com.avatarduel.model.player_component;
 
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.card.SkillCard;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Field {
     private List<CharacterCardInField> charCardList;
-    private List<Card> skillCardList;
+    private List<SkillCard> skillCardList;
     private int fieldSize;
 
     public Field (int size) {
         this.charCardList = new ArrayList<CharacterCardInField>();
-        this.skillCardList = new ArrayList<Card>();
+        this.skillCardList = new ArrayList<SkillCard>();
         this.fieldSize = size;
     }
 
@@ -20,7 +22,7 @@ public class Field {
         return fieldSize;
     }
 
-    public List<Card> getSkillCardList() {
+    public List<SkillCard> getSkillCardList() {
         return skillCardList;
     }
 
@@ -64,14 +66,14 @@ public class Field {
         return null; // harusnya throw error
     }
 
-    public void connectCards(CharacterCardInField card1, Card card2) {
+    public void connectCards(CharacterCardInField card1, SkillCard card2) {
         if (isAbleToAddSkill() && isContainCharacter(card1)) {
             card1.pair(card2);
             addSkillCard(card2);
         }
     }
 
-    public void addSkillCard(Card card) {
+    public void addSkillCard(SkillCard card) {
         if (isAbleToAddSkill()) {
            skillCardList.add(card);
         }
@@ -79,39 +81,37 @@ public class Field {
 
     public void removeCharacterCard(CharacterCardInField inField) {
         if (isContainCharacter(inField)){
-            Iterator itr = charCardList.iterator();
-            while (itr.hasNext())
-            {
-                CharacterCardInField itCard = (CharacterCardInField) itr.next();
-                if (itCard.equals(inField)) {
-                    List<Card> connectPair = new ArrayList<>(inField.getConnectedCard());
-                    for (Card pairCard : connectPair) {
-                        removeSkillCard(pairCard);
-                    }
-                    itr.remove();
-                }
-            }
+            CharacterCardInField cardInField = charCardList
+                    .stream()
+                    .filter(c -> c.equals(inField))
+                    .findFirst()
+                    .orElse(null); // throw Error
+            skillCardList = skillCardList
+                    .stream()
+                    .filter(c -> !cardInField.getConnectedCard().contains(c))
+                    .collect(Collectors.toList());
+            charCardList = charCardList
+                    .stream()
+                    .filter(card -> !card.equals(inField))
+                    .collect(Collectors.toList());
         }
     }
 
     public void removeSkillCard(Card inField) {
         if (isContainSkill(inField)) {
-            // delete from Field Reference
-            Iterator itr = skillCardList.iterator();
-            while (itr.hasNext())
-            {
-                Card itCard = (Card)itr.next();
-                if (itCard.equals(inField)) {
-                    itr.remove();
-                }
-            }
+            skillCardList = skillCardList
+                    .stream()
+                    .filter(card -> !card.equals(inField))
+                    .collect(Collectors.toList());
 
-            // delete from the Character Card Reference
-            for (CharacterCardInField inField2: charCardList) {
-                if (inField2.getConnectedCard().contains(inField)){
-                    inField2.removePair(inField);
-                }
-            }
+            charCardList.forEach(
+                    c -> {
+                        if (c.getConnectedCard().contains(inField)) {
+                            c.removePair(inField);
+                        }
+                    }
+            );
+
         }
     }
 }

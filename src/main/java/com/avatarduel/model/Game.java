@@ -41,8 +41,8 @@ public class Game {
         return currentTurn;
     }
 
-    public Phase getCurrentPhase() {
-        return currentPhase.getPhase();
+    public IPhase getCurrentPhase() {
+        return currentPhase;
     }
 
     public void nextPhase() {

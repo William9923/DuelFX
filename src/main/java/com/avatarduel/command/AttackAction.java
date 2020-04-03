@@ -30,16 +30,24 @@ public class AttackAction implements ICommand, IValidate{
 
     @Override
     public void execute() {
-        CharacterCardInField attackChar = Game.getInstance().getPlayerByType(attacker).getField().getCharacterCardByIdx(attackCharacterIdx);
-        CharacterCardInField defenseChar = Game.getInstance().getPlayerByType(defender).getField().getCharacterCardByIdx(defenseCharacterIdx);
+        CharacterCardInField attackChar = Game.getInstance()
+                .getPlayerByType(attacker)
+                .getField()
+                .getCharacterCardByIdx(attackCharacterIdx);
+
+        CharacterCardInField defenseChar = Game.getInstance()
+                .getPlayerByType(defender)
+                .getField()
+                .getCharacterCardByIdx(defenseCharacterIdx);
+
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();
 
         // artinya menang
         if (diff >= 0) {
             Player p2 = Game.getInstance().getPlayerByType(defender);
-            if (defenseChar.getState().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) {
+            if (defenseChar.getPosition().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) { // pierce effect
                 p2.setHealthPoint(p2.getHealthPoint() - diff);
-                p2.checkLose(); // check lose --> ini di game manager aja kali ya ??
+//                p2.checkLose(); // check lose --> ini di game manager aja kali ya ??
             }
             p2.getField().removeCharacterCard(defenseChar); // hancurin kartu lawan
         }
@@ -48,15 +56,29 @@ public class AttackAction implements ICommand, IValidate{
 
     @Override
     public boolean validate() {
-        Field f1 = Game.getInstance().getPlayerByType(attacker).getField();
-        Field f2 = Game.getInstance().getPlayerByType(defender).getField();
-        int currentTurn = Game.getInstance().getCurrentTurn();
-        Phase currPhase = Game.getInstance().getCurrentPhase();
+        Field f1 = Game.getInstance()
+                .getPlayerByType(attacker)
+                .getField();
+
+        Field f2 = Game.getInstance()
+                .getPlayerByType(defender)
+                .getField();
+
+        int currentTurn = Game
+                .getInstance()
+                .getCurrentTurn();
+
+        Phase currPhase = Game
+                .getInstance()
+                .getCurrentPhase()
+                .getPhase();
+
         return (currPhase.equals(Phase.BATTLE)
                 && currentTurn != 1
-                && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch //
+                && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch
                 && f2.getCharacterCardByIdx(defenseCharacterIdx) != null // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack() && f1.getCharacterCardByIdx(attackCharacterIdx).getCreatedAtTurn() != currentTurn
+                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack()
+                && f1.getCharacterCardByIdx(attackCharacterIdx).getCreatedAtTurn() != currentTurn
         );
     }
 }

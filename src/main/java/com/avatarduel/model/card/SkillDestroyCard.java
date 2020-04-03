@@ -11,8 +11,8 @@ public class SkillDestroyCard extends SkillCard {
         this.power = Integer.parseInt(power);
     }
 
-    @Override //-- > later implement || for debugging purpose
-    public void show() {
-
-    }
+//    @Override //-- > later implement || for debugging purpose
+//    public void show() {
+//
+//    }
 }
