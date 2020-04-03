@@ -29,12 +29,8 @@ public class Game {
         return game;
     }
 
-    public Player getP1() {
-        return p1;
-    }
-
-    public Player getP2() {
-        return p2;
+    public PlayerType getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public int getCurrentTurn() {
