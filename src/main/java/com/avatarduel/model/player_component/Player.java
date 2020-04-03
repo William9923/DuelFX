@@ -122,4 +122,10 @@ public class Player {
     public boolean checkLose() {
         return healthPoint <= 0;
     }
+
+    public void refreshState() {
+        this.power.refresh();
+        this.getField().getCharCardList()
+                .forEach(c -> c.refresh());
+    }
 }

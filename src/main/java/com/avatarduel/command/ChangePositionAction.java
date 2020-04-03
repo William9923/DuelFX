@@ -33,9 +33,7 @@ public class ChangePositionAction  implements ICommand, IValidate{
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
-        return ((currPhase.equals(Phase.MAIN1) || currPhase.equals(Phase.MAIN2))
-                && currPlayer.equals(p)
-        );
+        return !(!(currPhase.equals(Phase.MAIN1) || currPhase.equals(Phase.MAIN2)) || !currPlayer.equals(p));
 
     }
 }

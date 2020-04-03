@@ -41,8 +41,20 @@ public class Game {
         return currentPhase;
     }
 
+    public void incrementTurn() {
+        this.currentTurn++;
+    }
+
     public void nextPhase() {
         currentPhase = currentPhase.next();
+    }
+
+    public void nextPlayer() {
+        switch (currentPlayer) {
+            case A: currentPlayer = PlayerType.B; break;
+            case B: currentPlayer = PlayerType.A; break;
+        }
+        // else : error InvalidPlayer duar
     }
 
     public void setCurrentPhase(Phase newPhase) {
