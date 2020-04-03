@@ -87,6 +87,10 @@ public class PowerManager {
         }
     }
 
+    public int getTotal() {
+        return total_air + total_fire + total_earth + total_water;
+    }
+
     //To reduce or or delete power
     public int reduce(Element type, int power){
         if(type==Element.AIR){

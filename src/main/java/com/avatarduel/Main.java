@@ -1,5 +1,6 @@
 package com.avatarduel;
 
+import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.player_component.Deck;
 import com.avatarduel.model.player_component.Field;
@@ -7,12 +8,14 @@ import com.avatarduel.model.player_component.Hand;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.util.Loader;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -22,6 +25,51 @@ public class Main {
 
     public static void testGame() {
 
+        // how to get player based on types from
+        Player p1 = Game.getInstance().getPlayerByType(PlayerType.A); // A : First Player
+        Player p2 = Game.getInstance().getPlayerByType(PlayerType.B); // B : Second Player
+
+        assert p1.getType().equals(PlayerType.A) : "Player 1 error";
+        assert p2.getType().equals(PlayerType.B) : "Player 2 error";
+
+        p1.setHealthPoint(p1.getHealthPoint() - 10); // using the copied reference to make the change inside the Game Instance
+        assert Game.getInstance().getPlayerByType(PlayerType.A).getHealthPoint() == 70 : "Checking object reference :)";
+
+        Game.getInstance().getPlayerByType(PlayerType.A).startGameDraw();
+        assert Game.getInstance().getPlayerByType(PlayerType.A).getHand().size() == 7 : "Drawing error";
+
+        List<Card> cardList = Game.getInstance().getPlayerByType(PlayerType.A).getHand().stream()
+                .filter(c -> c.getType().equals(CardType.LAND))
+                .collect(Collectors.toList());
+        System.out.println("Land Card In Hand : " + cardList.size());
+
+        AtomicInteger i = new AtomicInteger();
+
+        List<Integer> cardListIndex = cardList.stream()
+                .map(c -> Game.getInstance().getPlayerByType(PlayerType.A).getHand().indexOf(c) - i.getAndIncrement())
+                .collect(Collectors.toList());
+
+        cardListIndex.forEach(index -> Game.getInstance().getPlayerByType(PlayerType.A).playLandCard(index));
+        System.out.println("Total Power For Player : " + Game.getInstance().getPlayerByType(PlayerType.A).getPower().getTotal());
+
+
+        // how to next phase
+        System.out.println("Testing on Phase Transition in game : ");
+        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+        System.out.println("Current Phase : " + currPhase);
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.MAIN1) : "Error in Phase Transition";
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE) : "Error in Phase Transition";
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.MAIN2) : "Error in Phase Transition";
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.END) : "Error in Phase Transition";
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "Error in Phase Transition";
+
+
+        // how
     }
 
     public static void testPlayer() {
@@ -413,5 +461,6 @@ public class Main {
         Main.testHand();
         Main.testField();
         Main.testPlayer();
+        Main.testGame();
     }
 }
