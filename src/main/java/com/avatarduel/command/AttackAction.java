@@ -30,8 +30,16 @@ public class AttackAction implements ICommand, IValidate{
 
     @Override
     public void execute() {
-        CharacterCardInField attackChar = Game.getInstance().getPlayerByType(attacker).getField().getCharacterCardByIdx(attackCharacterIdx);
-        CharacterCardInField defenseChar = Game.getInstance().getPlayerByType(defender).getField().getCharacterCardByIdx(defenseCharacterIdx);
+        CharacterCardInField attackChar = Game.getInstance()
+                .getPlayerByType(attacker)
+                .getField()
+                .getCharacterCardByIdx(attackCharacterIdx);
+
+        CharacterCardInField defenseChar = Game.getInstance()
+                .getPlayerByType(defender)
+                .getField()
+                .getCharacterCardByIdx(defenseCharacterIdx);
+
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();
 
         // artinya menang
@@ -48,15 +56,28 @@ public class AttackAction implements ICommand, IValidate{
 
     @Override
     public boolean validate() {
-        Field f1 = Game.getInstance().getPlayerByType(attacker).getField();
-        Field f2 = Game.getInstance().getPlayerByType(defender).getField();
-        int currentTurn = Game.getInstance().getCurrentTurn();
-        Phase currPhase = Game.getInstance().getCurrentPhase();
+        Field f1 = Game.getInstance()
+                .getPlayerByType(attacker)
+                .getField();
+
+        Field f2 = Game.getInstance()
+                .getPlayerByType(defender)
+                .getField();
+
+        int currentTurn = Game
+                .getInstance()
+                .getCurrentTurn();
+
+        Phase currPhase = Game
+                .getInstance()
+                .getCurrentPhase();
+
         return (currPhase.equals(Phase.BATTLE)
                 && currentTurn != 1
                 && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch //
                 && f2.getCharacterCardByIdx(defenseCharacterIdx) != null // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack() && f1.getCharacterCardByIdx(attackCharacterIdx).getCreatedAtTurn() != currentTurn
+                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack()
+                && f1.getCharacterCardByIdx(attackCharacterIdx).getCreatedAtTurn() != currentTurn
         );
     }
 }

@@ -13,4 +13,8 @@ public class Hand extends ArrayList<Card>{
     }
 
     // incase, nanti ada logic hand lagi gitu
+
+    public void print() {
+        this.forEach(s -> s.show());
+    }
 }

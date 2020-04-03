@@ -10,6 +10,7 @@ import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.util.Loader;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class Main {
         p1.startGameDraw();
         p2.startGameDraw();
 
+        p1.getHand().print();
+
         assert p1.getHand().size() == 7 ;
         assert p2.getHand().size() == 7 : "Wrong card in player 2 hand";
 
@@ -40,10 +43,112 @@ public class Main {
         assert p2.getDeck().size() == (60 - 7) : p2.getDeck().size();
 
         // play a character card :
-        CharacterCard cardChar  = (CharacterCard) p1.getHand().stream()
+        CharacterCard cardChar1  = (CharacterCard) p1.getHand().stream()
                 .filter(card -> card.getType().equals(CardType.CHARACTER))
-                .findAny()
+                .findFirst()
                 .orElse(null);
+
+        CharacterCard cardChar2  = (CharacterCard) p1.getHand().stream()
+                .filter(card -> card.getType().equals(CardType.CHARACTER) && !card.equals(cardChar1))
+                .findFirst()
+                .orElse(null);
+
+        int countMonster = 0;
+        int countSpell = 0;
+        int countLand = 0;
+        // summoning process test
+        if (cardChar1 != null) {
+            System.out.println("First Monster Usage : ");
+            cardChar1.show();
+            countMonster++;
+            int index1  = p1.getHand().indexOf(cardChar1);
+            p1.playCharacterCard(index1, CharacterState.ATTACK, 1); // summon in Attack Position
+            assert p1.getHand().size() == 7 - (countMonster + countSpell) : "Summon Wrong";
+            assert p1.getField().getCharCardList().size() == countMonster : "Summon Wrong";
+
+        }
+
+        if (cardChar2 != null) {
+            System.out.println("Second Monster Usage : ");
+            cardChar2.show();
+            countMonster++;
+            int index2 = p1.getHand().indexOf(cardChar2);
+            p1.playCharacterCard(index2, CharacterState.DEFENSE,1); // summon in Defense Position
+            assert p1.getHand().size() == 7 - (countMonster + countSpell) : "Summon second time gone wrong";
+            assert p1.getField().getCharCardList().size() == countMonster : "Summon second time gone wrong";
+        }
+
+        // using aura test
+        SkillCard cardSkill1 = (SkillCard) p1.getHand().stream()
+                .filter(card -> card.getType().equals(CardType.SKILL_AURA))
+                .findFirst()
+                .orElse(null);
+
+        SkillCard cardSkill2 = (SkillCard) p1.getHand().stream()
+                .filter(card -> card.getType().equals(CardType.SKILL_AURA) && !card.equals(cardSkill1))
+                .findFirst()
+                .orElse(null);
+
+        if (cardSkill1 != null && cardChar1 != null) {
+            System.out.println("Skill First Usage : ");
+            cardSkill1.show();
+            countSpell++;
+            int index1 = p1.getHand().indexOf(cardSkill1);
+            p1.playSkillAuraCard(index1, 0); // uwu semoga ada KWKWKW
+
+            assert p1.getHand().size() ==  7 - (countMonster + countSpell) : "Card Skill usage error"; // wlwkw, ini asumsi doang kalo atas atasnya bener
+            assert p1.getField().getCharacterCardByIdx(0).getConnectedCard().size() == countSpell : "Card skill not paired with monsta";
+            assert p1.getField().getSkillCardList().size() == countSpell : "Skill not utilized in field";
+        }
+        if (cardSkill2 != null && cardChar1 != null) {
+            System.out.println("Second Skill Usage : ");
+            cardSkill2.show();
+            countSpell++;
+            int index2 = p1.getHand().indexOf(cardSkill2);
+            p1.playSkillAuraCard(index2,0);
+
+            assert p1.getHand().size() ==  7 - (countMonster + countSpell) : "Card Skill usage error"; // wlwkw, ini asumsi doang kalo atas atasnya bener
+            assert p1.getField().getCharacterCardByIdx(0).getConnectedCard().size() == countSpell : "Card skill not paired with monsta";
+            assert p1.getField().getSkillCardList().size() == countSpell : "Skill not utilized in field";
+
+        }
+
+        // test to play land card
+
+        LandCard landCard1 = (LandCard) p1.getHand().stream()
+                .filter(card -> card.getType().equals(CardType.LAND))
+                .findFirst()
+                .orElse(null);
+
+        LandCard landCard2 = (LandCard) p1.getHand().stream()
+                .filter(card -> card.getType().equals(CardType.LAND) && !card.equals(landCard1))
+                .findFirst()
+                .orElse(null);
+
+        if (landCard1 != null) {
+            System.out.println("First Land Usage : ");
+            landCard1.show();
+            countLand++;
+
+            int index1 = p1.getHand().indexOf(landCard1);
+            p1.playLandCard(index1);
+
+            assert p1.getHand().size() == 7 - (countMonster + countLand + countSpell) : "Land Card Usage Error";
+            System.out.println(p1.getPower().getCurrent(landCard1.getElement()));
+            assert p1.getPower().getCurrent(landCard1.getElement()) == 1 : "Waw error";
+        }
+
+        // test to remove character card from field
+
+        // test to remove skill card from field
+
+        // test to decrease health point
+
+        // test to refresh state of player
+
+
+
+
 
     }
 
@@ -291,7 +396,7 @@ public class Main {
 //        Main.testSkillCard();
 //        Main.testDeck();
 //        Main.testHand();
-        Main.testField();
-//        Main.testPlayer();
+//        Main.testField();
+        Main.testPlayer();
     }
 }

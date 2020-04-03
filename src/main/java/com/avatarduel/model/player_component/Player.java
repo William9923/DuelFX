@@ -1,9 +1,6 @@
 package com.avatarduel.model.player_component;
 
-import com.avatarduel.model.card.Card;
-import com.avatarduel.model.card.CharacterCard;
-import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.card.SkillCard;
+import com.avatarduel.model.card.*;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
@@ -45,14 +42,14 @@ public class Player {
 
     public void playCharacterCard(int index, CharacterState state, int turn) {
         Card card = hand.get(index);
-        if (card.getType().equals(CardType.CHARACTER)){ // kalo ga ini, maka throw error kalo wrong type
+        if (index < hand.size() && card.getType().equals(CardType.CHARACTER)){ // kalo ga ini, maka throw error kalo wrong type
             hand.remove(index);  // keluarin dari tangan
             field.addCharacterCard(new CharacterCardInField((CharacterCard) card,state, turn));  // masukin ke field
         } // else : throw error
     }
 
     public void playSkillAuraCard(int indexHand, int indexField) {
-        if (hand.get(indexHand).getType().equals(CardType.SKILL_AURA)){
+        if (indexHand < hand.size() && hand.get(indexHand).getType().equals(CardType.SKILL_AURA)){
             Card card = hand.remove(indexHand);
             field.connectCards(field.getCharacterCardByIdx(indexField), (SkillCard) card);
         } // else : throw error
@@ -62,10 +59,18 @@ public class Player {
 
     // play skill power up
     public void playSkillPowerUpCard(int indexHand, int indexField) {
-        if (hand.get(indexHand).getType().equals(CardType.SKILL_POWER_UP)){
+        if (indexHand < hand.size() && hand.get(indexHand).getType().equals(CardType.SKILL_POWER_UP)){
             SkillCard card = (SkillCard) hand.remove(indexHand);
             field.connectCards(field.getCharacterCardByIdx(indexField), card);
         } // else : throw error
+    }
+
+    public void playLandCard(int indexHand) {
+
+        if (hand.get(indexHand).getType().equals(CardType.LAND)) {
+            LandCard card = (LandCard) hand.remove(indexHand);
+            power.add(card.getElement(), 1);
+        } // else throw error
     }
 
     public void removeCardFromHand(int index) {
