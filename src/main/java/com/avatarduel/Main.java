@@ -202,9 +202,11 @@ public class Main {
 
         System.out.println("Test Print Out Deck 1:");
         deck1.printDeck();
+        System.out.println("Deck1 size : " + deck1.size());
         System.out.println();
         System.out.println("Test Print Out Deck 2:");
         deck2.printDeck();
+        System.out.println("Deck2 size : " + deck2.size());
         System.out.println();
 
         System.out.println("Test Functionality dari Deck:");
@@ -212,9 +214,8 @@ public class Main {
         Card checkFirstCard = deck1.showFirstCard();
         Card firstCard = deck1.draw();
 
-        if (checkFirstCard.equals(firstCard)){
-            System.out.println("Checking successful");
-        }
+        assert checkFirstCard.equals(firstCard) : "Checking checkFirst or draw error";
+
         firstCard.show();
         System.out.println();
 
@@ -285,7 +286,7 @@ public class Main {
 //        Main.testCard();
 //        Main.testSkillCard();
         Main.testDeck();
-//        Main.testHand();
+        Main.testHand();
 //        Main.testField();
 //        Main.testPlayer();
     }

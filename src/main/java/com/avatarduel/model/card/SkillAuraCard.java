@@ -31,9 +31,9 @@ public class SkillAuraCard extends SkillCard {
     public void setAttack(int attack) {
         this.attack = attack;
     }
-
-    @Override //-- > later implement || for debugging purpose
-    public void show() {
-
-    }
+//
+//    @Override //-- > later implement || for debugging purpose
+//    public void show() {
+//
+//    }
 }
