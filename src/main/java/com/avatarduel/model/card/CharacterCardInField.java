@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CharacterCardInField {
     private CharacterCard card;
-    public boolean hasAttacked;
+    private boolean hasAttacked;
     private CharacterState position;
     private List<SkillCard> connectedCard;
     private int createdAtTurn;
@@ -20,6 +20,10 @@ public class CharacterCardInField {
         this.hasAttacked = true; // karena kalo baru di summon ga bisa attack kan ya
         this.connectedCard = new ArrayList<>();
         this.createdAtTurn = createdAt;
+    }
+
+    public void attack() {
+        hasAttacked = true;
     }
 
     public void refresh() {

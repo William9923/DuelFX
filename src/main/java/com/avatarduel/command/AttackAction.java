@@ -41,7 +41,7 @@ public class AttackAction implements ICommand, IValidate{
                 .getCharacterCardByIdx(defenseCharacterIdx);
 
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();
-
+        attackChar.attack(); // nandain dia uda attack jd ga bisa attack lagi
         // artinya menang
         if (diff >= 0) {
             Player p2 = Game.getInstance().getPlayerByType(defender);
@@ -56,25 +56,14 @@ public class AttackAction implements ICommand, IValidate{
 
     @Override
     public boolean validate() {
-        Field f1 = Game.getInstance()
-                .getPlayerByType(attacker)
-                .getField();
-
-        Field f2 = Game.getInstance()
-                .getPlayerByType(defender)
-                .getField();
-
-        int currentTurn = Game
-                .getInstance()
-                .getCurrentTurn();
-
-        Phase currPhase = Game
-                .getInstance()
-                .getCurrentPhase()
-                .getPhase();
-
+        Field f1 = Game.getInstance().getPlayerByType(attacker).getField();
+        Field f2 = Game.getInstance().getPlayerByType(defender).getField();
+        int currentTurn = Game.getInstance().getCurrentTurn();
+        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
         return (currPhase.equals(Phase.BATTLE)
                 && currentTurn != 1
+                && currPlayer.equals(attacker)
                 && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch
                 && f2.getCharacterCardByIdx(defenseCharacterIdx) != null // ganti kalo uda ada trycatch
                 && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack()

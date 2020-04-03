@@ -68,8 +68,6 @@ public class Main {
         Game.getInstance().nextPhase();
         assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "Error in Phase Transition";
 
-
-        // how
     }
 
     public static void testPlayer() {
