@@ -4,14 +4,48 @@ import com.avatarduel.model.card.*;
 import com.avatarduel.model.player_component.Deck;
 import com.avatarduel.model.player_component.Field;
 import com.avatarduel.model.player_component.Hand;
+import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.util.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+    public static void testAttackCommand() {
+
+    }
+
+    public static void testGame() {
+
+    }
+
+    public static void testPlayer() {
+        // Skenario for Player Functionality
+
+        Player p1 = new Player(PlayerType.A); // first Player
+        Player p2 = new Player(PlayerType.B); // second Player
+
+        // init game + draw method
+        p1.startGameDraw();
+        p2.startGameDraw();
+
+        assert p1.getHand().size() == 7 ;
+        assert p2.getHand().size() == 7 : "Wrong card in player 2 hand";
+
+        assert p1.getDeck().size() == (60 - 7) : p1.getDeck().size();
+        assert p2.getDeck().size() == (60 - 7) : p2.getDeck().size();
+
+        // play a character card :
+        CharacterCard cardChar  = (CharacterCard) p1.getHand().stream()
+                .filter(card -> card.getType().equals(CardType.CHARACTER))
+                .findAny()
+                .orElse(null);
+
+    }
 
     public static void testField() {
         // Skenario for Field Functionality
@@ -21,10 +55,10 @@ public class Main {
         Field field = new Field(8); // ikutin contoh spek dl, yakni 8 besarny
 
         for (int i = 0; i < 7; i++) {
-            hand.addCard(deck.draw());
+            hand.add(deck.draw());
         }
 
-        List<Card> cardList1 = new ArrayList<>(hand.getCardList());  // inget reference di objek
+        List<Card> cardList1 = new ArrayList<>(hand);  // inget reference di objek
         for(Card card : cardList1) {
             card.show();
         }
@@ -32,17 +66,17 @@ public class Main {
 
         for (Card card : cardList1) {
             if (card.getType().equals(CardType.CHARACTER)){
-                field.addCharacterCard(new CharacterCardInField((CharacterCard) card, CharacterState.ATTACK));  // cara panggil character ke arena
+                field.addCharacterCard(new CharacterCardInField((CharacterCard) card, CharacterState.ATTACK, 1));  // cara panggil character ke arena
             }
         }
 
         for (Card card : cardList1) {
             if (card.getType().equals(CardType.CHARACTER)){
-                hand.removeCard(card);                          // cara hapus kartu dari tangan user
+                hand.remove(card);                          // cara hapus kartu dari tangan user
             }
         }
 
-        List<Card> cardList2 = new ArrayList<>(hand.getCardList());  // tes liat isinya
+        List<Card> cardList2 = new ArrayList<>(hand);  // tes liat isinya
         for(Card card : cardList2) {
             card.show();
         }
@@ -104,8 +138,8 @@ public class Main {
         System.out.println();
 
         for (int i = 0; i < 7; i++) {
-            hand1.addCard(deck1.draw());
-            hand2.addCard(deck2.draw());
+            hand1.add(deck1.draw());
+            hand2.add(deck2.draw());
         }
 
         System.out.println("After Drawing : ");
@@ -114,23 +148,22 @@ public class Main {
         deck2.printDeck();
         System.out.println();
 
-        System.out.println("Card in Hand 1 : ");
-        List<Card> cardList1 = hand1.getCardList();
-        for(Card card : cardList1) {
+        System.out.println("Card in Hand 1 : ");;
+        for(Card card : hand1) {
             card.show();
         }
         System.out.println();
 
         System.out.println("Card in Hand 2 : ");
-        List<Card> cardList2 = hand2.getCardList();
-        for (Card card : cardList2) {
+
+        for (Card card : hand2) {
             card.show();
         }
         System.out.println();
 
         System.out.println("Test Finding Card : ");
-        Card card1 = hand1.findCardByIndex(5);
-        Card card2 = hand2.findCardByIndex(5);
+        Card card1 = hand1.get(5);
+        Card card2 = hand2.get(5);
 
         card1.show();
         card2.show();
@@ -138,28 +171,28 @@ public class Main {
         System.out.println();
 
         System.out.println("Testing Contains : ");
-        if (hand1.contain(card1)) {
+        if (hand1.contains(card1)) {
             System.out.println("Test contain successful");
         }
 
-        if (!hand2.contain(card2)) {
+        if (!hand2.contains(card2)) {
             System.out.println("Test contain unsuccessful");
         }
         System.out.println();
 
         System.out.println("Testing Removing Cards : ");
-        Card cardRemove1 = hand1.removeCard(card1);
+        Card cardRemove1 = hand1.remove(hand1.indexOf(card1));
         if (cardRemove1.equals(card1)){
             System.out.println("Test removing by Card successful");
         }
 
-        Card cardRemove2 = hand2.removeCardByIndex(5);
+        Card cardRemove2 = hand2.remove(5);
         if (cardRemove2.equals(card2)) {
             System.out.println("Test removing by index successful");
         }
         System.out.println();
 
-        System.out.println("Hand size : " + hand1.cardInHand());
+        System.out.println("Hand size : " + hand1.size());
     }
 
     public static void testDeck() {
@@ -244,18 +277,16 @@ public class Main {
         card2.show();
         card3.show();
 
-        card1.doEffect();
-        card2.doEffect();
-        card3.doEffect();
     }
 
     public static void main(String[] args) {
         System.out.println("Testing Backend");
-        Main.testLoader();
-        Main.testCard();
-        Main.testSkillCard();
+//        Main.testLoader();
+//        Main.testCard();
+//        Main.testSkillCard();
         Main.testDeck();
-        Main.testHand();
-        Main.testField();
+//        Main.testHand();
+//        Main.testField();
+//        Main.testPlayer();
     }
 }

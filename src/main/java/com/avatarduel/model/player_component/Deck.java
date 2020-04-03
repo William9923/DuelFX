@@ -8,23 +8,20 @@ import com.avatarduel.model.card.Card;
 
 import java.util.*;
 
-public class Deck {
+public class Deck extends Stack<Card>{
     private CardDAO charDAO;
     private CardDAO landDAO;
     private CardDAO skillAuraDAO;
     // destroy DAO
     // power up DAO
     private int deckSize;
-    private int currSize;
-    private Stack<Card> cardStack;
 
     public Deck(int deckSize) {
+        super();
         this.deckSize = deckSize;
-        this.currSize = deckSize;
         this.charDAO = new CharacterDAO();
         this.landDAO = new LandDAO();
         this.skillAuraDAO = new SkillAuraDAO();
-        this.cardStack = new Stack<Card>();
         init();
     }
 
@@ -37,26 +34,22 @@ public class Deck {
         for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {
             Card card = selectRandom(charCards);
             card.setId(j++);
-            cardStack.push(card);
+            super.push(card);
         }
         for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {
             Card card = selectRandom(landCards);
             card.setId(j++);
-            cardStack.push(card);
+            super.push(card);
         }
         for (int i = 0; i < Math.round(deckSize * 0.2) ; i++) {
             Card card = selectRandom(skillCards);
             card.setId(j++);
-            cardStack.push(card);
+            super.push(card);
         }
         shuffle();
     }
 
-    public int getCurrSize() {
-        return currSize;
-    }
-
-    public int getDeckSize() {
+    public int getTotalCard() {
         return deckSize;
     }
 
@@ -68,22 +61,22 @@ public class Deck {
 
     // shuffle
     public void shuffle() {
-        Collections.shuffle(cardStack);
+        Collections.shuffle(this);
     }
 
     // draw
     public Card draw() {
-        return cardStack.pop();
+        return super.pop();
     }
 
     // peek
     public Card showFirstCard() {
-        return cardStack.peek();
+        return super.peek();
     }
 
     // printDeck : debugging function
     public void printDeck() {
-        List<Card> listCard = new ArrayList<Card>(cardStack);
+        List<Card> listCard = new ArrayList<Card>(this);
         Collections.reverse(listCard);
         for (Card card: listCard) {
             card.show();

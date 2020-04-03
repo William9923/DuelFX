@@ -10,13 +10,13 @@ import java.util.List;
 public class CharacterCardInField {
     private CharacterCard card;
     public boolean hasAttacked;
-    private CharacterState state;
+    private CharacterState position;
     private List<Card> connectedCard;
     private int createdAtTurn;
 
     public CharacterCardInField(CharacterCard card, CharacterState state, int createdAt) {
         this.card = card;
-        this.state = state;
+        this.position = state;
         this.hasAttacked = true; // karena kalo baru di summon ga bisa attack kan ya
         this.connectedCard = new ArrayList<>();
         this.createdAtTurn = createdAt;
@@ -27,7 +27,7 @@ public class CharacterCardInField {
     }
 
     public boolean canAttack() {
-        return !hasAttacked && state.equals(CharacterState.ATTACK);
+        return !hasAttacked && position.equals(CharacterState.ATTACK);
     }
 
     public Card getCard() {
@@ -48,8 +48,8 @@ public class CharacterCardInField {
         return bonus;
     }
 
-    public CharacterState getState() {
-        return state;
+    public CharacterState getPosition() {
+        return position;
     }
 
     public int getBonusDefense() {
@@ -87,7 +87,7 @@ public class CharacterCardInField {
     }
 
     public int getCurrentTotal() {
-        if (getState().equals(CharacterState.ATTACK)) {
+        if (getPosition().equals(CharacterState.ATTACK)) {
             return getTotalAttack();
         } else {
             return getTotalDefense();
@@ -111,10 +111,10 @@ public class CharacterCardInField {
     }
 
     public void changeState() {
-        if (CharacterState.ATTACK.equals(state)) {
-            state = CharacterState.DEFENSE;
+        if (CharacterState.ATTACK.equals(position)) {
+            position = CharacterState.DEFENSE;
         } else {
-            state = CharacterState.ATTACK;
+            position = CharacterState.ATTACK;
         }
     }
 }

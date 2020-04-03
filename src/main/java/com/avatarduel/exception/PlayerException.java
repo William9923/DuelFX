@@ -1,8 +1,5 @@
 package com.avatarduel.exception;
 
-import com.avatarduel.model.Player;java.util.*;
-java.io.*;
-
 public class PlayerException {
     private String player;
     private String message;

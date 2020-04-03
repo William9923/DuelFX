@@ -37,7 +37,7 @@ public class AttackAction implements ICommand, IValidate{
         // artinya menang
         if (diff >= 0) {
             Player p2 = Game.getInstance().getPlayerByType(defender);
-            if (defenseChar.getState().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) {
+            if (defenseChar.getPosition().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) {
                 p2.setHealthPoint(p2.getHealthPoint() - diff);
                 p2.checkLose(); // check lose --> ini di game manager aja kali ya ??
             }
