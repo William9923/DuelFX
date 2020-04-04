@@ -1,9 +1,0 @@
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<VBox>
-    <Label>
-        <text>
-            Hello World
-        </text>
-    </Label>
-</VBox>

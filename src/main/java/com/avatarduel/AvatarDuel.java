@@ -5,21 +5,18 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import com.avatarduel.guicontroller.BoardGUI;
-import com.avatarduel.guicontroller.CardGUI;
+import com.avatarduel.guicontroller.BoardController;
+import com.avatarduel.guicontroller.CardController;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.util.CSVReader;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AvatarDuel extends Application {
@@ -44,9 +41,12 @@ public class AvatarDuel extends Application {
     Button seeBoardBtn = new Button("see board");
     seeBoardBtn.setLayoutX(500);
 
+    Button seeMainMenuBtn = new Button("main menu");
+    seeMainMenuBtn.setLayoutX(500);
+    seeMainMenuBtn.setLayoutY(200);
+
     Group root = new Group();
-    root.getChildren().add(seeCardBtn);
-    root.getChildren().add(seeBoardBtn);
+    root.getChildren().addAll(seeCardBtn, seeBoardBtn, seeMainMenuBtn);
 
     Scene scene = new Scene(root, 1280, 720);
 
@@ -61,15 +61,25 @@ public class AvatarDuel extends Application {
     FXMLLoader FXMLBoardGUI = new FXMLLoader(getClass().getResource("GUI/Board/Board.fxml"));
     Parent boardGUI = FXMLBoardGUI.load();
     Scene board = new Scene(boardGUI);
+    BoardController boardController = FXMLBoardGUI.getController();
     seeBoardBtn.setOnAction(e -> {
       stage.setScene(board);
+    });
+
+    FXMLLoader mainmanuLoader = new FXMLLoader(getClass().getResource("GUI/MainMenu/MainMenu.fxml"));
+    Parent mainmenuGUI = mainmanuLoader.load();
+    Scene mainmenu = new Scene(mainmenuGUI);
+    seeMainMenuBtn.setOnAction(e -> {
+      stage.setScene(mainmenu);
+      stage.setFullScreen(true);
+
     });
 
     try {
       FXMLLoader loader = getCardGUI();
       Parent cardGUIBox = loader.load();
       root.getChildren().add(cardGUIBox);
-      CardGUI controller = loader.getController();
+      CardController controller = loader.getController();
       seeCardBtn.setOnAction(new EventHandler<ActionEvent>() {
         int i = 1;
         @Override
@@ -80,6 +90,7 @@ public class AvatarDuel extends Application {
           CharacterCard card = new CharacterCard(character[0],character[1],character[2],character[3],character[4],character[5], character[6], character[7]);
           System.out.println(card.getElement());
           controller.setData(card);
+          boardController.setSelectedCard(card);
           root.getChildren().add(cardGUIBox);
         }
       });

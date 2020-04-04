@@ -13,3 +13,6 @@
 .container {
     -fx-background-color : #EEE;
 }
+.flipped_card {
+    -fx-background-color : black;
+}

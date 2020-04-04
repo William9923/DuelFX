@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 
-public class CardGUI extends VBox {
+public class CardController extends VBox {
     private Card data;
     private final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border"};
     @FXML private AnchorPane card_border;
@@ -26,13 +26,13 @@ public class CardGUI extends VBox {
     @FXML private Label card_def;
     @FXML private Label card_pow;
 
-    public CardGUI() {
+    public CardController() {
         System.out.println("CardGUI()");
     }
 
-    public static CardGUI valueOf(Card card) {
+    public static CardController valueOf(Card card) {
         System.out.println("valueOf called");
-        CardGUI result = new CardGUI();
+        CardController result = new CardController();
         result.setCard(card);
         return result;
     }

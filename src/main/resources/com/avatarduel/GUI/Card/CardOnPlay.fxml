@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="card_border" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="120.0" styleClass="water_border" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.CardGUI">
+<AnchorPane fx:id="card_border" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="120.0" styleClass="water_border" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.CardController">
    <children>
       <VBox fx:id="card_container" alignment="TOP_CENTER" prefHeight="148.0" prefWidth="120.0" spacing="8.0" styleClass="container">
          <children>

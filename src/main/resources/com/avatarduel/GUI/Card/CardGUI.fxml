@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="card_border" styleClass="water_border" stylesheets="@styles/CardGUI.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.CardGUI">
+<AnchorPane fx:id="card_border" styleClass="water_border" stylesheets="@styles/CardGUI.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.avatarduel.guicontroller.CardController">
    <children>
       <VBox fx:id="card_container" styleClass="container" alignment="TOP_CENTER" layoutX="25.0" layoutY="15.0" prefHeight="358.0" prefWidth="248.0" spacing="8.0" >
          <children>

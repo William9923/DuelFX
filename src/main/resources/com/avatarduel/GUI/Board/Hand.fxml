@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox layoutX="302.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="892.0" spacing="16.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.avatarduel.guicontroller.HandController">
+    <children>
+        <fx:include fx:id="card_1" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_2" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_3" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_4" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_5" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_6" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_7" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_8" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_9" source="../Card/CardOnHand.fxml" />
+        <fx:include fx:id="card_10" source="../Card/CardOnHand.fxml" />
+    </children>
+</HBox>
