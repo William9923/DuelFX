@@ -26,12 +26,7 @@ public class CardController extends VBox {
     @FXML private Label card_def;
     @FXML private Label card_pow;
 
-    public CardController() {
-        System.out.println("CardGUI()");
-    }
-
     public static CardController valueOf(Card card) {
-        System.out.println("valueOf called");
         CardController result = new CardController();
         result.setCard(card);
         return result;
