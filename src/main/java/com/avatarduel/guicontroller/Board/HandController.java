@@ -33,7 +33,7 @@ public class HandController {
 
     @FXML
     public void initialize() {
-        deck = new Deck(10);
+        deck = new Deck(50);
 
         cards = new ArrayList<CardOnHandController>();
         cards.add(card1Controller);
@@ -46,13 +46,17 @@ public class HandController {
         cards.add(card8Controller);
         cards.add(card9Controller);
         cards.add(card10Controller);
+        Card card;
+        CharacterCard characterCard;
         for(int i = 0 ; i < 10 ; i++) {
-            Card card = deck.draw();
+            card = deck.draw();
             System.out.println(card.getType());
-            if(card.getType().equals(CardType.CHARACTER)) {
-                CharacterCard characterCard = (CharacterCard) card;
-                cards.get(i).setCard(characterCard);
-            }
+//            if(card.getType().equals(CardType.CHARACTER)) {
+////                characterCard = (CharacterCard) card;
+//                cards.get(i).setCard(card);
+//            }
+            cards.get(i).setCard(card);
+
         }
     }
 }
