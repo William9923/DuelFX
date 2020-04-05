@@ -15,29 +15,26 @@ import java.io.File;
 public abstract class CardController {
     protected Card data;
     protected final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border"};
+    @FXML protected VBox card_border;
     @FXML protected Label card_name;
     @FXML protected ImageView card_img;
     @FXML protected Label card_atk;
     @FXML protected Label card_def;
     @FXML protected Label card_pow;
 
-
     public void setAdditionalInfoCard(CharacterCard card) {
-//        this.setCard(card);
-        card_atk.setText("ATK : " + String.valueOf(card.getAttack()));
-        card_def.setText("DEF : " + String.valueOf(card.getDefense()));
+        card_atk.setText("ATK : " + Integer.toString( card.getAttack()));
+        card_def.setText("DEF : " + Integer.toString( card.getDefense()));
         card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
     }
 
     public void setAdditionalInfoCard(SkillAuraCard card) {
-//        this.setCard((Card) card);
         card_atk.setText("ATK : " + card.getAttack());
         card_def.setText("DEF : " + card.getDefense());
         card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
     }
 
     public void setAdditionalInfoCard(LandCard card) {
-//        this.setCard((Card) card);
         card_atk.setText("");
         card_def.setText("");
         card_pow.setText("");
@@ -51,8 +48,26 @@ public abstract class CardController {
             case CHARACTER: setAdditionalInfoCard((CharacterCard) card); break;
             case LAND: setAdditionalInfoCard((LandCard) card); break;
             case SKILL_AURA: setAdditionalInfoCard((SkillAuraCard) card); break;
-//            default: //do noting;
         }
+        switch (card.getElement()) {
+            case WATER:
+                setBorderStyle("water_border");
+                break;
+            case FIRE:
+                setBorderStyle("fire_border");
+                break;
+            case EARTH:
+                setBorderStyle("earth_border");
+                break;
+            case AIR:
+                setBorderStyle("air_border");
+                break;
+        }
+    }
+
+    private void setBorderStyle(String className) {
+        card_border.getStyleClass().removeAll(listBorderClass);
+        card_border.getStyleClass().add(className);
     }
 
     private Image getImage(String imgpath) {

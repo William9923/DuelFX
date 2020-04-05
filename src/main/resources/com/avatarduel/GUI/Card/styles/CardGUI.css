@@ -1,14 +1,22 @@
 .fire_border {
     -fx-background-color : #F20;
+    -fx-border-color : firebrick;
+    -fx-border-width : 2px;
 }
 .water_border {
     -fx-background-color : #3AF;
+    -fx-border-color : darkblue;
+    -fx-border-width : 2px;
 }
 .earth_border {
-    -fx-background-color : #662E00;
+    -fx-background-color : #864E20;
+    -fx-border-color : brown;
+    -fx-border-width : 2px;
 }
 .air_border {
     -fx-background-color : #FFF;
+    -fx-border-color : aqua;
+    -fx-border-width : 2px;
 }
 .container {
     -fx-background-color : #EEE;

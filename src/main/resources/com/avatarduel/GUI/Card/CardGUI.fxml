@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,11 +13,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="card_border" styleClass="water_border" stylesheets="@styles/CardGUI.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.avatarduel.guicontroller.Card.DisplayCardController">
+<VBox fx:id="card_border" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="303.0" styleClass="water_border" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.DisplayCardController">
    <children>
-      <VBox fx:id="card_container" styleClass="container" alignment="TOP_CENTER" layoutX="25.0" layoutY="15.0" prefHeight="358.0" prefWidth="248.0" spacing="8.0" >
+      <VBox fx:id="card_container" alignment="TOP_CENTER" layoutX="25.0" layoutY="15.0" maxWidth="-Infinity" prefHeight="347.0" prefWidth="268.0" spacing="10.0" styleClass="container">
          <children>
             <Label fx:id="card_name" alignment="CENTER" text="NAMA KARTU" />
             <ImageView fx:id="card_img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -20,7 +23,7 @@
                   <Image url="@../../card/image/character/Aang.png" />
                </image>
             </ImageView>
-            <Label fx:id="card_desc" wrapText="true" alignment="TOP_LEFT" prefHeight="112.0" prefWidth="200.0" text="Deskripsi Kartu ada di sini" textAlignment="CENTER" />
+            <Label fx:id="card_desc" alignment="TOP_LEFT" prefHeight="103.0" prefWidth="200.0" text="Deskripsi Kartu ada di sini aaaaaaaaaaaaaaaaaa" textAlignment="CENTER" wrapText="true" />
             <HBox fx:id="card_attributes" alignment="BOTTOM_CENTER" prefHeight="14.0" prefWidth="238.0" spacing="15.0">
                <children>
                   <Label fx:id="card_atk" text="ATK : 8" />
@@ -34,4 +37,4 @@
          </padding>
       </VBox>
    </children>
-</AnchorPane>
+</VBox>
