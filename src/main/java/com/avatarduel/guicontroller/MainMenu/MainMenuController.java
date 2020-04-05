@@ -1,4 +1,4 @@
-package com.avatarduel.guicontroller;
+package com.avatarduel.guicontroller.MainMenu;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -13,6 +13,7 @@ public class MainMenuController {
     public void setStartOnScene(Stage stage,Scene scene) {
         start.onMouseClickedProperty().setValue(e -> {
             stage.setScene(scene);
+            stage.setFullScreen(true);
         });
     }
 

@@ -8,7 +8,8 @@ public class SkillAuraCard extends SkillCard {
     private int defense;
 
     // Aura Skill Card
-    public SkillAuraCard(String id, String name, String element, String description, String image, String attack, String defense, String power) {
+    //id	name	element	description	imagepath	power	attack	defense
+    public SkillAuraCard(String id, String name, String element, String description, String image, String power, String attack, String defense) {
         super(id, name, element, description, image);
         this.type = CardType.SKILL_AURA;
         this.power = Integer.parseInt(power);
