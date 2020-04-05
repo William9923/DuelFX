@@ -38,6 +38,7 @@ public class CardController extends VBox {
         card_def.setText("DEF : " + Integer.toString(card.getDefense()));
         card_pow.setText("POW : " + Integer.toString(card.getPower()));
     }
+
     public void setData(LandCard card) {
         setCard(card);
         card_atk.setText("");
@@ -49,8 +50,8 @@ public class CardController extends VBox {
         card_atk.setText("");
         card_def.setText("");
         card_pow.setText("POW : " + Integer.toString(card.getPower()));
-
     }
+
     public void setCard(Card card) {
         this.data = card;
         card_name.setText(this.data.getName());
