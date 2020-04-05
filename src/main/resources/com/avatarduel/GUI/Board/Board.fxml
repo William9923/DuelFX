@@ -10,16 +10,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.avatarduel.guicontroller.BoardController">
+            fx:controller="com.avatarduel.guicontroller.Board.BoardController">
    <children>
       <HBox layoutX="435.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="892.0" spacing="16.0">
          <children>
-            <fx:include source="Hand.fxml" />
+            <fx:include fx:id="handB" source="Hand.fxml" />
          </children>
       </HBox>
       <HBox layoutX="447.0" layoutY="897.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="163.0" prefWidth="965.0" spacing="16.0">
          <children>
-            <fx:include source="Hand.fxml" />
+            <fx:include fx:id="handA" source="Hand.fxml" />
          </children>
       </HBox>
       <HBox layoutX="508.0" layoutY="540.0" prefHeight="173.0" prefWidth="874.0" spacing="16.0">

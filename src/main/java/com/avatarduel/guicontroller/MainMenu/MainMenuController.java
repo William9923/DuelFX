@@ -1,4 +1,4 @@
-package com.avatarduel.guicontroller;
+package com.avatarduel.guicontroller.MainMenu;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;

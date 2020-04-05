@@ -1,11 +1,12 @@
-package com.avatarduel.guicontroller;
+package com.avatarduel.guicontroller.Board;
 
+import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.model.card.CharacterCard;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 
 public class BoardController {
-    @FXML private CardController selectedController;
+    @FXML private DisplayCardController selectedController;
+    @FXML private FieldController fieldAController;
 
     public BoardController() {
         System.out.println("Board GUI constructor");
@@ -18,7 +19,7 @@ public class BoardController {
 
     @FXML
     private void setData(CharacterCard card) {
-        selectedController.setData(card);
+        selectedController.setCard(card);
     }
 
     public void setSelectedCard(CharacterCard card) {

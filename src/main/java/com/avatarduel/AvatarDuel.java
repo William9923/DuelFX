@@ -5,27 +5,27 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import com.avatarduel.guicontroller.BoardController;
-import com.avatarduel.guicontroller.CardController;
-import com.avatarduel.guicontroller.MainMenuController;
-import com.avatarduel.model.card.CharacterCard;
+import com.avatarduel.guicontroller.Board.BoardController;
+import com.avatarduel.guicontroller.Card.DisplayCardController;
+import com.avatarduel.guicontroller.MainMenu.MainMenuController;
+import com.avatarduel.model.card.LandCard;
+import com.avatarduel.model.card.SkillAuraCard;
 import com.avatarduel.util.CSVReader;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class AvatarDuel extends Application {
 
   private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
   private static final String CHARACTER_CSV_FILE_PATH ="card/data/character.csv";
+  private static final String SKILL_AURA_CSV_FILE_PATH = "card/data/skill_aura.csv";
 
   @Override
   public void start(Stage stage) throws IOException, URISyntaxException {
@@ -37,7 +37,7 @@ public class AvatarDuel extends Application {
     MainMenuController mainMenuController = mainmenuLoader.getController();
 
     // Load list of cards
-    List<String[]> characterRows = getCharacters();
+    List<String[]> characterRows = getSkillAuras();
     Button seeCardBtn = new Button("see card");
     seeCardBtn.setLayoutX(500);
     seeCardBtn.setLayoutY(100);
@@ -46,7 +46,7 @@ public class AvatarDuel extends Application {
     FXMLLoader cardLoader = getCardGUI();
     Parent cardGUIBox = cardLoader.load();
     root.getChildren().addAll(seeCardBtn, cardGUIBox);
-    CardController controller = cardLoader.getController();
+    DisplayCardController controller = cardLoader.getController();
 
     seeCardBtn.setOnAction(new EventHandler<ActionEvent>() {
       int i = 1;
@@ -62,8 +62,9 @@ public class AvatarDuel extends Application {
           character = characterRows.get(i);
         }
         i++;
-        CharacterCard card = new CharacterCard(character[0],character[1],character[2],character[3],character[4],character[5], character[6], character[7]);
-        controller.setData(card);
+        //id	name	element	description	imagepath	power	attack	defense
+        SkillAuraCard card = new SkillAuraCard(character[0],character[1],character[2],character[3],character[4],character[5],character[6],character[7]);
+        controller.setCard(card);
         root.getChildren().add(cardGUIBox);
       }
     });
@@ -84,7 +85,7 @@ public class AvatarDuel extends Application {
     mainMenuController.setCardsOnScene(stage, new Scene(root));
   }
 
-  private FXMLLoader getMainMenu() throws IOException {
+  private FXMLLoader getMainMenu() {
     return new FXMLLoader(getClass().getResource("GUI/MainMenu/MainMenu.fxml"));
   }
 
@@ -92,10 +93,24 @@ public class AvatarDuel extends Application {
     return new FXMLLoader(getClass().getResource("GUI/Card/CardGUI.fxml"));
   }
 
+
+
+  public List<String[]> getSkillAuras() throws IOException, URISyntaxException {
+    File skillAuraFile = new File(getClass().getResource(SKILL_AURA_CSV_FILE_PATH).toURI());
+    CSVReader skillAuraReader = new CSVReader(skillAuraFile, "\t");
+    return skillAuraReader.read();
+  }
+
   public List<String[]> getCharacters() throws IOException, URISyntaxException {
     File characterCSVFile = new File(getClass().getResource(CHARACTER_CSV_FILE_PATH).toURI());
     CSVReader characterReader = new CSVReader(characterCSVFile, "\t");
     return characterReader.read();
+  }
+
+  public List<String[]> getLands() throws IOException, URISyntaxException {
+    File landCSVFile = new File(getClass().getResource(LAND_CSV_FILE_PATH).toURI());
+    CSVReader LandCSVFile = new CSVReader(landCSVFile, "\t");
+    return LandCSVFile.read();
   }
 
   public static void main(String[] args) {

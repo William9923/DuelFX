@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.avatarduel.guicontroller.FieldController"
+      fx:controller="com.avatarduel.guicontroller.Board.FieldController"
       prefHeight="400.0" prefWidth="600.0">
     <HBox >
         <fx:include source="../Card/CardOnPlay.fxml" fx:id="card1"/>
