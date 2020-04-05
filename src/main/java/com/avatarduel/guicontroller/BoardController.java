@@ -4,7 +4,7 @@ import com.avatarduel.model.card.CharacterCard;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public class BoardController extends VBox {
+public class BoardController {
     @FXML private CardController selectedController;
 
     public BoardController() {

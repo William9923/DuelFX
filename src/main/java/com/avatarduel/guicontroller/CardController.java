@@ -1,9 +1,6 @@
 package com.avatarduel.guicontroller;
 
-import com.avatarduel.model.card.Card;
-import com.avatarduel.model.card.CharacterCard;
-import com.avatarduel.model.card.LandCard;
-import com.avatarduel.model.card.SkillAuraCard;
+import com.avatarduel.model.card.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,7 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 
-public class CardController extends VBox {
+public class CardController {
     private Card data;
     private final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border"};
     @FXML private AnchorPane card_border;
@@ -44,7 +41,7 @@ public class CardController extends VBox {
         card_def.setText("");
         card_pow.setText("");
     }
-    public void setData(SkillAuraCard card) {
+    public void setData(SkillCard card) {
         setCard(card);
         card_atk.setText("");
         card_def.setText("");

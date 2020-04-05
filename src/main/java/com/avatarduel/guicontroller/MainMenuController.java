@@ -13,6 +13,7 @@ public class MainMenuController {
     public void setStartOnScene(Stage stage,Scene scene) {
         start.onMouseClickedProperty().setValue(e -> {
             stage.setScene(scene);
+            stage.setFullScreen(true);
         });
     }
 
