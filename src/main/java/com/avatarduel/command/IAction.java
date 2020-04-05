@@ -1,5 +1,6 @@
 package com.avatarduel.command;
 
-public interface IValidate {
+public interface IAction {
+    public void execute();
     public boolean validate();
 }

@@ -8,16 +8,16 @@ import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class AttackAction implements ICommand, IValidate{
+public class AttackAction implements IAction{
 
-    private int attackCharacterIdx;
-    private int defenseCharacterIdx;
+    private int attackCharacterId;
+    private int defenseCharacterId;
     private PlayerType attacker;
     private PlayerType defender;
 
-    public AttackAction(int indexAttack, int indexDefense, PlayerType attacker, PlayerType defender) {
-        this.attackCharacterIdx = indexAttack;
-        this.defenseCharacterIdx = indexDefense;
+    public AttackAction(int idAttack, int idDefense, PlayerType attacker, PlayerType defender) {
+        this.attackCharacterId = idAttack;
+        this.defenseCharacterId = idDefense;
         this.attacker = attacker;
         this.defender = defender;
 
@@ -33,12 +33,12 @@ public class AttackAction implements ICommand, IValidate{
         CharacterCardInField attackChar = Game.getInstance()
                 .getPlayerByType(attacker)
                 .getField()
-                .getCharacterCardByIdx(attackCharacterIdx);
+                .getCharacterCardByID(attackCharacterId);
 
         CharacterCardInField defenseChar = Game.getInstance()
                 .getPlayerByType(defender)
                 .getField()
-                .getCharacterCardByIdx(defenseCharacterIdx);
+                .getCharacterCardByID(defenseCharacterId);
 
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();
         attackChar.attack(); // nandain dia uda attack jd ga bisa attack lagi
@@ -64,10 +64,10 @@ public class AttackAction implements ICommand, IValidate{
         return (currPhase.equals(Phase.BATTLE)
                 && currentTurn != 1
                 && currPlayer.equals(attacker)
-                && f1.getCharacterCardByIdx(attackCharacterIdx) != null  // ganti kalo uda ada trycatch
-                && f2.getCharacterCardByIdx(defenseCharacterIdx) != null // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByIdx(attackCharacterIdx).canAttack()
-                && f1.getCharacterCardByIdx(attackCharacterIdx).getCreatedAtTurn() != currentTurn
+                && f1.getCharacterCardByID(attackCharacterId) != null  // ganti kalo uda ada trycatch
+                && f2.getCharacterCardByID(defenseCharacterId) != null // ganti kalo uda ada trycatch
+                && f1.getCharacterCardByID(attackCharacterId).canAttack()
+                && f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() != currentTurn
         );
     }
 }

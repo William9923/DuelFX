@@ -7,7 +7,7 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class ChangePositionAction  implements ICommand, IValidate{
+public class ChangePositionAction  implements IAction{
 
     private CharacterCardInField character;
     private PlayerType p;

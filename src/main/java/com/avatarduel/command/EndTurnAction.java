@@ -6,19 +6,21 @@ import com.avatarduel.model.type.PlayerType;
 
 import static com.avatarduel.model.Game.getInstance;
 
-public class EndTurnAction implements ICommand, IValidate{
+public class EndTurnAction implements IAction{
 
     private PlayerType player;
 
     public EndTurnAction(PlayerType player) {
         this.player = player;
 
-        if (validate()) {
-            execute();
+        if (this.validate()) {
+            System.out.println("Check this out!");
+            this.execute();
         } // throw error Action
     }
     @Override
     public void execute() {
+        getInstance().nextPhase();
         getInstance().nextPlayer(); // ganti player
         getInstance().incrementTurn(); // naikin turn
         getInstance().nextPhase(); // ganti phase jadi draw
@@ -27,7 +29,7 @@ public class EndTurnAction implements ICommand, IValidate{
 
     @Override
     public boolean validate() {
-        return (getInstance().getCurrentPlayer().equals(player)
-                && getInstance().getCurrentPhase().equals(Phase.MAIN2));
+        return (getInstance().getCurrentPlayer() == (player)
+                && getInstance().getCurrentPhase().getPhase() == Phase.MAIN2);
     }
 }

@@ -1,6 +1,6 @@
 package com.avatarduel.command;
 
-public class SummonAction implements ICommand,IValidate {
+public class SummonAction implements IAction{
     @Override
     public void execute() {
 

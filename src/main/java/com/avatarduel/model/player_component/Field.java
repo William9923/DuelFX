@@ -59,12 +59,27 @@ public class Field {
         return null; // throw error
     }
 
+    public CharacterCardInField getCharacterCardByID(int cardID) {
+        return charCardList.stream()
+                .filter(card -> card.getCard().getId() == cardID)
+                .findFirst()
+                .orElse(null);
+    }
+
     public Card getSkillCardByIdx(int index) {
         if(index < fieldSize && index < skillCardList.size()) {
             return skillCardList.get(index);
         }
         return null; // harusnya throw error
     }
+
+    public SkillCard getSkillCardByID(int cardID) {
+        return skillCardList.stream()
+                .filter(card -> card.getId() == cardID)
+                .findFirst()
+                .orElse(null);
+    }
+
 
     public void connectCards(CharacterCardInField card1, SkillCard card2) {
         if (isAbleToAddSkill() && isContainCharacter(card1)) {

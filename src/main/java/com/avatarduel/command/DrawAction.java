@@ -4,7 +4,7 @@ import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class DrawAction implements IValidate,ICommand {
+public class DrawAction implements IAction{
     private PlayerType player;
 
     public DrawAction(PlayerType p) {
@@ -23,8 +23,8 @@ public class DrawAction implements IValidate,ICommand {
 
     @Override
     public boolean validate() {
-        return (Game.getInstance().getCurrentPlayer().equals(player)
-        && Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW)
+        return (Game.getInstance().getCurrentPlayer() == player
+        && Game.getInstance().getCurrentPhase().getPhase() == Phase.DRAW
         && Game.getInstance().getPlayerByType(player).getDeck().size() > 0); // kalo ada handsize limit, taro disini
     }
 }

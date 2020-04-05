@@ -1,5 +1,7 @@
 package com.avatarduel;
 
+import com.avatarduel.command.EndTurnAction;
+import com.avatarduel.command.IAction;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.player_component.Deck;
@@ -20,6 +22,42 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void testAttackCommand() {
+        // First all player should draw their cards
+
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "Wrong Phase";
+        Game.getInstance().getPlayerByType(PlayerType.A).startGameDraw(); // start game draw
+        Game.getInstance().getPlayerByType(PlayerType.B).startGameDraw(); // start game draw
+        boolean canProceed = true;
+        // Next Phase
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.MAIN1);
+
+        // Player 1 Turn : Player A
+        CharacterCard cardToSummon1 = (CharacterCard) Game.getInstance().getPlayerByType(PlayerType.A).getHand()
+                .stream()
+                .filter(card -> card.getType().equals(CardType.CHARACTER))
+                .findFirst()
+                .orElse(null); // subtyping
+
+        if (cardToSummon1 != null) {
+            Game.getInstance().getPlayerByType(PlayerType.A).getField().addCharacterCard(new CharacterCardInField(cardToSummon1, CharacterState.ATTACK, Game.getInstance().getCurrentTurn()));     // summoning first Monster
+        } else {
+            canProceed = false;
+        }
+
+        // Next Phase : Battle Phase
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE) : "Wrong Phase";
+        // Next Phase : Main Phase 2
+        Game.getInstance().nextPhase();
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.MAIN2) : "Wrong Phase";
+        // Next Phase : End Turn
+        // bungkus try catch ya ntar
+        IAction newAction = new EndTurnAction(PlayerType.A);
+        assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "End Turn Action Wrong";
+        assert Game.getInstance().getCurrentPlayer().equals(PlayerType.B) : "End Turn Action Wrong";
+        
+
 
     }
 
@@ -452,13 +490,14 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Testing Backend");
-        Main.testLoader();
-        Main.testCard();
-        Main.testSkillCard();
-        Main.testDeck();
-        Main.testHand();
-        Main.testField();
-        Main.testPlayer();
-        Main.testGame();
+//        Main.testLoader();
+//        Main.testCard();
+//        Main.testSkillCard();
+//        Main.testDeck();
+//        Main.testHand();
+//        Main.testField();
+//        Main.testPlayer();
+//        Main.testGame();
+        Main.testAttackCommand();
     }
 }
