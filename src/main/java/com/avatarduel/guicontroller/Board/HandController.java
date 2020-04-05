@@ -1,8 +1,11 @@
 package com.avatarduel.guicontroller.Board;
 
+import com.avatarduel.factory.CardFactory;
 import com.avatarduel.guicontroller.Card.CardOnHandController;
 import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.player_component.Deck;
+import com.avatarduel.model.type.CardType;
 import javafx.fxml.FXML;
 
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import java.util.Map;
 public class HandController {
     private Deck deck;
     private List<CardOnHandController> cards;
+    private CardFactory cardFactory;
     @FXML CardOnHandController card1Controller;
     @FXML CardOnHandController card2Controller;
     @FXML CardOnHandController card3Controller;
@@ -43,7 +47,12 @@ public class HandController {
         cards.add(card9Controller);
         cards.add(card10Controller);
         for(int i = 0 ; i < 10 ; i++) {
-            cards.get(i).setCard(deck.draw());
+            Card card = deck.draw();
+            System.out.println(card.getType());
+            if(card.getType().equals(CardType.CHARACTER)) {
+                CharacterCard characterCard = (CharacterCard) card;
+                cards.get(i).setCard(characterCard);
+            }
         }
     }
 }
