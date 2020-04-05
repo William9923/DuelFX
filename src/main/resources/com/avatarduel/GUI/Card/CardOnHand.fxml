@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="161.0" prefWidth="83.0" spacing="10.0"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.avatarduel.guicontroller.Card.CardOnHandController"
-      fx:id="container"
-      stylesheets="@styles/CardGUI.css">
+<VBox fx:id="card_border" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="161.0" prefWidth="104.0" spacing="5.0" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.CardOnHandController">
    <children>
-      <Label fx:id="card_name" alignment="CENTER" prefHeight="0.0" prefWidth="65.0" text="NAMA KARTU">
+      <Label fx:id="card_name" alignment="CENTER" prefHeight="34.0" prefWidth="85.0" text="NAMA KARTU" wrapText="true">
          <font>
-            <Font size="9.0" />
+            <Font size="10.0" />
          </font>
       </Label>
-      <ImageView fx:id="card_img" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-         <Image  url="@../../card/image/character/Aang.png" />
+      <ImageView fx:id="card_img" fitHeight="73.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../card/image/character/Aang.png" />
+         </image>
       </ImageView>
-      <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0">
-         <Label fx:id="card_atk" text="ATT:" />
-         <Label fx:id="card_def" text="DEF:" />
-         <Label fx:id="card_pow" text="POW:" />
-         <padding>
-            <Insets left="5.0" />
-         </padding>
-      </VBox>
+      <StackPane prefHeight="50.0" prefWidth="104.0">
+         <children>
+            <VBox alignment="BOTTOM_LEFT" maxWidth="-Infinity" prefHeight="41.0" prefWidth="80.0">
+               <children>
+                  <Label fx:id="card_atk" text="ATT:">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="card_def" text="DEF:">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="card_pow" text="POW:">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </VBox>
+         </children>
+      </StackPane>
    </children>
 </VBox>
