@@ -1,10 +1,10 @@
 package com.avatarduel.exception;
 
-public class PlayerException {
+public class InvalidPlayerException {
     private String player;
     private String message;
 
-    public PlayerException(String player, String message){
+    public InvalidPlayerException(String player, String message){
         this.player = player;
         this.message = message;
     }

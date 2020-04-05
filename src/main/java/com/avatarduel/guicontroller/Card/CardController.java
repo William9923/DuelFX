@@ -29,14 +29,14 @@ public abstract class CardController {
     }
 
     public void setCard(SkillAuraCard card) {
-        this.setCard((Card) card);
+//        this.setCard((Card) card);
         card_atk.setText("ATK : " + card.getAttack());
         card_def.setText("DEF : " + card.getDefense());
         card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
     }
 
     public void setCard(LandCard card) {
-        this.setCard((Card) card);
+//        this.setCard((Card) card);
         card_atk.setText("");
         card_def.setText("");
         card_pow.setText("");
@@ -46,6 +46,12 @@ public abstract class CardController {
         this.data = card;
         card_name.setText(this.data.getName());
         card_img.imageProperty().set(getImage(card.getImage()));
+        switch (card.getType()) {
+            case CHARACTER: setAdditionalInfoCard((CharacterCard) card); break;
+            case LAND: setAdditionalInfoCard((LandCard) card); break;
+            case SKILL_AURA: setAdditionalInfoCard((SkillAuraCard) card); break;
+//            default: //do noting;
+        }
     }
 
     private Image getImage(String imgpath) {

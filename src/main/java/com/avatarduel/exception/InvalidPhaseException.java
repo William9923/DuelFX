@@ -3,7 +3,7 @@ package com.avatarduel.exception;
 import java.util.*;
 import java.io.*;
 
-public class InvalidPhaseException {
+public class InvalidPhaseException extends Exception{
     private String phaseType;
     private String message;
 
@@ -16,7 +16,4 @@ public class InvalidPhaseException {
 
     public String getPhaseType() { return phaseType; }
 
-    public void setMessage(String message) { this.message = message; }
-
-    public void setPhaseType(String phaseType) { this.phaseType = phaseType; }
 }
