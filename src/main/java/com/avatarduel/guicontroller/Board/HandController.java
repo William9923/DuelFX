@@ -4,6 +4,8 @@ import com.avatarduel.factory.CardFactory;
 import com.avatarduel.guicontroller.Card.CardOnHandController;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCard;
+import com.avatarduel.model.card.LandCard;
+import com.avatarduel.model.card.SkillAuraCard;
 import com.avatarduel.model.player_component.Deck;
 import com.avatarduel.model.type.CardType;
 import javafx.fxml.FXML;
@@ -48,10 +50,17 @@ public class HandController {
         cards.add(card10Controller);
         for(int i = 0 ; i < 10 ; i++) {
             Card card = deck.draw();
-            System.out.println(card.getType());
             if(card.getType().equals(CardType.CHARACTER)) {
                 CharacterCard characterCard = (CharacterCard) card;
                 cards.get(i).setCard(characterCard);
+            }
+            else if (card.getType().equals(CardType.SKILL_AURA)) {
+                SkillAuraCard skillAuraCard = (SkillAuraCard) card;
+                cards.get(i).setCard(skillAuraCard);
+            }
+            else if (card.getType().equals(CardType.LAND)) {
+                LandCard landCard = (LandCard) card;
+                cards.get(i).setCard(landCard);
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.model.card.CharacterCard;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 

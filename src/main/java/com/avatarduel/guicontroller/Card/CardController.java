@@ -23,8 +23,8 @@ public abstract class CardController {
 
     public void setCard(CharacterCard card) {
         this.setCard((Card) card);
-        card_atk.setText("ATK : " + card.getAttack());
-        card_def.setText("DEF : " + card.getDefense());
+        card_atk.setText("ATK : " + Integer.toString( card.getAttack()));
+        card_def.setText("DEF : " + Integer.toString( card.getDefense()));
         card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
     }
 

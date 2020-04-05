@@ -21,7 +21,7 @@
          <Image  url="@../../card/image/character/Aang.png" />
       </ImageView>
       <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0">
-         <Label fx:id="card_att" text="ATT:" />
+         <Label fx:id="card_atk" text="ATT:" />
          <Label fx:id="card_def" text="DEF:" />
          <Label fx:id="card_pow" text="POW:" />
          <padding>
