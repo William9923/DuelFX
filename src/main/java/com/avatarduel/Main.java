@@ -56,7 +56,10 @@ public class Main {
         IAction newAction = new EndTurnAction(PlayerType.A);
         assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "End Turn Action Wrong";
         assert Game.getInstance().getCurrentPlayer().equals(PlayerType.B) : "End Turn Action Wrong";
-        
+
+
+
+
 
 
     }
