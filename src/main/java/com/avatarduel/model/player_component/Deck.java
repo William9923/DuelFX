@@ -4,6 +4,7 @@ import com.avatarduel.dao.CardDAO;
 import com.avatarduel.dao.CharacterDAO;
 import com.avatarduel.dao.LandDAO;
 import com.avatarduel.dao.SkillAuraDAO;
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.card.Card;
 
 import java.util.*;
@@ -63,7 +64,7 @@ public class Deck extends Stack<Card>{
     }
 
     // draw
-    public Card draw() {
+    public Card draw() throws EmptyStackException{
         return super.pop();
     }
 

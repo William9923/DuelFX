@@ -1,7 +1,9 @@
 package com.avatarduel.model.card;
 
+import com.avatarduel.model.type.Element;
+
 public abstract class SkillCard extends Card{
-    public SkillCard(String id, String name, String element, String description, String image) {
+    public SkillCard(int id, String name, Element element, String description, String image) {
         super(id,name,element,description,image);
     }
     public void show() {

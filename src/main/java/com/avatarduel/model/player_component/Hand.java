@@ -7,11 +7,19 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Hand extends ArrayList<Card>{
-
-    public Hand() {
+    private int maxSize;
+    public Hand(int size) {
         super();
     }
 
+    @Override
+    public boolean add(Card c) {
+        if (this.size() < 10) {
+            super.add(c);
+            return true;
+        }
+        return false;
+    }
     // incase, nanti ada logic hand lagi gitu
 
     public void print() {

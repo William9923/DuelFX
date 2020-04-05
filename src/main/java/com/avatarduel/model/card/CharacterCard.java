@@ -1,17 +1,18 @@
 package com.avatarduel.model.card;
 
 import com.avatarduel.model.type.CardType;
+import com.avatarduel.model.type.Element;
 
 public class CharacterCard extends Card {
     private int attack;
     private int defense;
     private int power;
 
-    public CharacterCard(String id, String name, String element, String description, String image, String attack, String defense, String power) {
+    public CharacterCard(int id, String name, Element element, String description, String image, int attack, int defense, int power) {
         super(id, name, element, description, image);
-        this.attack = Integer.parseInt(attack);
-        this.defense = Integer.parseInt(defense);
-        this.power = Integer.parseInt(power);
+        this.attack = attack;
+        this.defense = defense;
+        this.power = power;
         this.type = CardType.CHARACTER;
     }
 

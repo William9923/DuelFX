@@ -14,10 +14,10 @@ public abstract class Card  {
     protected int power;
 
     // constructor
-    public Card(String id, String name, String element, String description, String image) {
-        this.id = Integer.parseInt(id);
+    public Card(int id, String name, Element element, String description, String image) {
+        this.id = id;
         this.name = name;
-        this.element = Loader.outputElement(element);
+        this.element = element;
         this.description = description;
         this.image = image;
     }

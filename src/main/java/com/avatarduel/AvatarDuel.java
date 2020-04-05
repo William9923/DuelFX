@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import com.avatarduel.factory.CardFactory;
 import com.avatarduel.guicontroller.Board.BoardController;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.MainMenu.MainMenuController;
@@ -63,7 +64,7 @@ public class AvatarDuel extends Application {
         }
         i++;
         //id	name	element	description	imagepath	power	attack	defense
-        SkillAuraCard card = new SkillAuraCard(character[0],character[1],character[2],character[3],character[4],character[5],character[6],character[7]);
+        SkillAuraCard card = new SkillAuraCard(Integer.parseInt(character[0]),character[1], CardFactory.outputElement(character[2]),character[3],character[4],Integer.parseInt(character[5]),Integer.parseInt(character[6]),Integer.parseInt(character[7]));
         controller.setCard(card);
         root.getChildren().add(cardGUIBox);
       }

@@ -5,5 +5,6 @@ public enum CardType {
     SKILL_AURA,
     SKILL_DESTROY,
     SKILL_POWER_UP,
-    LAND
+    LAND,
+    NULL
 }

@@ -3,11 +3,11 @@ package com.avatarduel.exception;
 import java.util.*;
 import java.io.*;
 
-public class ElementException {
+public class InvalidElementException extends Exception{
     private String message;
     private String elementType;
 
-    public ElementException(String elementType, String description){
+    public InvalidElementException(String elementType, String description){
         this.elementType = elementType;
         this.message = description;
     }
@@ -16,7 +16,4 @@ public class ElementException {
 
     public String getElementType() { return elementType; }
 
-    public void setElementType(String elementType) { this.elementType = elementType; }
-
-    public void setMessage(String message) { this.message = message; }
 }

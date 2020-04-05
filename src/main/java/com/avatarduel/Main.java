@@ -2,6 +2,7 @@ package com.avatarduel;
 
 import com.avatarduel.command.EndTurnAction;
 import com.avatarduel.command.IAction;
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.player_component.Deck;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    public static void testAttackCommand() {
+    public static void testAttackCommand() throws InvalidOperationException {
         // First all player should draw their cards
 
         assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "Wrong Phase";
@@ -56,11 +57,6 @@ public class Main {
         IAction newAction = new EndTurnAction(PlayerType.A);
         assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "End Turn Action Wrong";
         assert Game.getInstance().getCurrentPlayer().equals(PlayerType.B) : "End Turn Action Wrong";
-
-
-
-
-
 
     }
 
@@ -111,7 +107,7 @@ public class Main {
 
     }
 
-    public static void testPlayer() {
+    public static void testPlayer() throws InvalidOperationException {
         // Skenario for Player Functionality
 
         Player p1 = new Player(PlayerType.A); // first Player
@@ -254,11 +250,11 @@ public class Main {
 
     }
 
-    public static void testField() {
+    public static void testField() throws InvalidOperationException {
         // Skenario for Field Functionality
         System.out.println("\nTest Field");
         Deck deck = new Deck(20);
-        Hand hand = new Hand();
+        Hand hand = new Hand(10);
         Field field = new Field(8); // ikutin contoh spek dl, yakni 8 besarny
 
         for (int i = 0; i < 7; i++) {
@@ -339,8 +335,8 @@ public class Main {
         Deck deck1 = new Deck (10);
         Deck deck2 = new Deck (10);
 
-        Hand hand1 = new Hand();
-        Hand hand2 = new Hand();
+        Hand hand1 = new Hand(10);
+        Hand hand2 = new Hand(10);
 
         System.out.println("Before Drawing : ");
         deck1.printDeck();
@@ -459,48 +455,54 @@ public class Main {
 
     }
 
-    public static void testCard() {
-        System.out.println("\nTest Card : ");
-        Card card1;
-        card1 = new CharacterCard("17",  "Katara"  ,"WATER"  ,"Waterbending master from Southern Water Tribe, sister of Sokka, and friend of Aang."  ,"src/res/image/character/Katara.png"  ,"13"  ,"7"  ,"5");
+//    public static void testCard() {
+//        System.out.println("\nTest Card : ");
+//        Card card1;
+//        card1 = new CharacterCard("17",  "Katara"  ,"WATER"  ,"Waterbending master from Southern Water Tribe, sister of Sokka, and friend of Aang."  ,"src/res/image/character/Katara.png"  ,"13"  ,"7"  ,"5");
+//
+//        Card card2;
+//        card2 = new LandCard("1"  ,"Eastern Water Temple"  ,"AIR"  ,"One of the two temples exclusively housing female airbenders."  ,"src/res/image/Eastern Water Temple.png");
+//
+//        Card card3;
+//        card3 = new SkillAuraCard("77"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3"  ,"-1"  ,"5");
+//
+//        card1.show();
+//        card2.show();
+//        card3.show();
+//    }
 
-        Card card2;
-        card2 = new LandCard("1"  ,"Eastern Water Temple"  ,"AIR"  ,"One of the two temples exclusively housing female airbenders."  ,"src/res/image/Eastern Water Temple.png");
+//    public static void testSkillCard() {
+//        System.out.println("\nTest Skill Card : ");
+//        Card card1;
+//        Card card2;
+//        Card card3;
+//
+//        card1 = new SkillAuraCard("77"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3"  ,"-1"  ,"5");
+//        card2 = new SkillDestroyCard("78"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3"  );
+//        card3 = new SkillPowerUpCard("79"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3");
+//
+//        card1.show();
+//        card2.show();
+//        card3.show();
+//
+//    }
 
-        Card card3;
-        card3 = new SkillAuraCard("77"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3"  ,"-1"  ,"5");
-
-        card1.show();
-        card2.show();
-        card3.show();
-    }
-
-    public static void testSkillCard() {
-        System.out.println("\nTest Skill Card : ");
-        Card card1;
-        Card card2;
-        Card card3;
-
-        card1 = new SkillAuraCard("77"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3"  ,"-1"  ,"5");
-        card2 = new SkillDestroyCard("78"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3"  );
-        card3 = new SkillPowerUpCard("79"  ,"Slinky Tank"  ,"EARTH"  ,"Stone vehicles provided both transportation and protection during the invasion of the Fire Nation."  ,"src/res/image/Slinky Tank.png"  ,"3");
-
-        card1.show();
-        card2.show();
-        card3.show();
-
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         System.out.println("Testing Backend");
-//        Main.testLoader();
+
+        try{
+            Main.testLoader();
 //        Main.testCard();
 //        Main.testSkillCard();
-//        Main.testDeck();
+            Main.testDeck();
 //        Main.testHand();
-//        Main.testField();
-//        Main.testPlayer();
-//        Main.testGame();
-        Main.testAttackCommand();
+            Main.testField();
+            Main.testPlayer();
+            Main.testGame();
+            Main.testAttackCommand();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

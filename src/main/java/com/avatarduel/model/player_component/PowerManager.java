@@ -92,20 +92,36 @@ public class PowerManager {
     }
 
     //To reduce or or delete power
-    public int reduce(Element type, int power){
+    public boolean reduce(Element type, int power){
         if(type==Element.AIR){
-            return this.current_air -= power;
+            if (this.current_air >= power) {
+                this.current_air -= power;
+                return true;
+            }
+            return false;
         }
         else if (type==Element.EARTH){
-            return this.current_earth -= power;
+            if (this.current_earth >= power) {
+                this.current_earth -= power;
+                return true;
+            }
+            return false;
         }
         else if (type==Element.FIRE){
-            return this.current_fire -= power;
+            if (this.current_fire >= power) {
+                this.current_fire -= power;
+                return true;
+            }
+            return false;
         }
         else if(type==Element.WATER) {
-            return this.current_water -= power;
+            if (this.current_water >= power) {
+                this.current_water -= power;
+                return true;
+            }
+            return false;
         }
-        return -1; // throw
+        return false; // throw
     }
 
     // To reset every new phase

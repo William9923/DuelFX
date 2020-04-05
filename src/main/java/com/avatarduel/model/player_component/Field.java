@@ -1,5 +1,6 @@
 package com.avatarduel.model.player_component;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
@@ -46,17 +47,21 @@ public class Field {
         return skillCardList.size() < fieldSize;
     }
 
-    public void addCharacterCard(CharacterCardInField inField) {
+    public void addCharacterCard(CharacterCardInField inField) throws InvalidOperationException {
         if (isAbleToAddChar()){
             charCardList.add(inField);
+        } else {
+            throw new InvalidOperationException("Summon Character", "Unable to summon due to Full Field Size!");
         }
     }
 
-    public CharacterCardInField getCharacterCardByIdx(int index) {
+    public CharacterCardInField getCharacterCardByIdx(int index) throws InvalidOperationException{
         if (index < fieldSize && index < charCardList.size()) {
             return charCardList.get(index);
+        } else {
+            throw new InvalidOperationException("Get Char By Idx", "Invalid Index");
         }
-        return null; // throw error
+
     }
 
     public CharacterCardInField getCharacterCardByID(int cardID) {
@@ -66,11 +71,13 @@ public class Field {
                 .orElse(null);
     }
 
-    public Card getSkillCardByIdx(int index) {
+    public SkillCard getSkillCardByIdx(int index) throws InvalidOperationException{
         if(index < fieldSize && index < skillCardList.size()) {
             return skillCardList.get(index);
+        } else {
+            throw new InvalidOperationException("Get Char By Idx", "Invalid Index");
         }
-        return null; // harusnya throw error
+
     }
 
     public SkillCard getSkillCardByID(int cardID) {
@@ -81,16 +88,18 @@ public class Field {
     }
 
 
-    public void connectCards(CharacterCardInField card1, SkillCard card2) {
+    public void connectCards(CharacterCardInField card1, SkillCard card2) throws InvalidOperationException {
         if (isAbleToAddSkill() && isContainCharacter(card1)) {
             card1.pair(card2);
             addSkillCard(card2);
         }
     }
 
-    public void addSkillCard(SkillCard card) {
+    public void addSkillCard(SkillCard card) throws InvalidOperationException{
         if (isAbleToAddSkill()) {
            skillCardList.add(card);
+        } else {
+            throw new InvalidOperationException("Add Skill Card", "Unable to play due to Full Skill Field!");
         }
     }
 

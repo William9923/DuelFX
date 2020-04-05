@@ -126,14 +126,4 @@ public class Loader {
         }
     }
 
-    public static Element outputElement(String element) {
-        switch (element) {
-            case "WATER" : return Element.WATER;
-            case "AIR" : return Element.AIR;
-            case "EARTH" : return Element.EARTH;
-            case "FIRE" : return Element.FIRE;
-            default: return Element.AIR; // blom di handle
-        }
-    }
-
 }
