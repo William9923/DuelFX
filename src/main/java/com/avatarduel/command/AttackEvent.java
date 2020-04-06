@@ -1,5 +1,6 @@
 package com.avatarduel.command;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.player_component.Field;
@@ -43,7 +44,11 @@ public class AttackEvent implements IEvent {
                 p2.setHealthPoint(p2.getHealthPoint() - diff);
 //                p2.checkLose(); // check lose --> ini di game manager aja kali ya ??
             }
-            p2.getField().removeCharacterCard(defenseChar); // hancurin kartu lawan
+            try {
+                p2.removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
+            } catch (InvalidOperationException e) {
+                e.printStackTrace();
+            }
         }
         // else : kalah, do nothing , ato bisa send message biar interaktif
     }
