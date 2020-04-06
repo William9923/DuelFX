@@ -4,6 +4,7 @@ import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
@@ -27,9 +28,12 @@ public class SummonAction implements IAction{
                 .findFirst()
                 .orElse(null);
         int currTurn = Game.getInstance().getCurrentTurn();
+        Player p = Game.getInstance().getPlayerByType(playerType);
         CharacterCardInField newInField = new CharacterCardInField(charCard,position,currTurn );
         try {
-            Game.getInstance().getPlayerByType(playerType).getField().addCharacterCard(newInField);
+            p.getField().addCharacterCard(newInField); // tes tambahin dl
+            p.getHand().remove(charCard); // diilangin dari tangan
+            p.getPower().reduce(charCard.getElement(), charCard.getPower()); // kalo error, dia ga kekurang powernya jdny
         } catch (InvalidOperationException e) {
             e.printStackTrace();
         }
@@ -49,6 +53,7 @@ public class SummonAction implements IAction{
                 && (currPlayer == playerType)
                 && (charCard != null)
                 && (CardType.CHARACTER == charCard.getType())
-                && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()));
+                && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
+                && (charCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(charCard.getElement())));
     }
 }
