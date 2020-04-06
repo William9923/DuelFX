@@ -15,6 +15,7 @@ public class Player {
     protected PlayerType type;
     protected PowerManager power;
     protected int healthPoint;
+    public boolean hasPlayLand;
 
     // hard coded constant
     private static final int firstDraw = 7; // can be better coded, but right now, still hardcoded
@@ -29,6 +30,7 @@ public class Player {
         this.type = type;
         this.power = new PowerManager();
         this.healthPoint = initialHP; // starting health point, bisa dinamik namun sekarang statik saja
+        this.hasPlayLand = false;
     }
 
     public void startGameDraw() throws EmptyStackException {
@@ -197,5 +199,6 @@ public class Player {
         this.power.refresh();
         this.getField().getCharCardList()
                 .forEach(c -> c.refresh());
+        this.hasPlayLand = false;
     }
 }
