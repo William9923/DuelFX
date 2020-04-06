@@ -8,7 +8,7 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class ChangePositionAction  implements IAction{
+public class ChangePositionAction implements IAction{
 
     private int characterId;
     private PlayerType p;
