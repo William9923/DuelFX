@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CharacterCardInField {
     private CharacterCard card;
-    private boolean hasAttacked;
+    public boolean hasAttacked;
     private CharacterState position;
     private List<SkillCard> connectedCard;
     private int createdAtTurn;
@@ -22,9 +22,6 @@ public class CharacterCardInField {
         this.createdAtTurn = createdAt;
     }
 
-    public void attack() {
-        hasAttacked = true;
-    }
 
     public void refresh() {
         hasAttacked = false;

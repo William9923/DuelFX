@@ -9,10 +9,6 @@ public class DrawAction implements IAction{
 
     public DrawAction(PlayerType p) {
         player = p;
-
-        if (validate()) {
-            execute();
-        }
     }
 
     @Override
@@ -25,6 +21,7 @@ public class DrawAction implements IAction{
     public boolean validate() {
         return (Game.getInstance().getCurrentPlayer() == player
         && Game.getInstance().getCurrentPhase().getPhase() == Phase.DRAW
-        && Game.getInstance().getPlayerByType(player).getDeck().size() > 0); // kalo ada handsize limit, taro disini
+        && Game.getInstance().getPlayerByType(player).getDeck().size() > 0      // deck size limit
+        && Game.getInstance().getPlayerByType(player).getHand().size() < 10);   // hand size limit
     }
 }

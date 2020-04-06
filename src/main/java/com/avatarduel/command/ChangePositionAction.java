@@ -1,5 +1,6 @@
 package com.avatarduel.command;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.player_component.Field;
@@ -9,31 +10,24 @@ import com.avatarduel.model.type.PlayerType;
 
 public class ChangePositionAction  implements IAction{
 
-    private CharacterCardInField character;
+    private int characterId;
     private PlayerType p;
 
-    public ChangePositionAction(PlayerType p, CharacterCardInField character) {
+    public ChangePositionAction(PlayerType p, int id) {
         this.p = p;
-        this.character = character;
-
-        if (validate()) {
-            execute();
-        } // else : throw error
-
+        this.characterId = id;
     }
 
     @Override
     public void execute() {
-        character.changeState();
+        Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).changeState();
     }
 
     @Override
     public boolean validate() {
-        Field f1 = Game.getInstance().getPlayerByType(p).getField();
+        CharacterCardInField card = Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId);
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-
-        return !(!(currPhase.equals(Phase.MAIN1) || currPhase.equals(Phase.MAIN2)) || !currPlayer.equals(p));
-
+        return !(!(currPhase.equals(Phase.MAIN1) || currPhase.equals(Phase.MAIN2)) || !(card != null) || card.hasAttacked || !(currPlayer == p));
     }
 }

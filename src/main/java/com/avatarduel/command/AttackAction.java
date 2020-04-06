@@ -1,5 +1,6 @@
 package com.avatarduel.command;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.player_component.Field;
@@ -20,16 +21,10 @@ public class AttackAction implements IAction{
         this.defenseCharacterId = idDefense;
         this.attacker = attacker;
         this.defender = defender;
-
-        if (validate()) {
-            execute();
-        }
-        // else : throw error bangsat
-        // end bungkusannya
     }
 
     @Override
-    public void execute() {
+    public void execute(){
         CharacterCardInField attackChar = Game.getInstance()
                 .getPlayerByType(attacker)
                 .getField()
@@ -41,7 +36,7 @@ public class AttackAction implements IAction{
                 .getCharacterCardByID(defenseCharacterId);
 
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();
-        attackChar.attack(); // nandain dia uda attack jd ga bisa attack lagi
+        attackChar.hasAttacked = true; // nandain dia uda attack jd ga bisa attack lagi
         // artinya menang
         if (diff >= 0) {
             Player p2 = Game.getInstance().getPlayerByType(defender);

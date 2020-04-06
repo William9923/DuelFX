@@ -12,19 +12,14 @@ public class EndTurnAction implements IAction{
 
     public EndTurnAction(PlayerType player) {
         this.player = player;
-
-        if (this.validate()) {
-            System.out.println("Check this out!");
-            this.execute();
-        } // throw error Action
     }
     @Override
     public void execute() {
-        getInstance().nextPhase();
-        getInstance().nextPlayer(); // ganti player
-        getInstance().incrementTurn(); // naikin turn
-        getInstance().nextPhase(); // ganti phase jadi draw
-        getInstance().getPlayerByType(getInstance().getCurrentPlayer()).refreshState();  // refresh state next pemain
+        getInstance().nextPhase(); // MainPhase 2 -> EndPhase
+        getInstance().nextPlayer(); // Player A -> Player B, begitu sebaliknya
+        getInstance().incrementTurn(); // Game State naikin turn + 1
+        getInstance().nextPhase(); // EndPhase -> DrawPhase
+        getInstance().getPlayerByType(getInstance().getCurrentPlayer()).refreshState();  // refresh state pemain pada draw phase
     }
 
     @Override
