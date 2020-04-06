@@ -10,25 +10,25 @@
       fx:controller="com.avatarduel.guicontroller.Board.FieldController"
       prefHeight="400.0" prefWidth="600.0">
     <HBox >
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card1"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card2"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card3"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card4"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card5"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card6"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card7"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card8"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="card9"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character1"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character2"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character3"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character4"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character5"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character6"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character7"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character8"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="character9"/>
     </HBox>
     <HBox >
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell1"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell2"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell3"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell4"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell5"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell6"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell7"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell8"/>
-        <fx:include source="../Card/CardOnPlay.fxml" fx:id="spell9"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill1"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill2"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill3"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill4"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill5"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill6"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill7"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill8"/>
+        <fx:include source="../Card/CardOnPlay.fxml" fx:id="skill9"/>
     </HBox>
 </VBox>

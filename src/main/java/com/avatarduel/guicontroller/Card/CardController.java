@@ -14,31 +14,14 @@ import java.io.File;
 
 public abstract class CardController {
     protected Card data;
-    protected final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border"};
+    protected final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border", "null_card", "flipped_card"};
     @FXML protected VBox card_border;
     @FXML protected Label card_name;
     @FXML protected ImageView card_img;
+    @FXML protected ImageView card_icon;
     @FXML protected Label card_atk;
     @FXML protected Label card_def;
     @FXML protected Label card_pow;
-
-    public void setAdditionalInfoCard(CharacterCard card) {
-        card_atk.setText("ATK : " + Integer.toString( card.getAttack()));
-        card_def.setText("DEF : " + Integer.toString( card.getDefense()));
-        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
-    }
-
-    public void setAdditionalInfoCard(SkillAuraCard card) {
-        card_atk.setText("ATK : " + card.getAttack());
-        card_def.setText("DEF : " + card.getDefense());
-        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
-    }
-
-    public void setAdditionalInfoCard(LandCard card) {
-        card_atk.setText("");
-        card_def.setText("");
-        card_pow.setText("");
-    }
 
     public void setCard(Card card) {
         this.data = card;
@@ -64,8 +47,35 @@ public abstract class CardController {
                 break;
         }
     }
+    public void setAdditionalInfoCard(CharacterCard card) {
+        card_atk.setText("ATK : " + Integer.toString( card.getAttack()));
+        card_def.setText("DEF : " + Integer.toString( card.getDefense()));
+        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
+    }
 
-    private void setBorderStyle(String className) {
+    public void setAdditionalInfoCard(SkillAuraCard card) {
+        card_atk.setText("ATK : " + card.getAttack());
+        card_def.setText("DEF : " + card.getDefense());
+        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
+    }
+
+    public void setAdditionalInfoCard(LandCard card) {
+        card_atk.setText("");
+        card_def.setText("");
+        card_pow.setText("");
+    }
+
+    public void setNull() {
+        card_name.setText("");
+        card_img.setImage(null);
+        card_atk.setText("");
+        card_def.setText("");
+        card_pow.setText("");
+        card_border.getStyleClass().remove("flipped_card");
+        card_border.getStyleClass().add("null_card");
+    }
+
+    protected void setBorderStyle(String className) {
         card_border.getStyleClass().removeAll(listBorderClass);
         card_border.getStyleClass().add(className);
     }

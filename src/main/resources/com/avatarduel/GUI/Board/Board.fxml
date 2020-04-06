@@ -43,74 +43,8 @@
             <fx:include fx:id="selected" source="../Card/CardGUI.fxml" />
          </children>
       </VBox>
-      <HBox layoutX="46.0" layoutY="760.0" prefHeight="274.0" prefWidth="275.0" spacing="16.0">
-         <children>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="280.0" prefWidth="190.0" spacing="8.0">
-               <children>
-                  <Label text="Kira Yoshikage">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="173.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                           <Image url="@../../character/kira_yoshikage.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-                  <Label text="HP: 80">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="163.0" prefWidth="118.0" spacing="10.0">
-               <children>
-                  <Label text="Power:">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Label>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
+      <HBox layoutX="46.0" layoutY="760.0" spacing="16.0">
+         <fx:include fx:id="playerAStatus" source="PlayerStatus.fxml"/>
       </HBox>
       <VBox layoutX="1520.0" layoutY="261.0" prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -118,80 +52,8 @@
             <Label text="Deck : 45/50" />
          </children>
       </VBox>
-      <HBox layoutX="46.0" layoutY="30.0" prefHeight="274.0" prefWidth="275.0" spacing="16.0">
-         <children>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="280.0" prefWidth="190.0" spacing="8.0">
-               <children>
-                  <Label text="Kira Yoshikage">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="173.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../character/kira_yoshikage.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-                  <Label text="HP: 80">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="163.0" prefWidth="118.0" spacing="10.0">
-               <children>
-                  <Label text="Power:">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="34.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
+      <HBox layoutX="46.0" layoutY="30.0" spacing="16.0">
+         <fx:include fx:id="playerBStatus" source="PlayerStatus.fxml"/>
       </HBox>
       <Rectangle id="pembatas" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="377.0" layoutY="525.0" stroke="BLACK" strokeType="INSIDE" width="1114.0" />
       <Rectangle id="status_game" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="599.0" layoutX="1700.0" layoutY="233.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />

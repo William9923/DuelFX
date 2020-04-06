@@ -17,7 +17,12 @@
    <children>
       <VBox fx:id="card_container" alignment="TOP_CENTER" layoutX="25.0" layoutY="15.0" maxWidth="-Infinity" prefHeight="347.0" prefWidth="268.0" spacing="10.0" styleClass="container">
          <children>
-            <Label fx:id="card_name" alignment="CENTER" text="NAMA KARTU" />
+            <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="258.0">
+               <children>
+                  <ImageView fx:id="card_icon" fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="card_name" alignment="CENTER" text="NAMA KARTU" />
+               </children>
+            </HBox>
             <ImageView fx:id="card_img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../card/image/character/Aang.png" />
