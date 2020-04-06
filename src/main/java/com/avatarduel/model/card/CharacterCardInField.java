@@ -6,20 +6,24 @@ import com.avatarduel.model.type.CharacterState;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-public class CharacterCardInField {
+public class CharacterCardInField implements IField{
     private CharacterCard card;
     public boolean hasAttacked;
     private CharacterState position;
     private List<SkillCard> connectedCard;
     private int createdAtTurn;
+    private int index; // index in field for gui
 
-    public CharacterCardInField(CharacterCard card, CharacterState state, int createdAt) {
+    public CharacterCardInField(CharacterCard card, CharacterState state, int createdAt, int index) {
         this.card = card;
         this.position = state;
         this.hasAttacked = true; // karena kalo baru di summon ga bisa attack kan ya
         this.connectedCard = new ArrayList<>();
         this.createdAtTurn = createdAt;
+        this.index = index;
     }
 
 
@@ -31,6 +35,12 @@ public class CharacterCardInField {
         return !hasAttacked && position.equals(CharacterState.ATTACK);
     }
 
+    @Override
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
     public Card getCard() {
         return card;
     }
@@ -40,13 +50,13 @@ public class CharacterCardInField {
     }
 
     public int getBonusAttack() {
-        int bonus = 0;
+        AtomicInteger bonus = new AtomicInteger();
         for (Card card: connectedCard) {
             if (card.getType().equals(CardType.SKILL_AURA)) {
-                bonus += ((SkillAuraCard) card).getAttack();
+                bonus.addAndGet(((SkillAuraCard) card).getAttack());
             }
         }
-        return bonus;
+        return bonus.get();
     }
 
     public CharacterState getPosition() {
@@ -54,13 +64,13 @@ public class CharacterCardInField {
     }
 
     public int getBonusDefense() {
-        int bonus = 0;
+        AtomicInteger bonus = new AtomicInteger();
         for (Card card: connectedCard) {
             if (card.getType().equals(CardType.SKILL_AURA)) {
-                bonus += ((SkillAuraCard) card).getDefense();
+                bonus.addAndGet(((SkillAuraCard) card).getDefense());
             }
         }
-        return bonus;
+        return bonus.get();
     }
 
     public boolean isPowerUp() {
@@ -77,14 +87,9 @@ public class CharacterCardInField {
     }
 
     public void removePair(Card card) {
-        Iterator itr = connectedCard.iterator();
-        while (itr.hasNext())
-        {
-            Card itCard = (Card)itr.next();
-            if (itCard.equals(card)) {
-                itr.remove();
-            }
-        }
+        connectedCard = connectedCard.stream()
+                .filter(c -> !card.equals(c))
+                .collect(Collectors.toList());
     }
 
     public int getCurrentTotal() {
