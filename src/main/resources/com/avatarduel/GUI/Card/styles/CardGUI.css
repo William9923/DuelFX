@@ -14,7 +14,7 @@
     -fx-border-width : 2px;
 }
 .air_border {
-    -fx-background-color : #FFF;
+    -fx-background-color : #DDD;
     -fx-border-color : aqua;
     -fx-border-width : 2px;
 }
@@ -23,4 +23,9 @@
 }
 .flipped_card {
     -fx-background-color : black;
+}
+.null_card {
+    -fx-background-color : #EEE;
+    -fx-border-color : blue;
+    -fx-border-width : 3px;
 }

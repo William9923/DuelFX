@@ -1,0 +1,77 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Rectangle2D?>
+
+<HBox prefHeight="274.0" prefWidth="275.0" spacing="16.0">
+    <children>
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="280.0" prefWidth="190.0" spacing="8.0">
+            <children>
+                <Label text="Kira Yoshikage">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="173.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../character/kira_yoshikage.png" />
+                    </image>
+                    <viewport>
+                        <Rectangle2D />
+                    </viewport>
+                </ImageView>
+                <Label text="HP: 80">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="163.0" prefWidth="118.0" spacing="10.0">
+            <children>
+                <Label text="Power:">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+                <HBox prefHeight="34.0" prefWidth="118.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="118.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="118.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="118.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>
