@@ -4,10 +4,10 @@ import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class DrawAction implements IAction{
+public class DrawEvent implements IEvent {
     private PlayerType player;
 
-    public DrawAction(PlayerType p) {
+    public DrawEvent(PlayerType p) {
         player = p;
     }
 

@@ -1,18 +1,17 @@
 package com.avatarduel.command;
 
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.LandCard;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class PlayLandCardAction implements IAction {
+public class PlayLandCardEvent implements IEvent {
     private PlayerType playerType;
     private int landCardID;
 
-    public PlayLandCardAction(int idCard, PlayerType playerType) {
+    public PlayLandCardEvent(int idCard, PlayerType playerType) {
         this.playerType = playerType;
         this.landCardID = idCard;
     }

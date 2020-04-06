@@ -38,6 +38,6 @@ public class CardFactory {
             return new SkillPowerUpCard(Integer.parseInt(components[0]), components[1], outputElement(components[2]), components[3], components[4], components[5]);
         }
 
-        return new NullCard();
+        return null;
     }
 }

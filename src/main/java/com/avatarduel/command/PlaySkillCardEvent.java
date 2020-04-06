@@ -1,8 +1,8 @@
 package com.avatarduel.command;
 
-public class RemoveSkillCardAction implements IAction {
+public class PlaySkillCardEvent implements IEvent { // has not implemented yet
 
-    public RemoveSkillCardAction() {
+    public PlaySkillCardEvent() {
 
     }
 

@@ -2,11 +2,10 @@ package com.avatarduel.command;
 
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
-import com.avatarduel.phase.MainPhase2;
 
-public class NextPhaseAction implements IAction {
+public class NextPhaseEvent implements IEvent {
 
-    public NextPhaseAction() {
+    public NextPhaseEvent() {
         // untuk sementara, validasi next phase cukup gini saja
     }
 

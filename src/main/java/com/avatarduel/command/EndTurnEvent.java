@@ -1,16 +1,15 @@
 package com.avatarduel.command;
 
-import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
 import static com.avatarduel.model.Game.getInstance;
 
-public class EndTurnAction implements IAction{
+public class EndTurnEvent implements IEvent {
 
     private PlayerType player;
 
-    public EndTurnAction(PlayerType player) {
+    public EndTurnEvent(PlayerType player) {
         this.player = player;
     }
     @Override

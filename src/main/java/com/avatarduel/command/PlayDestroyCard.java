@@ -6,7 +6,7 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class PlayDestroyCard implements IAction{
+public class PlayDestroyCard implements IEvent {
 
     private int skillID;
     private int targetID;

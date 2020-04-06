@@ -1,7 +1,7 @@
 package com.avatarduel;
 
-import com.avatarduel.command.EndTurnAction;
-import com.avatarduel.command.IAction;
+import com.avatarduel.command.EndTurnEvent;
+import com.avatarduel.command.IEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
@@ -54,7 +54,7 @@ public class Main {
         assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.MAIN2) : "Wrong Phase";
         // Next Phase : End Turn
         // bungkus try catch ya ntar
-        IAction newAction = new EndTurnAction(PlayerType.A);
+        IEvent newAction = new EndTurnEvent(PlayerType.A);
         assert Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) : "End Turn Action Wrong";
         assert Game.getInstance().getCurrentPlayer().equals(PlayerType.B) : "End Turn Action Wrong";
 

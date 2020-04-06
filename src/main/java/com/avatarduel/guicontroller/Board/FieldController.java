@@ -4,6 +4,7 @@ import com.avatarduel.guicontroller.Card.CardOnPlayController;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
+import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 
@@ -67,7 +68,7 @@ public class FieldController {
 
     public void render() {
         List<CharacterCardInField> characterCardInFieldList = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList();
-        List<SkillCard> skillCardList = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList();
+        List<SkillCardInField> skillCardList = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList();
         int i = 0;
         while(characterCardInFieldList.get(i) != null) {
             this.characters.get(Integer.toString(i)).setCard(characterCardInFieldList.get(i));
@@ -75,7 +76,7 @@ public class FieldController {
         }
         i = 0;
         while(skillCardList.get(i) != null) {
-            this.skills.get(Integer.toString(i)).setCard(skillCardList.get(i));
+            this.skills.get(Integer.toString(i)).setCard(skillCardList.get(i).getCard());
             i++;
         }
     }

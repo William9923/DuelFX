@@ -1,29 +1,33 @@
 package com.avatarduel.model.player_component;
 
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
+import com.avatarduel.model.card.SkillCardInField;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Field {
     private List<CharacterCardInField> charCardList;
-    private List<SkillCard> skillCardList;
+    private List<SkillCardInField> skillCardList;
     private int fieldSize;
+    private CardInFieldFactory cardFactory;
 
     public Field (int size) {
         this.charCardList = new ArrayList<CharacterCardInField>();
-        this.skillCardList = new ArrayList<SkillCard>();
+        this.skillCardList = new ArrayList<SkillCardInField>();
         this.fieldSize = size;
+        this.cardFactory = new CardInFieldFactory();
     }
 
     public int getFieldSize() {
         return fieldSize;
     }
 
-    public List<SkillCard> getSkillCardList() {
+    public List<SkillCardInField> getSkillCardList() {
         return skillCardList;
     }
 
@@ -55,14 +59,6 @@ public class Field {
         }
     }
 
-    public CharacterCardInField getCharacterCardByIdx(int index) throws InvalidOperationException{
-        if (index < fieldSize && index < charCardList.size()) {
-            return charCardList.get(index);
-        } else {
-            throw new InvalidOperationException("Get Char By Idx", "Invalid Index");
-        }
-
-    }
 
     public CharacterCardInField getCharacterCardByID(int cardID) {
         return charCardList.stream()
@@ -71,33 +67,25 @@ public class Field {
                 .orElse(null);
     }
 
-    public SkillCard getSkillCardByIdx(int index) throws InvalidOperationException{
-        if(index < fieldSize && index < skillCardList.size()) {
-            return skillCardList.get(index);
-        } else {
-            throw new InvalidOperationException("Get Char By Idx", "Invalid Index");
-        }
 
-    }
-
-    public SkillCard getSkillCardByID(int cardID) {
+    public SkillCardInField getSkillCardByID(int cardID) {
         return skillCardList.stream()
-                .filter(card -> card.getId() == cardID)
+                .filter(cardInField -> cardInField.getCard().getId() == cardID)
                 .findFirst()
                 .orElse(null);
     }
 
 
-    public void connectCards(CharacterCardInField card1, SkillCard card2) throws InvalidOperationException {
+    public void connectCards(CharacterCardInField card1, SkillCard card2, int index, int createdAt) throws InvalidOperationException {
         if (isAbleToAddSkill() && isContainCharacter(card1)) {
             card1.pair(card2);
-            addSkillCard(card2);
+            addSkillCard(card2, index, createdAt);
         }
     }
 
-    public void addSkillCard(SkillCard card) throws InvalidOperationException{
+    public void addSkillCard(SkillCard card, int index, int createdAt) throws InvalidOperationException{
         if (isAbleToAddSkill()) {
-           skillCardList.add(card);
+           skillCardList.add((SkillCardInField) cardFactory.createCardInField(card, index, createdAt, null));
         } else {
             throw new InvalidOperationException("Add Skill Card", "Unable to play due to Full Skill Field!");
         }
@@ -121,11 +109,11 @@ public class Field {
         }
     }
 
-    public void removeSkillCard(Card inField) {
+    public void removeSkillCard(SkillCard inField) {
         if (isContainSkill(inField)) {
             skillCardList = skillCardList
                     .stream()
-                    .filter(card -> !card.equals(inField))
+                    .filter(cardInField -> cardInField.getCard().getId() != inField.getId())
                     .collect(Collectors.toList());
 
             charCardList.forEach(
