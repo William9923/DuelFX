@@ -124,22 +124,16 @@ public class Player {
         if (card == null) {
             throw new InvalidOperationException("Removing Summoned Character", "Card not found");
         }
-
         field.removeCharacterCard(card);
     }
-
-    // buang
 
     public void removeSkillCardByID (int id) throws InvalidOperationException {
         SkillCard card = (SkillCard) field.getSkillCardByID(id).getCard();
         if (card == null) {
             throw new InvalidOperationException("Removing Summoned Character", "Card not found");
         }
-
         field.removeSkillCard(card);
     }
-
-    // buang
 
     public Deck getDeck() {
         return deck;
