@@ -20,12 +20,12 @@
             <fx:include fx:id="handA" source="Hand.fxml" />
          </children>
       </HBox>
-      <HBox layoutX="360.0" layoutY="544.0" prefHeight="173.0" prefWidth="874.0" spacing="16.0">
+      <HBox layoutX="360.0" layoutY="584.0" prefHeight="173.0" prefWidth="874.0" spacing="16.0">
          <children>
             <fx:include fx:id="fieldA" source="Field.fxml" />
          </children>
       </HBox>
-      <HBox layoutX="360.0" layoutY="251.0" prefHeight="274.0" prefWidth="1291.0" spacing="16.0">
+      <HBox layoutX="360.0" layoutY="216.0" prefHeight="274.0" prefWidth="1291.0" spacing="16.0">
          <children>
             <fx:include fx:id="fieldB" source="Field.fxml" />
          </children>

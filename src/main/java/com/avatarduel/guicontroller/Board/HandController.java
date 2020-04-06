@@ -54,7 +54,6 @@ public class HandController {
     }
 
     public void render() {
-        Game.getInstance().getPlayerByType(this.playerType).startGameDraw();
         Hand currentHand = Game.getInstance().getPlayerByType(this.playerType).getHand();
         int i = 0;
         for(Card cardInHand: currentHand) {
