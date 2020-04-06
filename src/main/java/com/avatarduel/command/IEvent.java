@@ -2,7 +2,7 @@ package com.avatarduel.command;
 
 import com.avatarduel.exception.InvalidOperationException;
 
-public interface IAction {
+public interface IEvent {
     public void execute();
     public boolean validate();
 }

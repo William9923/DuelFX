@@ -10,12 +10,12 @@ import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class SummonAction implements IAction{
+public class SummonEvent implements IEvent {
     private PlayerType playerType;
     private int idCard;
     private CharacterState position;
 
-    public SummonAction(int idCard, PlayerType playerType, CharacterState position) {
+    public SummonEvent(int idCard, PlayerType playerType, CharacterState position) {
         this.idCard = idCard;
         this.playerType = playerType;
         this.position = position;

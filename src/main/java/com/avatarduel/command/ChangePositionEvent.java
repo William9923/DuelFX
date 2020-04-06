@@ -1,19 +1,16 @@
 package com.avatarduel.command;
 
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.player_component.Field;
-import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class ChangePositionAction implements IAction{
+public class ChangePositionEvent implements IEvent {
 
     private int characterId;
     private PlayerType p;
 
-    public ChangePositionAction(PlayerType p, int id) {
+    public ChangePositionEvent(PlayerType p, int id) {
         this.p = p;
         this.characterId = id;
     }

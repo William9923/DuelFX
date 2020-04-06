@@ -1,6 +1,5 @@
 package com.avatarduel.command;
 
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.player_component.Field;
@@ -9,14 +8,14 @@ import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class AttackAction implements IAction{
+public class AttackEvent implements IEvent {
 
     private int attackCharacterId;
     private int defenseCharacterId;
     private PlayerType attacker;
     private PlayerType defender;
 
-    public AttackAction(int idAttack, int idDefense, PlayerType attacker, PlayerType defender) {
+    public AttackEvent(int idAttack, int idDefense, PlayerType attacker, PlayerType defender) {
         this.attackCharacterId = idAttack;
         this.defenseCharacterId = idDefense;
         this.attacker = attacker;
