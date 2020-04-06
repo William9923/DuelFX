@@ -80,6 +80,7 @@ public abstract class CardController {
         card_atk.setText("");
         card_def.setText("");
         card_pow.setText("");
+        card_icon.setImage(null);
         card_border.getStyleClass().remove("flipped_card");
         card_border.getStyleClass().add("null_card");
     }

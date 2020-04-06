@@ -3,6 +3,7 @@ package com.avatarduel.guicontroller.Board;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.type.PlayerType;
+import com.google.common.eventbus.EventBus;
 import javafx.fxml.FXML;
 
 public class BoardController {
@@ -17,10 +18,11 @@ public class BoardController {
 
     @FXML
     public void initialize() {
+
         handAController.setPlayerType(PlayerType.A);
-        handAController.setPlayerType(PlayerType.B);
+        handBController.setPlayerType(PlayerType.B);
         handAController.render();
-//        handBController.render();
+        handBController.render();
     }
 
     @FXML
