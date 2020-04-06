@@ -32,6 +32,13 @@ public class Game {
     public PlayerType getCurrentPlayer() {
         return currentPlayer;
     }
+    public PlayerType getCurrentOpponent() {
+        switch (getCurrentPlayer()) {
+            case A: return PlayerType.B;
+            case B: return PlayerType.A;
+        }
+        return null; // throw game rusak wkwkw
+    }
 
     public int getCurrentTurn() {
         return currentTurn;

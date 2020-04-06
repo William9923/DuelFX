@@ -15,7 +15,9 @@ public class EndTurnAction implements IAction{
     }
     @Override
     public void execute() {
-        getInstance().nextPhase(); // MainPhase 2 -> EndPhase
+        while(getInstance().getCurrentPhase().getPhase() != Phase.END) {
+            getInstance().nextPhase();
+        }
         getInstance().nextPlayer(); // Player A -> Player B, begitu sebaliknya
         getInstance().incrementTurn(); // Game State naikin turn + 1
         getInstance().nextPhase(); // EndPhase -> DrawPhase
@@ -24,7 +26,6 @@ public class EndTurnAction implements IAction{
 
     @Override
     public boolean validate() {
-        return (getInstance().getCurrentPlayer() == (player)
-                && getInstance().getCurrentPhase().getPhase() == Phase.MAIN2);
+        return (getInstance().getCurrentPlayer() == (player));
     }
 }
