@@ -1,6 +1,7 @@
 package com.avatarduel.command;
 
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -14,11 +15,14 @@ public class SummonEvent implements IEvent {
     private PlayerType playerType;
     private int idCard;
     private CharacterState position;
-
-    public SummonEvent(int idCard, PlayerType playerType, CharacterState position) {
+    private int index;
+    private CardInFieldFactory factory;
+    public SummonEvent(int idCard, PlayerType playerType, CharacterState position, int index) {
         this.idCard = idCard;
         this.playerType = playerType;
         this.position = position;
+        this.index = index;
+        this.factory = new CardInFieldFactory();
     }
     @Override
     public void execute() {
@@ -29,9 +33,10 @@ public class SummonEvent implements IEvent {
                 .orElse(null);
         int currTurn = Game.getInstance().getCurrentTurn();
         Player p = Game.getInstance().getPlayerByType(playerType);
-        CharacterCardInField newInField = new CharacterCardInField(charCard,position,currTurn );
+//        CharacterCardInField newInField = (CharacterCardInField) factory.createCardInField(charCard, currTurn, index,position);
+
         try {
-            p.playCharacterCardByID(idCard, position, currTurn); // cek dl error ato ga
+            p.playCharacterCardByID(idCard, position, currTurn, index); // cek dl error ato ga
             p.getPower().reduce(charCard.getElement(), charCard.getPower()); // kalo error, dia ga kekurang powernya jdny
         } catch (InvalidOperationException e) {
             e.printStackTrace();
