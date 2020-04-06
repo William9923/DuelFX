@@ -1,36 +1,29 @@
 package com.avatarduel.model.player_component;
 
-import com.avatarduel.dao.CardDAO;
-import com.avatarduel.dao.CharacterDAO;
-import com.avatarduel.dao.LandDAO;
-import com.avatarduel.dao.SkillAuraDAO;
+import com.avatarduel.dao.*;
+
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.card.Card;
 
 import java.util.*;
 
 public class Deck extends Stack<Card>{
-    private CardDAO charDAO;
-    private CardDAO landDAO;
-    private CardDAO skillAuraDAO;
-    // destroy DAO
-    // power up DAO
+    private CardDAO csvDao;
     private int deckSize;
 
     public Deck(int deckSize) {
         super();
         this.deckSize = deckSize;
-        this.charDAO = new CharacterDAO();
-        this.landDAO = new LandDAO();
-        this.skillAuraDAO = new SkillAuraDAO();
+        this.csvDao = new CSVCardDAO();
         init();
     }
 
     // init
     private void init() {
-        List<Card> charCards = charDAO.getAllCard();
-        List<Card> landCards = landDAO.getAllCard();
-        List<Card> skillCards = skillAuraDAO.getAllCard();
+        List<Card> charCards = csvDao.getAllCharacterCard();
+        List<Card> landCards = csvDao.getAllLandCard();
+        List<Card> skillCards = csvDao.getAllLandCard();
+
         int j = 0;
         for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {
             Card card = selectRandom(charCards);
