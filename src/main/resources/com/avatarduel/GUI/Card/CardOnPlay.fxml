@@ -14,23 +14,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="card_border" alignment="TOP_CENTER" prefHeight="148.0" prefWidth="120.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.CardOnPlayController">
+<VBox fx:id="card_border" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="137.0" prefWidth="99.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.CardOnPlayController">
    <children>
       <HBox alignment="CENTER" prefHeight="19.0" prefWidth="110.0" spacing="5.0">
          <children>
             <ImageView fx:id="card_icon" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icon/character_icon.png" />
+                  <Image url="@../../card/icon/character_icon.png" />
                </image>
             </ImageView>
-               <Label fx:id="card_name" alignment="CENTER" text="NAMA KARTU" wrapText="true">
+               <Label fx:id="card_name" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" text="NAMA KARTU" wrapText="true">
                   <font>
-                     <Font size="10.0" />
+                     <Font size="9.0" />
                   </font>
                </Label>
          </children>
       </HBox>
-         <ImageView fx:id="card_img" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="card_img" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../card/image/character/Aang.png" />
             </image>

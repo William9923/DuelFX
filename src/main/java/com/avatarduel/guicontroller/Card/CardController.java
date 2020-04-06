@@ -28,9 +28,18 @@ public abstract class CardController {
         card_name.setText(this.data.getName());
         card_img.imageProperty().set(getImage(card.getImage()));
         switch (card.getType()) {
-            case CHARACTER: setAdditionalInfoCard((CharacterCard) card); break;
-            case LAND: setAdditionalInfoCard((LandCard) card); break;
-            case SKILL_AURA: setAdditionalInfoCard((SkillAuraCard) card); break;
+            case CHARACTER:
+                setAdditionalInfoCard((CharacterCard) card);
+                card_icon.setImage(getIcon("character_icon.png"));
+                break;
+            case LAND:
+                setAdditionalInfoCard((LandCard) card);
+                card_icon.setImage(getIcon("land_icon.png"));
+                break;
+            case SKILL_AURA:
+                setAdditionalInfoCard((SkillAuraCard) card);
+                card_icon.setImage(getIcon("skill_icon.png"));
+                break;
         }
         switch (card.getElement()) {
             case WATER:
@@ -82,6 +91,11 @@ public abstract class CardController {
 
     private Image getImage(String imgpath) {
         File f = new File("build/resources/main/com/avatarduel/card/" + imgpath.substring(8));
+        return new Image("file:\\" + f.getAbsolutePath());
+    }
+
+    private Image getIcon(String iconname) {
+        File f = new File("src/main/resources/com/avatarduel/card/icon/" + iconname);
         return new Image("file:\\" + f.getAbsolutePath());
     }
 }
