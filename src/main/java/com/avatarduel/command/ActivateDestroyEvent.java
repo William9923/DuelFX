@@ -6,13 +6,13 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class PlayDestroyCard implements IEvent {
+public class ActivateDestroyEvent implements IEvent {
 
     private int skillID;
     private int targetID;
     private PlayerType playerType; // enchanter
 
-    public PlayDestroyCard(PlayerType playerType, int skillID, int charID) {
+    public ActivateDestroyEvent(PlayerType playerType, int skillID, int charID) {
         this.playerType = playerType;
         this.skillID = skillID;
         this.targetID = charID;

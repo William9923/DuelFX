@@ -71,7 +71,7 @@ public class Player {
 //        } // else : throw error
 //    }
 
-    public void playSkillAuraCardByID (int id, int charID, int index, int turn) throws InvalidOperationException {
+    public void playSkillCardByID (int id, int charID, int index, int turn) throws InvalidOperationException {
         SkillCard skillCard = (SkillCard) hand.stream()
                 .filter(c -> c.getId() == id && (c.getType().equals(CardType.SKILL_AURA) || c.getType().equals(CardType.SKILL_POWER_UP)))
                 .findFirst()

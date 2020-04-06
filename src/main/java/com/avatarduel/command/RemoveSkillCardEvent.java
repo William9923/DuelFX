@@ -13,6 +13,7 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
 
     @Override
     public boolean validate() {
+
         return false;
     }
 }
