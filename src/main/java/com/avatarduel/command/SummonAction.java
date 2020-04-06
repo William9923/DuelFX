@@ -31,8 +31,7 @@ public class SummonAction implements IAction{
         Player p = Game.getInstance().getPlayerByType(playerType);
         CharacterCardInField newInField = new CharacterCardInField(charCard,position,currTurn );
         try {
-            p.getField().addCharacterCard(newInField); // tes tambahin dl
-            p.getHand().remove(charCard); // diilangin dari tangan
+            p.playCharacterCardByID(idCard, position, currTurn); // cek dl error ato ga
             p.getPower().reduce(charCard.getElement(), charCard.getPower()); // kalo error, dia ga kekurang powernya jdny
         } catch (InvalidOperationException e) {
             e.printStackTrace();
