@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 public class BoardController {
     @FXML private DisplayCardController selectedController;
     @FXML private FieldController fieldAController;
+    @FXML private FieldController fieldBController;
     @FXML private HandController handAController;
     @FXML private HandController handBController;
 
@@ -18,11 +19,11 @@ public class BoardController {
 
     @FXML
     public void initialize() {
-
         handAController.setPlayerType(PlayerType.A);
         handBController.setPlayerType(PlayerType.B);
         handAController.render();
         handBController.render();
+        fieldBController.swapCharacctersAndSkillsPosition();
     }
 
     @FXML

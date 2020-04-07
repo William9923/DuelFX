@@ -9,7 +9,6 @@ import com.avatarduel.factory.CardFactory;
 import com.avatarduel.guicontroller.Board.BoardController;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.MainMenu.MainMenuController;
-import com.avatarduel.model.card.LandCard;
 import com.avatarduel.model.card.SkillAuraCard;
 import com.avatarduel.util.CSVReader;
 import javafx.application.Application;
@@ -20,7 +19,9 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
 
 public class AvatarDuel extends Application {
 
@@ -32,6 +33,7 @@ public class AvatarDuel extends Application {
   public void start(Stage stage) throws IOException, URISyntaxException {
 //    Parent root = FXMLLoader.load(getClass().getResource("Board.fxml"));
     // Load Main Menu
+    playThemeMusic();
     FXMLLoader mainmenuLoader = getMainMenu();
     Parent mainmenuGUI = mainmenuLoader.load();
     Scene mainmenu = new Scene(mainmenuGUI);
@@ -94,8 +96,6 @@ public class AvatarDuel extends Application {
     return new FXMLLoader(getClass().getResource("GUI/Card/CardGUI.fxml"));
   }
 
-
-
   public List<String[]> getSkillAuras() throws IOException, URISyntaxException {
     File skillAuraFile = new File(getClass().getResource(SKILL_AURA_CSV_FILE_PATH).toURI());
     CSVReader skillAuraReader = new CSVReader(skillAuraFile, "\t");
@@ -112,6 +112,13 @@ public class AvatarDuel extends Application {
     File landCSVFile = new File(getClass().getResource(LAND_CSV_FILE_PATH).toURI());
     CSVReader LandCSVFile = new CSVReader(landCSVFile, "\t");
     return LandCSVFile.read();
+  }
+
+  private void playThemeMusic() throws URISyntaxException {
+    Media media = new Media(getClass().getResource("music/main_menu_song.mp3").toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.setAutoPlay(true);
+    mediaPlayer.setVolume(50);
   }
 
   public static void main(String[] args) {
