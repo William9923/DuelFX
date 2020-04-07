@@ -11,10 +11,6 @@ public class CardOnPlayController extends CardController {
         this.onAttackPosition = true;
     }
 
-    public void setCard(CharacterCardInField cardInField) {
-        super.setCard(cardInField.getCard());
-    }
-
     public void rotateCard() {
         this.card_border.rotateProperty().setValue(90);
     }

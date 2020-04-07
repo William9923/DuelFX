@@ -40,7 +40,7 @@
             <fx:include fx:id="playerAStatus" source="PlayerStatus.fxml" />
          </children>
       </HBox>
-      <VBox layoutX="1671.0" layoutY="30.0" prefHeight="164.0" prefWidth="104.0">
+      <VBox layoutX="1764.0" layoutY="29.0" prefHeight="164.0" prefWidth="104.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
             <Label text="Deck : 45/50" />
@@ -51,10 +51,10 @@
             <fx:include fx:id="playerBStatus" source="PlayerStatus.fxml" />
          </children>
       </HBox>
-      <Rectangle id="pembatas" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="345.0" layoutY="525.0" stroke="BLACK" strokeType="INSIDE" width="1323.0" />
-      <Rectangle id="status_game" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="595.0" layoutX="1700.0" layoutY="233.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle id="pembatas" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="376.0" layoutY="561.0" stroke="BLACK" strokeType="INSIDE" width="1323.0" />
+      <Rectangle id="status_game" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="565.0" layoutX="1739.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" width="166.0" />
       <Text layoutX="1739.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status Game disini" />
-      <VBox layoutX="1671.0" layoutY="899.0" prefHeight="164.0" prefWidth="104.0">
+      <VBox layoutX="1764.0" layoutY="897.0" prefHeight="164.0" prefWidth="104.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
             <Label text="Deck : 45/50" />
