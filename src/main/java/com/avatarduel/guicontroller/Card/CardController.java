@@ -40,6 +40,13 @@ public abstract class CardController {
                 setAdditionalInfoCard((SkillAuraCard) card);
                 card_icon.setImage(getIcon("skill_icon.png"));
                 break;
+            case SKILL_DESTROY:
+                setAdditionalInfoCard((SkillDestroyCard) card);
+                card_icon.setImage(getIcon("skill_icon.png"));
+                break;
+            case SKILL_POWER_UP:
+                setAdditionalInfoCard((SkillPowerUpCard) card);
+                card_icon.setImage(getIcon("skill_icon.png"));
         }
         switch (card.getElement()) {
             case WATER:
@@ -66,6 +73,18 @@ public abstract class CardController {
         card_atk.setText("ATK : " + card.getAttack());
         card_def.setText("DEF : " + card.getDefense());
         card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
+    }
+
+    public void setAdditionalInfoCard(SkillDestroyCard card) {
+        card_atk.setText("des");
+        card_def.setText("");
+        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
+    }
+
+    public void setAdditionalInfoCard(SkillPowerUpCard card) {
+        card_atk.setText("");
+        card_def.setText("");
+        card_pow.setText("POW: " + Integer.toString(this.data.getPower()));
     }
 
     public void setAdditionalInfoCard(LandCard card) {

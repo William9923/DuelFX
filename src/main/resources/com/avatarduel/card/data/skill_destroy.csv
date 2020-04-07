@@ -1,10 +1,10 @@
-id  name	element description imagepath   power
-22  Steel Destroyer EARTH   The rarest steel on earth that has destructive power.   8
-23  Magma Fist EARTH    Fist that made by a magma that can destroy any shield.    7
-24  Meteor Rain EARTH   The destroyer that no one able to stop. 9
-34  Hell Fire   FIRE    Generate and control flames of hell.    8
-35  Fire Fist   FIRE    Huge Fire that shape like a fist.     7
-74  Chi Manipulation    AIR Manipulate metaphysical life energies.  7
-75  Oxygen Vacuum   AIR Create and manipulate vacuum of physical energy.    8
-94  Ice Age WATER   Power that turn any objects becomes an ice in an instant.   8
-95  Tsunami WATER   Create such a huge and unstoppable water wave.  9
+id	name	element	description	imagepath	power
+22	Steel Destroyer	EARTH	The rarest steel on earth that has destructive power.	src/res/image/character/Katara.png	2
+23	Magma Fist	EARTH	Fist that made by a magma that can destroy any shield.	src/res/image/character/Katara.png	2
+24	Meteor Rain	EARTH	The destroyer that no one able to stop.	src/res/image/character/Katara.png	2
+34	Hell Fire	FIRE	Generate and control flames of hell.	src/res/image/character/Katara.png	2
+35	Fire Fist	FIRE	Huge Fire that shape like a fist.	src/res/image/character/Katara.png	2
+74	Chi Manipulation	AIR	Manipulate metaphysical life energies.	src/res/image/character/Katara.png	2
+75	Oxygen Vacuum	AIR	Create and manipulate vacuum of physical energy.	src/res/image/character/Katara.png	2
+94	Ice Age	WATER	Power that turn any objects becomes an ice in an instant.	src/res/image/character/Katara.png	2
+95	Tsunami	WATER	Create such a huge and unstoppable water wave.	src/res/image/character/Katara.png	2
