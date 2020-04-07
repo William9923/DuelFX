@@ -1,4 +1,4 @@
-package com.avatarduel.command;
+package com.avatarduel.event;
 
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.LandCard;

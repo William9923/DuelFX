@@ -1,4 +1,4 @@
-package com.avatarduel.command;
+package com.avatarduel.event;
 
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;

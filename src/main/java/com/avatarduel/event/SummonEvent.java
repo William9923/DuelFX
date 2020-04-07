@@ -1,10 +1,9 @@
-package com.avatarduel.command;
+package com.avatarduel.event;
 
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
-import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;

@@ -31,6 +31,8 @@ public class Player {
         this.power = new PowerManager();
         this.healthPoint = initialHP; // starting health point, bisa dinamik namun sekarang statik saja
         this.hasPlayLand = false;
+
+        startGameDraw();
     }
 
     public void startGameDraw() throws EmptyStackException {
@@ -88,11 +90,6 @@ public class Player {
             field.addSkillCard(skillCard, index, turn);
         }
     }
-
-    // play skill destroy --> buat destroy ya, keknya dia mesti manggil game manager puny
-
-    // play skill power up
-
 
     public void playLandCardByID (int id) throws InvalidOperationException {
         Card card = hand.stream()
