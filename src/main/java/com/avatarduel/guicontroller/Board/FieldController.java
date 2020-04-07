@@ -1,10 +1,9 @@
 package com.avatarduel.guicontroller.Board;
 
-import com.avatarduel.guicontroller.Card.CardOnPlayController;
+import com.avatarduel.guicontroller.Card.SkillCardOnPlayController;
 import com.avatarduel.guicontroller.Card.CharacterCardOnPlayController;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class FieldController {
     private Map<String, CharacterCardOnPlayController> characters;
-    private Map<String, CardOnPlayController> skills;
+    private Map<String, SkillCardOnPlayController> skills;
     private PlayerType playerType;
 
     @FXML VBox card_container;
@@ -32,20 +31,29 @@ public class FieldController {
     @FXML CharacterCardOnPlayController character7Controller;
     @FXML CharacterCardOnPlayController character8Controller;
     @FXML CharacterCardOnPlayController character9Controller;
-    @FXML CardOnPlayController skill1Controller;
-    @FXML CardOnPlayController skill2Controller;
-    @FXML CardOnPlayController skill3Controller;
-    @FXML CardOnPlayController skill4Controller;
-    @FXML CardOnPlayController skill5Controller;
-    @FXML CardOnPlayController skill6Controller;
-    @FXML CardOnPlayController skill7Controller;
-    @FXML CardOnPlayController skill8Controller;
-    @FXML CardOnPlayController skill9Controller;
+    @FXML
+    SkillCardOnPlayController skill1Controller;
+    @FXML
+    SkillCardOnPlayController skill2Controller;
+    @FXML
+    SkillCardOnPlayController skill3Controller;
+    @FXML
+    SkillCardOnPlayController skill4Controller;
+    @FXML
+    SkillCardOnPlayController skill5Controller;
+    @FXML
+    SkillCardOnPlayController skill6Controller;
+    @FXML
+    SkillCardOnPlayController skill7Controller;
+    @FXML
+    SkillCardOnPlayController skill8Controller;
+    @FXML
+    SkillCardOnPlayController skill9Controller;
 
     @FXML
     public void initialize() {
         this.characters = new HashMap<String, CharacterCardOnPlayController>();
-        this.skills = new HashMap<String, CardOnPlayController>();
+        this.skills = new HashMap<String, SkillCardOnPlayController>();
         characters.put("1", character1Controller);
         characters.put("2", character2Controller);
         characters.put("3", character3Controller);
@@ -87,7 +95,7 @@ public class FieldController {
         }
     }
 
-    public void swapCharacctersAndSkillsPosition() {
+    public void swapCharactersAndSkillsPosition() {
         card_container.getChildren().remove(character_container);
         card_container.getChildren().add(character_container);
     }
