@@ -4,6 +4,7 @@ import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
+import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
@@ -32,12 +33,11 @@ public class SummonEvent implements IEvent {
                 .orElse(null);
         int currTurn = Game.getInstance().getCurrentTurn();
         Player p = Game.getInstance().getPlayerByType(playerType);
-//        CharacterCardInField newInField = (CharacterCardInField) factory.createCardInField(charCard, currTurn, index,position);
-
+        p.getHand().remove(charCard);
         try {
-            p.playCharacterCardByID(idCard, position, currTurn, index); // cek dl error ato ga
-            p.getPower().reduce(charCard.getElement(), charCard.getPower()); // kalo error, dia ga kekurang powernya jdny
-        } catch (InvalidOperationException e) {
+            p.getField().addCharacterCard((CharacterCardInField) factory.createCardInField(charCard, currTurn, index,position));
+            p.getPower().reduce(charCard.getElement(), charCard.getPower());
+        } catch ( InvalidOperationException e) {
             e.printStackTrace();
         }
     }
