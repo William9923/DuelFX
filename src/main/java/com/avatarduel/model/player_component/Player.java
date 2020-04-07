@@ -45,20 +45,12 @@ public class Player {
         hand.add(deck.draw());
     }
 
-//    public void playCharacterCard(int index, CharacterState state, int turn) throws InvalidOperationException {
-//        Card card = hand.get(index);
-//        if (index < hand.size() && card.getType().equals(CardType.CHARACTER)){ // kalo ga ini, maka throw error kalo wrong type
-//            hand.remove(index);  // keluarin dari tangan
-//            field.addCharacterCard(new CharacterCardInField((CharacterCard) card,state, turn));  // masukin ke field
-//        } // else : throw error
-//    }
-
     public void playCharacterCardByID(int id, CharacterState state, int turn, int index) throws InvalidOperationException {
         Card card = hand.stream()
                 .filter(c -> c.getId() == id)
                 .findFirst()
-                .orElse(new NullCard());
-        if (card.getType().equals(CardType.CHARACTER)) {
+                .orElse(null);
+        if (card.getType().equals(CardType.CHARACTER) && card != null) {
             hand.remove(card);
             field.addCharacterCard(new CharacterCardInField((CharacterCard) card, state, turn, index));
         } else {

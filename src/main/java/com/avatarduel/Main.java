@@ -6,6 +6,7 @@ import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
+import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
 
 public class Main {
@@ -103,6 +104,115 @@ public class Main {
         System.out.println("Air : " + Game.getInstance().getPlayerByType(PlayerType.B).getPower().getTotal_air());
 
         System.out.println("Summoning Test : ");
+        IEvent drawEvent1 = new DrawEvent(Game.getInstance().getCurrentPlayer());
+        if(drawEvent1.validate()) {
+            drawEvent1.execute();
+        }
+
+        CharacterCard card = (CharacterCard) Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand()
+                .stream()
+                .filter(c -> c.getType().equals(CardType.CHARACTER) && c.getPower() <= Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getPower().getCurrent(c.getElement()))
+                .findFirst()
+                .orElse(null);
+
+        if (card !=null) {
+            System.out.println("Summon : " + card.getName());
+            IEvent summonEvent = new SummonEvent(card.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, 1);
+            if (summonEvent.validate()){
+                int currentElem = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getPower().getCurrent(card.getElement());
+                summonEvent.execute();
+                p1CardUsage++;
+                assert Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList().size() == 1 : "Summon Error";
+                assert Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand().size() + Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() + p1CardUsage == 60 : "Duar salah oi";
+                assert Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getPower().getCurrent(card.getElement()) == currentElem - card.getPower() : "Duar kurang power nya salah";
+            }
+        }
+
+        if (card != null) {
+            System.out.println("Change position Event : ");
+            System.out.println(Game.getInstance().getCurrentPhase().getPhase());
+            IEvent changePositionEvent = new ChangePositionEvent(Game.getInstance().getCurrentPlayer(), card.getId());
+            if (changePositionEvent.validate()) {
+                changePositionEvent.execute();
+                System.out.println("Uwu Change Posistion");
+                assert Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
+                        .stream()
+                        .filter(c -> c.getCard().getId() == card.getId())
+                        .findFirst()
+                        .orElse(null).getPosition().equals(CharacterState.DEFENSE) : "Failed To Change the position";
+            }
+            if (changePositionEvent.validate()) {
+                changePositionEvent.execute();
+                System.out.println("Uwu Change Posistion");
+                assert Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
+                        .stream()
+                        .filter(c -> c.getCard().getId() == card.getId())
+                        .findFirst()
+                        .orElse(null).getPosition().equals(CharacterState.DEFENSE) : "Failed To Change the position";
+            } // uwu bisa berkali kali duar
+            if (changePositionEvent.validate()) {
+                changePositionEvent.execute();
+                System.out.println("Uwu Change Posistion");
+                assert Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
+                        .stream()
+                        .filter(c -> c.getCard().getId() == card.getId())
+                        .findFirst()
+                        .orElse(null).getPosition().equals(CharacterState.DEFENSE) : "Failed To Change the position";
+            }
+        }
+
+        IEvent nextPhaseEvent = new NextPhaseEvent();
+        if (nextPhaseEvent.validate()) {
+            nextPhaseEvent.execute(); // uwu lets go to the fighting
+        }
+
+        System.out.println("Current Phase : " + Game.getInstance().getCurrentPhase().getPhase());
+
+        if (card != null) {
+            // lets go do the direct attack to the opponent
+            IEvent directAttackEvent = new DirectAttackEvent(card.getId(),Game.getInstance().getCurrentPlayer());
+            IEvent endTurn = new EndTurnEvent(Game.getInstance().getCurrentPlayer());
+            if (endTurn.validate()){
+                System.out.println(Game.getInstance().getCurrentPlayer());
+                endTurn.execute();
+            }
+            IEvent drawPhase = new DrawEvent(Game.getInstance().getCurrentPlayer());
+            System.out.println(Game.getInstance().getCurrentPlayer());
+            if(drawPhase.validate()){
+                System.out.println(Game.getInstance().getCurrentPlayer());
+                drawPhase.execute();
+            }
+//            System.out.println(Game.getInstance().getCurrentPhase().getPhase());
+            IEvent endTurn2 = new EndTurnEvent(Game.getInstance().getCurrentPlayer());
+            if (endTurn2.validate()) {
+                System.out.println(Game.getInstance().getCurrentPlayer());
+                endTurn2.execute();
+            }
+            IEvent drawPhase2 = new DrawEvent(Game.getInstance().getCurrentPlayer());
+
+            if(drawPhase2.validate()){
+                System.out.println(Game.getInstance().getCurrentPlayer());
+                drawPhase2.execute();
+            }
+            System.out.println("Halo : ini lewat loh " + Game.getInstance().getCurrentPhase().getPhase());
+            if (nextPhaseEvent.validate()){
+                System.out.println("Hit this");
+                nextPhaseEvent.execute();
+            }
+            CharacterCardInField oi = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
+                    .stream()
+                    .filter(c -> c.getCard().getId() == card.getId())
+                    .findFirst()
+                    .orElse(null);
+            System.out.println("Game Current Turn : " + Game.getInstance().getCurrentTurn());
+            System.out.println("Card Created At : " + oi.getCreatedAtTurn());
+            if (directAttackEvent.validate()) {
+                System.out.println("Waw berhasil direct attack");
+                directAttackEvent.execute();
+                assert Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHealthPoint() > Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getHealthPoint() : "Woi salah attack mas";
+            }
+        }
+
         System.out.println("");
     }
     public static void main(String[] args)  {
