@@ -57,7 +57,6 @@ public class HandController {
         Hand currentHand = Game.getInstance().getPlayerByType(this.playerType).getHand();
         int i = 0;
         for(Card cardInHand: currentHand) {
-            System.out.println(cardInHand.getType());
             cards.get(i).setCard(cardInHand);
             i++;
         }

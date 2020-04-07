@@ -1,5 +1,6 @@
 package com.avatarduel.model.card;
 
+import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
@@ -16,6 +17,11 @@ public class SkillAuraCard extends SkillCard {
         this.power = power;
         this.attack = attack;
         this.defense = defense;
+    }
+
+    public SkillAuraCard(String[] elements) {
+        this(Integer.parseInt(elements[0]), elements[1], CardFactory.outputElement(elements[2]), elements[3], elements[4],
+                Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[5]));
     }
 
     public int getDefense() {

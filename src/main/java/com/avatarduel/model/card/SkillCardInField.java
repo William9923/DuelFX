@@ -22,7 +22,6 @@ public class SkillCardInField implements IField {
         return card;
     }
 
-
     @Override
     public int getCreatedAtTurn() {
         return createdAt;

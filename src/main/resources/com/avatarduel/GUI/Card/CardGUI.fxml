@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -8,10 +10,10 @@
    <children>
       <VBox fx:id="card_container" alignment="TOP_CENTER" layoutX="25.0" layoutY="15.0" maxWidth="-Infinity" prefHeight="347.0" prefWidth="268.0" spacing="10.0" styleClass="container">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="258.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="258.0" spacing="10.0">
                <children>
                   <ImageView fx:id="card_icon" fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="card_name" alignment="CENTER" text="NAMA KARTU" />
+                  <Label fx:id="card_name" alignment="CENTER" text="Card Name" />
                </children>
             </HBox>
             <ImageView fx:id="card_img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -19,7 +21,7 @@
                   <Image url="@../../card/image/character/Aang.png" />
                </image>
             </ImageView>
-            <Label fx:id="card_desc" alignment="TOP_LEFT" prefHeight="103.0" prefWidth="200.0" text="Deskripsi Kartu ada di sini aaaaaaaaaaaaaaaaaa" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="card_desc" alignment="TOP_LEFT" prefHeight="103.0" prefWidth="200.0" text="This is just a template for selected card, and displaying card" textAlignment="CENTER" wrapText="true" />
             <HBox fx:id="card_attributes" alignment="BOTTOM_CENTER" prefHeight="14.0" prefWidth="238.0" spacing="15.0">
                <children>
                   <Label fx:id="card_atk" text="ATK : 8" />

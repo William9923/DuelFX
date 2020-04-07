@@ -1,5 +1,6 @@
 package com.avatarduel.model.card;
 
+import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.type.Element;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.util.Loader;
@@ -20,6 +21,10 @@ public abstract class Card  {
         this.element = element;
         this.description = description;
         this.image = image;
+    }
+
+    public Card(String[] elements) {
+        this(Integer.parseInt(elements[0]), elements[1], CardFactory.outputElement(elements[2]), elements[3], elements[4]);
     }
 
     // getter & setter
