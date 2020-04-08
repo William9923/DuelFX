@@ -77,7 +77,7 @@ public class Field {
 
 
     public void connectCards(CharacterCardInField card1, SkillCard card2, int index, int createdAt) throws InvalidOperationException {
-        if (isAbleToAddSkill() && isContainCharacter(card1)) {
+        if (isAbleToAddSkill()) {
             card1.pair(card2);
             addSkillCard(card2, index, createdAt);
         }

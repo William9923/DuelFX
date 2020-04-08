@@ -24,7 +24,7 @@ public class Player {
     private static final int initialHP = 80;
 
     public Player(PlayerType type) {
-        this.deck = new Deck(deckSize); // decksize harus lebih dari 7
+        this.deck = new Deck(deckSize, type); // decksize harus lebih dari 7
         this.field = new Field(fieldSize);
         this.hand = new Hand(10); // hand size harus lebih dari 7 maksimum
         this.type = type;
@@ -83,30 +83,30 @@ public class Player {
         }
     }
 
-    public void playLandCardByID (int id) throws InvalidOperationException {
-        Card card = hand.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElse(null);
+//    public void playLandCardByID (int id) throws InvalidOperationException {
+//        Card card = hand.stream()
+//                .filter(c -> c.getId() == id)
+//                .findFirst()
+//                .orElse(null);
+//
+//        if (card == null) {
+//            throw new InvalidOperationException("Play Land Card", "Invalid Cards");
+//        }
+//
+//        if (card.getType().equals(CardType.LAND)){
+//            hand.remove(card);
+//            power.add(card.getElement(), 1);
+//        }  else {
+//            throw new InvalidOperationException("Play Land Card", "Not A Land Card");
+//        }
+//    }
 
-        if (card == null) {
-            throw new InvalidOperationException("Play Land Card", "Invalid Cards");
-        }
-
-        if (card.getType().equals(CardType.LAND)){
-            hand.remove(card);
-            power.add(card.getElement(), 1);
-        }  else {
-            throw new InvalidOperationException("Play Land Card", "Not A Land Card");
-        }
-    }
-
-    // ini nanti dibuang aja
-    public void removeCardFromHand(int index) {
-        if (index < hand.size()){
-            hand.remove(index);
-        } // else : throw error
-    }
+//    // ini nanti dibuang aja
+//    public void removeCardFromHand(int index) {
+//        if (index < hand.size()){
+//            hand.remove(index);
+//        } // else : throw error
+//    }
 
     public void removeCharacterFromFieldByID(int id) throws InvalidOperationException {
         CharacterCardInField card = field.getCharacterCardByID(id);

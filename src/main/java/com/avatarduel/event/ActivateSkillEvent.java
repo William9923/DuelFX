@@ -29,14 +29,34 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
     }
     @Override
     public void execute() {
-        SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(playerType).getHand()
+        SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand()
                 .stream()
                 .filter(card1 -> card1.getId() == idCard && (card1.getType().equals(CardType.SKILL_AURA) || (card1.getType().equals(CardType.SKILL_POWER_UP))))
                 .findFirst()
                 .orElse(null);
-        Player p = Game.getInstance().getPlayerByType(playerType);
+
+        PlayerType targetedPlayer = Game.getInstance().getCurrentPlayer();
+        CharacterCardInField inField = Game.getInstance().getPlayerByType(targetedPlayer).getField()
+                    .getCharCardList()
+                    .stream()
+                    .filter(c -> c.getCard().getId() == idTarget)
+                    .findFirst()
+                    .orElse(null);
+        if (inField == null) {
+            targetedPlayer = Game.getInstance().getCurrentOpponent();
+            inField = Game.getInstance().getPlayerByType(targetedPlayer).getField()
+                    .getCharCardList()
+                    .stream()
+                    .filter(c -> c.getCard().getId() == idTarget)
+                    .findFirst()
+                    .orElse(null);
+        }
+        Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());
+
         try {
-            p.playSkillCardByID(idCard, idTarget, index, currTurn);
+            p.getHand().remove(skillCard);
+            p.getField().addSkillCard(skillCard, index, Game.getInstance().getCurrentTurn());
+            inField.pair(skillCard);
             p.getPower().reduce(skillCard.getElement(), skillCard.getPower()); // kalo error, dia ga kekurang powernya jdny
         } catch (InvalidOperationException e) {
             e.printStackTrace();
@@ -45,16 +65,24 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
 
     @Override
     public boolean validate(){
-        SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(playerType).getHand()
+        SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand()
                 .stream()
                 .filter(card1 -> card1.getId() == idCard && (card1.getType().equals(CardType.SKILL_AURA) || (card1.getType().equals(CardType.SKILL_POWER_UP))))
                 .findFirst()
                 .orElse(null);
-        CharacterCardInField characterCardInField = (CharacterCardInField) Game.getInstance().getPlayerByType(playerType).getField().getCharCardList()
+
+        CharacterCardInField characterCardInField =  Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
                 .stream()
                 .filter(c -> c.getCard().getId() == idTarget && c.getCard().getType().equals(CardType.CHARACTER))
                 .findFirst()
                 .orElse(null);
+        if (characterCardInField == null) {
+            characterCardInField =  Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList()
+                    .stream()
+                    .filter(c -> c.getCard().getId() == idTarget && c.getCard().getType().equals(CardType.CHARACTER))
+                    .findFirst()
+                    .orElse(null);
+        }
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
         int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
