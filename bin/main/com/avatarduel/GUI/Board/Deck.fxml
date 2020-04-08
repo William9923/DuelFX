@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="232.0" prefWidth="103.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Board.DeckController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
+      <Label fx:id="deck_size" prefHeight="92.0" prefWidth="103.0" text="Deck : 45/50" wrapText="true" />
+   </children>
+</VBox>

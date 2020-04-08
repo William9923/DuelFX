@@ -4,6 +4,7 @@ import com.avatarduel.event.SummonEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Board.HandController;
 import com.avatarduel.model.Game;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
@@ -13,31 +14,54 @@ import javafx.scene.control.Button;
 
 public class CardInHandController extends CardController{
     @FXML private Button card_play;
-    private int index;
+    private boolean isFlipped;
+    private String borderStyle;
     private PlayerType playerType;
     private HandController handController;
 
     @FXML
     public void initialize() {
         card_play.setVisible(false);
+        isFlipped = false;
+        borderStyle = "null_card";
     }
+
+    @Override
+    public void setCard(Card card) {
+        super.setCard(card);
+        switch (cardData.getElement()) {
+            case WATER:
+                borderStyle = "water_border";
+                break;
+            case FIRE:
+                borderStyle = "fire_border";
+                break;
+            case EARTH:
+                borderStyle = "earth_border";
+                break;
+            case AIR:
+                borderStyle = "air_border";
+                break;
+        }
+    }
+
     public void flipCard() {
-        if(isCardFlipped()) {
-            card_name.setVisible(true);
-            card_name.setVisible(true);
-            card_img.setVisible(true);
-            card_atk.setVisible(true);
-            card_def.setVisible(true);
-            card_pow.setVisible(true);
+        // kalo udah di flip, buka
+        card_name.setVisible(isFlipped);
+        card_icon.setVisible(isFlipped);
+        card_img.setVisible(isFlipped);
+        card_atk.setVisible(isFlipped);
+        card_def.setVisible(isFlipped);
+        card_pow.setVisible(isFlipped);
+        super.removeAllBorderStyle();
+        if(isFlipped) {
+            super.addBorderStyle(borderStyle);
         }
         else {
-            card_name.setVisible(false);
-            card_img.setVisible(false);
-            card_atk.setVisible(false);
-            card_def.setVisible(false);
-            card_pow.setVisible(false);
-            super.setBorderStyle("flipped_card");
+            super.addBorderStyle("flipped_card");
         }
+        System.out.println("Player card " + playerType + " has border style : " + card_border.getStyleClass());
+        isFlipped = !isFlipped;
     }
 
     @FXML
@@ -52,14 +76,6 @@ public class CardInHandController extends CardController{
 
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public boolean isCardFlipped() {
-        return card_border.getStyleClass().contains("flipped_card");
     }
 
     public void setHandController(HandController handController) {

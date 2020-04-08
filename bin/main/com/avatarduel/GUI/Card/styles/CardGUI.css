@@ -1,3 +1,8 @@
+.flipped_card {
+    -fx-background-color : black;
+    -fx-border-color : black;
+    -fx-border-width : 0px;
+}
 .fire_border {
     -fx-background-color : #F20;
     -fx-border-color : firebrick;
@@ -20,9 +25,6 @@
 }
 .container {
     -fx-background-color : #EEE;
-}
-.flipped_card {
-    -fx-background-color : black;
 }
 .null_card {
     -fx-background-color : #EEE;

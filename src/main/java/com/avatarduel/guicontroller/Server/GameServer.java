@@ -16,7 +16,7 @@ public class GameServer implements EventChannel {
         this.subscriberChannelMap = new HashMap<Channel, List<Subscriber>>();
     }
     @Override
-    public void executeEvent(Channel channel, IEvent event) {
+    public void renderAll(Channel channel) {
         if (subscriberChannelMap.containsKey(channel)) {
             subscriberChannelMap.get(channel).forEach(
                     subscriber -> subscriber.render()

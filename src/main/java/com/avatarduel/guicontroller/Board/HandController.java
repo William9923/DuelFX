@@ -64,7 +64,6 @@ public class HandController implements Subscriber {
         cards.add(card10Controller);
         for(int i = 0 ; i < 10 ; i++) {
             cards.get(i).setNull();
-            cards.get(i).setIndex(i);
             cards.get(i).setHandController(this);
         }
     }
@@ -90,6 +89,7 @@ public class HandController implements Subscriber {
         for(Card cardInHand: currentHand) {
             cards.get(i).setCard(cardInHand);
             i++;
+            System.out.println("Hand Controller : " + cardInHand.getName());
         }
         while(i < 10) {
             cards.get(i).setNull();
@@ -99,7 +99,9 @@ public class HandController implements Subscriber {
 
     public void flipCards() {
         for(CardInHandController cardInHandController : cards) {
-            cardInHandController.flipCard();
+            if(cardInHandController.getCardData() != null) {
+                cardInHandController.flipCard();
+            }
         }
     }
 }

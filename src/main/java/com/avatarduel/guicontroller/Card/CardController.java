@@ -45,18 +45,19 @@ public abstract class CardController {
                 setAdditionalInfoCard((SkillPowerUpCard) card);
                 card_icon.setImage(getIcon("skill_icon.png"));
         }
+        removeAllBorderStyle();
         switch (card.getElement()) {
             case WATER:
-                setBorderStyle("water_border");
+                addBorderStyle("water_border");
                 break;
             case FIRE:
-                setBorderStyle("fire_border");
+                addBorderStyle("fire_border");
                 break;
             case EARTH:
-                setBorderStyle("earth_border");
+                addBorderStyle("earth_border");
                 break;
             case AIR:
-                setBorderStyle("air_border");
+                addBorderStyle("air_border");
                 break;
         }
     }
@@ -101,9 +102,20 @@ public abstract class CardController {
         card_border.getStyleClass().add("null_card");
     }
 
-    protected void setBorderStyle(String className) {
-        card_border.getStyleClass().removeAll(listBorderClass);
+    protected void addBorderStyle(String className) {
         card_border.getStyleClass().add(className);
+    }
+
+    protected void removeBorderStyle(String className) {
+        card_border.getStyleClass().remove(className);
+    }
+
+    protected void removeAllBorderStyle() {
+        card_border.getStyleClass().removeAll(listBorderClass);
+    }
+
+    public Card getCardData() {
+        return cardData;
     }
 
     private Image getImage(String imgpath) {
