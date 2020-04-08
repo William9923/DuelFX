@@ -1,12 +1,16 @@
 package com.avatarduel.guicontroller.Board;
 
+import com.avatarduel.event.AttackEvent;
 import com.avatarduel.guicontroller.Card.SkillCardOnPlayController;
 import com.avatarduel.guicontroller.Card.CharacterCardOnPlayController;
 import com.avatarduel.model.Game;
+import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -18,6 +22,12 @@ public class FieldController {
     private Map<String, CharacterCardOnPlayController> characters;
     private Map<String, SkillCardOnPlayController> skills;
     private PlayerType playerType;
+    private FieldController enemyFieldController;
+    private int fromAttack;
+
+    @FXML VBox popup;
+    @FXML Label card_from;
+    @FXML TextArea enemy_index;
 
     @FXML VBox card_container;
     @FXML HBox character_container;
@@ -54,44 +64,43 @@ public class FieldController {
     public void initialize() {
         this.characters = new HashMap<String, CharacterCardOnPlayController>();
         this.skills = new HashMap<String, SkillCardOnPlayController>();
-        characters.put("1", character1Controller);
-        characters.put("2", character2Controller);
-        characters.put("3", character3Controller);
-        characters.put("4", character4Controller);
-        characters.put("5", character5Controller);
-        characters.put("6", character6Controller);
-        characters.put("7", character7Controller);
-        characters.put("8", character8Controller);
-        characters.put("9", character9Controller);
-        skills.put("1", skill1Controller);
-        skills.put("2", skill2Controller);
-        skills.put("3", skill3Controller);
-        skills.put("4", skill4Controller);
-        skills.put("5", skill5Controller);
-        skills.put("6", skill6Controller);
-        skills.put("7", skill7Controller);
-        skills.put("8", skill8Controller);
-        skills.put("9", skill9Controller);
+        popup.setVisible(false);
+        characters.put("0", character1Controller);
+        characters.put("1", character2Controller);
+        characters.put("2", character3Controller);
+        characters.put("3", character4Controller);
+        characters.put("4", character5Controller);
+        characters.put("5", character6Controller);
+        characters.put("6", character7Controller);
+        characters.put("7", character8Controller);
+        characters.put("8", character9Controller);
+        skills.put("0", skill1Controller);
+        skills.put("1", skill2Controller);
+        skills.put("2", skill3Controller);
+        skills.put("3", skill4Controller);
+        skills.put("4", skill5Controller);
+        skills.put("5", skill6Controller);
+        skills.put("6", skill7Controller);
+        skills.put("7", skill8Controller);
+        skills.put("8", skill9Controller);
         characters.forEach((key, controller) -> {
             controller.setNull();
+            controller.setIndex(Integer.parseInt(key));
+            controller.setFieldController(this);
         });
         skills.forEach((key, controller) -> {
             controller.setNull();
+            controller.setPlayerType(playerType);
+            controller.setIndex(Integer.parseInt(key));
+            controller.setFieldController(this);
         });
     }
 
     public void render() {
         List<CharacterCardInField> characterCardInFieldList = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList();
         List<SkillCardInField> skillCardList = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList();
-        int i = 0;
-        while(characterCardInFieldList.get(i) != null) {
-            this.characters.get(Integer.toString(i)).setCard(characterCardInFieldList.get(i));
-            i++;
-        }
-        i = 0;
-        while(skillCardList.get(i) != null) {
-            this.skills.get(Integer.toString(i)).setCard(skillCardList.get(i).getCard());
-            i++;
+        for(CharacterCardInField characterCardInField : characterCardInFieldList) {
+            this.characters.get(Integer.toString(characterCardInField.getIndex())).setCard(characterCardInField);
         }
     }
 
@@ -100,7 +109,46 @@ public class FieldController {
         card_container.getChildren().add(character_container);
     }
 
+    public CharacterCardOnPlayController getCharacterCardController(int index) {
+        return this.characters.get(Integer.toString(index));
+    }
+
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
+        characters.forEach((key,controller) -> {
+            controller.setPlayerType(playerType);
+        });
+        skills.forEach((key,controller) -> {
+            controller.setPlayerType(playerType);
+        });
+    }
+
+    public void setEnemyFieldController(FieldController enemyFieldController) {
+        this.enemyFieldController = enemyFieldController;
+    }
+
+    @FXML
+    public void submitAttackRequestForm() {
+        int indexOfEnemyCard = Integer.parseInt(enemy_index.getText());
+        int enemyTargetId = enemyFieldController.getCharacterCardController(indexOfEnemyCard).getCharacterCardInField().getCard().getId();
+        AttackEvent attackEvent = new AttackEvent(fromAttack , enemyTargetId, this.playerType, enemyFieldController.playerType);
+        System.out.println(fromAttack);
+        System.out.println(enemyTargetId);
+        System.out.println(this.playerType);
+        System.out.println(enemyFieldController.playerType);
+        System.out.println(attackEvent.validate());
+        attackEvent.execute();
+        this.render();
+        this.enemyFieldController.render();
+        this.popup.setVisible(false);
+    }
+
+    public void showAttackRequestForm(CharacterCardInField characterCardInField) {
+        this.popup.setVisible(true);
+        fromAttack = characterCardInField.getCard().getId();
+        CharacterCard characterCard = (CharacterCard) characterCardInField.getCard();
+        this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
+                + Integer.toString(characterCard.getAttack()));
+
     }
 }

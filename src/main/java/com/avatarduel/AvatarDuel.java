@@ -67,8 +67,8 @@ public class AvatarDuel extends Application {
   private void playThemeMusic() throws URISyntaxException {
     Media media = new Media(getClass().getResource("music/main_menu_song.mp3").toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
-    mediaPlayer.setAutoPlay(true);
-    mediaPlayer.setVolume(50);
+    mediaPlayer.setVolume(20);
+    mediaPlayer.play();
   }
 
   public static void main(String[] args) {
