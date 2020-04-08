@@ -4,17 +4,20 @@ import com.avatarduel.dao.*;
 
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.card.Card;
+import com.avatarduel.model.type.PlayerType;
 
 import java.util.*;
 
 public class Deck extends Stack<Card>{
     private CardDAO csvDao;
     private int deckSize;
+    private PlayerType type;
 
-    public Deck(int deckSize) {
+    public Deck(int deckSize, PlayerType type) {
         super();
         this.deckSize = deckSize;
         this.csvDao = new CSVCardDAO();
+        this.type = type;
         init();
     }
 
@@ -24,7 +27,7 @@ public class Deck extends Stack<Card>{
         List<Card> landCards = csvDao.getAllLandCard();
         List<Card> skillCards = csvDao.getAllLandCard();
 
-        int j = 0;
+        int j = (type.equals(PlayerType.A)) ? 100 : 200; // duar terlalu pinrat
         for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {
             Card card = selectRandom(charCards);
             card.setId(j++);
@@ -59,11 +62,6 @@ public class Deck extends Stack<Card>{
     // draw
     public Card draw() throws EmptyStackException{
         return super.pop();
-    }
-
-    // peek
-    public Card showFirstCard() {
-        return super.peek();
     }
 
     // printDeck : debugging function

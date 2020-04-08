@@ -24,7 +24,7 @@ public class Player {
     private static final int initialHP = 80;
 
     public Player(PlayerType type) {
-        this.deck = new Deck(deckSize); // decksize harus lebih dari 7
+        this.deck = new Deck(deckSize, type); // decksize harus lebih dari 7
         this.field = new Field(fieldSize);
         this.hand = new Hand(10); // hand size harus lebih dari 7 maksimum
         this.type = type;
