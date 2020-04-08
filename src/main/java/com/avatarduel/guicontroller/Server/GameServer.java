@@ -17,6 +17,9 @@ public class GameServer implements EventChannel {
     }
     @Override
     public void executeEvent(Channel channel, IEvent event) {
+        if (event.validate()) {
+            event.execute();
+        }
         if (subscriberChannelMap.containsKey(channel)) {
             subscriberChannelMap.get(channel).forEach(
                     subscriber -> subscriber.render()

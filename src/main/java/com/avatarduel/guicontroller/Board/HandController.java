@@ -14,7 +14,6 @@ import com.avatarduel.model.player_component.Hand;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
-import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 
 import java.util.ArrayList;
