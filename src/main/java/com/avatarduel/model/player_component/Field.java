@@ -91,6 +91,19 @@ public class Field {
         }
     }
 
+    public int getEmptyCharacterIndex() throws InvalidOperationException {
+        List<Integer> notAvailableIndex= new ArrayList<Integer>();
+        for(CharacterCardInField characterCardInField : charCardList) {
+            notAvailableIndex.add(characterCardInField.getIndex());
+        }
+        for(int i = 0 ; i < 9 ; i++ ) {
+            if(!notAvailableIndex.contains(i)) {
+                return i;
+            }
+        }
+        throw new InvalidOperationException("Full Board", "No empty spaces available because board is full");
+    }
+
     public void removeCharacterCard(CharacterCardInField inField) {
         if (isContainCharacter(inField)){
             CharacterCardInField cardInField = charCardList

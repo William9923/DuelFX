@@ -1,19 +1,16 @@
 package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.model.card.*;
-import com.avatarduel.model.type.CardType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
 
 public abstract class CardController {
-    protected Card data;
+    protected Card cardData;
     protected final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border", "null_card", "flipped_card"};
     @FXML protected VBox card_border;
     @FXML protected Label card_name;
@@ -24,8 +21,8 @@ public abstract class CardController {
     @FXML protected Label card_pow;
 
     public void setCard(Card card) {
-        this.data = card;
-        card_name.setText(this.data.getName());
+        this.cardData = card;
+        card_name.setText(this.cardData.getName());
         card_img.imageProperty().set(getImage(card.getImage()));
         switch (card.getType()) {
             case CHARACTER:
@@ -66,25 +63,25 @@ public abstract class CardController {
     public void setAdditionalInfoCard(CharacterCard card) {
         card_atk.setText("ATK : " + Integer.toString( card.getAttack()));
         card_def.setText("DEF : " + Integer.toString( card.getDefense()));
-        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
+        card_pow.setText("POW : " + Integer.toString(this.cardData.getPower()));
     }
 
     public void setAdditionalInfoCard(SkillAuraCard card) {
         card_atk.setText("ATK : " + card.getAttack());
         card_def.setText("DEF : " + card.getDefense());
-        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
+        card_pow.setText("POW : " + Integer.toString(this.cardData.getPower()));
     }
 
     public void setAdditionalInfoCard(SkillDestroyCard card) {
         card_atk.setText("des");
         card_def.setText("");
-        card_pow.setText("POW : " + Integer.toString(this.data.getPower()));
+        card_pow.setText("POW : " + Integer.toString(this.cardData.getPower()));
     }
 
     public void setAdditionalInfoCard(SkillPowerUpCard card) {
         card_atk.setText("");
         card_def.setText("");
-        card_pow.setText("POW: " + Integer.toString(this.data.getPower()));
+        card_pow.setText("POW: " + Integer.toString(this.cardData.getPower()));
     }
 
     public void setAdditionalInfoCard(LandCard card) {

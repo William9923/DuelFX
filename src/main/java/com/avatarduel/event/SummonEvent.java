@@ -5,11 +5,14 @@ import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.player_component.Field;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
+
+import java.util.List;
 
 public class SummonEvent implements IEvent {
     private PlayerType playerType;
@@ -23,6 +26,9 @@ public class SummonEvent implements IEvent {
         this.position = position;
         this.index = index;
         this.factory = new CardInFieldFactory();
+    }
+    public SummonEvent(int idCard, PlayerType playerType, CharacterState position) throws InvalidOperationException {
+        this(idCard,playerType,position,Game.getInstance().getPlayerByType(playerType).getField().getEmptyCharacterIndex());
     }
     @Override
     public void execute() {
@@ -58,5 +64,9 @@ public class SummonEvent implements IEvent {
                 && (CardType.CHARACTER == charCard.getType())
                 && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
                 && (charCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(charCard.getElement())));
+    }
+
+    public PlayerType getPlayerType() {
+        return playerType;
     }
 }

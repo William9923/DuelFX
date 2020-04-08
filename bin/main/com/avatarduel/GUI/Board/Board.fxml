@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Board.BoardController">
+   <children>
+      <HBox layoutX="435.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="892.0" spacing="16.0">
+         <children>
+            <fx:include fx:id="handB" source="Hand.fxml" />
+         </children>
+      </HBox>
+      <HBox layoutX="447.0" layoutY="897.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="163.0" prefWidth="965.0" spacing="16.0">
+         <children>
+            <fx:include fx:id="handA" source="Hand.fxml" />
+         </children>
+      </HBox>
+      <HBox layoutX="360.0" layoutY="584.0" prefHeight="173.0" prefWidth="874.0" spacing="16.0">
+         <children>
+            <fx:include fx:id="fieldA" source="Field.fxml" />
+         </children>
+      </HBox>
+      <HBox layoutX="360.0" layoutY="216.0" prefHeight="274.0" prefWidth="1291.0" spacing="16.0">
+         <children>
+            <fx:include fx:id="fieldB" source="Field.fxml" />
+         </children>
+      </HBox>
+      <VBox layoutX="32.0" layoutY="329.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="295.0" prefWidth="222.0">
+         <children>
+            <fx:include fx:id="selected" source="../Card/CardGUI.fxml" />
+         </children>
+      </VBox>
+      <HBox layoutX="46.0" layoutY="760.0" spacing="16.0">
+         <children>
+            <fx:include fx:id="playerAStatus" source="PlayerStatus.fxml" />
+         </children>
+      </HBox>
+      <VBox layoutX="1764.0" layoutY="29.0" prefHeight="164.0" prefWidth="104.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
+            <Label text="Deck : 45/50" />
+         </children>
+      </VBox>
+      <HBox layoutX="46.0" layoutY="30.0" spacing="16.0">
+         <children>
+            <fx:include fx:id="playerBStatus" source="PlayerStatus.fxml" />
+         </children>
+      </HBox>
+      <Rectangle id="pembatas" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="376.0" layoutY="561.0" stroke="BLACK" strokeType="INSIDE" width="1323.0" />
+      <Rectangle id="status_game" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="565.0" layoutX="1739.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" width="166.0" />
+      <Text layoutX="1739.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status Game disini" />
+      <VBox layoutX="1764.0" layoutY="897.0" prefHeight="164.0" prefWidth="104.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
+            <Label text="Deck : 45/50" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

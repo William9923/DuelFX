@@ -1,43 +1,57 @@
 package com.avatarduel.guicontroller.Board;
 
-import com.avatarduel.factory.CardFactory;
-import com.avatarduel.guicontroller.Card.CardOnHandController;
+import com.avatarduel.event.SummonEvent;
+import com.avatarduel.guicontroller.Server.EventChannel;
+import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.guicontroller.Card.CardInHandController;
+import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.Server.GameServer;
+import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
-import com.avatarduel.model.card.CharacterCard;
-import com.avatarduel.model.card.LandCard;
-import com.avatarduel.model.card.SkillAuraCard;
-import com.avatarduel.model.player_component.Deck;
+import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.player_component.Hand;
 import com.avatarduel.model.type.CardType;
+import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
+import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class HandController {
+public class HandController implements Subscriber {
     private PlayerType playerType;
-    private List<CardOnHandController> cards;
-    @FXML CardOnHandController card1Controller;
-    @FXML CardOnHandController card2Controller;
-    @FXML CardOnHandController card3Controller;
-    @FXML CardOnHandController card4Controller;
-    @FXML CardOnHandController card5Controller;
-    @FXML CardOnHandController card6Controller;
-    @FXML CardOnHandController card7Controller;
-    @FXML CardOnHandController card8Controller;
-    @FXML CardOnHandController card9Controller;
-    @FXML CardOnHandController card10Controller;
+    private List<CardInHandController> cards;
+    private FieldController correspondingField;
 
-    public void setPlayerType(PlayerType playerType) {
-        this.playerType = playerType;
+    @FXML
+    CardInHandController card1Controller;
+    @FXML
+    CardInHandController card2Controller;
+    @FXML
+    CardInHandController card3Controller;
+    @FXML
+    CardInHandController card4Controller;
+    @FXML
+    CardInHandController card5Controller;
+    @FXML
+    CardInHandController card6Controller;
+    @FXML
+    CardInHandController card7Controller;
+    @FXML
+    CardInHandController card8Controller;
+    @FXML
+    CardInHandController card9Controller;
+    @FXML
+    CardInHandController card10Controller;
+
+    public HandController() {
     }
 
     @FXML
     public void initialize() {
-        cards = new ArrayList<CardOnHandController>();
+        cards = new ArrayList<CardInHandController>();
         cards.add(card1Controller);
         cards.add(card2Controller);
         cards.add(card3Controller);
@@ -50,7 +64,24 @@ public class HandController {
         cards.add(card10Controller);
         for(int i = 0 ; i < 10 ; i++) {
             cards.get(i).setNull();
+            cards.get(i).setIndex(i);
+            cards.get(i).setHandController(this);
         }
+    }
+
+    public void setPlayerType(PlayerType playerType) {
+        this.playerType = playerType;
+        for(CardInHandController cardInHandController : cards) {
+            cardInHandController.setPlayerType(playerType);
+        }
+    }
+
+    public void setCorrespondingField(FieldController field) {
+        correspondingField = field;
+    }
+
+    public FieldController getCorrespondingField() {
+        return correspondingField;
     }
 
     public void render() {
@@ -67,8 +98,8 @@ public class HandController {
     }
 
     public void flipCards() {
-        for(CardOnHandController cardOnHandController : cards) {
-            cardOnHandController.flipCard();
+        for(CardInHandController cardInHandController : cards) {
+            cardInHandController.flipCard();
         }
     }
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Rectangle2D?>
+
+<HBox fx:id="player_border" prefHeight="274.0" prefWidth="275.0" spacing="5.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.avatarduel.guicontroller.Board.PlayerStatusController">
+    <children>
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="280.0" prefWidth="190.0" spacing="8.0">
+            <children>
+                <Label fx:id="player_name" text="Kira Yoshikage">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="player_image" fitHeight="173.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../character/kira_yoshikage.png" />
+                    </image>
+                    <viewport>
+                        <Rectangle2D />
+                    </viewport>
+                </ImageView>
+                <Label fx:id="player_hp" text="HP: 80">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+            </children>
+        </VBox>
+        <VBox fx:id="power_container" alignment="CENTER" prefHeight="274.0" prefWidth="125.0" spacing="10.0">
+            <children>
+                <Label text="Power:">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+                <HBox prefHeight="34.0" prefWidth="118.0" spacing="4.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../card/icon/elements/air_element.png" />
+                     </image></ImageView>
+                        <Label fx:id="air_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="118.0" spacing="4.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../card/icon/elements/water_element.png" />
+                     </image></ImageView>
+                        <Label fx:id="water_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="118.0" spacing="4.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../card/icon/elements/earth.png" />
+                     </image></ImageView>
+                        <Label fx:id="earth_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="118.0">
+                    <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../card/icon/elements/fire_element.png" />
+                     </image></ImageView>
+                        <Label fx:id="fire_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>

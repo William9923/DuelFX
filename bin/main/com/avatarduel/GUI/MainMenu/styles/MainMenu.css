@@ -1,0 +1,8 @@
+.menu {
+    -fx-color : black;
+    -fx-padding : 0;
+    -fx-margin : 0;
+}
+.menu:hover {
+    -fx-color : blue;
+}

@@ -1,0 +1,49 @@
+id	name	element	description	imagepath	attack	defense	power
+17	Katara	WATER	Waterbending master from Southern Water Tribe, sister of Sokka, and friend of Aang.	src/res/image/character/Katara.png	13	7	5
+18	Sokka	WATER	Water Tribe warrior of the Southern Water Tribe.	src/res/image/character/Sokka.png	6	10	3
+19	Yue	WATER	Princess of the Northern Water Tribe.	src/res/image/character/Yue.png	4	9	2
+20	Hakoda	WATER	Father of Sokka and Katara, leading the Invasion of the Fire Nation.	src/res/image/character/Hakoda.png	7	11	4
+21	Huu	WATER	Waterbending master from Foggy Swamp Tribe.	src/res/image/character/Huu.png	8	5	2
+22	Hama	WATER	Developer of bloodbending.	src/res/image/character/Hama.png	12	6	4
+23	Pakku	WATER	Aang's teacher for waterbending at Northern Water Tribe.	src/res/image/character/Pakku.png	10	6	3
+24	Arnook	WATER	Chief of the Northern Water Tribe.	src/res/image/character/Arnook.png	4	7	1
+25	Kuruk	WATER	Water Tribe Avatar, predecessor of Avatar Kyoshi.	src/res/image/character/Kuruk.png	6	14	5
+26	Bato	WATER	Friend of Hakoda since childhood.	src/res/image/character/Bato.png	7	9	3
+27	Due	WATER	Waterbending master from Foggy Swamp Tribe.	src/res/image/character/Due.png	5	8	2
+28	Hahn	WATER	Career-minded soldier from Northern Water Tribe.	src/res/image/character/Hahn.png	8	3	1
+29	Aang	AIR	Avatar Roku's successor. Also learned how to energybending.	src/res/image/character/Aang.png	14	6	5
+30	Appa	AIR	Aang's loyal sky bison friend.	src/res/image/character/Appa.png	5	8	2
+31	Momo	AIR	Aang's loyal winged lemur friend.	src/res/image/character/Momo.png	6	5	1
+32	Gyatso	AIR	Aang's guardian, mentor, and father figure.	src/res/image/character/Gyatso.png	5	10	3
+33	Teo	AIR	Paraplegic Earth Kingdom boy who lived in the Northern Air Temple with his father, the mechanist.	src/res/image/character/Teo.png	5	6	1
+34	Yangchen	AIR	Air Nomad Avatar before Aang, predecessor of Kuruk.	src/res/image/character/Yangchen.png	10	8	4
+35	Afiko	AIR	Airbender of Southern Air Temple that revealed the location of his home to the Fire Nation.	src/res/image/character/Afiko.png	7	6	2
+36	Iio	AIR	Air Nomad nun and the Mother Superior of the Eastern Air Temple.	src/res/image/character/Iio.png	5	8	2
+37	Pathik	AIR	A nomadic supercentenarian who possessed great knowledge of the Spirit World.	src/res/image/character/Pathik.png	9	9	4
+38	Tashi	AIR	One of five monks in charge of the Southern Air Temple.	src/res/image/character/Tashi.png	7	9	3
+39	Wan	AIR	The first Avatar.	src/res/image/character/Wan.png	10	10	5
+40	Mechanist	AIR	An inventor and engineer from the Earth Kingdom who became a refugee after being displaced by a flood.	src/res/image/character/Mechanist.png	8	8	3
+41	Zuko	FIRE	Prince of the Fire Nation, Fire Lord after Ozai.	src/res/image/character/Zuko.png	12	8	5
+42	Azula	FIRE	Princess of the Fire Nation, daughter of Fire Lord Ozai.	src/res/image/character/Azula.png	11	7	4
+43	Ozai	FIRE	Fire Lord during the final years of the Hundred Year War.	src/res/image/character/Ozai.png	9	9	4
+44	Ty Lee	FIRE	Skilled acrobatic, mastering chi blocking martial arts.	src/res/image/character/Ty Lee.png	9	4	2
+45	Combustion Man	FIRE	Firebending assassin and silent bounty hunter that was hired by Zuko to eliminate Aang.	src/res/image/character/Combustion Man.png	11	4	3
+46	Chit Sang	FIRE	Inmate at the Boiling Rock prison in the Fire Nation.	src/res/image/character/Chit Sang.png	7	4	1
+47	Iroh	FIRE	Retired Fire Nation General and wise mentor to his nephew Zuko.	src/res/image/character/Iroh.png	8	8	3
+48	Zhao	FIRE	Leader of the Fire Nation Navy that is obsessed to capture Aang.	src/res/image/character/Zhao.png	8	5	2
+49	Mai	FIRE	Main ally of Princess Azula, proficient at throwing stilettos.	src/res/image/character/Mai.png	7	6	2
+50	Roku	FIRE	Avatar from Fire Nation, predecessor of Aang.	src/res/image/character/Roku.png	14	6	5
+51	Sozin	FIRE	Instigator of the Hundred Year War.	src/res/image/character/Sozin.png	9	7	3
+52	Great Sage	FIRE	Leader of 5 Fire Sages who resided on Crescent Island.	src/res/image/character/Great Sage.png	8	3	1
+53	Bumi	EARTH	King of Omashu, childhood friend of Aang.	src/res/image/character/Bumi.png	5	12	4
+54	Cabbage Merchant	EARTH	Earth Kingdom businessman and founder of Cabbage Corb.	src/res/image/character/Cabbage Merchant.png	2	8	1
+55	The Boulder	EARTH	Professional earthbending westler who participated in the Earth Rumble tournaments.	src/res/image/character/The Boulder.png	9	9	4
+56	Haru	EARTH	Skilled teenager earthbender that hides his skill because of Fire Nation attack.	src/res/image/character/Haru.png	6	10	3
+57	Jet	EARTH	Teenage leader of Earth Kingdom refugees that called themselves Freedom Fighters.	src/res/image/character/Jet.png	8	5	2
+58	Jin Wei	EARTH	Legendary patriarch of the Gan Jin tribe.	src/res/image/character/Jin Wei.png	6	5	1
+59	Kyoshi	EARTH	Earth Kingdom Avatar, predecessor of Avatar Roku	src/res/image/character/Kyoshi.png	5	15	5
+60	Toph	EARTH	Earthbending master that discover metalbending.	src/res/image/character/Toph.png	12	8	5
+61	Long Feng	EARTH	Grand Secretariat of Ba Sing Se and the leader of the Dai Li.	src/res/image/character/Long Feng.png	4	11	3
+62	June	EARTH	Bounty hunter with a shirshu as her pet.	src/res/image/character/June.png	5	8	2
+63	Suki	EARTH	Leader of Kyoshi Warrior.	src/res/image/character/Suki.png	8	8	3
+64	Pipsqueak	EARTH	Strongest member of Freedom Fighters.	src/res/image/character/Pipsqueak.png	3	10	2
