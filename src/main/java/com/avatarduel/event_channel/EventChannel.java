@@ -5,6 +5,6 @@ import com.avatarduel.subscriber.Subscriber;
 
 public interface EventChannel {
     // release event ke semua subscriber
-    public void executeEvent(Channel channel, IEvent event);
+    public void executeEvent(Channel channel, IEvent event  );
     public void addSubscriber(Channel channel, Subscriber subscriber);
 }
