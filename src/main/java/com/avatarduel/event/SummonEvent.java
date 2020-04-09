@@ -11,6 +11,7 @@ import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class SummonEvent implements IEvent {
         this.index = index;
         this.factory = new CardInFieldFactory();
     }
-    public SummonEvent(int idCard, PlayerType playerType, CharacterState position) throws InvalidOperationException {
-        this(idCard,playerType,position,Game.getInstance().getPlayerByType(playerType).getField().getEmptyCharacterIndex());
+    public SummonEvent(int idCard, PlayerType playerType) throws InvalidOperationException {
+        this(idCard,playerType,CharacterState.ATTACK,Game.getInstance().getPlayerByType(playerType).getField().getEmptyCharacterIndex());
     }
     @Override
     public void execute() {

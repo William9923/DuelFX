@@ -1,12 +1,15 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.event.IEvent;
+import com.avatarduel.event.PlayLandCardEvent;
 import com.avatarduel.event.SummonEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Board.HandController;
+import com.avatarduel.guicontroller.Board.PlayerStatusController;
+import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
-import com.avatarduel.model.card.CardInHand;
-import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,15 +17,14 @@ import javafx.scene.control.Button;
 
 public class CardInHandController extends CardController{
     @FXML private Button card_play;
-    private boolean isFlipped;
     private String borderStyle;
     private PlayerType playerType;
     private HandController handController;
+    private PlayerStatusController playerStatusController;
 
     @FXML
     public void initialize() {
         card_play.setVisible(false);
-        isFlipped = false;
         borderStyle = "null_card";
     }
 
@@ -47,6 +49,7 @@ public class CardInHandController extends CardController{
 
     public void flipCard() {
         // kalo udah di flip, buka
+        boolean isFlipped = Game.getInstance().getCurrentPlayer() == playerType;
         card_name.setVisible(isFlipped);
         card_icon.setVisible(isFlipped);
         card_img.setVisible(isFlipped);
@@ -60,8 +63,6 @@ public class CardInHandController extends CardController{
         else {
             super.addBorderStyle("flipped_card");
         }
-        System.out.println("Player card " + playerType + " has border style : " + card_border.getStyleClass());
-        isFlipped = !isFlipped;
     }
 
     @FXML
@@ -85,10 +86,20 @@ public class CardInHandController extends CardController{
     @FXML
     public void playIsClicked() {
         try {
-            SummonEvent summonEvent = new SummonEvent(cardData.getId(), this.playerType, CharacterState.ATTACK);
-            summonEvent.execute();
-            handController.render();
-            handController.getCorrespondingField().render();
+            IEvent playCardEvent;
+            if(cardData.getType() == CardType.LAND) {
+                playCardEvent = new PlayLandCardEvent(cardData.getId(), playerType);
+                playCardEvent.execute();
+                gameServer.renderAll(Channel.getChannelFromPlayerType(playerType));
+            }
+            else if(cardData.getType() == CardType.CHARACTER) {
+                playCardEvent = new SummonEvent(cardData.getId(), playerType);
+                playCardEvent.execute();
+                gameServer.renderAll(Channel.getChannelFromPlayerType(playerType));
+            }
+            else {
+                // TODO : BIKIN IMPLEMENTASI PLAY BUAT SKILL
+            }
         }
         catch(InvalidOperationException e) {
             System.out.println(e.getOperation());

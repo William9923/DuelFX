@@ -101,7 +101,20 @@ public class Field {
                 return i;
             }
         }
-        throw new InvalidOperationException("Full Board", "No empty spaces available because board is full");
+        throw new InvalidOperationException("Full Board", "No empty character spaces available because board is full");
+    }
+
+    public int getEmptySkillCardIndex() throws InvalidOperationException {
+        List<Integer> notAvailableIndex = new ArrayList<>();
+        for(SkillCardInField skillCardInField : skillCardList) {
+            notAvailableIndex.add(skillCardInField.getIndex());
+        }
+        for(int i = 0 ; i < 9 ; i++) {
+            if(!notAvailableIndex.contains(i)) {
+                return i;
+            }
+        }
+        throw new InvalidOperationException("Full board", "No empty skill spaces available because board is full");
     }
 
     public void removeCharacterCard(CharacterCardInField inField) {

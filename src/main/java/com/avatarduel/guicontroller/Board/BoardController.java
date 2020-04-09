@@ -19,6 +19,8 @@ public class BoardController {
     @FXML private HandController handBController;
     @FXML private DeckController deckAController;
     @FXML private DeckController deckBController;
+    @FXML private PlayerStatusController playerAStatusController;
+    @FXML private PlayerStatusController playerBStatusController;
     @FXML private Button end_turn;
     @FXML private Button end_phase;
     private GameServer gameServer;
@@ -46,18 +48,29 @@ public class BoardController {
         deckAController.setPlayerType(PlayerType.A);
         deckBController.setPlayerType(PlayerType.B);
 
+        playerAStatusController.setPlayerType(PlayerType.A);
+        playerBStatusController.setPlayerType(PlayerType.B);
+
         gameServer = new GameServer();
         gameServer.addSubscriber(Channel.DECK, deckAController);
         gameServer.addSubscriber(Channel.DECK, deckBController);
         gameServer.addSubscriber(Channel.HAND, handAController);
         gameServer.addSubscriber(Channel.HAND, handBController);
-
+        gameServer.addSubscriber(Channel.PLAYER_A, handAController);
+        gameServer.addSubscriber(Channel.PLAYER_A, fieldAController);
+        gameServer.addSubscriber(Channel.PLAYER_A, playerAStatusController);
+        gameServer.addSubscriber(Channel.PLAYER_B, handBController);
+        gameServer.addSubscriber(Channel.PLAYER_B, fieldBController);
+        gameServer.addSubscriber(Channel.PLAYER_B, playerBStatusController);
         gameServer.renderAll(Channel.DECK);
+
+        this.passGameServer();
     }
 
     @FXML
     public void endTurn() {
         Game.getInstance().nextPlayer();
+        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
         gameServer.renderAll(Channel.HAND);
         handAController.flipCards();
         handBController.flipCards();
@@ -76,5 +89,12 @@ public class BoardController {
 
     public void setSelectedCard(CharacterCard card) {
         setData(card);
+    }
+
+    private void passGameServer() {
+        handAController.setGameServer(this.gameServer);
+        handBController.setGameServer(this.gameServer);
+        fieldAController.setGameServer(this.gameServer);
+        fieldBController.setGameServer(this.gameServer);
     }
 }
