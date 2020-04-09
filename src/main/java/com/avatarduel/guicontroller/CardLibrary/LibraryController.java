@@ -39,7 +39,7 @@ public class LibraryController {
             landRows = getCSVListFrom(getCSVPathFrom("land.csv"));
         }
         catch (IOException IOE) {
-            System.out.println("Library controller : getCharacters gasabi");
+            System.out.println("Library controller : getCharacters");
         }
         charIndex = 1;
         auraIndex = 1;

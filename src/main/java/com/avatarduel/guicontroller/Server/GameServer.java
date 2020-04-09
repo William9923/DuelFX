@@ -15,6 +15,14 @@ public class GameServer implements EventChannel {
     public GameServer() {
         this.subscriberChannelMap = new HashMap<Channel, List<Subscriber>>();
     }
+
+    public void executeEvent(IEvent event, Channel channel) {
+        if (event.validate()) {
+            event.execute();
+        }
+        renderAll(channel);
+    }
+
     @Override
     public void renderAll(Channel channel) {
         if (subscriberChannelMap.containsKey(channel)) {

@@ -31,7 +31,6 @@ public class AvatarDuel extends Application {
 
   @Override
   public void start(Stage stage) throws IOException, URISyntaxException {
-//    Parent root = FXMLLoader.load(getClass().getResource("Board.fxml"));
     // Load Main Menu
     FXMLLoader mainmenuLoader = getMainMenu();
     Parent mainmenuGUI = mainmenuLoader.load();
@@ -49,8 +48,7 @@ public class AvatarDuel extends Application {
     Parent libraryGUI = libraryLoader.load();
     Scene library = new Scene(libraryGUI);
 
-
-    stage.setTitle("Avatar Duel");
+    stage.setTitle("Avatar Duel OOP");
     stage.setScene(mainmenu);
     stage.setFullScreen(true);
     stage.show();

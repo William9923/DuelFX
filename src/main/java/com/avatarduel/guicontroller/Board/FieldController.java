@@ -135,11 +135,11 @@ public class FieldController implements Subscriber {
         int indexOfEnemyCard = Integer.parseInt(enemy_index.getText());
         int enemyTargetId = enemyFieldController.getCharacterCardController(indexOfEnemyCard).getCharacterCardInField().getCard().getId();
         AttackEvent attackEvent = new AttackEvent(fromAttack , enemyTargetId, this.playerType, enemyFieldController.playerType);
-        System.out.println(fromAttack);
-        System.out.println(enemyTargetId);
-        System.out.println(this.playerType);
-        System.out.println(enemyFieldController.playerType);
-        System.out.println(attackEvent.validate());
+//        System.out.println(fromAttack);
+//        System.out.println(enemyTargetId);
+//        System.out.println(this.playerType);
+//        System.out.println(enemyFieldController.playerType);
+//        System.out.println(attackEvent.validate());
         attackEvent.execute();
         this.render();
         this.enemyFieldController.render();
