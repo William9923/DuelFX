@@ -5,7 +5,6 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.phase.*;
-import com.google.common.eventbus.EventBus;
 
 // Singleton Design pattern
 public class Game {
@@ -79,8 +78,7 @@ public class Game {
     public void setCurrentPhase(Phase newPhase) {
         switch (newPhase) {
             case DRAW: currentPhase = new DrawPhase(); break;
-            case MAIN1: currentPhase = new MainPhase1(); break;
-            case MAIN2: currentPhase = new MainPhase2(); break;
+            case MAIN: currentPhase = new MainPhase(); break;
             case BATTLE: currentPhase = new BattlePhase(); break;
             case END: currentPhase = new EndPhase(); break;
             // default:  / throw InvalidPhase

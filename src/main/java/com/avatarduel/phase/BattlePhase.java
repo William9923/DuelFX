@@ -16,6 +16,6 @@ public class BattlePhase implements IPhase {
 
     @Override
     public IPhase next() {
-        return new MainPhase2();
+        return new EndPhase();
     }
 }

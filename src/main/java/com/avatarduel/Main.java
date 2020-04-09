@@ -76,7 +76,7 @@ public class Main {
                 event5.execute();
             }
             System.out.println("CurrentPhase : " + Game.getInstance().getCurrentPhase().getPhase());
-            IEvent event4 = new EndTurnEvent(Game.getInstance().getCurrentPlayer()); // tested
+            IEvent event4 = new EndTurnEvent(); // tested
             if (event4.validate()) {
                 event4.execute();
             }
@@ -171,7 +171,7 @@ public class Main {
         if (card != null) {
             // lets go do the direct attack to the opponent
             IEvent directAttackEvent = new DirectAttackEvent(card.getId(),Game.getInstance().getCurrentPlayer());
-            IEvent endTurn = new EndTurnEvent(Game.getInstance().getCurrentPlayer());
+            IEvent endTurn = new EndTurnEvent();
             if (endTurn.validate()){
                 System.out.println(Game.getInstance().getCurrentPlayer());
                 endTurn.execute();
@@ -183,7 +183,7 @@ public class Main {
                 drawPhase.execute();
             }
 //            System.out.println(Game.getInstance().getCurrentPhase().getPhase());
-            IEvent endTurn2 = new EndTurnEvent(Game.getInstance().getCurrentPlayer());
+            IEvent endTurn2 = new EndTurnEvent();
             if (endTurn2.validate()) {
                 System.out.println(Game.getInstance().getCurrentPlayer());
                 endTurn2.execute();

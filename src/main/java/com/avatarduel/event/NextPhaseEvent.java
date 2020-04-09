@@ -11,12 +11,18 @@ public class NextPhaseEvent implements IEvent {
 
     @Override
     public void execute() {
-        Game.getInstance().nextPhase(); // pindah phase
+        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+        if (currPhase.equals(Phase.BATTLE)){
+            IEvent event = new EndTurnEvent();
+            event.execute();
+        } else {
+            Game.getInstance().nextPhase();
+        }
     }
 
     @Override
     public boolean validate() {
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        return (currPhase == Phase.MAIN1 || currPhase == Phase.BATTLE); // cuman bisa pas MainPhase 1 atau battle, kalo MainPhase2 pake tombol
+        return (currPhase == Phase.MAIN || currPhase == Phase.BATTLE); // cuman bisa pas MainPhase 1 atau battle, kalo MainPhase2 pake tombol
     }
 }

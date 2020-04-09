@@ -33,7 +33,7 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
                 .filter(c -> c.getCard().getId() == idTarget)
                 .findFirst()
                 .orElse(null);
-        return (((currPhase == Phase.MAIN1) || (currPhase == Phase.MAIN2))
+        return (((currPhase == Phase.MAIN))
                 && (currPlayer == playerType)
                 && (card != null));
 
