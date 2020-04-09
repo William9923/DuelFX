@@ -61,8 +61,8 @@ public class FieldController implements Subscriber {
 
     @FXML
     public void initialize() {
-        this.characters = new HashMap<String, CharacterCardInFieldController>();
-        this.skills = new HashMap<String, SkillCardInFieldController>();
+        this.characters = new HashMap<>();
+        this.skills = new HashMap<>();
         popup.setVisible(false);
         characters.put("0", character1Controller);
         characters.put("1", character2Controller);
@@ -102,29 +102,29 @@ public class FieldController implements Subscriber {
         card_container.getChildren().add(character_container);
     }
 
-    public CharacterCardInFieldController getCharacterCardController(int index) {
-        return this.characters.get(Integer.toString(index));
+    public void setCharactersActionsVisible(boolean value) {
+        this.characters.values().forEach( controller -> {
+            controller.setActionVisible(value);
+        });
     }
 
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
-    }
-
-    public void setEnemyFieldController(FieldController enemyFieldController) {
-        this.enemyFieldController = enemyFieldController;
+        characters.values().forEach( controller -> {
+            controller.setPlayerType(playerType);
+        });
     }
 
     @FXML
     public void submitAttackRequestForm() {
-        int indexOfEnemyCard = Integer.parseInt(enemy_index.getText());
-        int enemyTargetId = enemyFieldController.getCharacterCardController(indexOfEnemyCard).getCharacterCardInField().getCard().getId();
-        AttackEvent attackEvent = new AttackEvent(fromAttack , enemyTargetId, this.playerType, enemyFieldController.playerType);
-        if(attackEvent.validate()) {
-            attackEvent.execute();
-        }
-        this.render();
-        this.enemyFieldController.render();
-        this.popup.setVisible(false);
+//        int indexOfEnemyCard = Integer.parseInt(enemy_index.getText());
+//        AttackEvent attackEvent = new AttackEvent(fromAttack , enemyTargetId, this.playerType, enemyFieldController.playerType);
+//        if(attackEvent.validate()) {
+//            attackEvent.execute();
+//        }
+//        this.render();
+//        this.enemyFieldController.render();
+//        this.popup.setVisible(false);
     }
 
     @Subscribe
@@ -134,4 +134,5 @@ public class FieldController implements Subscriber {
         CharacterCard characterCard = (CharacterCard) characterCardInField.getCard();
         this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
                 + Integer.toString(characterCard.getAttack()));
+    }
 }

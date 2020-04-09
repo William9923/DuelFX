@@ -1,18 +1,21 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.EventBus;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class CharacterCardInFieldController extends CardController {
-    @FXML HBox card_actions;
+    @FXML VBox card_actions;
     @FXML ImageView card_rotate;
     @FXML ImageView card_attack;
     private boolean isActionEnabled;
+    private PlayerType playerType;
     private CharacterCardInField characterCardInField;
 
     public void setCard(CharacterCardInField cardInField) {
@@ -41,7 +44,7 @@ public class CharacterCardInFieldController extends CardController {
 
     // dipake FieldController untuk membuat action tidak terlihat ketika di hover
     public void setActionVisible(boolean value) {
-        isActionEnabled = false;
+        isActionEnabled = value;
     }
 
     @FXML
@@ -61,7 +64,13 @@ public class CharacterCardInFieldController extends CardController {
         Game.getInstance().getEventBus().post(this.characterCardInField);
     }
 
-    public CharacterCardInField getCharacterCardInField() {
-        return characterCardInField;
+    public void setPlayerType(PlayerType playerType) {
+        this.playerType = playerType;
+    }
+
+    public void showSelectedCard() {
+        if(cardData != null && this.playerType == Game.getInstance().getCurrentPlayer()) {
+            Game.getInstance().getEventBus().post(new ShowSelectedCardRequest(this.cardData));
+        }
     }
 }

@@ -6,6 +6,7 @@ import com.avatarduel.event.SummonEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Board.HandController;
 import com.avatarduel.guicontroller.Board.PlayerStatusController;
+import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
@@ -52,7 +53,9 @@ public class CardInHandController extends CardController{
 
     @FXML
     public void showPlayButton() {
-        card_play.setVisible(true);
+        if(playerType == Game.getInstance().getCurrentPlayer()) {
+            card_play.setVisible(true);
+        }
     }
 
     @FXML
@@ -84,6 +87,12 @@ public class CardInHandController extends CardController{
         catch(InvalidOperationException e) {
             System.out.println(e.getOperation());
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void showSelectedCard() {
+        if(cardData != null && this.playerType == Game.getInstance().getCurrentPlayer()) {
+            Game.getInstance().getEventBus().post(new ShowSelectedCardRequest(this.cardData));
         }
     }
 }

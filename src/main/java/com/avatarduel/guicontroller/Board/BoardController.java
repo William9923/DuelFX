@@ -1,15 +1,10 @@
 package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Card.DisplayCardController;
+import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.guicontroller.Server.Channel;
-import com.avatarduel.guicontroller.Server.GUIRenderServer;
-import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.Card;
-import com.avatarduel.model.card.CharacterCard;
-import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.PlayerType;
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,6 +36,7 @@ public class BoardController {
         fieldControllerMap = new HashMap<>();
         playerStatusControllerMap = new HashMap<>();
         deckControllerMap = new HashMap<>();
+        Game.getInstance().getEventBus().register(this);
     }
 
     @FXML
@@ -93,13 +89,16 @@ public class BoardController {
     @FXML
     public void endTurn() {
         Game.getInstance().endTurn();
-        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
+//        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
         PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
         handControllerMap.get(nextPlayer).render();
         handAController.flipCards();
         handBController.flipCards();
         deckControllerMap.get(nextPlayer).render();
         gameStatusController.render();
+        fieldControllerMap.forEach((playerType, controller) -> {
+            controller.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == playerType);
+        });
     }
 
     @FXML
@@ -111,11 +110,7 @@ public class BoardController {
     // TODO : IMPLEMENT CARD HOVER ON CARD CONTROLLER TO POST AN EVENT
     // Buat Card jadi HoveredCard
     @Subscribe
-    private void setData(Card card) {
-        selectedController.setCard(card);
-    }
-
-    public void setSelectedCard(CharacterCard card) {
-        setData(card);
+    private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {
+        selectedController.setCard(selectCardRequest.getCard());
     }
 }

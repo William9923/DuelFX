@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="card_border" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="128.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.SkillCardInFieldController">
+<VBox fx:id="card_border" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="128.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.SkillCardInFieldController">
    <children>
       <HBox alignment="CENTER" prefHeight="19.0" prefWidth="110.0" spacing="5.0">
          <children>
@@ -30,12 +30,12 @@
                </Label>
          </children>
       </HBox>
-         <ImageView fx:id="card_img" fitHeight="81.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="card_img" fitHeight="71.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../card/image/character/Aang.png" />
             </image>
          </ImageView>
-      <HBox alignment="CENTER" prefHeight="15.0" prefWidth="118.0" spacing="8.0">
+      <HBox alignment="CENTER" onMouseClicked="#showSelectedCard" prefHeight="15.0" prefWidth="118.0" spacing="8.0">
          <children>
                <Label fx:id="card_atk" text="ATK : 8">
                   <font>

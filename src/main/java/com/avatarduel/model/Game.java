@@ -5,6 +5,7 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.phase.*;
+import com.google.common.eventbus.EventBus;
 
 // Singleton Design pattern
 public class Game {
@@ -72,7 +73,9 @@ public class Game {
     public void endTurn() {
         nextPlayer();
         incrementTurn();
-        this.currentPhase = new DrawPhase();
+        DrawPhase drawPhase = new DrawPhase();
+        currentPhase = drawPhase;
+        drawPhase.drawCardAndGoToNextPhase();
     }
 
     public void setCurrentPhase(Phase newPhase) {

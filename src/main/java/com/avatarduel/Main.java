@@ -22,7 +22,7 @@ public class Main {
         // lets make 10 turn of only playing landCard :
         for (int i = 0; i < 20; i++) {
             System.out.println(Game.getInstance().getCurrentPlayer());
-            IEvent event1 = new DrawEvent(Game.getInstance().getCurrentPlayer());
+            IEvent event1 = new DrawEvent();
             int currentCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand().size();
             if (event1.validate()) {
                 event1.execute();
@@ -104,7 +104,7 @@ public class Main {
         System.out.println("Air : " + Game.getInstance().getPlayerByType(PlayerType.B).getPower().getTotal_air());
 
         System.out.println("Summoning Test : ");
-        IEvent drawEvent1 = new DrawEvent(Game.getInstance().getCurrentPlayer());
+        IEvent drawEvent1 = new DrawEvent();
         if(drawEvent1.validate()) {
             drawEvent1.execute();
         }
@@ -176,7 +176,7 @@ public class Main {
                 System.out.println(Game.getInstance().getCurrentPlayer());
                 endTurn.execute();
             }
-            IEvent drawPhase = new DrawEvent(Game.getInstance().getCurrentPlayer());
+            IEvent drawPhase = new DrawEvent();
             System.out.println(Game.getInstance().getCurrentPlayer());
             if(drawPhase.validate()){
                 System.out.println(Game.getInstance().getCurrentPlayer());
@@ -188,7 +188,7 @@ public class Main {
                 System.out.println(Game.getInstance().getCurrentPlayer());
                 endTurn2.execute();
             }
-            IEvent drawPhase2 = new DrawEvent(Game.getInstance().getCurrentPlayer());
+            IEvent drawPhase2 = new DrawEvent();
 
             if(drawPhase2.validate()){
                 System.out.println(Game.getInstance().getCurrentPlayer());

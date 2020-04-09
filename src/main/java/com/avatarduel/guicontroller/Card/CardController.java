@@ -1,6 +1,7 @@
 package com.avatarduel.guicontroller.Card;
 
-import com.avatarduel.guicontroller.Server.GUIRenderServer;
+import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
+import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

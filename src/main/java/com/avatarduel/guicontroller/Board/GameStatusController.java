@@ -20,6 +20,6 @@ public class GameStatusController implements Subscriber {
     public void render() {
         game_turn.setText(Integer.toString(Game.getInstance().getCurrentTurn()));
         current_player.setText(Game.getInstance().getCurrentPlayer().toString());
-        game_phase.setText(Game.getInstance().getCurrentPhase().toString());
+        game_phase.setText(Game.getInstance().getCurrentPhase().getPhase().toString());
     }
 }

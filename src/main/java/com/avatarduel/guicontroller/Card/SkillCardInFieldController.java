@@ -1,6 +1,8 @@
 package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.guicontroller.Board.FieldController;
+import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
+import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.PlayerType;
@@ -39,5 +41,11 @@ public class SkillCardInFieldController extends CardController {
 
     public FieldController getFieldController() {
         return fieldController;
+    }
+
+    public void showSelectedCard() {
+        if(cardData != null && this.playerType == Game.getInstance().getCurrentPlayer()) {
+            Game.getInstance().getEventBus().post(new ShowSelectedCardRequest(this.cardData));
+        }
     }
 }

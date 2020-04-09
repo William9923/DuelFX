@@ -9,7 +9,6 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
-import com.sun.corba.se.spi.orbutil.fsm.ActionBase;
 
 public class ActivateSkillEvent implements IEvent { // has not implemented yet
 

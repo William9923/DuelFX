@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class DisplayCardController extends  CardController {
+public class DisplayCardController extends CardController {
     @FXML private Label card_desc;
     @FXML private HBox card_attributes;
 
