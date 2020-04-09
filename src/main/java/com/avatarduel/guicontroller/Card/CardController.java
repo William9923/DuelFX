@@ -1,6 +1,6 @@
 package com.avatarduel.guicontroller.Card;
 
-import com.avatarduel.guicontroller.Server.GameServer;
+import com.avatarduel.guicontroller.Server.GUIRenderServer;
 import com.avatarduel.model.card.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,7 +13,6 @@ import java.io.File;
 public abstract class CardController {
     protected Card cardData;
     protected final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border", "null_card", "flipped_card"};
-    protected GameServer gameServer;
 
     @FXML protected VBox card_border;
     @FXML protected Label card_name;
@@ -94,7 +93,7 @@ public abstract class CardController {
         card_pow.setText("");
     }
 
-    public void setNull() {
+    public void setNullCard() {
         card_name.setText("");
         card_img.setImage(null);
         card_atk.setText("");
@@ -129,9 +128,5 @@ public abstract class CardController {
     private Image getIcon(String iconname) {
         File f = new File("src/main/resources/com/avatarduel/card/icon/" + iconname);
         return new Image("file:\\" + f.getAbsolutePath());
-    }
-
-    public void setGameServer(GameServer gameServer) {
-        this.gameServer = gameServer;
     }
 }

@@ -7,26 +7,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox
-     alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showActions" onMouseExited="#hideActions" prefHeight="174.0" prefWidth="104.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css"
-     xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-     fx:controller="com.avatarduel.guicontroller.Card.CharacterCardOnPlayController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showActions" onMouseExited="#hideActions" prefHeight="167.0" prefWidth="128.0" spacing="5.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.CharacterCardInFieldController">
    <children>
       <HBox fx:id="card_actions" alignment="TOP_CENTER" prefHeight="27.0" prefWidth="205.0" spacing="20.0">
          <children>
-            <ImageView fx:id="card_attack" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#postAttackRequest">
+            <ImageView fx:id="card_attack" fitHeight="27.0" fitWidth="27.0" onMouseClicked="#cardAttack" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../card/icon/CharacterOnFieldHoverAttack.png" />
                </image></ImageView>
-            <ImageView fx:id="card_rotate" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#rotateCard">
+            <ImageView fx:id="card_rotate" fitHeight="27.0" fitWidth="27.0" onMouseClicked="#rotateCard" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../card/icon/CharacterOnFieldHoverRotate.png" />
                </image>
             </ImageView>
          </children>
       </HBox>
-      <VBox prefHeight="200.0" prefWidth="100.0" />
-      <VBox fx:id="card_border" alignment="TOP_CENTER" prefHeight="124.0" prefWidth="236.0" spacing="5.0">
+      <VBox fx:id="card_border" alignment="TOP_CENTER" prefHeight="106.0" prefWidth="128.0" spacing="5.0">
          <children>
             <HBox alignment="CENTER" prefHeight="19.0" prefWidth="110.0" spacing="5.0">
                <children>
@@ -42,13 +38,13 @@
                      </Label>
                </children>
             </HBox>
-               <ImageView fx:id="card_img" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="card_img" fitHeight="69.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../../card/image/character/Aang.png" />
                   </image>
                </ImageView>
-               <VBox prefHeight="50.0" prefWidth="110.0">
-                  <children>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="128.0" spacing="8.0">
+               <children>
                      <Label fx:id="card_atk" text="ATK : 8">
                         <font>
                            <Font size="9.0" />
@@ -64,14 +60,8 @@
                            <Font size="9.0" />
                         </font>
                      </Label>
-                  </children>
-                  <VBox.margin>
-                     <Insets />
-                  </VBox.margin>
-                  <padding>
-                     <Insets left="11.0" />
-                  </padding>
-               </VBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

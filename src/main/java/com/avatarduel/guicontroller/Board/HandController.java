@@ -1,19 +1,14 @@
 package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.event.SummonEvent;
-import com.avatarduel.guicontroller.Server.EventChannel;
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.CardInHandController;
-import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
-import com.avatarduel.guicontroller.Server.GameServer;
+import com.avatarduel.guicontroller.Server.GUIRenderServer;
 import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
-import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.player_component.Hand;
-import com.avatarduel.model.type.CardType;
-import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
+import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 
 import java.util.ArrayList;
@@ -22,8 +17,6 @@ import java.util.List;
 public class HandController implements Subscriber {
     private PlayerType playerType;
     private List<CardInHandController> cards;
-    private FieldController correspondingField;
-    private GameServer gameServer;
 
     @FXML
     CardInHandController card1Controller;
@@ -63,24 +56,16 @@ public class HandController implements Subscriber {
         cards.add(card9Controller);
         cards.add(card10Controller);
         for(int i = 0 ; i < 10 ; i++) {
-            cards.get(i).setNull();
-            cards.get(i).setHandController(this);
+            cards.get(i).setNullCard();
         }
     }
 
-    public void setPlayerType(PlayerType playerType) {
+    public void setPlayerTypeAndRender(PlayerType playerType) {
         this.playerType = playerType;
         for(CardInHandController cardInHandController : cards) {
             cardInHandController.setPlayerType(playerType);
         }
-    }
-
-    public void setCorrespondingField(FieldController field) {
-        correspondingField = field;
-    }
-
-    public FieldController getCorrespondingField() {
-        return correspondingField;
+        this.render();
     }
 
     public void render() {
@@ -91,7 +76,7 @@ public class HandController implements Subscriber {
             i++;
         }
         while(i < 10) {
-            cards.get(i).setNull();
+            cards.get(i).setNullCard();
             i++;
         }
     }
@@ -102,12 +87,5 @@ public class HandController implements Subscriber {
                 cardInHandController.flipCard();
             }
         }
-    }
-
-    public void setGameServer(GameServer gameServer) {
-        this.gameServer = gameServer;
-        cards.forEach(controller -> {
-            controller.setGameServer(gameServer);
-        });
     }
 }

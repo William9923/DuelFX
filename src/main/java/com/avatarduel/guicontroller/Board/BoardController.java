@@ -2,13 +2,19 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.Server.Channel;
-import com.avatarduel.guicontroller.Server.GameServer;
+import com.avatarduel.guicontroller.Server.GUIRenderServer;
+import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCard;
+import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.PlayerType;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class BoardController {
@@ -23,78 +29,93 @@ public class BoardController {
     @FXML private PlayerStatusController playerBStatusController;
     @FXML private Button end_turn;
     @FXML private Button end_phase;
-    private GameServer gameServer;
+    @FXML private GameStatusController gameStatusController;
+
+    private Map<PlayerType, HandController> handControllerMap;
+    private Map<PlayerType, FieldController> fieldControllerMap;
+    private Map<PlayerType, PlayerStatusController> playerStatusControllerMap;
+    private Map<PlayerType, DeckController> deckControllerMap;
 
     public BoardController() {
-
+        handControllerMap = new HashMap<>();
+        fieldControllerMap = new HashMap<>();
+        playerStatusControllerMap = new HashMap<>();
+        deckControllerMap = new HashMap<>();
     }
 
     @FXML
     public void initialize() {
-        handAController.setPlayerType(PlayerType.A);
-        handBController.setPlayerType(PlayerType.B);
-        handAController.render();
-        handBController.render();
+        handControllerMap.put(PlayerType.A, handAController);
+        handControllerMap.put(PlayerType.B, handBController);
+        handControllerMap.forEach((playerType ,controller) -> {
+            controller.setPlayerTypeAndRender(playerType);
+            Game.getInstance().getEventBus().register(controller);
+        });
         handBController.flipCards();
-        handAController.setCorrespondingField(fieldAController);
-        handBController.setCorrespondingField(fieldBController);
 
+        fieldControllerMap.put(PlayerType.A, fieldAController);
+        fieldControllerMap.put(PlayerType.B, fieldBController);
+        fieldControllerMap.forEach((playerType, fieldController) -> {
+            fieldController.setPlayerType(playerType);
+            Game.getInstance().getEventBus().register(fieldController);
+        });
         fieldBController.swapCharactersAndSkillsPosition();
-        fieldAController.setPlayerType(PlayerType.A);
-        fieldBController.setPlayerType(PlayerType.B);
-        fieldAController.setEnemyFieldController(fieldBController);
-        fieldBController.setEnemyFieldController(fieldAController);
 
-        deckAController.setPlayerType(PlayerType.A);
-        deckBController.setPlayerType(PlayerType.B);
+        deckControllerMap.put(PlayerType.A, deckAController);
+        deckControllerMap.put(PlayerType.B, deckBController);
+        deckControllerMap.forEach((playerType, deckController) -> {
+            deckController.setPlayerType(playerType);
+        });
 
-        playerAStatusController.setPlayerType(PlayerType.A);
-        playerBStatusController.setPlayerType(PlayerType.B);
+        playerStatusControllerMap.put(PlayerType.A, playerAStatusController);
+        playerStatusControllerMap.put(PlayerType.B, playerBStatusController);
+        playerStatusControllerMap.forEach((playerType, playerStatusController) -> {
+            playerStatusController.setPlayerType(playerType);
+        });
 
-        gameServer = new GameServer();
-        gameServer.addSubscriber(Channel.DECK, deckAController);
-        gameServer.addSubscriber(Channel.DECK, deckBController);
-        gameServer.addSubscriber(Channel.HAND, handAController);
-        gameServer.addSubscriber(Channel.HAND, handBController);
-        gameServer.addSubscriber(Channel.PLAYER_A, handAController);
-        gameServer.addSubscriber(Channel.PLAYER_A, fieldAController);
-        gameServer.addSubscriber(Channel.PLAYER_A, playerAStatusController);
-        gameServer.addSubscriber(Channel.PLAYER_B, handBController);
-        gameServer.addSubscriber(Channel.PLAYER_B, fieldBController);
-        gameServer.addSubscriber(Channel.PLAYER_B, playerBStatusController);
-        gameServer.renderAll(Channel.DECK);
+        // Initialize Game Server
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckAController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckBController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handAController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handBController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldAController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldBController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, handAController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, fieldAController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, playerAStatusController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, handBController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, fieldBController);
+        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, playerBStatusController);
 
-        this.passGameServer();
+        Game.getInstance().getGUIRenderServer().renderAll(Channel.DECK);
     }
 
     @FXML
     public void endTurn() {
-        Game.getInstance().nextPlayer();
+        Game.getInstance().endTurn();
         Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
-        gameServer.renderAll(Channel.HAND);
+        PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
+        handControllerMap.get(nextPlayer).render();
         handAController.flipCards();
         handBController.flipCards();
-        gameServer.renderAll(Channel.DECK);
+        deckControllerMap.get(nextPlayer).render();
+        gameStatusController.render();
     }
 
     @FXML
     public void endPhase() {
         Game.getInstance().nextPhase();
+        gameStatusController.render();
     }
 
-    @FXML
-    private void setData(CharacterCard card) {
+    // TODO : IMPLEMENT CARD HOVER ON CARD CONTROLLER TO POST AN EVENT
+    // Buat Card jadi HoveredCard
+    @Subscribe
+    private void setData(Card card) {
         selectedController.setCard(card);
     }
 
     public void setSelectedCard(CharacterCard card) {
         setData(card);
-    }
-
-    private void passGameServer() {
-        handAController.setGameServer(this.gameServer);
-        handBController.setGameServer(this.gameServer);
-        fieldAController.setGameServer(this.gameServer);
-        fieldBController.setGameServer(this.gameServer);
     }
 }

@@ -19,8 +19,6 @@ public class CardInHandController extends CardController{
     @FXML private Button card_play;
     private String borderStyle;
     private PlayerType playerType;
-    private HandController handController;
-    private PlayerStatusController playerStatusController;
 
     @FXML
     public void initialize() {
@@ -31,20 +29,7 @@ public class CardInHandController extends CardController{
     @Override
     public void setCard(Card card) {
         super.setCard(card);
-        switch (cardData.getElement()) {
-            case WATER:
-                borderStyle = "water_border";
-                break;
-            case FIRE:
-                borderStyle = "fire_border";
-                break;
-            case EARTH:
-                borderStyle = "earth_border";
-                break;
-            case AIR:
-                borderStyle = "air_border";
-                break;
-        }
+        borderStyle = card_border.getStyleClass().get(0);
     }
 
     public void flipCard() {
@@ -79,10 +64,6 @@ public class CardInHandController extends CardController{
         this.playerType = playerType;
     }
 
-    public void setHandController(HandController handController) {
-        this.handController = handController;
-    }
-
     @FXML
     public void playIsClicked() {
         try {
@@ -90,16 +71,15 @@ public class CardInHandController extends CardController{
             if(cardData.getType() == CardType.LAND) {
                 playCardEvent = new PlayLandCardEvent(cardData.getId(), playerType);
                 playCardEvent.execute();
-                gameServer.renderAll(Channel.getChannelFromPlayerType(playerType));
             }
             else if(cardData.getType() == CardType.CHARACTER) {
                 playCardEvent = new SummonEvent(cardData.getId(), playerType);
                 playCardEvent.execute();
-                gameServer.renderAll(Channel.getChannelFromPlayerType(playerType));
             }
             else {
                 // TODO : BIKIN IMPLEMENTASI PLAY BUAT SKILL
             }
+            Game.getInstance().getGUIRenderServer().renderAll(Channel.getChannelFromPlayerType(playerType));
         }
         catch(InvalidOperationException e) {
             System.out.println(e.getOperation());

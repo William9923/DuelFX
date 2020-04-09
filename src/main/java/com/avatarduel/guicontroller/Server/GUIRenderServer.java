@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameServer implements EventChannel {
+public class GUIRenderServer implements EventChannel {
 
     private Map<Channel, List<Subscriber>> subscriberChannelMap;
 
-    public GameServer() {
+    public GUIRenderServer() {
         this.subscriberChannelMap = new HashMap<Channel, List<Subscriber>>();
     }
     @Override

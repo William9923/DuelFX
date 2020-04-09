@@ -51,8 +51,9 @@
          </children>
       </HBox>
       <Rectangle id="pembatas" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="376.0" layoutY="561.0" stroke="BLACK" strokeType="INSIDE" width="1323.0" />
-      <Rectangle id="status_game" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="565.0" layoutX="1733.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" width="166.0" />
-      <Text layoutX="1739.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status Game disini" />
+      <VBox layoutX="1728.0" layoutY="368.0">
+         <fx:include fx:id="gameStatus" source="GameStatus.fxml" />
+      </VBox>
       <VBox layoutX="1764.0" layoutY="848.0" prefHeight="206.0" prefWidth="104.0">
          <children>
             <fx:include fx:id="deckA" source="Deck.fxml" />

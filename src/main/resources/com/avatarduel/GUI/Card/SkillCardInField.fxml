@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="card_border" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="141.0" prefWidth="104.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.SkillCardOnPlayController">
+<VBox fx:id="card_border" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="128.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.SkillCardInFieldController">
    <children>
       <HBox alignment="CENTER" prefHeight="19.0" prefWidth="110.0" spacing="5.0">
          <children>
@@ -30,13 +30,13 @@
                </Label>
          </children>
       </HBox>
-         <ImageView fx:id="card_img" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="card_img" fitHeight="81.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../card/image/character/Aang.png" />
             </image>
          </ImageView>
-         <VBox prefHeight="50.0" prefWidth="110.0">
-            <children>
+      <HBox alignment="CENTER" prefHeight="15.0" prefWidth="118.0" spacing="8.0">
+         <children>
                <Label fx:id="card_atk" text="ATK : 8">
                   <font>
                      <Font size="9.0" />
@@ -52,14 +52,8 @@
                      <Font size="9.0" />
                   </font>
                </Label>
-            </children>
-            <VBox.margin>
-               <Insets />
-            </VBox.margin>
-            <padding>
-               <Insets left="11.0" />
-            </padding>
-         </VBox>
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

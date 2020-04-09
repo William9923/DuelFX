@@ -1,4 +1,4 @@
-package com.avatarduel.guicontroller.RenderRequest;
+package com.avatarduel.guicontroller.Request;
 
 public class HandRenderRequest extends RenderRequest{
 
