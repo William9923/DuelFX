@@ -1,5 +1,6 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.guicontroller.Server.GameServer;
 import com.avatarduel.model.card.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +13,8 @@ import java.io.File;
 public abstract class CardController {
     protected Card cardData;
     protected final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border", "null_card", "flipped_card"};
+    protected GameServer gameServer;
+
     @FXML protected VBox card_border;
     @FXML protected Label card_name;
     @FXML protected ImageView card_img;
@@ -45,18 +48,19 @@ public abstract class CardController {
                 setAdditionalInfoCard((SkillPowerUpCard) card);
                 card_icon.setImage(getIcon("skill_icon.png"));
         }
+        removeAllBorderStyle();
         switch (card.getElement()) {
             case WATER:
-                setBorderStyle("water_border");
+                addBorderStyle("water_border");
                 break;
             case FIRE:
-                setBorderStyle("fire_border");
+                addBorderStyle("fire_border");
                 break;
             case EARTH:
-                setBorderStyle("earth_border");
+                addBorderStyle("earth_border");
                 break;
             case AIR:
-                setBorderStyle("air_border");
+                addBorderStyle("air_border");
                 break;
         }
     }
@@ -101,9 +105,20 @@ public abstract class CardController {
         card_border.getStyleClass().add("null_card");
     }
 
-    protected void setBorderStyle(String className) {
-        card_border.getStyleClass().removeAll(listBorderClass);
+    protected void addBorderStyle(String className) {
         card_border.getStyleClass().add(className);
+    }
+
+    protected void removeBorderStyle(String className) {
+        card_border.getStyleClass().remove(className);
+    }
+
+    protected void removeAllBorderStyle() {
+        card_border.getStyleClass().removeAll(listBorderClass);
+    }
+
+    public Card getCardData() {
+        return cardData;
     }
 
     private Image getImage(String imgpath) {
@@ -114,5 +129,9 @@ public abstract class CardController {
     private Image getIcon(String iconname) {
         File f = new File("src/main/resources/com/avatarduel/card/icon/" + iconname);
         return new Image("file:\\" + f.getAbsolutePath());
+    }
+
+    public void setGameServer(GameServer gameServer) {
+        this.gameServer = gameServer;
     }
 }

@@ -3,6 +3,8 @@ package com.avatarduel.guicontroller.Board;
 import com.avatarduel.event.AttackEvent;
 import com.avatarduel.guicontroller.Card.SkillCardOnPlayController;
 import com.avatarduel.guicontroller.Card.CharacterCardOnPlayController;
+import com.avatarduel.guicontroller.Server.GameServer;
+import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -18,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FieldController {
+public class FieldController implements Subscriber {
     private Map<String, CharacterCardOnPlayController> characters;
     private Map<String, SkillCardOnPlayController> skills;
     private PlayerType playerType;
@@ -59,6 +61,7 @@ public class FieldController {
     SkillCardOnPlayController skill8Controller;
     @FXML
     SkillCardOnPlayController skill9Controller;
+    private GameServer gameServer;
 
     @FXML
     public void initialize() {
@@ -149,5 +152,12 @@ public class FieldController {
         CharacterCard characterCard = (CharacterCard) characterCardInField.getCard();
         this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
                 + Integer.toString(characterCard.getAttack()));
+    }
+
+    public void setGameServer(GameServer gameServer) {
+        this.gameServer = gameServer;
+        for (CharacterCardOnPlayController characterCardOnPlayController : characters.values()) {
+            characterCardOnPlayController.setGameServer(gameServer);
+        }
     }
 }

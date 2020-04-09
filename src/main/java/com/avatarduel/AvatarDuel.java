@@ -33,7 +33,6 @@ public class AvatarDuel extends Application {
   public void start(Stage stage) throws IOException, URISyntaxException {
 //    Parent root = FXMLLoader.load(getClass().getResource("Board.fxml"));
     // Load Main Menu
-    playThemeMusic();
     FXMLLoader mainmenuLoader = getMainMenu();
     Parent mainmenuGUI = mainmenuLoader.load();
     Scene mainmenu = new Scene(mainmenuGUI);
@@ -67,7 +66,7 @@ public class AvatarDuel extends Application {
   private void playThemeMusic() throws URISyntaxException {
     Media media = new Media(getClass().getResource("music/main_menu_song.mp3").toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
-    mediaPlayer.setVolume(20);
+    mediaPlayer.setVolume(0.2);
     mediaPlayer.play();
   }
 

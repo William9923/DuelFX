@@ -9,6 +9,7 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
+import com.sun.corba.se.spi.orbutil.fsm.ActionBase;
 
 public class ActivateSkillEvent implements IEvent { // has not implemented yet
 
@@ -26,6 +27,9 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
         this.idCard = idCard;
         this.idTarget = idTarget;
         this.currTurn = Game.getInstance().getCurrentTurn();
+    }
+    public ActivateSkillEvent(int idCard, int idTarget, PlayerType playerType) throws InvalidOperationException {
+        this(idCard, idTarget, playerType, Game.getInstance().getPlayerByType(playerType).getField().getEmptySkillCardIndex());
     }
     @Override
     public void execute() {

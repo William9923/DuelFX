@@ -40,10 +40,9 @@
             <fx:include fx:id="playerAStatus" source="PlayerStatus.fxml" />
          </children>
       </HBox>
-      <VBox layoutX="1764.0" layoutY="29.0" prefHeight="164.0" prefWidth="104.0">
+      <VBox layoutX="1764.0" layoutY="29.0" prefHeight="206.0" prefWidth="104.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
-            <Label text="Deck : 45/50" />
+            <fx:include fx:id="deckB" source="Deck.fxml" />
          </children>
       </VBox>
       <HBox layoutX="46.0" layoutY="30.0" spacing="16.0">
@@ -52,13 +51,14 @@
          </children>
       </HBox>
       <Rectangle id="pembatas" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="376.0" layoutY="561.0" stroke="BLACK" strokeType="INSIDE" width="1323.0" />
-      <Rectangle id="status_game" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="565.0" layoutX="1739.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" width="166.0" />
+      <Rectangle id="status_game" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="565.0" layoutX="1733.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" width="166.0" />
       <Text layoutX="1739.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status Game disini" />
-      <VBox layoutX="1764.0" layoutY="897.0" prefHeight="164.0" prefWidth="104.0">
+      <VBox layoutX="1764.0" layoutY="848.0" prefHeight="206.0" prefWidth="104.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="147.0" stroke="BLACK" strokeType="INSIDE" width="103.0" />
-            <Label text="Deck : 45/50" />
+            <fx:include fx:id="deckA" source="Deck.fxml" />
          </children>
       </VBox>
+      <Button fx:id="end_turn" layoutX="757.0" layoutY="553.0" mnemonicParsing="false" onMouseClicked="#endTurn" prefHeight="31.0" prefWidth="96.0" text="End Turn" />
+      <Button fx:id="end_phase" layoutX="879.0" layoutY="553.0" mnemonicParsing="false" onMouseClicked="#endPhase" text="End Phase" />
    </children>
 </AnchorPane>

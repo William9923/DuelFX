@@ -23,6 +23,7 @@ public class HandController implements Subscriber {
     private PlayerType playerType;
     private List<CardInHandController> cards;
     private FieldController correspondingField;
+    private GameServer gameServer;
 
     @FXML
     CardInHandController card1Controller;
@@ -63,7 +64,6 @@ public class HandController implements Subscriber {
         cards.add(card10Controller);
         for(int i = 0 ; i < 10 ; i++) {
             cards.get(i).setNull();
-            cards.get(i).setIndex(i);
             cards.get(i).setHandController(this);
         }
     }
@@ -98,7 +98,16 @@ public class HandController implements Subscriber {
 
     public void flipCards() {
         for(CardInHandController cardInHandController : cards) {
-            cardInHandController.flipCard();
+            if(cardInHandController.getCardData() != null) {
+                cardInHandController.flipCard();
+            }
         }
+    }
+
+    public void setGameServer(GameServer gameServer) {
+        this.gameServer = gameServer;
+        cards.forEach(controller -> {
+            controller.setGameServer(gameServer);
+        });
     }
 }
