@@ -17,6 +17,6 @@ public class DrawPhase  implements IPhase{
 
     @Override
     public IPhase next() {
-        return new MainPhase1();
+        return new MainPhase();
     }
 }

@@ -91,7 +91,7 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
         int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
 
-        return (((currPhase == Phase.MAIN1) || (currPhase == Phase.MAIN2))
+        return ((currPhase == Phase.MAIN)
                 && (currPlayer == playerType)
                 && (characterCardInField != null)
                 && (skillCard != null)

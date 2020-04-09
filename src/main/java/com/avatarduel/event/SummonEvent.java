@@ -59,7 +59,7 @@ public class SummonEvent implements IEvent {
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
         int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList().size();
 
-        return (((currPhase == Phase.MAIN1) || (currPhase == Phase.MAIN2))
+        return ((currPhase == Phase.MAIN)
                 && (currPlayer == playerType)
                 && (charCard != null)
                 && (CardType.CHARACTER == charCard.getType())

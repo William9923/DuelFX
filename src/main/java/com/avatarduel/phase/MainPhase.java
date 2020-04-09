@@ -2,12 +2,12 @@ package com.avatarduel.phase;
 
 import com.avatarduel.model.type.Phase;
 
-public class MainPhase2 implements IPhase {
+public class MainPhase implements IPhase {
 
     private Phase phase;
 
-    public MainPhase2() {
-        phase = Phase.MAIN2;
+    public MainPhase() {
+        phase = Phase.MAIN;
     }
     @Override
     public Phase getPhase() {
@@ -16,6 +16,6 @@ public class MainPhase2 implements IPhase {
 
     @Override
     public IPhase next() {
-        return new EndPhase();
+        return new BattlePhase();
     }
 }

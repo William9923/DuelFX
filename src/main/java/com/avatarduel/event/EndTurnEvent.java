@@ -7,10 +7,7 @@ import static com.avatarduel.model.Game.getInstance;
 
 public class EndTurnEvent implements IEvent {
 
-    private PlayerType player;
-
-    public EndTurnEvent(PlayerType player) {
-        this.player = player;
+    public EndTurnEvent() {
     }
     @Override
     public void execute() {
@@ -25,6 +22,6 @@ public class EndTurnEvent implements IEvent {
 
     @Override
     public boolean validate() {
-        return (getInstance().getCurrentPlayer() == (player));
+        return true;
     }
 }

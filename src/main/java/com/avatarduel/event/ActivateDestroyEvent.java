@@ -44,7 +44,7 @@ public class ActivateDestroyEvent implements IEvent {
             .filter(card -> card.getId() == skillID)
             .findFirst()
             .orElse(null);
-        return ((currPhase.equals(Phase.MAIN1) || currPhase.equals(Phase.MAIN1))
+        return ((currPhase.equals(Phase.MAIN))
                 && currPlayer.equals(playerType)
                 && opponent.getField().getCharacterCardByID(targetID) != null
                 && destroyCard != null
