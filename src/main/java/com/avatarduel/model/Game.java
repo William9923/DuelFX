@@ -4,7 +4,6 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.phase.*;
-import com.google.common.eventbus.EventBus;
 
 // Singleton Design pattern
 public class Game {

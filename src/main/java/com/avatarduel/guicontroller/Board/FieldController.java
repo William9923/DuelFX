@@ -149,6 +149,5 @@ public class FieldController {
         CharacterCard characterCard = (CharacterCard) characterCardInField.getCard();
         this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
                 + Integer.toString(characterCard.getAttack()));
-
     }
 }
