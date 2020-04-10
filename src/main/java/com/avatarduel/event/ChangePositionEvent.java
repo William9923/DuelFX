@@ -17,7 +17,7 @@ public class ChangePositionEvent implements IEvent {
 
     @Override
     public void execute() {
-        Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).changeState();
+        Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).switchPosition();
     }
 
     @Override

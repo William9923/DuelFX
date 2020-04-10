@@ -116,7 +116,7 @@ public class CharacterCardInField implements IField{
         return Math.max(0, card.getDefense() + getBonusDefense());
     }
 
-    public void changeState() {
+    public void switchPosition() {
         if (CharacterState.ATTACK.equals(position)) {
             position = CharacterState.DEFENSE;
         } else {

@@ -1,9 +1,11 @@
 package com.avatarduel.model;
 
+import com.avatarduel.guicontroller.Server.GUIRenderServer;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.phase.*;
+import com.google.common.eventbus.EventBus;
 
 // Singleton Design pattern
 public class Game {
@@ -13,6 +15,8 @@ public class Game {
     private int currentTurn;
     private PlayerType currentPlayer;
     private IPhase currentPhase;
+    private EventBus eventBus;
+    private GUIRenderServer guiRenderServer;
 
     private Game() {
         this.p1 = new Player(PlayerType.A);
@@ -20,6 +24,8 @@ public class Game {
         this.currentTurn = 1; // first turn
         this.currentPhase = new DrawPhase();
         this.currentPlayer = PlayerType.A;
+        this.eventBus = new EventBus();
+        this.guiRenderServer = new GUIRenderServer();
     }
 
     public static Game getInstance() {
@@ -64,6 +70,14 @@ public class Game {
         // else : error InvalidPlayer duar
     }
 
+    public void endTurn() {
+        nextPlayer();
+        incrementTurn();
+        DrawPhase drawPhase = new DrawPhase();
+        currentPhase = drawPhase;
+        drawPhase.drawCardAndGoToNextPhase();
+    }
+
     public void setCurrentPhase(Phase newPhase) {
         switch (newPhase) {
             case DRAW: currentPhase = new DrawPhase(); break;
@@ -86,5 +100,13 @@ public class Game {
         } else {
             return null; // throw error
         }
+    }
+
+    public EventBus getEventBus() {
+        return eventBus;
+    }
+
+    public GUIRenderServer getGUIRenderServer() {
+        return guiRenderServer;
     }
 }

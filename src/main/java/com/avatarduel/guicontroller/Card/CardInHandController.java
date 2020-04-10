@@ -6,6 +6,7 @@ import com.avatarduel.event.SummonEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Board.HandController;
 import com.avatarduel.guicontroller.Board.PlayerStatusController;
+import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
@@ -19,8 +20,6 @@ public class CardInHandController extends CardController{
     @FXML private Button card_play;
     private String borderStyle;
     private PlayerType playerType;
-    private HandController handController;
-    private PlayerStatusController playerStatusController;
 
     @FXML
     public void initialize() {
@@ -31,20 +30,7 @@ public class CardInHandController extends CardController{
     @Override
     public void setCard(Card card) {
         super.setCard(card);
-        switch (cardData.getElement()) {
-            case WATER:
-                borderStyle = "water_border";
-                break;
-            case FIRE:
-                borderStyle = "fire_border";
-                break;
-            case EARTH:
-                borderStyle = "earth_border";
-                break;
-            case AIR:
-                borderStyle = "air_border";
-                break;
-        }
+        borderStyle = card_border.getStyleClass().get(0);
     }
 
     public void flipCard() {
@@ -67,7 +53,9 @@ public class CardInHandController extends CardController{
 
     @FXML
     public void showPlayButton() {
-        card_play.setVisible(true);
+        if(playerType == Game.getInstance().getCurrentPlayer()) {
+            card_play.setVisible(true);
+        }
     }
 
     @FXML
@@ -79,10 +67,6 @@ public class CardInHandController extends CardController{
         this.playerType = playerType;
     }
 
-    public void setHandController(HandController handController) {
-        this.handController = handController;
-    }
-
     @FXML
     public void playIsClicked() {
         try {
@@ -90,20 +74,25 @@ public class CardInHandController extends CardController{
             if(cardData.getType() == CardType.LAND) {
                 playCardEvent = new PlayLandCardEvent(cardData.getId(), playerType);
                 playCardEvent.execute();
-                gameServer.renderAll(Channel.getChannelFromPlayerType(playerType));
             }
             else if(cardData.getType() == CardType.CHARACTER) {
                 playCardEvent = new SummonEvent(cardData.getId(), playerType);
                 playCardEvent.execute();
-                gameServer.renderAll(Channel.getChannelFromPlayerType(playerType));
             }
             else {
                 // TODO : BIKIN IMPLEMENTASI PLAY BUAT SKILL
             }
+            Game.getInstance().getGUIRenderServer().renderAll(Channel.getChannelFromPlayerType(playerType));
         }
         catch(InvalidOperationException e) {
             System.out.println(e.getOperation());
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void showSelectedCard() {
+        if(cardData != null && this.playerType == Game.getInstance().getCurrentPlayer()) {
+            Game.getInstance().getEventBus().post(new ShowSelectedCardRequest(this.cardData));
         }
     }
 }
