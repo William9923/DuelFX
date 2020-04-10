@@ -1,5 +1,7 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.event.ChangePositionEvent;
+import com.avatarduel.event.IEvent;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -31,6 +33,12 @@ public class CharacterCardInFieldController extends CardController {
 
     @FXML
     public void rotateCard() {
+        IEvent event = new ChangePositionEvent(playerType, characterCardInField.getCard().getId());
+        Game.getInstance().getEventBus().post(event);
+        this.renderRotate();
+    }
+
+    public void renderRotate() {
         if(characterCardInField.getPosition() == CharacterState.ATTACK) {
             card_border.rotateProperty().setValue(90);
             card_attack.setVisible(false);
@@ -39,7 +47,6 @@ public class CharacterCardInFieldController extends CardController {
             card_border.rotateProperty().setValue(0);
             card_attack.setVisible(true);
         }
-        characterCardInField.switchPosition();
     }
 
     // dipake FieldController untuk membuat action tidak terlihat ketika di hover

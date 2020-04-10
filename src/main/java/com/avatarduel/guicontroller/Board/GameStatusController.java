@@ -1,6 +1,7 @@
 package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Request.Render;
+import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.google.common.eventbus.Subscribe;
@@ -20,8 +21,8 @@ public class GameStatusController {
     }
 
     @Subscribe
-    public void update(Render request) {
-        System.out.println("Hit this");
+    public void update(RenderRequest request) {
+        System.out.println("Seharusnya kena ini");
         this.render();
     }
     public void render() {

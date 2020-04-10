@@ -2,6 +2,7 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.event.SummonEvent;
 import com.avatarduel.guicontroller.Card.CardInHandController;
+import com.avatarduel.guicontroller.Request.HandRenderRequest;
 import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.guicontroller.Server.GUIRenderServer;
 import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
@@ -18,6 +19,7 @@ import java.util.List;
 public class HandController implements Subscriber {
     private PlayerType playerType;
     private List<CardInHandController> cards;
+    private boolean isFlipped;
 
     @FXML
     CardInHandController card1Controller;
@@ -63,6 +65,7 @@ public class HandController implements Subscriber {
 
     public void setPlayerTypeAndRender(PlayerType playerType) {
         this.playerType = playerType;
+        this.isFlipped = false;
         for(CardInHandController cardInHandController : cards) {
             cardInHandController.setPlayerType(playerType);
         }
@@ -70,17 +73,21 @@ public class HandController implements Subscriber {
     }
 
     public void render() {
-        Hand currentHand = Game.getInstance().getPlayerByType(this.playerType).getHand();
-        int i = 0;
-        for(Card cardInHand: currentHand) {
-            cards.get(i).setCard(cardInHand);
-            i++;
-        }
-        while(i < 10) {
-            cards.get(i).setNullCard();
-            i++;
+        if (!this.isFlipped) {
+            Hand currentHand = Game.getInstance().getPlayerByType(this.playerType).getHand();
+            int i = 0;
+            for(Card cardInHand: currentHand) {
+                cards.get(i).setCard(cardInHand);
+                i++;
+            }
+            while(i < 10) {
+                cards.get(i).setNullCard();
+                i++;
+            }
         }
     }
+
+
 
     public void flipCards() {
         for(CardInHandController cardInHandController : cards) {
@@ -88,10 +95,11 @@ public class HandController implements Subscriber {
                 cardInHandController.flipCard();
             }
         }
+        this.isFlipped = !this.isFlipped;
     }
 
     @Subscribe
-    public void update(Render request) {
+    public void update(HandRenderRequest request) {
         this.render();
     }
 }

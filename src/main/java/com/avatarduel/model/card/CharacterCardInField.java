@@ -59,6 +59,11 @@ public class CharacterCardInField implements IField{
         return bonus.get();
     }
 
+    @Override
+    public String toString() {
+        return this.getCard().getId() + " | " + this.getCard().getName();
+    }
+
     public CharacterState getPosition() {
         return position;
     }

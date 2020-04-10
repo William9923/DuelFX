@@ -1,6 +1,7 @@
 package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Request.Render;
+import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Element;
@@ -30,7 +31,7 @@ public class PlayerStatusController implements Subscriber {
     }
 
     @Subscribe
-    public void update(Render request) {
+    public void update(RenderRequest request) {
         this.render();
     }
 

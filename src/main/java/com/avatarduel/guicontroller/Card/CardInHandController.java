@@ -4,16 +4,27 @@ import com.avatarduel.event.IEvent;
 import com.avatarduel.event.PlayLandCardEvent;
 import com.avatarduel.event.SummonEvent;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.guicontroller.Board.FieldController;
 import com.avatarduel.guicontroller.Board.HandController;
 import com.avatarduel.guicontroller.Board.PlayerStatusController;
+import com.avatarduel.guicontroller.Request.FieldRenderRequest;
+import com.avatarduel.guicontroller.Request.HandRenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CharacterCard;
+import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CardType;
+import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class CardInHandController extends CardController{
@@ -53,7 +64,7 @@ public class CardInHandController extends CardController{
 
     @FXML
     public void showPlayButton() {
-        if(playerType == Game.getInstance().getCurrentPlayer()) {
+        if (playerType == Game.getInstance().getCurrentPlayer()) {
             card_play.setVisible(true);
         }
     }
@@ -69,25 +80,55 @@ public class CardInHandController extends CardController{
 
     @FXML
     public void playIsClicked() {
-        try {
-            IEvent playCardEvent;
-            if(cardData.getType() == CardType.LAND) {
-                playCardEvent = new PlayLandCardEvent(cardData.getId(), playerType);
-                playCardEvent.execute();
-            }
-            else if(cardData.getType() == CardType.CHARACTER) {
-                playCardEvent = new SummonEvent(cardData.getId(), playerType);
-                playCardEvent.execute();
-            }
-            else {
-                // TODO : BIKIN IMPLEMENTASI PLAY BUAT SKILL
-            }
-            Game.getInstance().getGUIRenderServer().renderAll(Channel.getChannelFromPlayerType(playerType));
+        IEvent event;
+        if(cardData.getType() == CardType.LAND) {
+            event = new PlayLandCardEvent(cardData.getId(), playerType);
+            Game.getInstance().getEventBus().post(event);
+            Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
         }
-        catch(InvalidOperationException e) {
-            System.out.println(e.getOperation());
-            System.out.println(e.getMessage());
+        else if(cardData.getType() == CardType.CHARACTER) {
+            CharacterState stateList[] = {CharacterState.ATTACK, CharacterState.DEFENSE};
+            ChoiceDialog<CharacterState> state = new ChoiceDialog<>(stateList[0], stateList);
+            state.setHeaderText("Pilihlah State Karakter : ");
+            state.showAndWait();
+            System.out.println(state.getSelectedItem());
+            if (state.getSelectedItem() != null) {
+                System.out.println(state.getSelectedItem());
+                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(),state.getSelectedItem(), getSmallestIndexPossible(Game.getInstance().getCurrentPlayer()));
+                Game.getInstance().getEventBus().post(event);
+                Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
+                Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
+            }
         }
+        else if (cardData.getType() == CardType.SKILL_DESTROY) {
+            if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
+                List<String> listOfCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
+                        .stream()
+                        .map(c -> c.toString())
+                        .collect(Collectors.toList());
+
+                ChoiceDialog<String> dialog = new ChoiceDialog<>(listOfCard.get(0), listOfCard);
+                dialog.setHeaderText("Pick Character to destroy");
+                dialog.showAndWait();
+                System.out.println();
+                // implementasi blom
+                // set wat to destroy
+                // duar render apa ja yang perlu
+                // mantap di gas lagi
+        } else {
+            // play skill aura card / play skill power up
+            // buat sementara do nothing dl
+            }
+        }
+    }
+
+    private int getSmallestIndexPossible(PlayerType type) {
+        List<CharacterCardInField> listOfCharacter = Game.getInstance().getPlayerByType(type).getField().getCharCardList();
+        int min = 0;
+        for (CharacterCardInField card : listOfCharacter) {
+            min = (card.getIndex() < min) ? card.getIndex() : min;
+        }
+        return min;
     }
 
     public void showSelectedCard() {

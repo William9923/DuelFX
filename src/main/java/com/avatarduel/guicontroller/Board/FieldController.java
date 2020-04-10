@@ -3,6 +3,7 @@ package com.avatarduel.guicontroller.Board;
 import com.avatarduel.event.AttackEvent;
 import com.avatarduel.guicontroller.Card.CharacterCardInFieldController;
 import com.avatarduel.guicontroller.Card.SkillCardInFieldController;
+import com.avatarduel.guicontroller.Request.FieldRenderRequest;
 import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
@@ -134,6 +135,13 @@ public class FieldController implements Subscriber {
         CharacterCard characterCard = (CharacterCard) characterCardInField.getCard();
 //        this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
 //                + Integer.toString(characterCard.getAttack()));
+    }
+
+    @Subscribe
+    public void update(FieldRenderRequest request){
+        if (request.getPlayerType().equals(playerType)){
+            this.render();
+        }
     }
 
 

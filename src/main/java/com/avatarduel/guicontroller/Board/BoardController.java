@@ -6,9 +6,11 @@ import com.avatarduel.event.IEvent;
 import com.avatarduel.event.NextPhaseEvent;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.Request.Render;
+import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
+import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
 import javafx.event.ActionEvent;
@@ -108,24 +110,27 @@ public class BoardController {
 
     @FXML
     public void endTurn() {
+        IEvent event = new EndTurnEvent();
+        boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
-        PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
-        handControllerMap.get(nextPlayer).render();
-        handAController.flipCards();
-        handBController.flipCards();
-        deckControllerMap.get(nextPlayer).render();
-        gameStatusController.render();
-        fieldControllerMap.forEach((playerType, controller) -> {
-            controller.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == playerType);
-        });
+        Game.getInstance().getEventBus().post(new RenderRequest());
+        if (canDoIt){
+            // gw bikin kek gini karena blom bisa request Flip Card dkk gitu
+            handAController.flipCards();
+            handBController.flipCards();
+            PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
+            handControllerMap.get(nextPlayer).render();
+            // dis kode di bawah ini so smart actually KWKW
+            fieldControllerMap.forEach((playerType, controller) -> {
+                controller.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == playerType);
+            });
+        }
     }
 
     @Subscribe
     public void executeEvent(IEvent event) {
         if (event.validate()) {
             event.execute();
-            Game.getInstance().getEventBus().post(new Render());
-//            gameStatusController.render();
         } else {
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setContentText("Invalid Action");
@@ -135,11 +140,17 @@ public class BoardController {
 
     @FXML
     public void endPhase() {
-        Game.getInstance().getEventBus().post(new NextPhaseEvent());
+        if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE)){
+            this.endTurn();
+        } else {
+            Game.getInstance().getEventBus().post(new NextPhaseEvent());
+            Game.getInstance().getEventBus().post(new RenderRequest());
+        }
     }
 
     // TODO : IMPLEMENT CARD HOVER ON CARD CONTROLLER TO POST AN EVENT
     // Buat Card jadi HoveredCard
+    // ayo ayo mangat gun uwaw
 
     @Subscribe
     private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {

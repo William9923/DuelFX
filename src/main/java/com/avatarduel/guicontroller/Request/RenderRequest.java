@@ -2,7 +2,7 @@ package com.avatarduel.guicontroller.Request;
 
 import com.avatarduel.model.type.PlayerType;
 
-public abstract class RenderRequest {
+public class RenderRequest {
     protected PlayerType playerType;
 
     public RenderRequest(PlayerType playerType) {
