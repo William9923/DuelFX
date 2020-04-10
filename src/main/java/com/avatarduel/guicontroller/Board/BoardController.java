@@ -41,16 +41,21 @@ public class BoardController {
 
     @FXML
     public void initialize() {
+        // hand mapping setup
         handControllerMap.put(PlayerType.A, handAController);
         handControllerMap.put(PlayerType.B, handBController);
+
         handControllerMap.forEach((playerType ,controller) -> {
             controller.setPlayerTypeAndRender(playerType);
             Game.getInstance().getEventBus().register(controller);
         });
-        handBController.flipCards();
 
+        handBController.flipCards(); // game start, second player need to flip the card
+
+        // field mapping setup
         fieldControllerMap.put(PlayerType.A, fieldAController);
         fieldControllerMap.put(PlayerType.B, fieldBController);
+
         fieldControllerMap.forEach((playerType, fieldController) -> {
             fieldController.setPlayerType(playerType);
             Game.getInstance().getEventBus().register(fieldController);
