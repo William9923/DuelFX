@@ -2,6 +2,7 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.event.SummonEvent;
 import com.avatarduel.guicontroller.Card.CardInHandController;
+import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.guicontroller.Server.GUIRenderServer;
 import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
@@ -87,5 +88,10 @@ public class HandController implements Subscriber {
                 cardInHandController.flipCard();
             }
         }
+    }
+
+    @Subscribe
+    public void update(Render request) {
+        this.render();
     }
 }

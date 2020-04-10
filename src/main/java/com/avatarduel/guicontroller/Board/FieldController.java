@@ -27,9 +27,9 @@ public class FieldController implements Subscriber {
     private FieldController enemyFieldController;
     private int fromAttack;
 
-    @FXML VBox popup;
-    @FXML Label card_from;
-    @FXML TextArea enemy_index;
+//    @FXML VBox popup;
+//    @FXML Label card_from;
+//    @FXML TextArea enemy_index;
 
     @FXML VBox card_container;
     @FXML HBox character_container;
@@ -63,7 +63,7 @@ public class FieldController implements Subscriber {
     public void initialize() {
         this.characters = new HashMap<>();
         this.skills = new HashMap<>();
-        popup.setVisible(false);
+//        popup.setVisible(false);
         characters.put("0", character1Controller);
         characters.put("1", character2Controller);
         characters.put("2", character3Controller);
@@ -129,10 +129,12 @@ public class FieldController implements Subscriber {
 
     @Subscribe
     public void showAttackRequestForm(CharacterCardInField characterCardInField) {
-        this.popup.setVisible(true);
+//        this.popup.setVisible(true);
         fromAttack = characterCardInField.getCard().getId();
         CharacterCard characterCard = (CharacterCard) characterCardInField.getCard();
-        this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
-                + Integer.toString(characterCard.getAttack()));
+//        this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
+//                + Integer.toString(characterCard.getAttack()));
     }
+
+
 }

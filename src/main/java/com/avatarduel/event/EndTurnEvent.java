@@ -18,14 +18,15 @@ public class EndTurnEvent implements IEvent {
         getInstance().incrementTurn(); // Game State naikin turn + 1
         getInstance().nextPhase(); // EndPhase -> DrawPhase
         getInstance().getPlayerByType(getInstance().getCurrentPlayer()).refreshState();  // refresh state pemain pada draw phase
-        IEvent drawEvent = new DrawEvent(); // ude, langsung draw otomatis ni
-        if (drawEvent.validate()) {
-            drawEvent.execute();
-        }
+//        IEvent drawEvent = new DrawEvent(); // ude, langsung draw otomatis ni
+//        if (drawEvent.validate()) {
+//            drawEvent.execute();
+//        }
     }
 
     @Override
     public boolean validate() {
-        return true;
+        Phase currPhase = getInstance().getCurrentPhase().getPhase();
+        return (currPhase.equals(Phase.MAIN) || currPhase.equals(Phase.BATTLE));
     }
 }

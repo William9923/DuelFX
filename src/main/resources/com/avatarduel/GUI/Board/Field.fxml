@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="1203.0" stylesheets="@styles/Field.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Board.FieldController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="1203.0" stylesheets="@styles/Field.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Board.FieldController">
    <children>
       <VBox fx:id="card_container" prefHeight="317.0" prefWidth="1064.0">
          <children>
@@ -30,14 +28,6 @@
                   <fx:include fx:id="skill6" source="../Card/SkillCardInField.fxml" />
                </children>
             </HBox>
-         </children>
-      </VBox>
-      <VBox fx:id="popup" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="128.0" prefWidth="824.0" styleClass="popup">
-         <children>
-            <Label fx:id="card_from" text="card_intro" />
-            <Label text="WRITE ENEMY CHARACTER INDEX ( 0-9 )YOU WANT TO ATTACK" />
-            <TextArea fx:id="enemy_index" prefHeight="43.0" prefWidth="824.0" />
-            <Button mnemonicParsing="false" onMouseClicked="#submitAttackRequestForm" text="Submit" />
          </children>
       </VBox>
    </children>

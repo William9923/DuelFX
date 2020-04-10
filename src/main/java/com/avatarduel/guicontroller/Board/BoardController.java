@@ -1,12 +1,20 @@
 package com.avatarduel.guicontroller.Board;
 
+import com.avatarduel.event.DrawEvent;
+import com.avatarduel.event.EndTurnEvent;
+import com.avatarduel.event.IEvent;
+import com.avatarduel.event.NextPhaseEvent;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
+import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.util.HashMap;
@@ -25,6 +33,7 @@ public class BoardController {
     @FXML private Button end_turn;
     @FXML private Button end_phase;
     @FXML private GameStatusController gameStatusController;
+//    private Executor executor;
 
     private Map<PlayerType, HandController> handControllerMap;
     private Map<PlayerType, FieldController> fieldControllerMap;
@@ -41,6 +50,7 @@ public class BoardController {
 
     @FXML
     public void initialize() {
+
         // hand mapping setup
         handControllerMap.put(PlayerType.A, handAController);
         handControllerMap.put(PlayerType.B, handBController);
@@ -60,41 +70,45 @@ public class BoardController {
             fieldController.setPlayerType(playerType);
             Game.getInstance().getEventBus().register(fieldController);
         });
+
+        Game.getInstance().getEventBus().register(gameStatusController);
         fieldBController.swapCharactersAndSkillsPosition();
 
         deckControllerMap.put(PlayerType.A, deckAController);
         deckControllerMap.put(PlayerType.B, deckBController);
         deckControllerMap.forEach((playerType, deckController) -> {
             deckController.setPlayerType(playerType);
+            deckController.render();
+            Game.getInstance().getEventBus().register(deckController);
         });
 
         playerStatusControllerMap.put(PlayerType.A, playerAStatusController);
         playerStatusControllerMap.put(PlayerType.B, playerBStatusController);
         playerStatusControllerMap.forEach((playerType, playerStatusController) -> {
             playerStatusController.setPlayerType(playerType);
+            Game.getInstance().getEventBus().register(playerStatusController);
         });
 
         // Initialize Game Server
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckAController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckBController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handAController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handBController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldAController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldBController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, handAController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, fieldAController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, playerAStatusController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, handBController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, fieldBController);
-        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, playerBStatusController);
-
-        Game.getInstance().getGUIRenderServer().renderAll(Channel.DECK);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckAController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckBController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handAController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handBController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldAController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldBController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, handAController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, fieldAController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, playerAStatusController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, handBController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, fieldBController);
+//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, playerBStatusController);
+//
+//        Game.getInstance().getGUIRenderServer().renderAll(Channel.DECK);
     }
 
     @FXML
     public void endTurn() {
-        Game.getInstance().endTurn();
-//        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
+        Game.getInstance().getEventBus().post(new EndTurnEvent());
         PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
         handControllerMap.get(nextPlayer).render();
         handAController.flipCards();
@@ -106,14 +120,27 @@ public class BoardController {
         });
     }
 
+    @Subscribe
+    public void executeEvent(IEvent event) {
+        if (event.validate()) {
+            event.execute();
+            Game.getInstance().getEventBus().post(new Render());
+//            gameStatusController.render();
+        } else {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("Invalid Action");
+            a.show();
+        }
+    }
+
     @FXML
     public void endPhase() {
-        Game.getInstance().nextPhase();
-        gameStatusController.render();
+        Game.getInstance().getEventBus().post(new NextPhaseEvent());
     }
 
     // TODO : IMPLEMENT CARD HOVER ON CARD CONTROLLER TO POST AN EVENT
     // Buat Card jadi HoveredCard
+
     @Subscribe
     private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {
         selectedController.setCard(selectCardRequest.getCard());
