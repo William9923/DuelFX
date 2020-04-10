@@ -90,22 +90,6 @@ public class BoardController {
             playerStatusController.setPlayerType(playerType);
             Game.getInstance().getEventBus().register(playerStatusController);
         });
-
-        // Initialize Game Server
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckAController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.DECK, deckBController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handAController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.HAND, handBController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldAController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.FIELD, fieldBController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, handAController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, fieldAController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_A, playerAStatusController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, handBController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, fieldBController);
-//        Game.getInstance().getGUIRenderServer().addSubscriber(Channel.PLAYER_B, playerBStatusController);
-//
-//        Game.getInstance().getGUIRenderServer().renderAll(Channel.DECK);
     }
 
     @FXML
