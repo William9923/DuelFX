@@ -41,8 +41,8 @@ public class DirectAttackEvent implements IEvent {
                 && currentTurn != 1 // not first turn
                 && currPlayer.equals(player)
                 && f1.getCharacterCardByID(attackCharacterId) != null  // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByID(attackCharacterId).canAttack()
                 && f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() != currentTurn
+                && !f1.getCharacterCardByID(attackCharacterId).hasAttacked
         );
     }
 }

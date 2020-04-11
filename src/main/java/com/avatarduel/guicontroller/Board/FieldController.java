@@ -64,7 +64,6 @@ public class FieldController implements Subscriber {
     public void initialize() {
         this.characters = new HashMap<>();
         this.skills = new HashMap<>();
-//        popup.setVisible(false);
         characters.put("0", character1Controller);
         characters.put("1", character2Controller);
         characters.put("2", character3Controller);
@@ -118,28 +117,13 @@ public class FieldController implements Subscriber {
 
     @FXML
     public void submitAttackRequestForm() {
-//        int indexOfEnemyCard = Integer.parseInt(enemy_index.getText());
-//        AttackEvent attackEvent = new AttackEvent(fromAttack , enemyTargetId, this.playerType, enemyFieldController.playerType);
-//        if(attackEvent.validate()) {
-//            attackEvent.execute();
-//        }
-//        this.render();
-//        this.enemyFieldController.render();
-//        this.popup.setVisible(false);
-    }
-
-    @Subscribe
-    public void showAttackRequestForm(CharacterCardInField characterCardInField) {
-//        this.popup.setVisible(true);
-        fromAttack = characterCardInField.getCard().getId();
-        CharacterCard characterCard = (CharacterCard) characterCardInField.getCard();
-//        this.card_from.setText("Attacking from card " + characterCard.getName() + " with attack : "
-//                + Integer.toString(characterCard.getAttack()));
     }
 
     @Subscribe
     public void update(FieldRenderRequest request){
         if (request.getPlayerType().equals(playerType)){
+            System.out.println("Updating Field");
+            System.out.println(playerType);
             this.render();
         }
     }

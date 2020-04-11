@@ -1,7 +1,11 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.event.AttackEvent;
 import com.avatarduel.event.ChangePositionEvent;
+import com.avatarduel.event.DirectAttackEvent;
 import com.avatarduel.event.IEvent;
+import com.avatarduel.guicontroller.Request.FieldRenderRequest;
+import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -9,8 +13,11 @@ import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.EventBus;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
+import java.util.List;
 
 public class CharacterCardInFieldController extends CardController {
     @FXML VBox card_actions;
@@ -68,6 +75,23 @@ public class CharacterCardInFieldController extends CardController {
 
     @FXML
     public void cardAttack() {
+        if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() == 0){
+            Game.getInstance().getEventBus().post(new DirectAttackEvent(this.getCardData().getId(), playerType));
+            Game.getInstance().getEventBus().post(new RenderRequest());
+        }
+        else if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
+            List<CharacterCardInField> opponentField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
+            ChoiceDialog<CharacterCardInField> choiceAttack = new ChoiceDialog<>(opponentField.get(0), opponentField);
+            choiceAttack.showAndWait();
+            if (choiceAttack.getSelectedItem() != null) {
+                IEvent event = new AttackEvent(this.getCardData().getId(), choiceAttack.getSelectedItem().getCard().getId(), Game.getInstance().getCurrentPlayer(), Game.getInstance().getCurrentOpponent());
+                Game.getInstance().getEventBus().post(event);
+                Game.getInstance().getEventBus().post(new RenderRequest());
+                Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
+                Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
+                // cek uda bener ga nanti
+            }
+        }
         Game.getInstance().getEventBus().post(this.characterCardInField);
     }
 

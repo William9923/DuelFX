@@ -65,8 +65,8 @@ public class AttackEvent implements IEvent {
                 && currPlayer.equals(attacker)
                 && f1.getCharacterCardByID(attackCharacterId) != null  // ganti kalo uda ada trycatch
                 && f2.getCharacterCardByID(defenseCharacterId) != null // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByID(attackCharacterId).canAttack()
                 && f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() != currentTurn
+                && !f1.getCharacterCardByID(attackCharacterId).hasAttacked
         );
     }
 }

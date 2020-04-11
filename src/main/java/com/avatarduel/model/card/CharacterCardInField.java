@@ -20,7 +20,7 @@ public class CharacterCardInField implements IField{
     public CharacterCardInField(CharacterCard card, CharacterState state, int createdAt, int index) {
         this.card = card;
         this.position = state;
-        this.hasAttacked = true; // karena kalo baru di summon ga bisa attack kan ya
+        this.hasAttacked = false; // karena kalo baru di summon ga bisa attack kan ya
         this.connectedCard = new ArrayList<>();
         this.createdAtTurn = createdAt;
         this.index = index;
@@ -28,6 +28,7 @@ public class CharacterCardInField implements IField{
 
 
     public void refresh() {
+        System.out.println(this + "refreshed");
         hasAttacked = false;
     }
 
@@ -57,11 +58,6 @@ public class CharacterCardInField implements IField{
             }
         }
         return bonus.get();
-    }
-
-    @Override
-    public String toString() {
-        return this.getCard().getId() + " | " + this.getCard().getName();
     }
 
     public CharacterState getPosition() {
@@ -127,5 +123,10 @@ public class CharacterCardInField implements IField{
         } else {
             position = CharacterState.ATTACK;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ID:" + Integer.toString(this.getCard().getId()) + " | " + this.getCard().getName();
     }
 }

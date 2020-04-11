@@ -18,10 +18,6 @@ public class EndTurnEvent implements IEvent {
         getInstance().incrementTurn(); // Game State naikin turn + 1
         getInstance().nextPhase(); // EndPhase -> DrawPhase
         getInstance().getPlayerByType(getInstance().getCurrentPlayer()).refreshState();  // refresh state pemain pada draw phase
-//        IEvent drawEvent = new DrawEvent(); // ude, langsung draw otomatis ni
-//        if (drawEvent.validate()) {
-//            drawEvent.execute();
-//        }
     }
 
     @Override

@@ -60,6 +60,6 @@
          </children>
       </VBox>
       <Button fx:id="end_turn" layoutX="1761.0" layoutY="705.0" mnemonicParsing="false" onMouseClicked="#endTurn" prefHeight="31.0" prefWidth="96.0" text="End Turn" />
-      <Button fx:id="end_phase" layoutX="1761.0" layoutY="754.0" mnemonicParsing="false" onMouseClicked="#endPhase" prefHeight="31.0" prefWidth="96.0" text="End Phase" />
+      <Button fx:id="end_phase" layoutX="1761.0" layoutY="754.0" mnemonicParsing="false" onMouseClicked="#endPhase" prefHeight="31.0" prefWidth="96.0" text="Next Phase" />
    </children>
 </AnchorPane>
