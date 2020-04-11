@@ -86,11 +86,30 @@ public class FieldController implements Subscriber {
         });
     }
 
+    private void setNullCharacter() {
+        characters.forEach((key, controller) -> {
+            controller.setNullCard();
+        });
+    }
+
+    private void setNullSkill() {
+        skills.forEach((key, controller) -> {
+            controller.setNullCard();
+        });
+    }
+
     public void render() {
+        setNullCharacter();
+        skills.forEach((key, controller) -> {
+            controller.setNullCard();
+            controller.setPlayerType(playerType);
+            controller.setIndex(Integer.parseInt(key));
+        });
         List<CharacterCardInField> characterCardInFieldList = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList();
         List<SkillCardInField> skillCardList = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList();
         for(CharacterCardInField characterCardInField : characterCardInFieldList) {
             this.characters.get(Integer.toString(characterCardInField.getIndex())).setCard(characterCardInField);
+            this.characters.get(Integer.toString(characterCardInField.getIndex())).renderRotate();          // biar dia tetep sesuai keadaan dia
         }
         for(SkillCardInField skillCardInField : skillCardList) {
             this.skills.get(Integer.toString(skillCardInField.getIndex())).setCard(skillCardInField);

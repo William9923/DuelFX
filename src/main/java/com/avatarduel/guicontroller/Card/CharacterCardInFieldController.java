@@ -46,11 +46,15 @@ public class CharacterCardInFieldController extends CardController {
     }
 
     public void renderRotate() {
-        if(characterCardInField.getPosition() == CharacterState.ATTACK) {
+        if(characterCardInField.getPosition() == CharacterState.DEFENSE) {
+//            System.out.println("Seharusnya Attack");
+//            System.out.println("Nyatanya " + characterCardInField.getPosition());
             card_border.rotateProperty().setValue(90);
             card_attack.setVisible(false);
         }
         else{
+//            System.out.println("Seharusnya Attack");
+//            System.out.println("Nyatanya " + characterCardInField.getPosition());
             card_border.rotateProperty().setValue(0);
             card_attack.setVisible(true);
         }
