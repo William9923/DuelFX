@@ -1,27 +1,27 @@
 package com.avatarduel.guicontroller.Card;
 
-import com.avatarduel.event.IEvent;
-import com.avatarduel.event.PlayLandCardEvent;
-import com.avatarduel.event.SummonEvent;
+import com.avatarduel.event.*;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Board.FieldController;
 import com.avatarduel.guicontroller.Board.HandController;
 import com.avatarduel.guicontroller.Board.PlayerStatusController;
 import com.avatarduel.guicontroller.Request.FieldRenderRequest;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
+import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.Card;
-import com.avatarduel.model.card.CharacterCard;
-import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.card.*;
+import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 
+import javax.security.auth.callback.ChoiceCallback;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,7 +94,7 @@ public class CardInHandController extends CardController{
             System.out.println(state.getSelectedItem());
             if (state.getSelectedItem() != null) {
                 System.out.println(state.getSelectedItem());
-                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(),state.getSelectedItem(), getSmallestIndexPossible(Game.getInstance().getCurrentPlayer()));
+                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(),state.getSelectedItem(), getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
                 Game.getInstance().getEventBus().post(event);
                 Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
@@ -102,33 +102,67 @@ public class CardInHandController extends CardController{
         }
         else if (cardData.getType() == CardType.SKILL_DESTROY) {
             if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
-                List<String> listOfCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
-                        .stream()
-                        .map(c -> c.toString())
-                        .collect(Collectors.toList());
-
-                ChoiceDialog<String> dialog = new ChoiceDialog<>(listOfCard.get(0), listOfCard);
-                dialog.setHeaderText("Pick Character to destroy");
-                dialog.showAndWait();
-                System.out.println();
-                // implementasi blom
-                // set wat to destroy
-                // duar render apa ja yang perlu
-                // mantap di gas lagi
+                List<CharacterCardInField> listOfCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
+                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0),listOfCard);
+                choice.setHeaderText("Destroy Card Effect");
+                choice.setContentText("Select Character To Destroy :");
+                choice.showAndWait();
+                if (choice != null) {
+                    event = new ActivateDestroyEvent(playerType, cardData.getId(), choice.getSelectedItem().getCard().getId());
+                    Game.getInstance().getEventBus().post(event);
+                    Game.getInstance().getEventBus().post(new RenderRequest()); // render player status + game status
+                    Game.getInstance().getEventBus().post(new HandRenderRequest(playerType)); // render tangan lagi soalny uda dipake kartuny
+                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent())); // render opponent field
+                }
+            } else { // kalo ga ada karakter yang bisa dihancurin
+                Alert alert = this.createInfoAlert("Destroy Card Effect","No Card To Destroy");
+                alert.showAndWait();
+            }
         } else {
-            // play skill aura card / play skill power up
-            // buat sementara do nothing dl
+            // kartu skill aura or power up
+            if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList().size() > 0) {
+                List<CharacterCardInField> listOfCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
+                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0),listOfCard);
+                choice.setHeaderText("Skill Equip Card Effect");
+                choice.setContentText("Select Character To Equip :");
+                choice.showAndWait();
+                if (choice != null) {
+                    event = new ActivateSkillEvent(cardData.getId(),choice.getSelectedItem().getCard().getId(),playerType, this.getSmallestSkillIndexPossible(playerType));
+                    Game.getInstance().getEventBus().post(event); // post eventnya
+                    Game.getInstance().getEventBus().post(new RenderRequest()); // minta render terkait status player dan status game
+                    Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));  // render tangan lagi soalny kartunya uda dipake
+                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer())); // minta render field sendiri
+                }
+            } else {
+                Alert alert = this.createInfoAlert("Skill Card Effect","No Card To Equip");
+                alert.showAndWait();
             }
         }
     }
 
-    private int getSmallestIndexPossible(PlayerType type) {
+    private int getSmallestCharacterIndexPossible(PlayerType type) {
         List<CharacterCardInField> listOfCharacter = Game.getInstance().getPlayerByType(type).getField().getCharCardList();
         int max = -1;
         for (CharacterCardInField card : listOfCharacter) {
             max = (card.getIndex() > max) ? card.getIndex() : max;
         }
         return max + 1;
+    }
+
+    private int getSmallestSkillIndexPossible(PlayerType type) {
+        List<SkillCardInField> listOfSkill = Game.getInstance().getPlayerByType(type).getField().getSkillCardList();
+        int max = -1;
+        for (SkillCardInField card : listOfSkill) {
+            max = (card.getIndex() > max) ? card.getIndex() : max;
+        }
+        return max + 1;
+    }
+
+    private Alert createInfoAlert(String header, String text){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(header);
+        alert.setContentText(text);
+        return alert;
     }
 
     public void showSelectedCard() {

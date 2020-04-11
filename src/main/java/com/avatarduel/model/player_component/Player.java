@@ -42,7 +42,10 @@ public class Player {
     }
 
     public void draw() throws EmptyStackException {
-        hand.add(deck.draw());
+        Card card = deck.draw();
+        if (hand.size() < 10) {
+            hand.add(card);
+        }
     }
 
     public void playCharacterCardByID(int id, CharacterState state, int turn, int index) throws InvalidOperationException {

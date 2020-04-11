@@ -25,7 +25,7 @@ public class Deck extends Stack<Card>{
     private void init() {
         List<Card> charCards = csvDao.getAllCharacterCard();
         List<Card> landCards = csvDao.getAllLandCard();
-        List<Card> skillCards = csvDao.getAllLandCard();
+        List<Card> skillCards = csvDao.getAllSkillCard();
 
         int j = (type.equals(PlayerType.A)) ? 100 : 200; // duar terlalu pinrat
         for (int i = 0; i < Math.round(deckSize * 0.4) ; i++) {

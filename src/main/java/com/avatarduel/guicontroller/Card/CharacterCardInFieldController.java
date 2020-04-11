@@ -47,14 +47,10 @@ public class CharacterCardInFieldController extends CardController {
 
     public void renderRotate() {
         if(characterCardInField.getPosition() == CharacterState.DEFENSE) {
-//            System.out.println("Seharusnya Attack");
-//            System.out.println("Nyatanya " + characterCardInField.getPosition());
             card_border.rotateProperty().setValue(90);
             card_attack.setVisible(false);
         }
         else{
-//            System.out.println("Seharusnya Attack");
-//            System.out.println("Nyatanya " + characterCardInField.getPosition());
             card_border.rotateProperty().setValue(0);
             card_attack.setVisible(true);
         }
@@ -93,7 +89,6 @@ public class CharacterCardInFieldController extends CardController {
                 Game.getInstance().getEventBus().post(new RenderRequest());
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
-                // cek uda bener ga nanti
             }
         }
         Game.getInstance().getEventBus().post(this.characterCardInField);

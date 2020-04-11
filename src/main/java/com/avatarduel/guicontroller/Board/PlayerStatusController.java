@@ -44,7 +44,7 @@ public class PlayerStatusController implements Subscriber {
     }
 
     public void render() {
-        setPlayerHealth(Game.getInstance().getPlayerByType(playerType).getHealthPoint());
+        setPlayerHealth(Math.max(0, Game.getInstance().getPlayerByType(playerType).getHealthPoint()));  // mastiin dia ga mungkin minus
         water_power.setText(Integer.toString(Game.getInstance().getPlayerByType(playerType).getPower().getCurrent_water()));
         fire_power.setText(Integer.toString(Game.getInstance().getPlayerByType(playerType).getPower().getCurrent_fire()));
         air_power.setText(Integer.toString(Game.getInstance().getPlayerByType(playerType).getPower().getCurrent_air()));

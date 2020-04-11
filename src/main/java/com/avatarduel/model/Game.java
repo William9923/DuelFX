@@ -106,7 +106,7 @@ public class Game {
         return eventBus;
     }
 
-    public GUIRenderServer getGUIRenderServer() {
-        return guiRenderServer;
+    public boolean checkGameOver() {
+        return (p1.checkLose()||p2.checkLose());
     }
 }
