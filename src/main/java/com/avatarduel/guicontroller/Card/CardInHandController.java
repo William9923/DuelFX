@@ -124,11 +124,11 @@ public class CardInHandController extends CardController{
 
     private int getSmallestIndexPossible(PlayerType type) {
         List<CharacterCardInField> listOfCharacter = Game.getInstance().getPlayerByType(type).getField().getCharCardList();
-        int min = 0;
+        int max = -1;
         for (CharacterCardInField card : listOfCharacter) {
-            min = (card.getIndex() < min) ? card.getIndex() : min;
+            max = (card.getIndex() > max) ? card.getIndex() : max;
         }
-        return min;
+        return max + 1;
     }
 
     public void showSelectedCard() {
