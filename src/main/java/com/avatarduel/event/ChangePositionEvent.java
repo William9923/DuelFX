@@ -33,7 +33,7 @@ public class ChangePositionEvent implements IEvent {
         if (currPlayer!=p){
             throw new InvalidOperationException("Change Position Character", "Invalid Turn!");
         }
-        
+
         Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).switchPosition();
     }
 

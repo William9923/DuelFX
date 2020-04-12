@@ -54,8 +54,37 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
                     .findFirst()
                     .orElse(null);
         }
-        Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());
 
+        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
+        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
+
+
+        if (currPhase != Phase.MAIN) {
+            throw new InvalidOperationException("Activate Skill Card", "Not in main phase");
+        }
+
+        if (currPlayer != playerType) {
+            throw new InvalidOperationException("Activate Skill Card", "Invalid Player Turn");
+        }
+
+        if (inField == null) {
+            throw new InvalidOperationException("Activate Skill Card", "Invalid Paired Character Card!!");
+        }
+
+        if (skillCard == null) {
+            throw new InvalidOperationException("Activate Skill Card", "Invalid Skill Card");
+        }
+
+        if (currentFieldSize > Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()) {
+            throw new InvalidOperationException("Activate Skill Card","There are not enough space in field for this skill card");
+        }
+
+        if (skillCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())) {
+            throw new InvalidOperationException("Activate Skill Card","Not enough power!");
+        }
+
+        Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());
         p.getHand().remove(skillCard);
         p.getField().addSkillCard(skillCard, index, Game.getInstance().getCurrentTurn());
         inField.pair(skillCard);
