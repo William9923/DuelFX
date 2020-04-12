@@ -35,6 +35,36 @@ public class AttackEvent implements IEvent {
                 .getField()
                 .getCharacterCardByID(defenseCharacterId);
 
+        Field f1 = Game.getInstance().getPlayerByType(attacker).getField();
+        Field f2 = Game.getInstance().getPlayerByType(defender).getField();
+        int currentTurn = Game.getInstance().getCurrentTurn();
+        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
+
+        if (!currPhase.equals(Phase.BATTLE)){
+            throw new InvalidOperationException("Attack", "Not in Battle Phase");
+        }
+
+        if (!currPlayer.equals(attacker)) {
+            throw new InvalidOperationException("Attack", "Not A Valid Player Turn");
+        }
+
+        if (f1.getCharacterCardByID(attackCharacterId) == null) {
+            throw new InvalidOperationException("Attack", "Invalid Attack Character!");
+        }
+
+        if (f2.getCharacterCardByID(defenseCharacterId) == null) {
+            throw new InvalidOperationException("Attack", "Invalid Defense Character!");
+        }
+
+        if (f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() == currentTurn) {
+            throw new InvalidOperationException("Attack", "Cannot attack the same turn as it is created");
+        }
+
+        if (f1.getCharacterCardByID(attackCharacterId).hasAttacked){
+            throw new InvalidOperationException("Attack", "Cannot attack twice in the same turn");
+        }
+
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();
         attackChar.hasAttacked = true; // nandain dia uda attack jd ga bisa attack lagi
         // artinya menang
