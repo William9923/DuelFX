@@ -19,12 +19,37 @@ public class PlayLandCardEvent implements IEvent {
 
     @Override
     public void execute() throws InvalidOperationException {
-        Player player = Game.getInstance().getPlayerByType(playerType);
-        // remove card
         LandCard landCard = (LandCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()
                 .filter(card -> card.getId() == landCardID && card.getType().equals(CardType.LAND))
                 .findFirst()
                 .orElse(null);
+        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
+        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
+
+        if (currPhase != Phase.MAIN) {
+            throw new InvalidOperationException("Play Land Card", "Not in the Main Phase");
+        }
+
+        if (currPlayer != playerType) {
+            throw new InvalidOperationException("Play Land Card", "Not your turn");
+        }
+
+        if (landCard == null) {
+            throw new InvalidOperationException("Play Land Card", "Invalid Card!!");
+        }
+
+        if (CardType.LAND != landCard.getType()) {
+            throw new InvalidOperationException("Play Land Card", "Not A Land Card !");
+        }
+
+
+        if (Game.getInstance().getPlayerByType(currPlayer).hasPlayLand) {
+            throw new InvalidOperationException("Play Land Card", "Unable To Play Multiple Land Card In the Same Turn !");
+        }
+        
+        Player player = Game.getInstance().getPlayerByType(playerType);
+        // remove card
         player.getHand().remove(landCard);
         // add power to player
         player.getPower().add(landCard.getElement(),1);
