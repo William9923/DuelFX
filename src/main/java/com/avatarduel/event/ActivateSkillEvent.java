@@ -76,11 +76,11 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
             throw new InvalidOperationException("Activate Skill Card", "Invalid Skill Card");
         }
 
-        if (currentFieldSize > Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()) {
+        if (currentFieldSize >= Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()) {
             throw new InvalidOperationException("Activate Skill Card","There are not enough space in field for this skill card");
         }
 
-        if (skillCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())) {
+        if (skillCard.getPower() > Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())) {
             throw new InvalidOperationException("Activate Skill Card","Not enough power!");
         }
 
