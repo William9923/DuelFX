@@ -48,7 +48,7 @@ public class Player {
         }
     }
 
-    public void playCharacterCardByID(int id, CharacterState state, int turn, int index) throws InvalidOperationException {
+    public void playCharacterCardByID(int id, CharacterState state, int turn, int index) {
         Card card = hand.stream()
                 .filter(c -> c.getId() == id)
                 .findFirst()
@@ -56,19 +56,10 @@ public class Player {
         if (card.getType().equals(CardType.CHARACTER) && card != null) {
             hand.remove(card);
             field.addCharacterCard(new CharacterCardInField((CharacterCard) card, state, turn, index));
-        } else {
-            new InvalidOperationException("Play Character Card", "Invalid Card");
         }
     }
 
-//    public void playSkillAuraCard(int indexHand, int indexField) throws InvalidOperationException {
-//        if (indexHand < hand.size() && hand.get(indexHand).getType().equals(CardType.SKILL_AURA)){
-//            Card card = hand.remove(indexHand);
-//            field.connectCards(field.getCharacterCardByIdx(indexField), (SkillCard) card);
-//        } // else : throw error
-//    }
-
-    public void playSkillCardByID (int id, int charID, int index, int turn) throws InvalidOperationException {
+    public void playSkillCardByID (int id, int charID, int index, int turn) {
         SkillCard skillCard = (SkillCard) hand.stream()
                 .filter(c -> c.getId() == id && (c.getType().equals(CardType.SKILL_AURA) || c.getType().equals(CardType.SKILL_POWER_UP)))
                 .findFirst()
@@ -86,44 +77,19 @@ public class Player {
         }
     }
 
-//    public void playLandCardByID (int id) throws InvalidOperationException {
-//        Card card = hand.stream()
-//                .filter(c -> c.getId() == id)
-//                .findFirst()
-//                .orElse(null);
-//
-//        if (card == null) {
-//            throw new InvalidOperationException("Play Land Card", "Invalid Cards");
-//        }
-//
-//        if (card.getType().equals(CardType.LAND)){
-//            hand.remove(card);
-//            power.add(card.getElement(), 1);
-//        }  else {
-//            throw new InvalidOperationException("Play Land Card", "Not A Land Card");
-//        }
-//    }
-
-//    // ini nanti dibuang aja
-//    public void removeCardFromHand(int index) {
-//        if (index < hand.size()){
-//            hand.remove(index);
-//        } // else : throw error
-//    }
-
-    public void removeCharacterFromFieldByID(int id) throws InvalidOperationException {
+    public void removeCharacterFromFieldByID(int id)  {
         CharacterCardInField card = field.getCharacterCardByID(id);
-        if (card == null) {
-            throw new InvalidOperationException("Removing Summoned Character", "Card not found");
-        }
+//        if (card == null) {
+//            throw new InvalidOperationException("Removing Summoned Character", "Card not found");
+//        }
         field.removeCharacterCard(card);
     }
 
-    public void removeSkillCardByID (int id) throws InvalidOperationException {
+    public void removeSkillCardByID (int id) {
         SkillCard card = (SkillCard) field.getSkillCardByID(id).getCard();
-        if (card == null) {
-            throw new InvalidOperationException("Removing Summoned Character", "Card not found");
-        }
+//        if (card == null) {
+//            throw new InvalidOperationException("Removing Summoned Character", "Card not found");
+//        }
         field.removeSkillCard(card);
     }
 

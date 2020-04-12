@@ -51,11 +51,9 @@ public class Field {
         return skillCardList.size() < fieldSize;
     }
 
-    public void addCharacterCard(CharacterCardInField inField) throws InvalidOperationException {
+    public void addCharacterCard(CharacterCardInField inField) {
         if (isAbleToAddChar()){
             charCardList.add(inField);
-        } else {
-            throw new InvalidOperationException("Summon Character", "Unable to summon due to Full Field Size!");
         }
     }
 
@@ -76,22 +74,20 @@ public class Field {
     }
 
 
-    public void connectCards(CharacterCardInField card1, SkillCard card2, int index, int createdAt) throws InvalidOperationException {
+    public void connectCards(CharacterCardInField card1, SkillCard card2, int index, int createdAt)  {
         if (isAbleToAddSkill()) {
             card1.pair(card2);
             addSkillCard(card2, index, createdAt);
         }
     }
 
-    public void addSkillCard(SkillCard card, int index, int createdAt) throws InvalidOperationException{
+    public void addSkillCard(SkillCard card, int index, int createdAt){
         if (isAbleToAddSkill()) {
            skillCardList.add((SkillCardInField) cardFactory.createCardInField(card, index, createdAt, null));
-        } else {
-            throw new InvalidOperationException("Add Skill Card", "Unable to play due to Full Skill Field!");
         }
     }
 
-    public int getEmptyCharacterIndex() throws InvalidOperationException {
+    public int getEmptyCharacterIndex() {
         List<Integer> notAvailableIndex= new ArrayList<Integer>();
         for(CharacterCardInField characterCardInField : charCardList) {
             notAvailableIndex.add(characterCardInField.getIndex());
@@ -101,10 +97,10 @@ public class Field {
                 return i;
             }
         }
-        throw new InvalidOperationException("Full Board", "No empty character spaces available because board is full");
+        return -1;
     }
 
-    public int getEmptySkillCardIndex() throws InvalidOperationException {
+    public int getEmptySkillCardIndex()  {
         List<Integer> notAvailableIndex = new ArrayList<>();
         for(SkillCardInField skillCardInField : skillCardList) {
             notAvailableIndex.add(skillCardInField.getIndex());
@@ -114,7 +110,7 @@ public class Field {
                 return i;
             }
         }
-        throw new InvalidOperationException("Full board", "No empty skill spaces available because board is full");
+        return -1;
     }
 
     public void removeCharacterCard(CharacterCardInField inField) {

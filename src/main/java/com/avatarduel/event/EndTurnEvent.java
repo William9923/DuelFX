@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
@@ -10,7 +11,7 @@ public class EndTurnEvent implements IEvent {
     public EndTurnEvent() {
     }
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         while(getInstance().getCurrentPhase().getPhase() != Phase.END) {
             getInstance().nextPhase();
         }

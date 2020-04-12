@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 
@@ -10,7 +11,7 @@ public class NextPhaseEvent implements IEvent {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
         if (currPhase.equals(Phase.BATTLE)){
             IEvent event = new EndTurnEvent();

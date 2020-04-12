@@ -24,7 +24,7 @@ public class AttackEvent implements IEvent {
     }
 
     @Override
-    public void execute(){
+    public void execute() throws InvalidOperationException{
         CharacterCardInField attackChar = Game.getInstance()
                 .getPlayerByType(attacker)
                 .getField()
@@ -42,15 +42,9 @@ public class AttackEvent implements IEvent {
             Player p2 = Game.getInstance().getPlayerByType(defender);
             if (defenseChar.getPosition().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) { // pierce effect
                 p2.setHealthPoint(p2.getHealthPoint() - diff);
-//                p2.checkLose(); // check lose --> ini di game manager aja kali ya ??
             }
-            try {
-                p2.removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
-            } catch (InvalidOperationException e) {
-                e.printStackTrace();
-            }
+            p2.removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
         }
-        // else : kalah, do nothing , ato bisa send message biar interaktif
     }
 
     @Override

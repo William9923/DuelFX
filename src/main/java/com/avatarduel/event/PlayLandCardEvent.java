@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.LandCard;
 import com.avatarduel.model.player_component.Player;
@@ -17,7 +18,7 @@ public class PlayLandCardEvent implements IEvent {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         Player player = Game.getInstance().getPlayerByType(playerType);
         // remove card
         LandCard landCard = (LandCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()

@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidActionException;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
@@ -30,7 +31,7 @@ public class SummonEvent implements IEvent {
         this(idCard,playerType,CharacterState.ATTACK,Game.getInstance().getPlayerByType(playerType).getField().getEmptyCharacterIndex());
     }
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         CharacterCard charCard = (CharacterCard) Game.getInstance().getPlayerByType(playerType).getHand()
                 .stream()
                 .filter(card -> card.getId() == idCard && card.getType().equals(CardType.CHARACTER))
@@ -38,13 +39,37 @@ public class SummonEvent implements IEvent {
                 .orElse(null);
         int currTurn = Game.getInstance().getCurrentTurn();
         Player p = Game.getInstance().getPlayerByType(playerType);
-        p.getHand().remove(charCard);
-        try {
-            p.getField().addCharacterCard((CharacterCardInField) factory.createCardInField(charCard, currTurn, index,position));
-            p.getPower().reduce(charCard.getElement(), charCard.getPower());
-        } catch ( InvalidOperationException e) {
-            e.printStackTrace();
+        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList().size();
+        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
+
+        if (currPhase != Phase.MAIN){
+            throw new InvalidOperationException("Summon", "Unable to perform summon in this phase");
         }
+
+        if (currPlayer != playerType) {
+            throw new InvalidOperationException("Summon", "Unable to summon monster from other hands");
+        }
+
+        if (charCard == null) {
+            throw new InvalidOperationException("Summon", "Character Card is Invalid");
+        }
+
+        if (charCard.getType() != CardType.CHARACTER){
+            throw new InvalidOperationException("Summon", "Card is not a character card");
+        }
+
+        if (currentFieldSize >= Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()){
+            throw new InvalidOperationException("Summon", "There are not enough space in field for this character");
+        }
+
+        if (charCard.getPower() > Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(charCard.getElement())){
+            throw new InvalidOperationException("Summon", "Not enough power!");
+        }
+
+        p.getHand().remove(charCard);
+        p.getField().addCharacterCard((CharacterCardInField) factory.createCardInField(charCard, currTurn, index,position));
+        p.getPower().reduce(charCard.getElement(), charCard.getPower());
     }
 
     @Override

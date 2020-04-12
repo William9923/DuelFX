@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.player_component.Player;
@@ -18,7 +19,7 @@ public class ActivateDestroyEvent implements IEvent {
         this.targetID = charID;
     }
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         Player opponent = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent());
         Player player = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());
         Card destroyCard = player.getHand().stream()

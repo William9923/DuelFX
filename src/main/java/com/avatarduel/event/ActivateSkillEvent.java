@@ -31,7 +31,7 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
         this(idCard, idTarget, playerType, Game.getInstance().getPlayerByType(playerType).getField().getEmptySkillCardIndex());
     }
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand()
                 .stream()
                 .filter(card1 -> card1.getId() == idCard && (card1.getType().equals(CardType.SKILL_AURA) || (card1.getType().equals(CardType.SKILL_POWER_UP))))
@@ -56,14 +56,11 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
         }
         Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());
 
-        try {
-            p.getHand().remove(skillCard);
-            p.getField().addSkillCard(skillCard, index, Game.getInstance().getCurrentTurn());
-            inField.pair(skillCard);
-            p.getPower().reduce(skillCard.getElement(), skillCard.getPower()); // kalo error, dia ga kekurang powernya jdny
-        } catch (InvalidOperationException e) {
-            e.printStackTrace();
-        }
+        p.getHand().remove(skillCard);
+        p.getField().addSkillCard(skillCard, index, Game.getInstance().getCurrentTurn());
+        inField.pair(skillCard);
+        p.getPower().reduce(skillCard.getElement(), skillCard.getPower()); // kalo error, dia ga kekurang powernya jdny
+
     }
 
     @Override

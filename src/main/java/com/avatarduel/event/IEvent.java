@@ -1,6 +1,8 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
+
 public interface IEvent {
-    public void execute();
+    public void execute() throws InvalidOperationException;
     public boolean validate();
 }

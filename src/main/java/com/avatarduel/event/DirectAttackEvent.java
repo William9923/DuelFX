@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.player_component.Field;
@@ -18,7 +19,7 @@ public class DirectAttackEvent implements IEvent {
     }
 
     @Override
-    public void execute()  {
+    public void execute()  throws InvalidOperationException {
         CharacterCardInField attackChar = Game.getInstance()
                 .getPlayerByType(player)
                 .getField()

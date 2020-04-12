@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.Phase;
@@ -16,7 +17,7 @@ public class ChangePositionEvent implements IEvent {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).switchPosition();
     }
 

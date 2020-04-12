@@ -16,12 +16,8 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
     }
 
     @Override
-    public void execute() {
-        try {
-            Game.getInstance().getPlayerByType(playerType).removeSkillCardByID(idTarget);
-        } catch (InvalidOperationException e) {
-            e.printStackTrace();
-        }
+    public void execute() throws InvalidOperationException{
+        Game.getInstance().getPlayerByType(playerType).removeSkillCardByID(idTarget);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
@@ -11,7 +12,7 @@ public class DrawEvent implements IEvent {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws InvalidOperationException {
         Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
         Game.getInstance().nextPhase();  // pindah ke next phase
     }
