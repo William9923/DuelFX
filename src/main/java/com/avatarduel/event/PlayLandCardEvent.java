@@ -47,7 +47,7 @@ public class PlayLandCardEvent implements IEvent {
         if (Game.getInstance().getPlayerByType(currPlayer).hasPlayLand) {
             throw new InvalidOperationException("Play Land Card", "Unable To Play Multiple Land Card In the Same Turn !");
         }
-        
+
         Player player = Game.getInstance().getPlayerByType(playerType);
         // remove card
         player.getHand().remove(landCard);
