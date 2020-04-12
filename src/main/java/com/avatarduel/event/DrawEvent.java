@@ -13,7 +13,16 @@ public class DrawEvent implements IEvent {
 
     @Override
     public void execute() throws InvalidOperationException {
-        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
+
+        if (Game.getInstance().getCurrentPhase().getPhase() != Phase.DRAW){
+            throw new InvalidOperationException("Draw", "Not in Draw Phase");
+        }
+
+        if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
+            throw new InvalidOperationException("Draw", "Not Enough Card to Draw");
+        }
+
+        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw(); // kalo >= 10, dia langsung ke buang kartuny
         Game.getInstance().nextPhase();  // pindah ke next phase
     }
 
