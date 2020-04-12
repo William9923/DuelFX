@@ -1,20 +1,16 @@
 package com.avatarduel.guicontroller.Board;
 
-import com.avatarduel.event.DrawEvent;
 import com.avatarduel.event.EndTurnEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.event.NextPhaseEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
-import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -116,8 +112,8 @@ public class BoardController {
         try{
             event.execute();
         } catch (InvalidOperationException e){
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setHeaderText(e.getOperation());
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setHeaderText("Unable to " + e.getOperation());
             a.setContentText(e.getMessage());
             a.show();
         }

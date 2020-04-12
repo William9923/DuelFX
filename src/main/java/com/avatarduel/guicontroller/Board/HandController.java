@@ -1,9 +1,7 @@
 package com.avatarduel.guicontroller.Board;
 
-import com.avatarduel.event.SummonEvent;
 import com.avatarduel.guicontroller.Card.CardInHandController;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
-import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.player_component.Hand;

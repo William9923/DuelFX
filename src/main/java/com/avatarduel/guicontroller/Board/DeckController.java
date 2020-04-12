@@ -4,7 +4,6 @@ import com.avatarduel.event.DrawEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.guicontroller.Request.DeckRenderRequest;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
-import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
