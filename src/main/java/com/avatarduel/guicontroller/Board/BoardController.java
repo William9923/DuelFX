@@ -4,6 +4,7 @@ import com.avatarduel.event.DrawEvent;
 import com.avatarduel.event.EndTurnEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.event.NextPhaseEvent;
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.guicontroller.Request.RenderRequest;
@@ -113,11 +114,12 @@ public class BoardController {
 
     @Subscribe
     public void executeEvent(IEvent event) {
-        if (event.validate()) {
+        try{
             event.execute();
-        } else {
+        } catch (InvalidOperationException e){
             Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setContentText("Invalid Action");
+            a.setHeaderText(e.getOperation());
+            a.setContentText(e.getMessage());
             a.show();
         }
     }
