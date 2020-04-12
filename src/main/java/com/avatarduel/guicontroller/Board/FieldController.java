@@ -4,7 +4,6 @@ import com.avatarduel.event.AttackEvent;
 import com.avatarduel.guicontroller.Card.CharacterCardInFieldController;
 import com.avatarduel.guicontroller.Card.SkillCardInFieldController;
 import com.avatarduel.guicontroller.Request.FieldRenderRequest;
-import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -21,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FieldController implements Subscriber {
+public class FieldController {
     private Map<String, CharacterCardInFieldController> characters;
     private Map<String, SkillCardInFieldController> skills;
     private PlayerType playerType;

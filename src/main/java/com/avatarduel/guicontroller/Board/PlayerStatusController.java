@@ -2,7 +2,6 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.guicontroller.Request.RenderRequest;
-import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Element;
 import com.avatarduel.model.type.PlayerType;
@@ -11,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class PlayerStatusController implements Subscriber {
+public class PlayerStatusController  {
     private PlayerType playerType;
     @FXML Label player_name;
     @FXML ImageView player_image;

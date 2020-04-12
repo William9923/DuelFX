@@ -2,7 +2,6 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Request.Render;
 import com.avatarduel.guicontroller.Request.RenderRequest;
-import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;

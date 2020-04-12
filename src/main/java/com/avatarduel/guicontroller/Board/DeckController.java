@@ -5,7 +5,6 @@ import com.avatarduel.event.IEvent;
 import com.avatarduel.guicontroller.Request.DeckRenderRequest;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
 import com.avatarduel.guicontroller.Request.Render;
-import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
@@ -13,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 
-public class DeckController implements Subscriber {
+public class DeckController  {
     private PlayerType playerType;
     @FXML Label deck_size;
     @FXML Rectangle shape;

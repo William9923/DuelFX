@@ -1,6 +1,5 @@
 package com.avatarduel.model;
 
-import com.avatarduel.guicontroller.Server.GUIRenderServer;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
@@ -16,7 +15,6 @@ public class Game {
     private PlayerType currentPlayer;
     private IPhase currentPhase;
     private EventBus eventBus;
-    private GUIRenderServer guiRenderServer;
 
     private Game() {
         this.p1 = new Player(PlayerType.A);
@@ -25,7 +23,6 @@ public class Game {
         this.currentPhase = new DrawPhase();
         this.currentPlayer = PlayerType.A;
         this.eventBus = new EventBus();
-        this.guiRenderServer = new GUIRenderServer();
     }
 
     public static Game getInstance() {
@@ -67,16 +64,8 @@ public class Game {
             case A: currentPlayer = PlayerType.B; break;
             case B: currentPlayer = PlayerType.A; break;
         }
-        // else : error InvalidPlayer duar
     }
 
-    public void endTurn() {
-        nextPlayer();
-        incrementTurn();
-        DrawPhase drawPhase = new DrawPhase();
-        currentPhase = drawPhase;
-        drawPhase.drawCardAndGoToNextPhase();
-    }
 
     public void setCurrentPhase(Phase newPhase) {
         switch (newPhase) {

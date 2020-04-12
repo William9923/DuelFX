@@ -4,8 +4,6 @@ import com.avatarduel.event.SummonEvent;
 import com.avatarduel.guicontroller.Card.CardInHandController;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
 import com.avatarduel.guicontroller.Request.Render;
-import com.avatarduel.guicontroller.Server.GUIRenderServer;
-import com.avatarduel.guicontroller.Server.subscriber.Subscriber;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.player_component.Hand;
@@ -16,7 +14,7 @@ import javafx.fxml.FXML;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HandController implements Subscriber {
+public class HandController{
     private PlayerType playerType;
     private List<CardInHandController> cards;
     private boolean isFlipped;

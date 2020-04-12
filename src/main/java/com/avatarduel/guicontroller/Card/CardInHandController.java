@@ -9,7 +9,6 @@ import com.avatarduel.guicontroller.Request.FieldRenderRequest;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
 import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
-import com.avatarduel.guicontroller.Server.Channel;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.player_component.Player;

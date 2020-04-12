@@ -11,10 +11,10 @@ public class DrawPhase implements IPhase{
         phase = Phase.DRAW;
     }
 
-    public void drawCardAndGoToNextPhase() {
-        DrawEvent drawEvent = new DrawEvent();
-        drawEvent.execute();
-    }
+//    public void drawCardAndGoToNextPhase() {
+//        DrawEvent drawEvent = new DrawEvent();
+//        drawEvent.execute();
+//    }
     @Override
     public Phase getPhase() {
         return phase;
