@@ -25,7 +25,7 @@ public class DeckController  {
 
     @FXML
     public void draw() {
-        IEvent event = new DrawEvent();
+        IEvent event = new DrawEvent(playerType);
         Game.getInstance().getEventBus().post(event);
         Game.getInstance().getEventBus().post(new DeckRenderRequest(Game.getInstance().getCurrentPlayer()));
         Game.getInstance().getEventBus().post(new HandRenderRequest(Game.getInstance().getCurrentPlayer()));

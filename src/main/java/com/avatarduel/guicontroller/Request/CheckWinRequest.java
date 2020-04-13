@@ -1,4 +1,9 @@
 package com.avatarduel.guicontroller.Request;
 
-public class CheckWinRequest {
+import com.avatarduel.model.Game;
+
+public class CheckWinRequest extends RenderRequest {
+    public CheckWinRequest() {
+        super(Game.getInstance().getCurrentPlayer());
+    }
 }

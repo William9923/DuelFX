@@ -25,10 +25,6 @@ import javafx.scene.media.Media;
 
 public class AvatarDuel extends Application {
 
-  private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
-  private static final String CHARACTER_CSV_FILE_PATH ="card/data/character.csv";
-  private static final String SKILL_AURA_CSV_FILE_PATH = "card/data/skill_aura.csv";
-
   @Override
   public void start(Stage stage) throws IOException, URISyntaxException {
     // Load Main Menu
@@ -55,6 +51,7 @@ public class AvatarDuel extends Application {
 
     mainMenuController.setStartOnScene(stage, board);
     mainMenuController.setCardsOnScene(stage, library);
+    boardController.setStage(stage);
   }
 
   private FXMLLoader getMainMenu() {

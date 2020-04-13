@@ -9,9 +9,9 @@ import com.avatarduel.model.type.PlayerType;
 import java.util.List;
 
 public class DrawEvent implements IEvent {
-
-    public DrawEvent() {
-
+    private PlayerType playerType;
+    public DrawEvent(PlayerType type) {
+        this.playerType = type;
     }
 
     @Override

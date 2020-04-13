@@ -16,6 +16,23 @@ public class CardFactory {
             default: return Element.AIR; // blom di handle
         }
     }
+    public static CharacterCard createClone(CharacterCard card) {
+        return new CharacterCard(card.getId(), card.getName(), card.getElement(), card.getDescription(), card.getImage(), card.getAttack(),card.getDefense(), card.getPower());
+    }
+    public static SkillAuraCard createClone(SkillAuraCard card) {
+        return new SkillAuraCard(card.getId(), card.getName(), card.getElement(), card.getDescription(), card.getImage(), card.getPower(), card.getAttack(),card.getDefense());
+    }
+
+    public static LandCard createClone (LandCard card) {
+        return new LandCard(card.getId(), card.getName(), card.getElement(), card.getDescription(), card.getImage());
+    }
+
+    public static SkillDestroyCard createClone (SkillDestroyCard card) {
+        return new SkillDestroyCard(card.getId(), card.getName(), card.getElement(), card.getDescription(), card.getImage(), String.valueOf(card.getPower()));
+    }
+    public static SkillPowerUpCard createClone (SkillPowerUpCard card) {
+        return new SkillPowerUpCard(card.getId(), card.getName(), card.getElement(), card.getDescription(), card.getImage(), String.valueOf(card.getPower()));
+    }
 
     public Card createCard(String[] components, CardType type) {
         if (type.equals(CardType.CHARACTER)) { // character card

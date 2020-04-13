@@ -27,6 +27,12 @@ public abstract class Card  {
         this(Integer.parseInt(elements[0]), elements[1], CardFactory.outputElement(elements[2]), elements[3], elements[4]);
     }
 
+    public Object clone() throws
+            CloneNotSupportedException
+    {
+        return super.clone();
+    }
+
     // getter & setter
     public Element getElement() {
         return element;
