@@ -2,6 +2,7 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.event.DrawEvent;
 import com.avatarduel.event.IEvent;
+import com.avatarduel.guicontroller.Request.CheckWinRequest;
 import com.avatarduel.guicontroller.Request.DeckRenderRequest;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
 import com.avatarduel.model.Game;
@@ -25,6 +26,7 @@ public class DeckController  {
 
     @FXML
     public void draw() {
+        Game.getInstance().getEventBus().post(new CheckWinRequest());
         IEvent event = new DrawEvent(playerType);
         Game.getInstance().getEventBus().post(event);
         Game.getInstance().getEventBus().post(new DeckRenderRequest(Game.getInstance().getCurrentPlayer()));

@@ -4,6 +4,7 @@ import com.avatarduel.event.AttackEvent;
 import com.avatarduel.event.ChangePositionEvent;
 import com.avatarduel.event.DirectAttackEvent;
 import com.avatarduel.event.IEvent;
+import com.avatarduel.guicontroller.Request.CheckWinRequest;
 import com.avatarduel.guicontroller.Request.FieldRenderRequest;
 import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
@@ -90,6 +91,7 @@ public class CharacterCardInFieldController extends CardController {
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
             }
         }
+        Game.getInstance().getEventBus().post(new CheckWinRequest());
         Game.getInstance().getEventBus().post(this.characterCardInField);
     }
 
