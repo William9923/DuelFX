@@ -21,9 +21,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 
 import javax.security.auth.callback.ChoiceCallback;
+import javax.swing.text.html.Option;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class CardInHandController extends CardController{
@@ -89,9 +92,9 @@ public class CardInHandController extends CardController{
             CharacterState stateList[] = {CharacterState.ATTACK, CharacterState.DEFENSE};
             ChoiceDialog<CharacterState> state = new ChoiceDialog<>(stateList[0], stateList);
             state.setHeaderText("Pilihlah State Karakter : ");
-            state.showAndWait();
+            Optional<CharacterState> result = state.showAndWait();
             System.out.println(state.getSelectedItem());
-            if (state.getSelectedItem() != null) {
+            if (state != null && result.isPresent()) {
                 System.out.println(state.getSelectedItem());
                 event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(),state.getSelectedItem(), getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
                 Game.getInstance().getEventBus().post(event);
@@ -105,8 +108,8 @@ public class CardInHandController extends CardController{
                 ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0),listOfCard);
                 choice.setHeaderText("Destroy Card Effect");
                 choice.setContentText("Select Character To Destroy :");
-                choice.showAndWait();
-                if (choice != null) {
+                Optional<CharacterCardInField> result = choice.showAndWait();
+                if (choice != null && result.isPresent()) {
                     event = new ActivateDestroyEvent(playerType, cardData.getId(), choice.getSelectedItem().getCard().getId());
                     Game.getInstance().getEventBus().post(event);
                     Game.getInstance().getEventBus().post(new RenderRequest()); // render player status + game status
@@ -119,14 +122,20 @@ public class CardInHandController extends CardController{
             }
         } else {
             // kartu skill aura or power up
-            if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList().size() > 0) {
-                List<CharacterCardInField> listOfCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
+            int size1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList().size();
+            int size2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size();
+            if ((size1 + size2)> 0) {
+                List<CharacterCardInField> listOfCard1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
+                List<CharacterCardInField> listOfCard2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
+                List<CharacterCardInField> listOfCard = Stream.of(listOfCard1, listOfCard2)
+                        .flatMap(x -> x.stream())
+                        .collect(Collectors.toList());
                 ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0),listOfCard);
                 choice.setHeaderText("Skill Equip Card Effect");
                 choice.setContentText("Select Character To Equip :");
-                choice.showAndWait();
-                if (choice != null) {
-                    event = new ActivateSkillEvent(cardData.getId(),choice.getSelectedItem().getCard().getId(),playerType, this.getSmallestSkillIndexPossible(playerType));
+                Optional<CharacterCardInField> result = choice.showAndWait();
+                if (choice != null && result.isPresent()) {
+                    event = new ActivateSkillEvent(cardData.getId(),choice.getSelectedItem().getCard().getId(),playerType);
                     Game.getInstance().getEventBus().post(event); // post eventnya
                     Game.getInstance().getEventBus().post(new RenderRequest()); // minta render terkait status player dan status game
                     Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));  // render tangan lagi soalny kartunya uda dipake

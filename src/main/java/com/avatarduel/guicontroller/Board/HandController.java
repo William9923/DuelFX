@@ -70,6 +70,9 @@ public class HandController{
 
     public void render() {
         if (!this.isFlipped) {
+            for(int i = 0 ; i < 10 ; i++) {
+                cards.get(i).setNullCard();
+            }
             Hand currentHand = Game.getInstance().getPlayerByType(this.playerType).getHand();
             int i = 0;
             for(Card cardInHand: currentHand) {

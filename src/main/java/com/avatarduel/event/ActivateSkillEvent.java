@@ -27,7 +27,7 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
         this.idTarget = idTarget;
         this.currTurn = Game.getInstance().getCurrentTurn();
     }
-    public ActivateSkillEvent(int idCard, int idTarget, PlayerType playerType) throws InvalidOperationException {
+    public ActivateSkillEvent(int idCard, int idTarget, PlayerType playerType) {
         this(idCard, idTarget, playerType, Game.getInstance().getPlayerByType(playerType).getField().getEmptySkillCardIndex());
     }
     @Override

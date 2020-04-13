@@ -2,8 +2,11 @@ package com.avatarduel.event;
 
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
+import com.avatarduel.model.card.Card;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
+
+import java.util.List;
 
 public class DrawEvent implements IEvent {
 
@@ -22,7 +25,7 @@ public class DrawEvent implements IEvent {
             throw new InvalidOperationException("Draw", "Not Enough Card to Draw");
         }
 
-        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw(); // kalo >= 10, dia langsung ke buang kartuny
+        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
         Game.getInstance().nextPhase();  // pindah ke next phase
     }
 

@@ -9,10 +9,16 @@ import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 
 public class SkillCardInFieldController extends CardController {
+
     private SkillCardInField skillCardInField;
     private PlayerType playerType;
     private int index;
     private FieldController fieldController;
+
+    @FXML
+    public void initialize() {
+
+    }
 
     public void setCard(SkillCardInField cardInField) {
         super.setCard(cardInField.getCard());

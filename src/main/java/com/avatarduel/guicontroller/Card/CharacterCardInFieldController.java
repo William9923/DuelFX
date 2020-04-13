@@ -11,7 +11,6 @@ import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
-import com.google.common.eventbus.EventBus;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.image.ImageView;

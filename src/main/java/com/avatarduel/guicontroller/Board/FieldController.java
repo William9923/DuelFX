@@ -27,10 +27,6 @@ public class FieldController {
     private FieldController enemyFieldController;
     private int fromAttack;
 
-//    @FXML VBox popup;
-//    @FXML Label card_from;
-//    @FXML TextArea enemy_index;
-
     @FXML VBox card_container;
     @FXML HBox character_container;
     @FXML HBox skill_container;
@@ -99,18 +95,17 @@ public class FieldController {
 
     public void render() {
         setNullCharacter();
-        skills.forEach((key, controller) -> {
-            controller.setNullCard();
-            controller.setPlayerType(playerType);
-            controller.setIndex(Integer.parseInt(key));
-        });
+        setNullSkill();
         List<CharacterCardInField> characterCardInFieldList = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList();
         List<SkillCardInField> skillCardList = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList();
         for(CharacterCardInField characterCardInField : characterCardInFieldList) {
             this.characters.get(Integer.toString(characterCardInField.getIndex())).setCard(characterCardInField);
             this.characters.get(Integer.toString(characterCardInField.getIndex())).renderRotate();          // biar dia tetep sesuai keadaan dia
         }
+        System.out.println("Updating skill action render : ");
+        System.out.println("Skill card list : " + skillCardList.size());
         for(SkillCardInField skillCardInField : skillCardList) {
+            System.out.println("Index : " + skillCardInField.getIndex());
             this.skills.get(Integer.toString(skillCardInField.getIndex())).setCard(skillCardInField);
         }
     }
@@ -145,6 +140,4 @@ public class FieldController {
             this.render();
         }
     }
-
-
 }

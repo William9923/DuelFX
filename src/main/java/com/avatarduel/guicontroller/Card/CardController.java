@@ -103,6 +103,7 @@ public abstract class CardController {
         card_icon.setImage(null);
         card_border.getStyleClass().remove("flipped_card");
         card_border.getStyleClass().add("null_card");
+        cardData = null;
     }
 
     protected void addBorderStyle(String className) {

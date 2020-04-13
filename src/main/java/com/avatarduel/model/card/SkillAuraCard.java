@@ -11,7 +11,7 @@ public class SkillAuraCard extends SkillCard {
 
     // Aura Skill Card
     //id	name	element	description	imagepath	power	attack	defense
-    public SkillAuraCard(int id, String name, Element element, String description, String image, int attack, int defense, int power) {
+    public SkillAuraCard(int id, String name, Element element, String description, String image, int power, int attack, int defense) {
         super(id, name, element, description, image);
         this.type = CardType.SKILL_AURA;
         this.power = power;
