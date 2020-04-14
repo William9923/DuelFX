@@ -14,9 +14,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.geometry.Rectangle2D?>
 
-<HBox fx:id="player_border" prefHeight="274.0" prefWidth="275.0" spacing="5.0"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.avatarduel.guicontroller.Board.PlayerStatusController">
+<HBox fx:id="player_border" prefHeight="274.0" prefWidth="275.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Board.PlayerStatusController">
     <children>
         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="280.0" prefWidth="190.0" spacing="8.0">
             <children>
@@ -33,10 +31,20 @@
                         <Rectangle2D />
                     </viewport>
                 </ImageView>
-                <Label fx:id="player_hp" text="HP: 80">
-                    <font>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="HP: ">
+                     <font>
                         <Font size="18.0" />
-                    </font></Label>
+                     </font>
+                  </Label>
+                      <Label fx:id="player_hp" text="80">
+                          <font>
+                              <Font size="18.0" />
+                          </font>
+                  </Label>
+               </children>
+            </HBox>
             </children>
         </VBox>
         <VBox fx:id="power_container" alignment="CENTER" prefHeight="274.0" prefWidth="125.0" spacing="10.0">
@@ -51,10 +59,16 @@
                      <image>
                         <Image url="@../../card/icon/elements/air_element.png" />
                      </image></ImageView>
-                        <Label fx:id="air_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
+                        <Label fx:id="current_air" prefHeight="38.0" prefWidth="10.0" text="1">
                             <font>
                                 <Font size="18.0" />
                             </font></Label>
+                  <Label prefHeight="34.0" prefWidth="0.0" text="/" />
+                  <Label fx:id="total_air" prefHeight="34.0" prefWidth="0.0" text="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                     </children>
                 </HBox>
                 <HBox prefHeight="34.0" prefWidth="118.0" spacing="4.0">
@@ -63,10 +77,17 @@
                      <image>
                         <Image url="@../../card/icon/elements/water_element.png" />
                      </image></ImageView>
-                        <Label fx:id="water_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
-                            <font>
-                                <Font size="18.0" />
-                            </font></Label>
+                  <Label fx:id="current_water" prefHeight="38.0" prefWidth="10.0" text="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="34.0" prefWidth="0.0" text="/" />
+                  <Label fx:id="total_water" prefHeight="34.0" prefWidth="0.0" text="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                     </children>
                 </HBox>
                 <HBox prefHeight="34.0" prefWidth="118.0" spacing="4.0">
@@ -75,24 +96,58 @@
                      <image>
                         <Image url="@../../card/icon/elements/earth.png" />
                      </image></ImageView>
-                        <Label fx:id="earth_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
-                            <font>
-                                <Font size="18.0" />
-                            </font></Label>
+                  <Label fx:id="current_earth" prefHeight="38.0" prefWidth="10.0" text="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="34.0" prefWidth="0.0" text="/" />
+                  <Label fx:id="total_earth" prefHeight="34.0" prefWidth="0.0" text="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                     </children>
                 </HBox>
-                <HBox prefHeight="34.0" prefWidth="118.0">
-                    <children>
+            <HBox prefHeight="34.0" prefWidth="118.0" spacing="4.0">
+               <children>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../card/icon/elements/fire_element.png" />
                      </image></ImageView>
-                        <Label fx:id="fire_power" prefHeight="29.0" prefWidth="57.0" text="1/2">
-                            <font>
-                                <Font size="18.0" />
-                            </font></Label>
-                    </children>
-                </HBox>
+                  <Label fx:id="current_fire" prefHeight="38.0" prefWidth="10.0" text="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="34.0" prefWidth="0.0" text="/" />
+                  <Label fx:id="total_fire" prefHeight="34.0" prefWidth="0.0" text="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="118.0" spacing="4.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../card/icon/elements/energy_element.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="current_energy" prefHeight="38.0" prefWidth="10.0" text="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="34.0" prefWidth="0.0" text="/" />
+                  <Label fx:id="total_energy" prefHeight="34.0" prefWidth="0.0" text="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>

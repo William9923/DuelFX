@@ -13,7 +13,7 @@ import java.io.File;
 
 public abstract class CardController {
     protected Card cardData;
-    protected final String[] listBorderClass = {"water_border", "fire_border", "earth_border", "air_border", "null_card", "flipped_card"};
+    protected final String[] listBorderClass = {"water_border", "energy_border", "fire_border", "earth_border", "air_border", "null_card", "flipped_card"};
 
     @FXML protected VBox card_border;
     @FXML protected Label card_name;
@@ -61,6 +61,9 @@ public abstract class CardController {
                 break;
             case AIR:
                 addBorderStyle("air_border");
+                break;
+            case ENERGY:
+                addBorderStyle("energy_border");
                 break;
         }
     }

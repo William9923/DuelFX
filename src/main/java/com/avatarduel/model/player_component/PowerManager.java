@@ -11,6 +11,8 @@ public class PowerManager {
     protected int total_water;
     protected int total_earth;
     protected int total_air;
+    protected int total_energy;
+    protected int current_energy;
 
     //constructor
     public PowerManager(){
@@ -18,10 +20,13 @@ public class PowerManager {
         this.current_water=0;
         this.current_earth=0;
         this.current_air=0;
+        this.current_energy=0;
+
         this.total_fire=0;
         this.total_water=0;
         this.total_earth=0;
         this.total_air=0;
+        this.total_energy=0;
     }
 
     //GETTER
@@ -32,6 +37,9 @@ public class PowerManager {
     public int getCurrent_earth(){ return this.current_earth; }
 
     public int getCurrent_air(){ return this.current_air; }
+
+    public int getCurrent_energy() { return this.current_energy; }
+
 
     public int getCurrent(Element elem) {
         switch (elem) {
@@ -50,6 +58,10 @@ public class PowerManager {
     public int getTotal_earth(){ return this.total_earth; }
 
     public int getTotal_air(){ return this.total_air; }
+
+    public int getTotal_energy() {
+        return this.total_energy;
+    }
 
     //SETTER
 
@@ -131,4 +143,6 @@ public class PowerManager {
         setCurrent_fire(getTotal_fire());
         setCurrent_water(getTotal_water());
     }
+
+
 }
