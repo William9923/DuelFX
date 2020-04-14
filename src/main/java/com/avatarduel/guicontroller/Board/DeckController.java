@@ -2,9 +2,11 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.event.DrawEvent;
 import com.avatarduel.event.IEvent;
+import com.avatarduel.guicontroller.Card.DeckRenderRequest;
 import com.avatarduel.guicontroller.Request.CheckWinRequest;
 import com.avatarduel.guicontroller.Request.DeckDrawAndRenderRequest;
 import com.avatarduel.guicontroller.Request.HandRenderRequest;
+import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
@@ -27,10 +29,15 @@ public class DeckController  {
             IEvent event = new DrawEvent(playerType);
             Game.getInstance().getEventBus().post(event);
             Game.getInstance().getEventBus().post(new HandRenderRequest(Game.getInstance().getCurrentPlayer()));
-            if (request.getPlayerType().equals(playerType)) {
-                this.render();
-            }
+            Game.getInstance().getEventBus().post(new DeckRenderRequest(playerType));
         }
+    }
+
+    @Subscribe void update(DeckRenderRequest renderRequest) {
+        if (renderRequest.getPlayerType() == playerType){
+            this.render();
+        }
+
     }
 
     public void render() {
