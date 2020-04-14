@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -25,8 +26,8 @@ public class MainMenuController {
     public void setStage(Stage stage) throws IOException {
         this.stage = stage;
         this.setStartOnScene(getSceneFrom("GUI/Board/Board.fxml"));
-        this.setHowToPlayOnScene(getSceneFrom("GUI/Tutorial/HowToPlay.fxml"));
-        this.setCardsOnScene(getSceneFrom("GUI/Library/card_library.fxml"));
+        this.setHowToPlayPopUpOnParent(getParentFrom("GUI/MainMenu/HowToPlay/Page3.fxml"));
+        this.setCardsOnScene(getSceneFrom("GUI/MainMenu/ShowCards/ShowCards.fxml"));
         Game.getInstance().getEventBus().register(this);
     }
 
@@ -37,9 +38,11 @@ public class MainMenuController {
         });
     }
 
-    public void setHowToPlayOnScene(Scene scene) {
+    public void setHowToPlayPopUpOnParent(Parent parent) {
+        Popup howToPlay = new Popup();
+        howToPlay.getContent().add(parent);
         how_to_play.onMouseClickedProperty().setValue(e -> {
-            stage.setScene(scene);
+            howToPlay.show(stage);
         });
     }
 
@@ -50,9 +53,13 @@ public class MainMenuController {
     }
 
     public Scene getSceneFrom(String filePath) throws IOException {
+        Parent gui = getParentFrom(filePath);
+        return new Scene(gui);
+    }
+
+    public Parent getParentFrom(String filePath) throws IOException {
         File guiFile = new File("src/main/resources/com/avatarduel/" + filePath);
         FXMLLoader loader = new FXMLLoader(guiFile.toURI().toURL());
-        Parent gui = loader.load();
-        return new Scene(gui);
+        return loader.load();
     }
 }

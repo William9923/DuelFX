@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" styleClass="container" stylesheets="@styles/HowToPlay.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" layoutX="114.0" layoutY="250.0" prefHeight="406.0" prefWidth="772.0" spacing="16.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="398.0" prefWidth="242.0" spacing="8.0" styleClass="explanationCard">
+               <children>
+                  <Label text="Character Card">
+                     <font>
+                        <Font name="Franklin Gothic Demi Cond" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="261.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Character_Card.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="111.0" prefWidth="200.0" text="Atk means how much damage the card deals, Def means how much attack enemy needs to destroy this card on defense position, Pow means how much power(from land) needed to play the card" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="8.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="398.0" prefWidth="242.0" spacing="8.0" styleClass="explanationCard">
+               <children>
+                  <Label text="Land Card">
+                     <font>
+                        <Font name="Franklin Gothic Demi Cond" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="261.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Land_Card.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="113.0" prefWidth="200.0" text="It will add power to your corresponding attribute, more about attribute on next page" textAlignment="CENTER" wrapText="true" />
+               </children>
+               <padding>
+                  <Insets top="8.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="398.0" prefWidth="242.0" spacing="8.0" styleClass="explanationCard">
+               <children>
+                  <Label text="Skill Card">
+                     <font>
+                        <Font name="Franklin Gothic Demi Cond" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="261.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Skill_Card.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="105.0" prefWidth="200.0" text="There are 3 skill cards, Destroy which destroy an enemy, powerup which allow card to &quot;break&quot; defense and deal direct damage and skill aura which buffs or debuff card" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="8.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <Label layoutX="362.0" layoutY="57.0" text="#3 - Card Types">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="48.0" />
+         </font>
+      </Label>
+      <Button layoutX="592.0" layoutY="685.0" mnemonicParsing="false" text="Next" />
+      <Button layoutX="383.0" layoutY="685.0" mnemonicParsing="false" text="Exit" />
+      <Label layoutX="19.0" layoutY="123.0" prefHeight="113.0" prefWidth="963.0" text="There are 3 card types, character, land, and skill. You can only play one land card per turn, and it generates attribute power every turn for each land card on that attribute. Skill card are cards that can only be used once, and are used to manipulate either enemy or ally character card, to destroy, buff, and debuff them. Character card can attack opposing character card each turn, or do direct damage to enemy" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

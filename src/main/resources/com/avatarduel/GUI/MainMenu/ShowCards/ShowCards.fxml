@@ -8,7 +8,7 @@
    <children>
       <VBox layoutX="8.0" layoutY="4.0">
          <children>
-            <fx:include fx:id="displayCard" source="../Card/CardGUI.fxml" />
+            <fx:include fx:id="displayCard" source="../../Card/CardGUI.fxml" />
          </children>
       </VBox>
       <Button fx:id="see_char" layoutX="339.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#nextCharacter" text="next characters" />
