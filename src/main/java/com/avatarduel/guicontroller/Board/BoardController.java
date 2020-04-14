@@ -125,19 +125,15 @@ public class BoardController {
     @Subscribe
     public void checkWinnerGame(CheckWinRequest request) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setHeaderText("Congratulation");
         if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
-            a.setHeaderText("Congratulation");
             a.setContentText("Player " + Game.getInstance().getCurrentOpponent() + "Win!!!");
-            a.showAndWait();
-            stage.close(); // mattin game
         }
-
         if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getHealthPoint() <= 0) {
-            a.setHeaderText("Congratulation");
             a.setContentText("Player " + Game.getInstance().getCurrentPlayer() + "Win!!!");
-            a.showAndWait();
-            stage.close(); // mattin game
         }
+        a.showAndWait();
+        stage.close(); // mattin game
     }
 
     @FXML
