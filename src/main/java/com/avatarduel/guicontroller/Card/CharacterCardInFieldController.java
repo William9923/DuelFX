@@ -19,12 +19,9 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class CharacterCardInFieldController extends CardController {
-    @FXML VBox card_actions;
+public class CharacterCardInFieldController extends CardInFieldController {
     @FXML ImageView card_rotate;
     @FXML ImageView card_attack;
-    private boolean isActionEnabled;
-    private PlayerType playerType;
     private CharacterCardInField characterCardInField;
 
     public void setCard(CharacterCardInField cardInField) {
@@ -34,8 +31,6 @@ public class CharacterCardInFieldController extends CardController {
 
     @FXML
     public void initialize() {
-        card_actions.setVisible(false);
-        isActionEnabled = true;
     }
 
     @FXML
@@ -54,23 +49,6 @@ public class CharacterCardInFieldController extends CardController {
             card_border.rotateProperty().setValue(0);
             card_attack.setVisible(true);
         }
-    }
-
-    // dipake FieldController untuk membuat action tidak terlihat ketika di hover
-    public void setActionVisible(boolean value) {
-        isActionEnabled = value;
-    }
-
-    @FXML
-    public void showActions() {
-        if(!card_name.getText().equals("") && isActionEnabled) {
-            card_actions.setVisible(true);
-        }
-    }
-
-    @FXML
-    public void hideActions() {
-        card_actions.setVisible(false);
     }
 
     @FXML
@@ -97,11 +75,5 @@ public class CharacterCardInFieldController extends CardController {
 
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
-    }
-
-    public void showSelectedCard() {
-        if(cardData != null && this.playerType == Game.getInstance().getCurrentPlayer()) {
-            Game.getInstance().getEventBus().post(new ShowSelectedCardRequest(this.cardData));
-        }
     }
 }

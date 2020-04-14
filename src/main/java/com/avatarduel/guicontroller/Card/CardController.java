@@ -113,10 +113,6 @@ public abstract class CardController {
         card_border.getStyleClass().add(className);
     }
 
-    protected void removeBorderStyle(String className) {
-        card_border.getStyleClass().remove(className);
-    }
-
     protected void removeAllBorderStyle() {
         card_border.getStyleClass().removeAll(listBorderClass);
     }

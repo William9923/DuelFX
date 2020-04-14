@@ -14,48 +14,57 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="card_border" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="128.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.SkillCardInFieldController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showActions" onMouseExited="#hideActions" prefHeight="140.0" prefWidth="160.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.SkillCardInFieldController">
    <children>
-      <HBox alignment="CENTER" prefHeight="19.0" prefWidth="110.0" spacing="5.0">
+      <VBox fx:id="card_border" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="128.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css">
          <children>
-            <ImageView fx:id="card_icon" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+            <HBox alignment="CENTER" prefHeight="19.0" prefWidth="110.0" spacing="5.0">
+               <children>
+                  <ImageView fx:id="card_icon" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../card/icon/character_icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="card_name" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" text="NAMA KARTU" wrapText="true">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ImageView fx:id="card_img" fitHeight="71.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../card/icon/character_icon.png" />
+                  <Image url="@../../card/image/character/Aang.png" />
                </image>
             </ImageView>
-               <Label fx:id="card_name" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" text="NAMA KARTU" wrapText="true">
-                  <font>
-                     <Font size="9.0" />
-                  </font>
-               </Label>
+            <HBox alignment="CENTER" onMouseClicked="#showSelectedCard" prefHeight="15.0" prefWidth="118.0" spacing="8.0">
+               <children>
+                  <Label fx:id="card_atk" text="ATK : 8">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="card_def" text="DEF : 9">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="card_pow" text="POW : 2">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-         <ImageView fx:id="card_img" fitHeight="71.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../card/image/character/Aang.png" />
-            </image>
-         </ImageView>
-      <HBox alignment="CENTER" onMouseClicked="#showSelectedCard" prefHeight="15.0" prefWidth="118.0" spacing="8.0">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+      <VBox fx:id="card_actions" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="32.0">
          <children>
-               <Label fx:id="card_atk" text="ATK : 8">
-                  <font>
-                     <Font size="9.0" />
-                  </font>
-               </Label>
-               <Label fx:id="card_def" text="DEF : 9">
-                  <font>
-                     <Font size="9.0" />
-                  </font>
-               </Label>
-               <Label fx:id="card_pow" text="POW : 2">
-                  <font>
-                     <Font size="9.0" />
-                  </font>
-               </Label>
+            <ImageView fx:id="card_remove" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#removeCard" pickOnBounds="true" preserveRatio="true" />
          </children>
-      </HBox>
+      </VBox>
    </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
-</VBox>
+</HBox>

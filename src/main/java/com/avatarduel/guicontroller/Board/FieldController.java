@@ -24,8 +24,6 @@ public class FieldController {
     private Map<String, CharacterCardInFieldController> characters;
     private Map<String, SkillCardInFieldController> skills;
     private PlayerType playerType;
-    private FieldController enemyFieldController;
-    private int fromAttack;
 
     @FXML VBox card_container;
     @FXML HBox character_container;
@@ -66,6 +64,9 @@ public class FieldController {
         characters.put("4", character5Controller);
         characters.put("5", character6Controller);
         skills.put("0", skill1Controller);
+        if(skill1Controller == null) {
+            System.out.println("gasabi bray");
+        }
         skills.put("1", skill2Controller);
         skills.put("2", skill3Controller);
         skills.put("3", skill4Controller);
@@ -76,8 +77,6 @@ public class FieldController {
         });
         skills.forEach((key, controller) -> {
             controller.setNullCard();
-            controller.setPlayerType(playerType);
-            controller.setIndex(Integer.parseInt(key));
         });
     }
 
@@ -124,6 +123,9 @@ public class FieldController {
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
         characters.values().forEach( controller -> {
+            controller.setPlayerType(playerType);
+        });
+        skills.values().forEach(controller -> {
             controller.setPlayerType(playerType);
         });
     }
