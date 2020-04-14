@@ -1,8 +1,6 @@
 package com.avatarduel.guicontroller.MainMenu;
 
-import com.avatarduel.guicontroller.Request.DeckRenderRequest;
 import com.avatarduel.model.Game;
-import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -64,9 +64,6 @@ public class FieldController {
         characters.put("4", character5Controller);
         characters.put("5", character6Controller);
         skills.put("0", skill1Controller);
-        if(skill1Controller == null) {
-            System.out.println("gasabi bray");
-        }
         skills.put("1", skill2Controller);
         skills.put("2", skill3Controller);
         skills.put("3", skill4Controller);
@@ -116,6 +113,9 @@ public class FieldController {
 
     public void setCharactersActionsVisible(boolean value) {
         this.characters.values().forEach( controller -> {
+            controller.setActionVisible(value);
+        });
+        this.skills.values().forEach(controller -> {
             controller.setActionVisible(value);
         });
     }

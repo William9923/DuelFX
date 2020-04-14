@@ -6,6 +6,7 @@ import com.avatarduel.event.NextPhaseEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.Request.CheckWinRequest;
+import com.avatarduel.guicontroller.Request.DeckDrawAndRenderRequest;
 import com.avatarduel.guicontroller.Request.RenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.model.Game;
@@ -30,7 +31,6 @@ public class BoardController {
     @FXML private PlayerStatusController playerAStatusController;
     @FXML private PlayerStatusController playerBStatusController;
     @FXML private Button end_turn;
-    @FXML private Button end_phase;
     @FXML private GameStatusController gameStatusController;
 //    private Executor executor;
 
@@ -80,6 +80,7 @@ public class BoardController {
             deckController.render();
             Game.getInstance().getEventBus().register(deckController);
         });
+        Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
 
         playerStatusControllerMap.put(PlayerType.A, playerAStatusController);
         playerStatusControllerMap.put(PlayerType.B, playerBStatusController);
@@ -95,6 +96,7 @@ public class BoardController {
         boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
         Game.getInstance().getEventBus().post(new RenderRequest());
+        Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
 
         if (canDoIt){
             // gw bikin kek gini karena blom bisa request Flip Card dkk gitu
@@ -137,16 +139,6 @@ public class BoardController {
         if(gameEnded) {
             a.showAndWait();
             end_turn.getScene().getWindow().hide();
-        }
-    }
-
-    @FXML
-    public void endPhase() {
-        if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE)){
-            this.endTurn();
-        } else {
-            Game.getInstance().getEventBus().post(new NextPhaseEvent());
-            Game.getInstance().getEventBus().post(new RenderRequest());
         }
     }
 

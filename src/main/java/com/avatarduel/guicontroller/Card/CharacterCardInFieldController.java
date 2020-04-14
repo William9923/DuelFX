@@ -1,9 +1,6 @@
 package com.avatarduel.guicontroller.Card;
 
-import com.avatarduel.event.AttackEvent;
-import com.avatarduel.event.ChangePositionEvent;
-import com.avatarduel.event.DirectAttackEvent;
-import com.avatarduel.event.IEvent;
+import com.avatarduel.event.*;
 import com.avatarduel.guicontroller.Request.CheckWinRequest;
 import com.avatarduel.guicontroller.Request.FieldRenderRequest;
 import com.avatarduel.guicontroller.Request.RenderRequest;
@@ -11,6 +8,7 @@ import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceDialog;
@@ -24,13 +22,14 @@ public class CharacterCardInFieldController extends CardInFieldController {
     @FXML ImageView card_attack;
     private CharacterCardInField characterCardInField;
 
+    @FXML
+    public void initialize() {
+        card_actions.setVisible(false);
+    }
+
     public void setCard(CharacterCardInField cardInField) {
         super.setCard(cardInField.getCard());
         this.characterCardInField = cardInField;
-    }
-
-    @FXML
-    public void initialize() {
     }
 
     @FXML
@@ -53,6 +52,10 @@ public class CharacterCardInFieldController extends CardInFieldController {
 
     @FXML
     public void cardAttack() {
+        if(Game.getInstance().getCurrentPhase().getPhase() != Phase.BATTLE) {
+            Game.getInstance().getEventBus().post(new NextPhaseEvent());
+            Game.getInstance().getEventBus().post(new RenderRequest());
+        }
         if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() == 0){
             Game.getInstance().getEventBus().post(new DirectAttackEvent(this.getCardData().getId(), playerType));
             Game.getInstance().getEventBus().post(new RenderRequest());

@@ -2,8 +2,8 @@ package com.avatarduel.guicontroller.Request;
 
 import com.avatarduel.model.type.PlayerType;
 
-public class DeckRenderRequest extends RenderRequest {
-    public DeckRenderRequest(PlayerType type) {
+public class DeckDrawAndRenderRequest extends RenderRequest {
+    public DeckDrawAndRenderRequest(PlayerType type) {
         super(type);
     }
 }

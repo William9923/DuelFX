@@ -89,18 +89,10 @@ public class CardInHandController extends CardController{
             Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
         }
         else if(cardData.getType() == CardType.CHARACTER) {
-            CharacterState stateList[] = {CharacterState.ATTACK, CharacterState.DEFENSE};
-            ChoiceDialog<CharacterState> state = new ChoiceDialog<>(stateList[0], stateList);
-            state.setHeaderText("Pilihlah State Karakter : ");
-            Optional<CharacterState> result = state.showAndWait();
-            System.out.println(state.getSelectedItem());
-            if (state != null && result.isPresent()) {
-                System.out.println(state.getSelectedItem());
-                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(),state.getSelectedItem(), getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
-                Game.getInstance().getEventBus().post(event);
-                Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
-                Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
-            }
+            event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
+            Game.getInstance().getEventBus().post(event);
+            Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
+            Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
         }
         else if (cardData.getType() == CardType.SKILL_DESTROY) {
             if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
