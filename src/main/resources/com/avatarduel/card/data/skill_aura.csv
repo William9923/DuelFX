@@ -27,3 +27,7 @@ id	name	element	description	imagepath	power	attack	defense
 90	Ice Prison	WATER	This technique covers an opponent in a prison made of ice.	src/res/image/skill/Ice Prison.png	3	-4	2
 91	Tangle Mine	WATER	Military weapons invented by Hakoda to aid the Southern Water Tribe's quest to defeat the Fire Nation.	src/res/image/skill/Tangle Mine.png	2	2	-1
 92	Wolf Armor	WATER	Protective battle gear worn by the warriors of the Southern Water Tribe.	src/res/image/skill/Wolf Armor.png	2	2	1
+93
+94
+95
+96
