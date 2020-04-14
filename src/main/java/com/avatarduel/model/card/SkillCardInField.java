@@ -18,7 +18,7 @@ public class SkillCardInField implements IField {
     }
 
     @Override
-    public Card getCard() {
+    public SkillCard getCard() {
         return card;
     }
 

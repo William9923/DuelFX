@@ -1,5 +1,7 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.event.RemoveSkillCardEvent;
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Board.FieldController;
 import com.avatarduel.guicontroller.Request.FieldRenderRequest;
 import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
@@ -25,9 +27,12 @@ public class SkillCardInFieldController extends CardInFieldController {
     }
 
     @FXML
-    public void removeCard() {
+    public void removeCard() throws InvalidOperationException {
         System.out.println("SkillCardInFieldController : removing card... ");
-        Game.getInstance().getPlayerByType(this.playerType).getField().removeSkillCard((SkillCard) skillCardInField.getCard());
+        RemoveSkillCardEvent removeSkillCardEvent = new RemoveSkillCardEvent(this.skillCardInField.getCard().getId(), playerType);
+        if(removeSkillCardEvent.validate()) {
+            removeSkillCardEvent.execute();
+        }
         Game.getInstance().getEventBus().post(new FieldRenderRequest(PlayerType.A));
         Game.getInstance().getEventBus().post(new FieldRenderRequest(PlayerType.B));
         System.out.println("SkillCardInFieldController : remove successfull");

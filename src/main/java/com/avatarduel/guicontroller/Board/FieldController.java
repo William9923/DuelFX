@@ -98,10 +98,7 @@ public class FieldController {
             this.characters.get(Integer.toString(characterCardInField.getIndex())).setCard(characterCardInField);
             this.characters.get(Integer.toString(characterCardInField.getIndex())).renderRotate();          // biar dia tetep sesuai keadaan dia
         }
-        System.out.println("Updating skill action render : ");
-        System.out.println("Skill card list : " + skillCardList.size());
         for(SkillCardInField skillCardInField : skillCardList) {
-            System.out.println("Index : " + skillCardInField.getIndex());
             this.skills.get(Integer.toString(skillCardInField.getIndex())).setCard(skillCardInField);
         }
     }

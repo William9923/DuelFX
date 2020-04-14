@@ -14,7 +14,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showActions" onMouseExited="#hideActions" prefHeight="140.0" prefWidth="160.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.SkillCardInFieldController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showActions" onMouseExited="#hideActions" prefHeight="140.0" prefWidth="160.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.avatarduel.guicontroller.Card.SkillCardInFieldController">
    <children>
       <VBox fx:id="card_border" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="128.0" spacing="8.0" styleClass="container" stylesheets="@styles/CardGUI.css">
          <children>
