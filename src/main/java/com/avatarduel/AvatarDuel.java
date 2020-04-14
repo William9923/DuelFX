@@ -20,38 +20,27 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 
 public class AvatarDuel extends Application {
 
   @Override
-  public void start(Stage stage) throws IOException, URISyntaxException {
+  public void start(Stage stage) throws IOException {
     // Load Main Menu
     FXMLLoader mainmenuLoader = getMainMenu();
     Parent mainmenuGUI = mainmenuLoader.load();
     Scene mainmenu = new Scene(mainmenuGUI);
     MainMenuController mainMenuController = mainmenuLoader.getController();
-
-    // load board
-    FXMLLoader FXMLBoardGUI = new FXMLLoader(getClass().getResource("GUI/Board/Board.fxml"));
-    Parent boardGUI = FXMLBoardGUI.load();
-    Scene board = new Scene(boardGUI);
-    BoardController boardController = FXMLBoardGUI.getController();
-
-    // Load card library
-    FXMLLoader libraryLoader = new FXMLLoader(getClass().getResource("GUI/Library/card_library.fxml"));
-    Parent libraryGUI = libraryLoader.load();
-    Scene library = new Scene(libraryGUI);
+    mainMenuController.setStage(stage);
 
     stage.setTitle("Avatar Duel OOP");
     stage.setScene(mainmenu);
     stage.setFullScreen(true);
     stage.show();
-
-    mainMenuController.setStartOnScene(stage, board);
-    mainMenuController.setCardsOnScene(stage, library);
-    boardController.setStage(stage);
   }
 
   private FXMLLoader getMainMenu() {

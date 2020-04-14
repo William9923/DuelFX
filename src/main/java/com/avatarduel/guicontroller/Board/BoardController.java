@@ -15,7 +15,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +32,6 @@ public class BoardController {
     @FXML private Button end_turn;
     @FXML private Button end_phase;
     @FXML private GameStatusController gameStatusController;
-    private Stage stage;
 //    private Executor executor;
 
     private Map<PlayerType, HandController> handControllerMap;
@@ -97,6 +95,7 @@ public class BoardController {
         boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
         Game.getInstance().getEventBus().post(new RenderRequest());
+
         if (canDoIt){
             // gw bikin kek gini karena blom bisa request Flip Card dkk gitu
             handAController.flipCards();
@@ -125,15 +124,20 @@ public class BoardController {
     @Subscribe
     public void checkWinnerGame(CheckWinRequest request) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
+        boolean gameEnded = false;
         a.setHeaderText("Congratulation");
         if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
             a.setContentText("Player " + Game.getInstance().getCurrentOpponent() + "Win!!!");
+            gameEnded = true;
         }
         if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getHealthPoint() <= 0) {
             a.setContentText("Player " + Game.getInstance().getCurrentPlayer() + "Win!!!");
+            gameEnded = true;
         }
-        a.showAndWait();
-        stage.close(); // mattin game
+        if(gameEnded) {
+            a.showAndWait();
+            end_turn.getScene().getWindow().hide();
+        }
     }
 
     @FXML
@@ -148,14 +152,9 @@ public class BoardController {
 
     // TODO : IMPLEMENT CARD HOVER ON CARD CONTROLLER TO POST AN EVENT
     // Buat Card jadi HoveredCard
-    // ayo ayo mangat gun uwaw
 
     @Subscribe
     private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {
         selectedController.setCard(selectCardRequest.getCard());
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 }
