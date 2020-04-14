@@ -47,5 +47,5 @@ id	name	element	description	imagepath	attack	defense	power
 62	June	EARTH	Bounty hunter with a shirshu as her pet.	src/res/image/character/June.png	5	8	2
 63	Suki	EARTH	Leader of Kyoshi Warrior.	src/res/image/character/Suki.png	8	8	3
 64	Pipsqueak	EARTH	Strongest member of Freedom Fighters.	src/res/image/character/Pipsqueak.png	3	10	2
-65  Raava   ENERGY  The strongest spirit that creates the avatar.   src/res/image/character/Raava.png   15  15  20
-66  Vaatu   ENERGY  The dark version of Raava.  src/res/image/character/Vaatu.png   15  15  20
+65	Raava	ENERGY	The strongest spirit that creates the avatar.	src/res/image/character/Raava.png	15	15	20
+66	Vaatu	ENERGY	The dark version of Raava.	src/res/image/character/Vaatu.png	15	15	20

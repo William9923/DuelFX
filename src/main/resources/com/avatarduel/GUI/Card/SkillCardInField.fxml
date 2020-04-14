@@ -63,7 +63,10 @@
       </VBox>
       <VBox fx:id="card_actions" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="32.0">
          <children>
-            <ImageView fx:id="card_remove" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#removeCard" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="card_remove" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#removeCard" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../card/icon/RemoveSkillCard.png" />
+               </image></ImageView>
          </children>
       </VBox>
    </children>

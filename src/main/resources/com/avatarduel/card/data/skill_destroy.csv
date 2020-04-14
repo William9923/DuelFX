@@ -8,5 +8,5 @@ id	name	element	description	imagepath	power
 75	Oxygen Vacuum	AIR	Create and manipulate vacuum of physical energy.	src/res/image/skill/oxygen vacuum.png	2
 94	Ice Age	WATER	Power that turn any objects becomes an ice in an instant.	src/res/image/skill/ice age.png	2
 95	Tsunami	WATER	Create such a huge and unstoppable water wave.	src/res/image/skill/tsunami.png 2
-64  Expecto Patronum    ENERGY  Create a huge blast within range about 50 kilometers.   src/res/image/skill/expecto patronum.png    3
-65  Time Bender ENERGY  Able to manipulate time for 3 seconds.  src/res/image/skill/Time Bender.png 3
+64	Expecto Patronum	ENERGY	Create a huge blast within range about 50 kilometers.	src/res/image/skill/expecto patronum.png	3
+65	Time Bender ENERGY	Able to manipulate time for 3 seconds.	src/res/image/skill/Time Bender.png	3

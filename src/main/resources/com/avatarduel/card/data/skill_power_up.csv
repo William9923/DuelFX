@@ -8,5 +8,5 @@ id	name	element	description	imagepath	power
 52	Super Jump	AIR	Making body as light as ever like on the moon.	src/res/image/skill/super jump.png	2
 85	Lava flood	EARTH	Create a large puddle made of lava.	src/res/image/skill/lava flood.png	4
 88	Earthquake	EARTH	A very powerful vibration which able to destroy everything.	src/res/image/skill/earthquake.png	2
-98  Super Regeneration  ENERGY  Regenerating HP at superb speed 1 HP every 2 seconds for a full minute. src/res/image/skill/Super regeneration.png  3
-99  Full Power  ENERGY  Maximum attack defense. src/res/image/skill/Full Power.png  4
+98	Super Regeneration	ENERGY	Regenerating HP at superb speed 1 HP every 2 seconds for a full minute.	src/res/image/skill/Super regeneration.png	3
+99	Full Power	ENERGY	Maximum attack defense.	src/res/image/skill/Full Power.png	4
