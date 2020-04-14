@@ -73,6 +73,10 @@ public class Field {
                 .orElse(null);
     }
 
+    public void setSkillCardList(List<SkillCardInField> skillCardList) {
+        this.skillCardList = skillCardList;
+    }
+
 
     public void connectCards(CharacterCardInField card1, SkillCard card2, int index, int createdAt)  {
         if (isAbleToAddSkill()) {
@@ -137,20 +141,12 @@ public class Field {
     }
 
     public void removeSkillCard(SkillCard inField) {
+        System.out.println("Hit this");
         if (isContainSkill(inField)) {
             skillCardList = skillCardList
                     .stream()
                     .filter(cardInField -> cardInField.getCard().getId() != inField.getId())
                     .collect(Collectors.toList());
-
-            charCardList.forEach(
-                    c -> {
-                        if (c.getConnectedCard().contains(inField)) {
-                            c.removePair(inField);
-                        }
-                    }
-            );
-
         }
     }
 }

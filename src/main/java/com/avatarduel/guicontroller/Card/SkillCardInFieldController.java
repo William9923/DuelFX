@@ -29,13 +29,9 @@ public class SkillCardInFieldController extends CardInFieldController {
     @FXML
     public void removeCard() throws InvalidOperationException {
         System.out.println("SkillCardInFieldController : removing card... ");
-        RemoveSkillCardEvent removeSkillCardEvent = new RemoveSkillCardEvent(this.skillCardInField.getCard().getId(), playerType);
-        if(removeSkillCardEvent.validate()) {
-            removeSkillCardEvent.execute();
-        }
+        Game.getInstance().getEventBus().post(new RemoveSkillCardEvent(this.skillCardInField.getCard().getId(), playerType));
         Game.getInstance().getEventBus().post(new FieldRenderRequest(PlayerType.A));
         Game.getInstance().getEventBus().post(new FieldRenderRequest(PlayerType.B));
-        System.out.println("SkillCardInFieldController : remove successfull");
     }
 
     public void setPlayerType(PlayerType playerType) {

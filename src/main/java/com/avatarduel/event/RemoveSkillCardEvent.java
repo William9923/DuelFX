@@ -2,9 +2,14 @@ package com.avatarduel.event;
 
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
+import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
 
@@ -25,6 +30,21 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
                 .findFirst()
                 .orElse(null);
 
+        List<CharacterCardInField> list1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
+        List<CharacterCardInField> list2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
+
+        CharacterCardInField pairedCharacter = list1.stream()
+                .filter(c -> c.getConnectedCard().contains(card.getCard()))
+                .findFirst()
+                .orElse(null);
+
+        if (pairedCharacter == null) {
+            pairedCharacter = list2.stream()
+                    .filter(c -> c.getConnectedCard().contains(card.getCard()))
+                    .findFirst()
+                    .orElse(null);
+        }
+
         if (currPhase != Phase.MAIN){
             throw new InvalidOperationException("Removing Skill Card", "Not in the Main Phase");
         }
@@ -37,7 +57,18 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
             throw new InvalidOperationException("Removing Skill Card", "Invalid Card!!");
         }
 
-        Game.getInstance().getPlayerByType(playerType).removeSkillCardByID(idTarget);
+        if (pairedCharacter == null) {
+            throw new InvalidOperationException("Removing Skill Card", "No Character Card Found Equipped with this Skill Card");
+        }
+
+        pairedCharacter.setConnectedCard(pairedCharacter.getConnectedCard().stream()
+                .filter(c-> c.getId() !=card.getCard().getId())
+                .collect(Collectors.toList()));
+
+        List<SkillCardInField> cardInFields = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getSkillCardList();
+        Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().setSkillCardList(cardInFields.stream()
+                .filter(c -> c.getCard().getId() != idTarget)
+                .collect(Collectors.toList()));
     }
 
     @Override

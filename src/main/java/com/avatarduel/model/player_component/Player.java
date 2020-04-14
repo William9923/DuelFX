@@ -79,17 +79,11 @@ public class Player {
 
     public void removeCharacterFromFieldByID(int id)  {
         CharacterCardInField card = field.getCharacterCardByID(id);
-//        if (card == null) {
-//            throw new InvalidOperationException("Removing Summoned Character", "Card not found");
-//        }
         field.removeCharacterCard(card);
     }
 
     public void removeSkillCardByID (int id) {
         SkillCard card = (SkillCard) field.getSkillCardByID(id).getCard();
-//        if (card == null) {
-//            throw new InvalidOperationException("Removing Summoned Character", "Card not found");
-//        }
         field.removeSkillCard(card);
     }
 

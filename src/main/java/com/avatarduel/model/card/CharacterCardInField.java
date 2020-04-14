@@ -50,6 +50,10 @@ public class CharacterCardInField implements IField{
         this.card = card;
     }
 
+    public void setConnectedCard(List<SkillCard> listCard) {
+        this.connectedCard = listCard;
+    }
+
     public int getBonusAttack() {
         AtomicInteger bonus = new AtomicInteger();
         for (Card card: connectedCard) {
