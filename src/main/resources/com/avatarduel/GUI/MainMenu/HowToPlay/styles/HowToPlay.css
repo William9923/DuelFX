@@ -9,3 +9,13 @@
     -fx-border-width : 3px;
     -fx-border-color : black;
 }
+
+.button {
+    -fx-background-color : #FF0;
+    -fx-border-color : black;
+    -fx-font-size : 24px;
+}
+
+.button:hover {
+    -fx-background-color : red;
+}

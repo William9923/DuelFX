@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -21,13 +20,14 @@ public class MainMenuController {
 
     @FXML
     public void initialize() {
+
     }
 
     public void setStage(Stage stage) throws IOException {
         this.stage = stage;
         this.setStartOnScene(getSceneFrom("GUI/Board/Board.fxml"));
-        this.setHowToPlayPopUpOnParent(getParentFrom("GUI/MainMenu/HowToPlay/Page3.fxml"));
-        this.setCardsOnScene(getSceneFrom("GUI/MainMenu/ShowCards/ShowCards.fxml"));
+        this.setHowToPlayPopUp();
+        this.setCardsPopUp();
         Game.getInstance().getEventBus().register(this);
     }
 
@@ -38,17 +38,21 @@ public class MainMenuController {
         });
     }
 
-    public void setHowToPlayPopUpOnParent(Parent parent) {
-        Popup howToPlay = new Popup();
-        howToPlay.getContent().add(parent);
+    public void setHowToPlayPopUp() {
+        HowToPlayController howToPlay = new HowToPlayController();
+        howToPlay.setStage(stage);
         how_to_play.onMouseClickedProperty().setValue(e -> {
-            howToPlay.show(stage);
+            howToPlay.goToPage1();
         });
     }
 
-    public void setCardsOnScene(Scene scene) {
+    public void setCardsPopUp() throws IOException {
+        FXMLLoader fxmlLoader = getFxmlLoader("GUI/MainMenu/ShowCards/ShowCards.fxml");
+        fxmlLoader.load(); //harus diginiin sebelum getController dipanggil
+        CardLibraryController cardLibraryController = fxmlLoader.getController();
+        cardLibraryController.setStage(stage);
         cards.onMouseClickedProperty().setValue(e -> {
-            stage.setScene(scene);
+            cardLibraryController.start();
         });
     }
 
@@ -58,8 +62,12 @@ public class MainMenuController {
     }
 
     public Parent getParentFrom(String filePath) throws IOException {
-        File guiFile = new File("src/main/resources/com/avatarduel/" + filePath);
-        FXMLLoader loader = new FXMLLoader(guiFile.toURI().toURL());
+        FXMLLoader loader = getFxmlLoader(filePath);
         return loader.load();
+    }
+
+    public FXMLLoader getFxmlLoader(String filePath) throws IOException {
+        File guiFile = new File("src/main/resources/com/avatarduel/" + filePath);
+        return new FXMLLoader(guiFile.toURI().toURL());
     }
 }
