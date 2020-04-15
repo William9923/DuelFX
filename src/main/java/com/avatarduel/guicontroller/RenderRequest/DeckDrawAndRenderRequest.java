@@ -1,4 +1,4 @@
-package com.avatarduel.guicontroller.Request;
+package com.avatarduel.guicontroller.RenderRequest;
 
 import com.avatarduel.model.type.PlayerType;
 

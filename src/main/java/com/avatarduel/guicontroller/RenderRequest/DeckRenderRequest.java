@@ -1,7 +1,6 @@
-package com.avatarduel.guicontroller.Card;
+package com.avatarduel.guicontroller.RenderRequest;
 
-import com.avatarduel.guicontroller.Request.RenderRequest;
-import com.avatarduel.model.player_component.Player;
+import com.avatarduel.guicontroller.RenderRequest.RenderRequest;
 import com.avatarduel.model.type.PlayerType;
 
 public class DeckRenderRequest extends RenderRequest {

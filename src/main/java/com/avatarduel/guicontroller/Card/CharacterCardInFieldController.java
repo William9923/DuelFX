@@ -1,10 +1,10 @@
 package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.event.*;
-import com.avatarduel.guicontroller.Request.CheckWinRequest;
-import com.avatarduel.guicontroller.Request.FieldRenderRequest;
-import com.avatarduel.guicontroller.Request.RenderRequest;
-import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
+import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.RenderRequest.GameStatusRenderRequest;
+import com.avatarduel.guicontroller.RenderRequest.PlayerStatusRenderRequest;
+import com.avatarduel.guicontroller.RenderRequest.CheckWinRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CharacterState;
@@ -54,11 +54,11 @@ public class CharacterCardInFieldController extends CardInFieldController {
     public void cardAttack() {
         if(Game.getInstance().getCurrentPhase().getPhase() != Phase.BATTLE) {
             Game.getInstance().getEventBus().post(new NextPhaseEvent());
-            Game.getInstance().getEventBus().post(new RenderRequest());
+            Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
         }
         if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() == 0){
             Game.getInstance().getEventBus().post(new DirectAttackEvent(this.getCardData().getId(), playerType));
-            Game.getInstance().getEventBus().post(new RenderRequest());
+            Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentOpponent()));
         }
         else if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
             List<CharacterCardInField> opponentField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
@@ -67,7 +67,7 @@ public class CharacterCardInFieldController extends CardInFieldController {
             if (choiceAttack.getSelectedItem() != null) {
                 IEvent event = new AttackEvent(this.getCardData().getId(), choiceAttack.getSelectedItem().getCard().getId(), Game.getInstance().getCurrentPlayer(), Game.getInstance().getCurrentOpponent());
                 Game.getInstance().getEventBus().post(event);
-                Game.getInstance().getEventBus().post(new RenderRequest());
+                Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentOpponent()));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
             }

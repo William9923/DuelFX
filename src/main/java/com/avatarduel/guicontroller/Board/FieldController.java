@@ -1,18 +1,14 @@
 package com.avatarduel.guicontroller.Board;
 
-import com.avatarduel.event.AttackEvent;
 import com.avatarduel.guicontroller.Card.CharacterCardInFieldController;
 import com.avatarduel.guicontroller.Card.SkillCardInFieldController;
-import com.avatarduel.guicontroller.Request.FieldRenderRequest;
+import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.CharacterCard;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 

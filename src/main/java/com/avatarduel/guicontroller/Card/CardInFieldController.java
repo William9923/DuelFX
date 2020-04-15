@@ -1,8 +1,7 @@
 package com.avatarduel.guicontroller.Card;
 
-import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
+import com.avatarduel.guicontroller.RenderRequest.ShowSelectedCardRequest;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.IField;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
