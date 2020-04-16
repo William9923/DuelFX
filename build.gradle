@@ -15,9 +15,15 @@ repositories {
     mavenCentral()
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
     implementation 'junit:junit:4.12'
     implementation("com.google.guava:guava:28.2-jre")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }

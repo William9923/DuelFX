@@ -12,11 +12,11 @@ import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
 public class Loader {
-    private static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";
-    private static final String CHARACTER_CSV_FILE_PATH = "../card/data/character.csv";
-    private static final String SKILL_AURA_CSV_FILE_PATH = "../card/data/skill_aura.csv";
-    private static final String SKILL_DESTROY_CSV_FILE_PATH = "../card/data/skill_destroy.csv";
-    private static final String SKILL_POWER_UP_CSV_FILE_PATH = "../card/data/skill_power_up.csv";
+    public static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";
+    public static final String CHARACTER_CSV_FILE_PATH = "../card/data/character.csv";
+    public static final String SKILL_AURA_CSV_FILE_PATH = "../card/data/skill_aura.csv";
+    public static final String SKILL_DESTROY_CSV_FILE_PATH = "../card/data/skill_destroy.csv";
+    public static final String SKILL_POWER_UP_CSV_FILE_PATH = "../card/data/skill_power_up.csv";
 
     private CardFactory cardFactory;
 
