@@ -17,12 +17,7 @@ public class Game {
     private EventBus eventBus;
 
     private Game() {
-        this.p1 = new Player(PlayerType.A);
-        this.p2 = new Player(PlayerType.B);
-        this.currentTurn = 1; // first turn
-        this.currentPhase = new DrawPhase();
-        this.currentPlayer = PlayerType.A;
-        this.eventBus = new EventBus();
+        this.resetGame();
     }
 
     public static Game getInstance() {
@@ -97,5 +92,14 @@ public class Game {
 
     public boolean checkGameOver() {
         return (p1.checkLose()||p2.checkLose());
+    }
+
+    public void resetGame() {
+        this.p1 = new Player(PlayerType.A);
+        this.p2 = new Player(PlayerType.B);
+        this.currentTurn = 1; // first turn
+        this.currentPhase = new DrawPhase();
+        this.currentPlayer = PlayerType.A;
+        this.eventBus = new EventBus();
     }
 }
