@@ -2,13 +2,10 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.event.EndTurnEvent;
 import com.avatarduel.event.IEvent;
-import com.avatarduel.event.NextPhaseEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
-import com.avatarduel.guicontroller.Request.CheckWinRequest;
-import com.avatarduel.guicontroller.Request.DeckDrawAndRenderRequest;
-import com.avatarduel.guicontroller.Request.RenderRequest;
-import com.avatarduel.guicontroller.Request.ShowSelectedCardRequest;
+import com.avatarduel.guicontroller.PopupWindow.AttackPopup;
+import com.avatarduel.guicontroller.RenderRequest.*;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
@@ -17,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,8 +93,9 @@ public class BoardController {
         IEvent event = new EndTurnEvent();
         boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
-        Game.getInstance().getEventBus().post(new RenderRequest());
+        Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
         Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
+        Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentPlayer()));
 
         if (canDoIt){
             // gw bikin kek gini karena blom bisa request Flip Card dkk gitu
@@ -140,6 +139,13 @@ public class BoardController {
             a.showAndWait();
             end_turn.getScene().getWindow().hide();
         }
+    }
+
+    @Subscribe
+    public void showAttackForm(AttackRequest attackRequest) throws IOException {
+        System.out.println("Board controller : we get the attack request");
+        AttackPopup attackPopup = new AttackPopup(attackRequest.getAttacker());
+        attackPopup.show(end_turn.getScene().getWindow());
     }
 
     // TODO : IMPLEMENT CARD HOVER ON CARD CONTROLLER TO POST AN EVENT

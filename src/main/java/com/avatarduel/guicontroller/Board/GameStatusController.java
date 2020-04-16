@@ -1,6 +1,6 @@
 package com.avatarduel.guicontroller.Board;
 
-import com.avatarduel.guicontroller.Request.RenderRequest;
+import com.avatarduel.guicontroller.RenderRequest.GameStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ public class GameStatusController {
     }
 
     @Subscribe
-    public void update(RenderRequest request) {
+    public void update(GameStatusRenderRequest request) {
         this.render();
     }
     public void render() {
