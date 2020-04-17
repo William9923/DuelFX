@@ -122,7 +122,8 @@ public class CardInHandController extends CardController{
                     Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType)); // minta render terkait status player dan status game
                     Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
                     Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));  // render tangan lagi soalny kartunya uda dipake
-                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer())); // minta render field sendiri
+                    //render kedua field soalnya misalnya skill dipake ke kartu lawan, bakal beda juga efeknya
+                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
                     Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
                 }
             } else {
