@@ -4,7 +4,6 @@ import com.avatarduel.event.EndTurnEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
-import com.avatarduel.guicontroller.PopupWindow.AttackPopup;
 import com.avatarduel.guicontroller.RenderRequest.*;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
@@ -140,16 +139,6 @@ public class BoardController {
             end_turn.getScene().getWindow().hide();
         }
     }
-
-    @Subscribe
-    public void showAttackForm(AttackRequest attackRequest) throws IOException {
-        System.out.println("Board controller : we get the attack request");
-        AttackPopup attackPopup = new AttackPopup(attackRequest.getAttacker());
-        attackPopup.show(end_turn.getScene().getWindow());
-    }
-
-    // TODO : IMPLEMENT CARD HOVER ON CARD CONTROLLER TO POST AN EVENT
-    // Buat Card jadi HoveredCard
 
     @Subscribe
     private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {
