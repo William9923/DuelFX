@@ -3,11 +3,16 @@ package com.avatarduel.event;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.card.SkillCard;
+import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.player_component.Field;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AttackEvent implements IEvent {
 
@@ -74,6 +79,18 @@ public class AttackEvent implements IEvent {
                 p2.setHealthPoint(p2.getHealthPoint() - diff);
             }
 
+            List<SkillCard> pairedSkillCard = defenseChar.getConnectedCard();
+            for (SkillCard card: pairedSkillCard) {
+                List<SkillCardInField> list1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getSkillCardList();
+                List<SkillCardInField> list2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getSkillCardList();
+
+                Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().setSkillCardList(list1.stream()
+                        .filter(c -> c.getCard().getId() != card.getId())
+                        .collect(Collectors.toList()));
+                Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().setSkillCardList(list2.stream()
+                        .filter(c -> c.getCard().getId() != card.getId())
+                        .collect(Collectors.toList()));
+            }
             p2.removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
         }
     }
