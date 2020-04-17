@@ -21,7 +21,7 @@ public class SkillAuraCard extends SkillCard {
 
     public SkillAuraCard(String[] elements) {
         this(Integer.parseInt(elements[0]), elements[1], CardFactory.outputElement(elements[2]), elements[3], elements[4],
-                Integer.parseInt(elements[6]), Integer.parseInt(elements[7]), Integer.parseInt(elements[5]));
+                Integer.parseInt(elements[5]), Integer.parseInt(elements[6]), Integer.parseInt(elements[7]));
     }
 
     public int getDefense() {

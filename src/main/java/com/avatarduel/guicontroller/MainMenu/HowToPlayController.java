@@ -17,6 +17,7 @@ public class HowToPlayController {
     private Parent page1;
     private Parent page2;
     private Parent page3;
+    private Parent page4;
     private Popup howToPlay;
     private Stage stage;
 
@@ -37,12 +38,15 @@ public class HowToPlayController {
         FXMLLoader page1Loader = getLoader("GUI/MainMenu/HowToPlay/Page1.fxml");
         FXMLLoader page2Loader = getLoader("GUI/MainMenu/HowToPlay/Page2.fxml");
         FXMLLoader page3Loader = getLoader("GUI/MainMenu/HowToPlay/Page3.fxml");
+        FXMLLoader page4Loader = getLoader("GUI/MainMenu/HowToPlay/Page4.fxml");
         this.page1 = page1Loader.load();
         this.page2 = page2Loader.load();
         this.page3 = page3Loader.load();
+        this.page4 = page4Loader.load();
         page1Loader.setController(this);
         page2Loader.setController(this);
         page3Loader.setController(this);
+        page4Loader.setController(this);
     }
 
     public void goToPage1() {
@@ -78,7 +82,21 @@ public class HowToPlayController {
     public void goToPage3() {
         howToPlay.getContent().remove(0);
         howToPlay.getContent().add(this.page3);
+        Node nextButton = this.page3.getScene().lookup("#nextButton");
+        nextButton.setOnMouseClicked(e -> {
+            this.goToPage4();
+        });
         Node exitButton = this.page3.getScene().lookup("#exitButton");
+        exitButton.setOnMouseClicked(e -> {
+            this.exit();
+        });
+        howToPlay.show(this.stage);
+    }
+
+    public void goToPage4() {
+        howToPlay.getContent().remove(0);
+        howToPlay.getContent().add(this.page4);
+        Node exitButton = this.page4.getScene().lookup("#exitButton");
         exitButton.setOnMouseClicked(e -> {
             this.exit();
         });

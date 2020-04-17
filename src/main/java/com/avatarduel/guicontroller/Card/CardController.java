@@ -84,7 +84,7 @@ public abstract class CardController {
     }
 
     public void setAdditionalInfoCard(SkillPowerUpCard card) {
-        card_atk.setText("");
+        card_atk.setText("pow");
         card_def.setText("");
         card_pow.setText("POW: " + Integer.toString(this.cardData.getPower()));
     }
