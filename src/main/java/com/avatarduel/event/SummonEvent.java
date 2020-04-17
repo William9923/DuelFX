@@ -1,6 +1,5 @@
 package com.avatarduel.event;
 
-import com.avatarduel.exception.InvalidActionException;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
@@ -12,7 +11,6 @@ import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-import java.util.List;
 
 public class SummonEvent implements IEvent {
     private PlayerType playerType;

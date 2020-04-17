@@ -123,6 +123,7 @@ public class CardInHandController extends CardController{
                     Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
                     Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));  // render tangan lagi soalny kartunya uda dipake
                     Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer())); // minta render field sendiri
+                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
                 }
             } else {
                 Alert alert = this.createInfoAlert("Skill Card Effect","No Card To Equip");

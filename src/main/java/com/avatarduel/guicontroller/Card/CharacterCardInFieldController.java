@@ -30,6 +30,8 @@ public class CharacterCardInFieldController extends CardInFieldController {
     public void setCard(CharacterCardInField cardInField) {
         super.setCard(cardInField.getCard());
         this.characterCardInField = cardInField;
+        super.card_atk.setText("ATK : " + characterCardInField.getTotalAttack());
+        super.card_def.setText("DEF : " +  characterCardInField.getTotalDefense());
     }
 
     @FXML
