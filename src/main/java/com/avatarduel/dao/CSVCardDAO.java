@@ -19,6 +19,8 @@ public class CSVCardDAO implements CardDAO {
         cardDatabase.addAll(loader.loadCharacter());
         cardDatabase.addAll(loader.loadLand());
         cardDatabase.addAll(loader.loadSkillAura());
+        cardDatabase.addAll(loader.loadSkillDestroy());
+        cardDatabase.addAll(loader.loadSkillPowerUp());
     }
 
     @Override
