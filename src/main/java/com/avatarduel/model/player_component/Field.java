@@ -136,13 +136,4 @@ public class Field {
         }
     }
 
-    public void removeSkillCard(SkillCard inField) {
-        System.out.println("Hit this");
-        if (isContainSkill(inField)) {
-            skillCardList = skillCardList
-                    .stream()
-                    .filter(cardInField -> cardInField.getCard().getId() != inField.getId())
-                    .collect(Collectors.toList());
-        }
-    }
 }
