@@ -73,6 +73,7 @@ public class AttackEvent implements IEvent {
             if (defenseChar.getPosition().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) { // pierce effect
                 p2.setHealthPoint(p2.getHealthPoint() - diff);
             }
+
             p2.removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
         }
     }

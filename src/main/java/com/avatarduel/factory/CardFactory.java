@@ -45,6 +45,9 @@ public class CardFactory {
                 return new SkillAuraCard(components);
 
             case SKILL_DESTROY:
+                for(String str : components) {
+                    System.out.println(str);
+                }
                 return new SkillDestroyCard(components);
 
             case SKILL_POWER_UP:
