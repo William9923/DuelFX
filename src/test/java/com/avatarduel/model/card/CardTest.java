@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CardModelTest {
+public class CardTest {
     private Card CardTest;
 
-    public CardModelTest() {
+    public CardTest() {
         this.CardTest = new Card(99, "Sample", Element.WATER, "Sample Description", "image sample");
     }
 
