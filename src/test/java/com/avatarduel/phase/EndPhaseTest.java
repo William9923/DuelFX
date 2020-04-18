@@ -3,16 +3,16 @@ package com.avatarduel.phase;
 import com.avatarduel.model.type.Phase;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 class EndPhaseTest {
 
-    private Phase phase1;
+    private EndPhase endPhase;
 
-    public EndPhaseTest (){ this.phase1 = new EndPhaseTest(); }
+    public EndPhaseTest (){ this.endPhase = new EndPhase(); }
     @Test
-    void getPhase() { assertEquals(EndPhase, EndPhase.getPhase()) ;}
+    void getPhase() { assertEquals(Phase.END, endPhase.getPhase()) ;}
 
     @Test
-    void next() { assertEquals(DrawPhase, EndPhase.next()); }
+    void next() { assertEquals(Phase.DRAW, endPhase.next().getPhase()); }
 }

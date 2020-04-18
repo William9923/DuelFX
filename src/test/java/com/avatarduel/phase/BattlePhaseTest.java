@@ -1,20 +1,21 @@
 package com.avatarduel.phase;
 
-import com.avatarduel.event.NextPhaseEvent;
 import com.avatarduel.model.type.Phase;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 class BattlePhaseTest {
 
-    private Phase phase1;
+    private BattlePhase battlePhase;
 
-    public BattlePhaseTest(){ this.phase1 = new BattlePhaseTest(); }
-
-    @Test
-    void getPhase() { assertEquals(BattlePhase, BattlePhase.getPhase()); }
+    public BattlePhaseTest(){ this.battlePhase = new BattlePhase(); }
 
     @Test
-    void next() { assertEquals(EndPhase, BattlePhase.next()); }
+    void getPhase() { assertEquals(battlePhase.getPhase(), Phase.BATTLE); }
+
+    @Test
+    void next() { assertTrue(EqualsBuilder.reflectionEquals(battlePhase.next(), new EndPhase())); }
 }

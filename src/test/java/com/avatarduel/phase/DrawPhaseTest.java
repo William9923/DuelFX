@@ -1,19 +1,20 @@
 package com.avatarduel.phase;
 
 import com.avatarduel.model.type.Phase;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DrawPhaseTest {
 
-    private Phase phase1;
+    private DrawPhase drawPhase;
 
-    public DrawPhaseTest(){ this.phase1 = new DrawPhaseTest(); }
-
-    @Test
-    void getPhase() { assertEquals(DrawPhase, DrawPhase.getPhase()); }
+    public DrawPhaseTest(){ this.drawPhase = new DrawPhase(); }
 
     @Test
-    void next() { assertEquals(MainPhase, DrawPhase.next()); }
+    void getPhase() { assertEquals(drawPhase.getPhase(), Phase.DRAW); }
+
+    @Test
+    void next() { assertTrue(EqualsBuilder.reflectionEquals(new MainPhase(), drawPhase.next())); }
 }

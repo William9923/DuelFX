@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class terjaditerTestCSVCardDAO {
+public
+class TestCSVCardDAO {
 
     @Test
     public void testCardRetrieval() {
