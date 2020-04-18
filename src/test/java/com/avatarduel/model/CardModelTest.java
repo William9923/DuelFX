@@ -31,5 +31,39 @@ public class CardModelTest {
       assertEquals("image sample", CardTest.getImage());
     }
 
+    @Test
+    public void getName() {
+      assertEquals("Sample", CardTest.getName());
+    }
+
+    @Test
+    public void setDescription() {
+      CardTest.setDescription("lorem ipsum");
+      assertEquals(CardTest.getDescription(), "lorem ipsum");
+    }
+
+    @Test
+    public void setId() {
+      CardTest.setId(0);
+      assertEquals(CardTest.getId(), 0);
+    }
+
+    @Test
+    public void setImage() {
+      CardTest.setImage("sample pic");
+      assertEquals(CardTest.getImage(), "sample pic");
+    }
+
+    @Test
+    public void setName() {
+      CardTest.setName("sample");
+      assertEquals(CardTest.getName(), "sample");
+    }
+
+    @Test
+    public SetAndGetType() {
+      CardTest.setType("Sample Type");
+      assertEquals(CardTest.getType(), "Sample Type");
+    }
     // ...
 }
