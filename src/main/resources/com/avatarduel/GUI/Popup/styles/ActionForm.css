@@ -1,0 +1,23 @@
+.button {
+    -fx-background-color: white;
+    -fx-border-width : 4px;
+    -fx-border-color : black;
+    -fx-font-color: black;
+    -fx-font-size : 24px;
+}
+
+.button:hover {
+    -fx-background-color: black;
+    -fx-font-color: white;
+}
+
+.container {
+    -fx-background-color : #76EC76;
+    -fx-border-width : 3px;
+    -fx-border-color : black;
+}
+
+.title {
+    -fx-font-size : 30px;
+    -fx-font-weight : 700;
+}

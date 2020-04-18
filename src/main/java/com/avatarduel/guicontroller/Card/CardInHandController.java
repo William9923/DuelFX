@@ -5,6 +5,7 @@ import com.avatarduel.exception.EmptyFieldException;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardToDestroyCause;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.guicontroller.Popup.PlaySkillCardLoader;
 import com.avatarduel.guicontroller.RenderRequest.*;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Popup;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,6 +29,7 @@ public class CardInHandController extends CardController{
     @FXML private Button card_play;
     private String borderStyle;
     private PlayerType playerType;
+    private CardInHand cardInHand;
 
     @FXML
     public void initialize() {
@@ -38,6 +41,7 @@ public class CardInHandController extends CardController{
     public void setCard(Card card) {
         super.setCard(card);
         borderStyle = card_border.getStyleClass().get(0);
+        this.cardInHand = new CardInHand(card, playerType);
     }
 
     public void flipCard() {
@@ -114,34 +118,14 @@ public class CardInHandController extends CardController{
             }
         } else {
             // kartu skill aura or power up
-            int size1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList().size();
-            int size2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size();
             try {
-                List<CharacterCardInField> listOfCard1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
-                List<CharacterCardInField> listOfCard2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
-                List<CharacterCardInField> listOfCard = Stream.of(listOfCard1, listOfCard2)
-                        .flatMap(x -> x.stream())
-                        .collect(Collectors.toList());
-                if(listOfCard.isEmpty()) {
-                    throw new EmptyFieldException(new NoCharacterCardInFieldCause(this.cardData.getType()));
-                }
-                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0), listOfCard);
-                choice.setHeaderText("Skill Equip Card Effect");
-                choice.setContentText("Select Character To Equip :");
-                Optional<CharacterCardInField> result = choice.showAndWait();
-                if (choice != null && result.isPresent()) {
-                    event = new ActivateSkillEvent(cardData.getId(), choice.getSelectedItem().getCard().getId(), playerType);
-                    event.execute();
-                    Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType)); // minta render terkait status player dan status game
-                    Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
-                    Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));  // render tangan lagi soalny kartunya uda dipake
-                    //render kedua field soalnya misalnya skill dipake ke kartu lawan, bakal beda juga efeknya
-                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
-                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
-                }
+                PlaySkillCardLoader playSkillCardLoader = new PlaySkillCardLoader(this.cardInHand);
+                Popup popup = playSkillCardLoader.getPopup();
+                System.out.println("CardInHandController, test popup : " + popup.toString());
+                popup.show(card_play.getScene().getWindow());
             }
-            catch (InvalidOperationException e){
-                Alert alert = this.createInfoAlert(e.getOperation(),e.getMessage());
+            catch (IOException e) {
+                Alert alert = this.createInfoAlert("Cannot play the skill card",e.getMessage());
                 alert.showAndWait();
             }
         }

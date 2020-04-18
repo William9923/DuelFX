@@ -1,5 +1,6 @@
 package com.avatarduel.guicontroller.MainMenu;
 
+import com.avatarduel.guicontroller.util.FXMLHandler;
 import com.avatarduel.model.Game;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,12 +17,12 @@ import java.net.URL;
 
 public class MainMenuController {
     private Stage stage;
+    private MediaPlayer mediaPlayer;
+    private Thread musicThread;
 
     @FXML private Label start;
     @FXML private Label how_to_play;
     @FXML private Label cards;
-    private MediaPlayer mediaPlayer;
-    private Thread musicThread;
 
     @FXML
     public void initialize() {
@@ -30,17 +31,23 @@ public class MainMenuController {
 
     public void setStage(Stage stage) throws IOException {
         this.stage = stage;
-        this.setStartOnScene(getSceneFrom("GUI/Board/Board.fxml"));
+        this.setStart();
         this.setHowToPlayPopUp();
         this.setCardsPopUp();
         Game.getInstance().getEventBus().register(this);
     }
 
-    public void setStartOnScene(Scene scene) {
+    public void setStart() {
+        FXMLHandler fxmlHandler = new FXMLHandler("GUI/Board/Board.fxml");
         start.onMouseClickedProperty().setValue(e -> {
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-            mediaPlayer.stop();
+            try {
+                stage.setScene(fxmlHandler.getScene());
+                stage.setFullScreen(true);
+                mediaPlayer.stop();
+            }
+            catch(Exception exception) {
+                System.out.println(exception.getMessage());
+            }
         });
     }
 
@@ -53,28 +60,14 @@ public class MainMenuController {
     }
 
     public void setCardsPopUp() throws IOException {
-        FXMLLoader fxmlLoader = getFxmlLoader("GUI/MainMenu/ShowCards/ShowCards.fxml");
-        fxmlLoader.load(); //harus diginiin sebelum getController dipanggil
+        FXMLHandler fxmlHandler = new FXMLHandler("GUI/MainMenu/ShowCards/ShowCards.fxml");
+        FXMLLoader fxmlLoader = fxmlHandler.getFxmlLoader();
+        fxmlLoader.load();
         CardLibraryController cardLibraryController = fxmlLoader.getController();
         cardLibraryController.setStage(stage);
         cards.onMouseClickedProperty().setValue(e -> {
             cardLibraryController.start();
         });
-    }
-
-    public Scene getSceneFrom(String filePath) throws IOException {
-        Parent gui = getParentFrom(filePath);
-        return new Scene(gui);
-    }
-
-    public Parent getParentFrom(String filePath) throws IOException {
-        FXMLLoader loader = getFxmlLoader(filePath);
-        return loader.load();
-    }
-
-    public FXMLLoader getFxmlLoader(String filePath) throws IOException {
-        File guiFile = new File("src/main/resources/com/avatarduel/" + filePath);
-        return new FXMLLoader(guiFile.toURI().toURL());
     }
 
     private void playMainMenuMusic() {

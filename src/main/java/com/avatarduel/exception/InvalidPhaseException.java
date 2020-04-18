@@ -5,6 +5,6 @@ import com.avatarduel.model.type.Phase;
 
 public class InvalidPhaseException extends  InvalidOperationException {
     public InvalidPhaseException(ExceptionCause cause) {
-        super("Invalid Phase","Cause : " + cause.getCause() + " in this phase");
+        super("Invalid Phase","Cause : " + cause.getCause());
     }
 }
