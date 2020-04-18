@@ -61,9 +61,14 @@ public class CardModelTest {
     }
 
     @Test
-    public SetAndGetType() {
+    public void setAndGetPower() {
+      CardTest.setPower(0);
+      assertEquals(CardTest.getPower(), 0);
+    }
+
+    @Test
+    public setAndGetType() {
       CardTest.setType("Sample Type");
       assertEquals(CardTest.getType(), "Sample Type");
     }
-    // ...
 }
