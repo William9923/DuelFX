@@ -13,21 +13,21 @@ public class CardModelTest {
 
     @Test
     public Element getElement() {
-      assertEquals(WATER, CardTest.getElement());
+      assertEquals(Element.WATER, CardTest.getElement());
     }
 
     @Test
-    public int getId() {
+    public void getId() {
       assertEquals(99, CardTest.getId());
     }
 
     @Test
-    public String getDescription() {
+    public void getDescription() {
       assertEquals("Sample Description", CardTest.getDescription());
     }
 
     @Test
-    public String getImage() {
+    public void getImage() {
       assertEquals("image sample", CardTest.getImage());
     }
 
