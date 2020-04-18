@@ -2,7 +2,6 @@ package com.avatarduel.model.card;
 import com.avatarduel.model.type.Element;
 import com.avatarduel.model.type.CardType;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CardTest {
