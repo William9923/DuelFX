@@ -87,8 +87,29 @@ CardGameOOP
                     └───ShowSelectedCardRequest.java
             └───model
                 └───card
+                    └───Card.java
+                    └───CardInHand.java
+                    └───CharacterCard.java
+                    └───CharacterCardInField.java
+                    └───IField.java
+                    └───LandCard.java
+                    └───SkillAuraCard.java
+                    └───SkillCard.java
+                    └───SkillCardInField.java
+                    └───SkillDestroyCard.java
+                    └───SkillPowerUpCard.java
                 └───player_component
+                    └───Deck.java
+                    └───Field.java
+                    └───Hand.java
+                    └───Player.java
+                    └───PowerManager.java
                 └───type
+                    └───CardType.java
+                    └───CharacterState.java
+                    └───Element.java
+                    └───Phase.java
+                    └───PlayerType.java
                 └───Game.java
             └───phase
                 └───BattlePhase.java
