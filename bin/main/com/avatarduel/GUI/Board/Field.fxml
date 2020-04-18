@@ -1,52 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="1339.0"
-           stylesheets="@styles/Field.css"
-           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.avatarduel.guicontroller.Board.FieldController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="1203.0" stylesheets="@styles/Field.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Board.FieldController">
    <children>
-      <VBox fx:id="card_container" prefHeight="269.0" prefWidth="1363.0">
+      <VBox fx:id="card_container" prefHeight="317.0" prefWidth="1064.0">
          <children>
             <HBox fx:id="character_container" spacing="50.0">
                <children>
-                  <fx:include fx:id="character1" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character2" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character3" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character4" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character5" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character6" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character7" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character8" source="../Card/CharacterCardOnPlay.fxml" />
-                  <fx:include fx:id="character9" source="../Card/CharacterCardOnPlay.fxml" />
+                  <fx:include fx:id="character1" source="../Card/CharacterCardInField.fxml" />
+                  <fx:include fx:id="character2" source="../Card/CharacterCardInField.fxml" />
+                  <fx:include fx:id="character3" source="../Card/CharacterCardInField.fxml" />
+                  <fx:include fx:id="character4" source="../Card/CharacterCardInField.fxml" />
+                  <fx:include fx:id="character5" source="../Card/CharacterCardInField.fxml" />
+                  <fx:include fx:id="character6" source="../Card/CharacterCardInField.fxml" />
                </children>
             </HBox>
-            <HBox fx:id="skill_container" spacing="50.0">
+            <HBox fx:id="skill_container" prefHeight="146.0" prefWidth="1021.0" spacing="50.0">
                <children>
-                  <fx:include fx:id="skill1" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill2" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill3" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill4" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill5" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill6" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill7" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill8" source="../Card/SkillCardOnPlay.fxml" />
-                  <fx:include fx:id="skill9" source="../Card/SkillCardOnPlay.fxml" />
+                  <fx:include fx:id="skill1" source="../Card/SkillCardInField.fxml" />
+                  <fx:include fx:id="skill2" source="../Card/SkillCardInField.fxml" />
+                  <fx:include fx:id="skill3" source="../Card/SkillCardInField.fxml" />
+                  <fx:include fx:id="skill4" source="../Card/SkillCardInField.fxml" />
+                  <fx:include fx:id="skill5" source="../Card/SkillCardInField.fxml" />
+                  <fx:include fx:id="skill6" source="../Card/SkillCardInField.fxml" />
                </children>
             </HBox>
-         </children>
-      </VBox>
-      <VBox fx:id="popup" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="128.0" prefWidth="824.0" styleClass="popup">
-         <children>
-            <Label fx:id="card_from" text="card_intro" />
-            <Label text="WRITE ENEMY CHARACTER INDEX ( 0-9 )YOU WANT TO ATTACK" />
-            <TextArea fx:id="enemy_index" prefHeight="43.0" prefWidth="824.0" />
-            <Button mnemonicParsing="false" onMouseClicked="#submitAttackRequestForm" text="Submit" />
          </children>
       </VBox>
    </children>

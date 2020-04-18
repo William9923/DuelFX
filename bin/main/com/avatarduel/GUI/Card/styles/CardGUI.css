@@ -23,6 +23,11 @@
     -fx-border-color : aqua;
     -fx-border-width : 2px;
 }
+.energy_border {
+    -fx-background-color : #DD0;
+    -fx-border-color : yellow;
+    -fx-border-width : 2px;
+}
 .container {
     -fx-background-color : #EEE;
 }

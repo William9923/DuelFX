@@ -1,10 +1,12 @@
 id	name	element	description	imagepath	power
-14	Black Flame	FIRE	Create Black Flame that never goes out.	src/res/image/skill/black flame.png	4
-15	Sun Rise	FIRE	The power of Sun's flame.	src/res/image/skill/Sun rise.png	3
-17	Dragon Twist	FIRE	The breath of ancient weapon that can even burn a steel.	src/res/image/skill/Dragon twist.png	2
-36	Moon Light	WATER	Moon's gravity make the water wavy.	src/res/image/skill/Moon Light.png	2
-37	Koi Armor	WATER	Creates a felxible armor with the help of koi spirits.	src/res/image/skill/koi armor.png	3
-51	Double Speed	AIR	Increasing agility and attack speed.	src/res/image/skill/double speed.png	3
-52	Super Jump	AIR	Making body as light as ever like on the moon.	src/res/image/skill/super jump.png	2
-85	Lava flood	EARTH	Create a large puddle made of lava.	src/res/image/skill/lava flood.png	4
-88	Earthquake	EARTH	A very powerful vibration which able to destroy everything.	src/res/image/skill/earthquake.png	2
+14	Black Flame	FIRE	Create Black Flame that never goes out.	src/res/image/skill/black flame.png	1
+15	Sun Rise	FIRE	The power of Sun's flame.	src/res/image/skill/Sun rise.png	1
+17	Dragon Twist	FIRE	The breath of ancient weapon that can even burn a steel.	src/res/image/skill/Dragon twist.png	1
+36	Moon Light	WATER	Moon's gravity make the water wavy.	src/res/image/skill/Moon Light.png	1
+37	Koi Armor	WATER	Creates a felxible armor with the help of koi spirits.	src/res/image/skill/koi armor.png	1
+51	Double Speed	AIR	Increasing agility and attack speed.	src/res/image/skill/double speed.png	1
+52	Super Jump	AIR	Making body as light as ever like on the moon.	src/res/image/skill/super jump.png	1
+85	Lava flood	EARTH	Create a large puddle made of lava.	src/res/image/skill/lava flood.png	1
+88	Earthquake	EARTH	A very powerful vibration which able to destroy everything.	src/res/image/skill/earthquake.png	1
+98	Super Regeneration	ENERGY	Regenerating HP at superb speed 1 HP every 2 seconds for a full minute.	src/res/image/skill/Super regeneration.png	1
+99	Full Power	ENERGY	Maximum attack defense.	src/res/image/skill/Full Power.png	1

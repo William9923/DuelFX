@@ -1,0 +1,15 @@
+.container {
+    -fx-background-color : #76EC76;
+    -fx-border-width : 3px;
+    -fx-border-color : black;
+}
+
+.button {
+    -fx-background-color : #C5A373;
+    -fx-border-color : black;
+    -fx-font-size : 18px;
+}
+
+.button:hover {
+    -fx-background-color : #A59353;
+}

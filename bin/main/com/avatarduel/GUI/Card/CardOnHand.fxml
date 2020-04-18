@@ -7,9 +7,9 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#showPlayButton" onMouseExited="#hidePlayButton" prefHeight="186.0" prefWidth="106.0" spacing="5.0" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.CardInHandController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showSelectedCard" onMouseEntered="#showPlayButton" onMouseExited="#hidePlayButton" prefHeight="186.0" prefWidth="106.0" spacing="5.0" stylesheets="@styles/CardGUI.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.Card.CardInHandController">
    <children>
-      <Button fx:id="card_play" mnemonicParsing="false" prefHeight="9.0" prefWidth="48.0" text="Play" onMouseClicked="#playIsClicked">
+      <Button fx:id="card_play" mnemonicParsing="false" onMouseClicked="#playIsClicked" prefHeight="9.0" prefWidth="48.0" text="Play">
          <font>
             <Font size="9.0" />
          </font>
