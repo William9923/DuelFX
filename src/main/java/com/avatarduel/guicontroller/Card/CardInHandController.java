@@ -136,20 +136,27 @@ public class CardInHandController extends CardController{
 
     private int getSmallestCharacterIndexPossible(PlayerType type) {
         List<CharacterCardInField> listOfCharacter = Game.getInstance().getPlayerByType(type).getField().getCharCardList();
-        int max = -1;
-        for (CharacterCardInField card : listOfCharacter) {
-            max = (card.getIndex() > max) ? card.getIndex() : max;
+        List<Integer> indexList = listOfCharacter.stream()
+                .map(c -> c.getIndex())
+                .collect(Collectors.toList());
+        return getSmallestIndex(indexList);
+    }
+
+    private int getSmallestIndex(List<Integer> sequence) {
+        for (int i = 0; i < sequence.size() + 1; i++){
+            if (!sequence.contains(i)){
+                return i;
+            }
         }
-        return max + 1;
+        return -1;
     }
 
     private int getSmallestSkillIndexPossible(PlayerType type) {
         List<SkillCardInField> listOfSkill = Game.getInstance().getPlayerByType(type).getField().getSkillCardList();
-        int max = -1;
-        for (SkillCardInField card : listOfSkill) {
-            max = (card.getIndex() > max) ? card.getIndex() : max;
-        }
-        return max + 1;
+        List<Integer> indexList = listOfSkill.stream()
+                .map(c -> c.getIndex())
+                .collect(Collectors.toList());
+        return getSmallestIndex(indexList);
     }
 
     private Alert createInfoAlert(String header, String text){

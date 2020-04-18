@@ -47,6 +47,7 @@ public class PowerManager {
             case FIRE:return getCurrent_fire();
             case EARTH: return getCurrent_earth();
             case WATER:return getCurrent_water();
+            case ENERGY: return getCurrent_energy();
         }
         return -1; // throw element error
     }
@@ -71,6 +72,7 @@ public class PowerManager {
             case FIRE: setCurrent_fire(value); break;
             case EARTH: setCurrent_earth(value); break;
             case WATER: setCurrent_water(value); break;
+            case ENERGY: setCurrent_energy(value);break;
         }
     }
     public void setCurrent_fire(int current_Fire){ this.current_fire = current_Fire; }
@@ -80,6 +82,10 @@ public class PowerManager {
     public void setCurrent_earth(int current_Earth){ this.current_earth = current_Earth; }
 
     public void setCurrent_air(int current_Air){ this.current_air = current_Air; }
+
+    public void setCurrent_energy(int current_energy) {
+        this.current_energy = current_energy;
+    }
 
     public void setTotal_fire(int total_Fire){ this.total_fire = total_Fire; }
 
@@ -96,11 +102,12 @@ public class PowerManager {
             case EARTH: total_earth += power; current_earth += power; break;
             case FIRE: total_fire += power; current_fire += power; break;
             case AIR: total_air += power; current_air += power; break;
+            case ENERGY: total_energy += power; current_energy += power; break;
         }
     }
 
     public int getTotal() {
-        return total_air + total_fire + total_earth + total_water;
+        return total_air + total_fire + total_earth + total_water +total_energy;
     }
 
     //To reduce or or delete power
@@ -133,6 +140,12 @@ public class PowerManager {
             }
             return false;
         }
+        else if (type==Element.ENERGY) {
+            if (this.current_energy >= power) {
+                this.current_energy -= power;
+                return true;
+            }
+        }
         return false; // throw
     }
 
@@ -142,6 +155,7 @@ public class PowerManager {
         setCurrent_earth(getTotal_earth());
         setCurrent_fire(getTotal_fire());
         setCurrent_water(getTotal_water());
+        setCurrent_energy(getTotal_energy());
     }
 
 

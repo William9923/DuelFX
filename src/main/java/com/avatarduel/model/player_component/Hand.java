@@ -3,8 +3,6 @@ package com.avatarduel.model.player_component;
 import com.avatarduel.model.card.Card;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class Hand extends ArrayList<Card>{
     private int maxSize;
@@ -19,10 +17,5 @@ public class Hand extends ArrayList<Card>{
             return true;
         }
         return false;
-    }
-    // incase, nanti ada logic hand lagi gitu
-
-    public void print() {
-        this.forEach(s -> s.show());
     }
 }

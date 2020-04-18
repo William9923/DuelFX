@@ -1,9 +1,7 @@
 package com.avatarduel.model.player_component;
 
-import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.model.card.*;
-import com.avatarduel.model.type.CardType;
-import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.PlayerType;
 
 import java.util.EmptyStackException;
@@ -48,43 +46,9 @@ public class Player {
         }
     }
 
-    public void playCharacterCardByID(int id, CharacterState state, int turn, int index) {
-        Card card = hand.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElse(null);
-        if (card.getType().equals(CardType.CHARACTER) && card != null) {
-            hand.remove(card);
-            field.addCharacterCard(new CharacterCardInField((CharacterCard) card, state, turn, index));
-        }
-    }
-
-    public void playSkillCardByID (int id, int charID, int index, int turn) {
-        SkillCard skillCard = (SkillCard) hand.stream()
-                .filter(c -> c.getId() == id && (c.getType().equals(CardType.SKILL_AURA) || c.getType().equals(CardType.SKILL_POWER_UP)))
-                .findFirst()
-                .orElse(null);
-
-        CharacterCardInField playCard = field.getCharCardList().stream()
-                .filter(c -> c.getCard().getId() == charID)
-                .findFirst()
-                .orElse(null);
-
-        if ((skillCard != null) && (playCard != null) && (getField().getSkillCardList().size() < getField().getFieldSize())) {
-            hand.remove(skillCard);
-            field.connectCards(playCard, (SkillCard) skillCard, index, turn);
-            field.addSkillCard(skillCard, index, turn);
-        }
-    }
-
     public void removeCharacterFromFieldByID(int id)  {
         CharacterCardInField card = field.getCharacterCardByID(id);
         field.removeCharacterCard(card);
-    }
-
-    public void removeSkillCardByID (int id) {
-        SkillCard card = (SkillCard) field.getSkillCardByID(id).getCard();
-        field.removeSkillCard(card);
     }
 
     public Deck getDeck() {

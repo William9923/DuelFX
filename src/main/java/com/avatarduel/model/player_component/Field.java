@@ -1,13 +1,13 @@
 package com.avatarduel.model.player_component;
 
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.card.SkillCardInField;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Field {
@@ -129,10 +129,6 @@ public class Field {
                     .filter(c -> c.equals(inField))
                     .findFirst()
                     .orElse(null); // throw Error
-            skillCardList = skillCardList
-                    .stream()
-                    .filter(c -> !cardInField.getConnectedCard().contains(c))
-                    .collect(Collectors.toList());
             charCardList = charCardList
                     .stream()
                     .filter(card -> !card.equals(inField))
@@ -140,13 +136,4 @@ public class Field {
         }
     }
 
-    public void removeSkillCard(SkillCard inField) {
-        System.out.println("Hit this");
-        if (isContainSkill(inField)) {
-            skillCardList = skillCardList
-                    .stream()
-                    .filter(cardInField -> cardInField.getCard().getId() != inField.getId())
-                    .collect(Collectors.toList());
-        }
-    }
 }

@@ -16,9 +16,4 @@ public class SkillDestroyCard extends SkillCard {
     public SkillDestroyCard(String[] elements) {
         this(Integer.parseInt(elements[0]), elements[1], CardFactory.outputElement(elements[2]), elements[3], elements[4], elements[5]);
     }
-
-//    @Override //-- > later implement || for debugging purpose
-//    public void show() {
-//
-//    }
 }

@@ -3,9 +3,15 @@ package com.avatarduel.event;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.card.SkillCard;
+import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ActivateDestroyEvent implements IEvent {
 
@@ -50,6 +56,25 @@ public class ActivateDestroyEvent implements IEvent {
         }
         // reduce power
         player.getPower().reduce(destroyCard.getElement(),destroyCard.getPower());
+        CharacterCardInField cardInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList()
+                .stream()
+                .filter(c -> c.getCard().getId() == targetID)
+                .findFirst()
+                .orElse(null);
+        
+        List<SkillCard> pairedSkillCard = cardInField.getConnectedCard();
+        for (SkillCard card: pairedSkillCard) {
+            List<SkillCardInField> list1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getSkillCardList();
+            List<SkillCardInField> list2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getSkillCardList();
+
+            Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().setSkillCardList(list1.stream()
+                    .filter(c -> c.getCard().getId() != card.getId())
+                    .collect(Collectors.toList()));
+            Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().setSkillCardList(list2.stream()
+                    .filter(c -> c.getCard().getId() != card.getId())
+                    .collect(Collectors.toList()));
+        }
+
         // destroy card
         opponent.getField().removeCharacterCard(opponent.getField().getCharacterCardByID(targetID));
         // send destroy card to graveyard
