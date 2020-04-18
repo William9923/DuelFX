@@ -1,6 +1,10 @@
 package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.event.*;
+import com.avatarduel.exception.EmptyFieldException;
+import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
+import com.avatarduel.exception.ExceptionCause.NoCharacterCardToDestroyCause;
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.RenderRequest.*;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
@@ -84,41 +88,49 @@ public class CardInHandController extends CardController{
             Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
         }
         else if (cardData.getType() == CardType.SKILL_DESTROY) {
-            if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
+            try{
+                if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() == 0) {
+                    throw new EmptyFieldException(new NoCharacterCardToDestroyCause());
+                }
                 List<CharacterCardInField> listOfCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
-                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0),listOfCard);
+                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0), listOfCard);
                 choice.setHeaderText("Destroy Card Effect");
                 choice.setContentText("Select Character To Destroy :");
                 Optional<CharacterCardInField> result = choice.showAndWait();
                 if (choice != null && result.isPresent()) {
                     event = new ActivateDestroyEvent(playerType, cardData.getId(), choice.getSelectedItem().getCard().getId());
-                    Game.getInstance().getEventBus().post(event);
+                    event.execute();
                     Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType));
                     Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
                     Game.getInstance().getEventBus().post(new HandRenderRequest(playerType)); // render tangan lagi soalny uda dipake kartuny
                     Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent())); // render opponent field
                 }
-            } else { // kalo ga ada karakter yang bisa dihancurin
-                Alert alert = this.createInfoAlert("Destroy Card Effect","No Card To Destroy");
+
+            }
+            catch(InvalidOperationException e) { // kalo ga ada karakter yang bisa dihancurin
+                Alert alert = this.createInfoAlert(e.getOperation(), e.getMessage());
                 alert.showAndWait();
             }
         } else {
             // kartu skill aura or power up
             int size1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList().size();
             int size2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size();
-            if ((size1 + size2)> 0) {
+            try {
                 List<CharacterCardInField> listOfCard1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
                 List<CharacterCardInField> listOfCard2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
                 List<CharacterCardInField> listOfCard = Stream.of(listOfCard1, listOfCard2)
                         .flatMap(x -> x.stream())
                         .collect(Collectors.toList());
-                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0),listOfCard);
+                if(listOfCard.isEmpty()) {
+                    throw new EmptyFieldException(new NoCharacterCardInFieldCause(this.cardData.getType()));
+                }
+                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0), listOfCard);
                 choice.setHeaderText("Skill Equip Card Effect");
                 choice.setContentText("Select Character To Equip :");
                 Optional<CharacterCardInField> result = choice.showAndWait();
                 if (choice != null && result.isPresent()) {
-                    event = new ActivateSkillEvent(cardData.getId(),choice.getSelectedItem().getCard().getId(),playerType);
-                    Game.getInstance().getEventBus().post(event); // post eventnya
+                    event = new ActivateSkillEvent(cardData.getId(), choice.getSelectedItem().getCard().getId(), playerType);
+                    event.execute();
                     Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType)); // minta render terkait status player dan status game
                     Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
                     Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));  // render tangan lagi soalny kartunya uda dipake
@@ -126,8 +138,9 @@ public class CardInHandController extends CardController{
                     Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
                     Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
                 }
-            } else {
-                Alert alert = this.createInfoAlert("Skill Card Effect","No Card To Equip");
+            }
+            catch (InvalidOperationException e){
+                Alert alert = this.createInfoAlert(e.getOperation(),e.getMessage());
                 alert.showAndWait();
             }
         }

@@ -1,6 +1,10 @@
 package com.avatarduel.event;
 
-import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.*;
+import com.avatarduel.exception.ExceptionCause.FullBoardCause;
+import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
+import com.avatarduel.exception.ExceptionCause.NotEnoughPowerCause;
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -61,27 +65,19 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
 
 
         if (currPhase != Phase.MAIN) {
-            throw new InvalidOperationException("Activate Skill Card", "Not in main phase");
-        }
-
-        if (currPlayer != playerType) {
-            throw new InvalidOperationException("Activate Skill Card", "Invalid Player Turn");
+            throw new InvalidPhaseException(new InvalidPhaseCause(skillCard.getType()));
         }
 
         if (inField == null) {
-            throw new InvalidOperationException("Activate Skill Card", "Invalid Paired Character Card!!");
-        }
-
-        if (skillCard == null) {
-            throw new InvalidOperationException("Activate Skill Card", "Invalid Skill Card");
+            throw new EmptyFieldException(new NoCharacterCardInFieldCause(skillCard.getType()));
         }
 
         if (currentFieldSize >= Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()) {
-            throw new InvalidOperationException("Activate Skill Card","There are not enough space in field for this skill card");
+            throw new NotEnoughSpaceException(new FullBoardCause(skillCard.getType()));
         }
 
         if (skillCard.getPower() > Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())) {
-            throw new InvalidOperationException("Activate Skill Card","Not enough power!");
+            throw new NotEnoughPowerException(new NotEnoughPowerCause(skillCard.getElement()));
         }
 
         Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());

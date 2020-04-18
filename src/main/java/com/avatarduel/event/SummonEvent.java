@@ -1,6 +1,12 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.ExceptionCause.FullBoardCause;
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.ExceptionCause.NotEnoughPowerCause;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidPhaseException;
+import com.avatarduel.exception.NotEnoughPowerException;
+import com.avatarduel.exception.NotEnoughSpaceException;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
@@ -42,27 +48,15 @@ public class SummonEvent implements IEvent {
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
         if (currPhase != Phase.MAIN){
-            throw new InvalidOperationException("Summon", "Unable to perform summon in this phase");
-        }
-
-        if (currPlayer != playerType) {
-            throw new InvalidOperationException("Summon", "Unable to summon monster from other hands");
-        }
-
-        if (charCard == null) {
-            throw new InvalidOperationException("Summon", "Character Card is Invalid");
-        }
-
-        if (charCard.getType() != CardType.CHARACTER){
-            throw new InvalidOperationException("Summon", "Card is not a character card");
+            throw new InvalidPhaseException(new InvalidPhaseCause(charCard.getType()));
         }
 
         if (currentFieldSize >= Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()){
-            throw new InvalidOperationException("Summon", "There are not enough space in field for this character");
+            throw new NotEnoughSpaceException(new FullBoardCause(charCard.getType()));
         }
 
         if (charCard.getPower() > Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(charCard.getElement())){
-            throw new InvalidOperationException("Summon", "Not enough power!");
+            throw new NotEnoughPowerException(new NotEnoughPowerCause(charCard.getElement()));
         }
 
         p.getHand().remove(charCard);

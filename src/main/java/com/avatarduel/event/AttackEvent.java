@@ -1,6 +1,11 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.ExceptionCause.AttackOnTheCreatedTurnCause;
+import com.avatarduel.exception.ExceptionCause.MultipleAttackOnTheSameTurnCause;
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.InvalidAttackException;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidPhaseException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
@@ -47,27 +52,15 @@ public class AttackEvent implements IEvent {
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
         if (!currPhase.equals(Phase.BATTLE)){
-            throw new InvalidOperationException("Attack", "Not in Battle Phase");
-        }
-
-        if (!currPlayer.equals(attacker)) {
-            throw new InvalidOperationException("Attack", "Not A Valid Player Turn");
-        }
-
-        if (f1.getCharacterCardByID(attackCharacterId) == null) {
-            throw new InvalidOperationException("Attack", "Invalid Attack Character!");
-        }
-
-        if (f2.getCharacterCardByID(defenseCharacterId) == null) {
-            throw new InvalidOperationException("Attack", "Invalid Defense Character!");
+            throw new InvalidPhaseException(new InvalidPhaseCause(attackChar.getCard().getType()));
         }
 
         if (f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() == currentTurn) {
-            throw new InvalidOperationException("Attack", "Cannot attack the same turn as it is created");
+            throw new InvalidAttackException(new AttackOnTheCreatedTurnCause());
         }
 
         if (f1.getCharacterCardByID(attackCharacterId).hasAttacked){
-            throw new InvalidOperationException("Attack", "Cannot attack twice in the same turn");
+            throw new InvalidAttackException(new MultipleAttackOnTheSameTurnCause());
         }
 
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();

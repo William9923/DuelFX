@@ -15,16 +15,7 @@ public class DrawEvent implements IEvent {
     }
 
     @Override
-    public void execute() throws InvalidOperationException {
-
-        if (Game.getInstance().getCurrentPhase().getPhase() != Phase.DRAW){
-            throw new InvalidOperationException("Draw", "Not in Draw Phase");
-        }
-
-        if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
-            throw new InvalidOperationException("Draw", "Not Enough Card to Draw");
-        }
-
+    public void execute() {
         Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();
         Game.getInstance().nextPhase();  // pindah ke next phase
     }

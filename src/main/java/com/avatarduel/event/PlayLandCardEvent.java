@@ -1,6 +1,10 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.ExceptionCause.MultipleLandCardPlayedOnTheSameTurnCause;
+import com.avatarduel.exception.UniquePlayCardException;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidPhaseException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.LandCard;
 import com.avatarduel.model.player_component.Player;
@@ -28,24 +32,11 @@ public class PlayLandCardEvent implements IEvent {
         int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
 
         if (currPhase != Phase.MAIN) {
-            throw new InvalidOperationException("Play Land Card", "Not in the Main Phase");
+            throw new InvalidPhaseException(new InvalidPhaseCause(landCard.getType()));
         }
-
-        if (currPlayer != playerType) {
-            throw new InvalidOperationException("Play Land Card", "Not your turn");
-        }
-
-        if (landCard == null) {
-            throw new InvalidOperationException("Play Land Card", "Invalid Card!!");
-        }
-
-        if (CardType.LAND != landCard.getType()) {
-            throw new InvalidOperationException("Play Land Card", "Not A Land Card !");
-        }
-
 
         if (Game.getInstance().getPlayerByType(currPlayer).hasPlayLand) {
-            throw new InvalidOperationException("Play Land Card", "Unable To Play Multiple Land Card In the Same Turn !");
+            throw new UniquePlayCardException(new MultipleLandCardPlayedOnTheSameTurnCause());
         }
 
         Player player = Game.getInstance().getPlayerByType(playerType);
