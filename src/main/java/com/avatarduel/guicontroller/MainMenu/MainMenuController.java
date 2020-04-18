@@ -6,10 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class MainMenuController {
     private Stage stage;
@@ -17,10 +20,12 @@ public class MainMenuController {
     @FXML private Label start;
     @FXML private Label how_to_play;
     @FXML private Label cards;
+    private MediaPlayer mediaPlayer;
+    private Thread musicThread;
 
     @FXML
     public void initialize() {
-
+        playMainMenuMusic();
     }
 
     public void setStage(Stage stage) throws IOException {
@@ -35,6 +40,7 @@ public class MainMenuController {
         start.onMouseClickedProperty().setValue(e -> {
             stage.setScene(scene);
             stage.setFullScreen(true);
+            mediaPlayer.stop();
         });
     }
 
@@ -69,5 +75,19 @@ public class MainMenuController {
     public FXMLLoader getFxmlLoader(String filePath) throws IOException {
         File guiFile = new File("src/main/resources/com/avatarduel/" + filePath);
         return new FXMLLoader(guiFile.toURI().toURL());
+    }
+
+    private void playMainMenuMusic() {
+        musicThread = new Thread(() -> {
+            try {
+                File musicFile = new File("src/main/resources/com/avatarduel/music/main_song.mp3");
+                URL musicURL = musicFile.toURI().toURL();
+                Media media = new Media(musicURL.toString());
+                this.mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.play();
+            }
+            catch(Exception e) { }
+        });
+        musicThread.start();
     }
 }
