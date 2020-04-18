@@ -1,4 +1,4 @@
-package com.avatarduel.model.card;
+package com.avatarduel.mode;
 
 import com.avatarduel.model.type.Element;
 

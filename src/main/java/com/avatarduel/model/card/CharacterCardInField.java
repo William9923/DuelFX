@@ -1,10 +1,9 @@
-package com.avatarduel.model.card;
+package com.avatarduel.mode;
 
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
