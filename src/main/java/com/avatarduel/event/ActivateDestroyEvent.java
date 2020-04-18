@@ -61,7 +61,7 @@ public class ActivateDestroyEvent implements IEvent {
                 .filter(c -> c.getCard().getId() == targetID)
                 .findFirst()
                 .orElse(null);
-        
+
         List<SkillCard> pairedSkillCard = cardInField.getConnectedCard();
         for (SkillCard card: pairedSkillCard) {
             List<SkillCardInField> list1 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getSkillCardList();
