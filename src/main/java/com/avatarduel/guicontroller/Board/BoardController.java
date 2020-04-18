@@ -5,6 +5,7 @@ import com.avatarduel.event.IEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.RenderRequest.*;
+import com.avatarduel.guicontroller.util.PlayMusicRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
@@ -12,8 +13,12 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +40,9 @@ public class BoardController {
     private Map<PlayerType, FieldController> fieldControllerMap;
     private Map<PlayerType, PlayerStatusController> playerStatusControllerMap;
     private Map<PlayerType, DeckController> deckControllerMap;
+
+    private Thread musicThread;
+    private MediaPlayer mediaPlayer;
 
     public BoardController() {
         handControllerMap = new HashMap<>();
@@ -145,7 +153,19 @@ public class BoardController {
         selectedController.setCard(selectCardRequest.getCard());
     }
 
-    private void playOnGameSong() {
-
+    @Subscribe
+    public void playOnGameSong(PlayMusicRequest playMusicRequest) {
+        musicThread = new Thread(() -> {
+            try {
+                File musicFile = new File("src/main/resources/com/avatarduel/music/on_game_song.mp3");
+                URL musicURL = musicFile.toURI().toURL();
+                Media media = new Media(musicURL.toString());
+                this.mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.setVolume(0.1);
+                mediaPlayer.play();
+            }
+            catch(Exception e) { }
+        });
+        musicThread.start();
     }
 }

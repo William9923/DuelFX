@@ -2,10 +2,10 @@ package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.event.*;
 import com.avatarduel.exception.EmptyFieldException;
-import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardToDestroyCause;
 import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.guicontroller.Popup.PlaySkillCardLoader;
+import com.avatarduel.guicontroller.Popup.PlayAuraOrPowerupCardLoader;
+import com.avatarduel.guicontroller.Popup.PlayDestroyCardLoader;
 import com.avatarduel.guicontroller.RenderRequest.*;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class CardInHandController extends CardController{
@@ -93,41 +92,14 @@ public class CardInHandController extends CardController{
             Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
         }
         else if (cardData.getType() == CardType.SKILL_DESTROY) {
-            try{
-                if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() == 0) {
-                    throw new EmptyFieldException(new NoCharacterCardToDestroyCause());
-                }
-                List<CharacterCardInField> listOfCard = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
-                ChoiceDialog<CharacterCardInField> choice = new ChoiceDialog<>(listOfCard.get(0), listOfCard);
-                choice.setHeaderText("Destroy Card Effect");
-                choice.setContentText("Select Character To Destroy :");
-                Optional<CharacterCardInField> result = choice.showAndWait();
-                if (choice != null && result.isPresent()) {
-                    event = new ActivateDestroyEvent(playerType, cardData.getId(), choice.getSelectedItem().getCard().getId());
-                    event.execute();
-                    Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType));
-                    Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
-                    Game.getInstance().getEventBus().post(new HandRenderRequest(playerType)); // render tangan lagi soalny uda dipake kartuny
-                    Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent())); // render opponent field
-                }
-
-            }
-            catch(InvalidOperationException e) { // kalo ga ada karakter yang bisa dihancurin
-                Alert alert = this.createInfoAlert(e.getOperation(), e.getMessage());
-                alert.showAndWait();
-            }
+            PlayDestroyCardLoader playDestroyCardLoader = new PlayDestroyCardLoader(this.cardInHand);
+            Popup popup = playDestroyCardLoader.getPopup();
+            popup.show(card_play.getScene().getWindow());
         } else {
             // kartu skill aura or power up
-            try {
-                PlaySkillCardLoader playSkillCardLoader = new PlaySkillCardLoader(this.cardInHand);
-                Popup popup = playSkillCardLoader.getPopup();
-                System.out.println("CardInHandController, test popup : " + popup.toString());
-                popup.show(card_play.getScene().getWindow());
-            }
-            catch (IOException e) {
-                Alert alert = this.createInfoAlert("Cannot play the skill card",e.getMessage());
-                alert.showAndWait();
-            }
+            PlayAuraOrPowerupCardLoader playAuraOrPowerupCardLoader = new PlayAuraOrPowerupCardLoader(this.cardInHand);
+            Popup popup = playAuraOrPowerupCardLoader.getPopup();
+            popup.show(card_play.getScene().getWindow());
         }
         Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType));
     }

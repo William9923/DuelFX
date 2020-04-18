@@ -6,9 +6,13 @@ import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+
 public class PlayerStatusController  {
+    private static int numOfPlayer = 0;
     private PlayerType playerType;
     @FXML Label player_name;
     @FXML ImageView player_image;
@@ -27,6 +31,7 @@ public class PlayerStatusController  {
 
     @FXML
     public void initialize() {
+        numOfPlayer++;
         setPlayerHealth(80);
         current_earth.setText("0");
         current_fire.setText("0");
@@ -38,6 +43,14 @@ public class PlayerStatusController  {
         total_fire.setText("0");
         total_earth.setText("0");
         total_energy.setText("0");
+        if(numOfPlayer == 2) {
+            player_name.setText("Jotaro Kujo");
+            try {
+                File imageFile = new File("src/main/resources/com/avatarduel/gui/board/character/jotaro_kujo.png");
+                player_image.setImage(new Image("file:\\" + imageFile.getAbsolutePath()));
+            }
+            catch (Exception e) { }
+        }
     }
 
     @Subscribe

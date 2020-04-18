@@ -2,13 +2,13 @@
     -fx-background-color: white;
     -fx-border-width : 4px;
     -fx-border-color : black;
-    -fx-font-color: black;
+    -fx-text-fill: black;
     -fx-font-size : 24px;
 }
 
 .button:hover {
     -fx-background-color: black;
-    -fx-font-color: white;
+    -fx-text-fill : white;
 }
 
 .container {

@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.avatarduel.guicontroller.MainMenu.MainMenuController;
+import com.avatarduel.model.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +29,7 @@ public class AvatarDuel extends Application {
       MainMenuController mainMenuController = mainmenuLoader.getController();
       mainMenuController.setStage(stage);
 
-      System.out.println("gasabi musiknya");
+      // set up game
 
       stage.setTitle("Avatar Duel OOP");
       stage.setScene(mainmenu);
