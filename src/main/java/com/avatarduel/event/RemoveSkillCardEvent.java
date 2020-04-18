@@ -1,6 +1,8 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidPhaseException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
@@ -46,19 +48,7 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
         }
 
         if (currPhase != Phase.MAIN){
-            throw new InvalidOperationException("Removing Skill Card", "Not in the Main Phase");
-        }
-
-        if (currPlayer != playerType){
-            throw new InvalidOperationException("Removing Skill Card", "Unable to remove other player card");
-        }
-
-        if (card == null){
-            throw new InvalidOperationException("Removing Skill Card", "Invalid Card!!");
-        }
-
-        if (pairedCharacter == null) {
-            throw new InvalidOperationException("Removing Skill Card", "No Character Card Found Equipped with this Skill Card");
+            throw new InvalidPhaseException(new InvalidPhaseCause(card.getCard().getType()));
         }
 
         pairedCharacter.setConnectedCard(pairedCharacter.getConnectedCard().stream()

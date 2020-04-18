@@ -1,6 +1,8 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidPhaseException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.Phase;
@@ -23,15 +25,7 @@ public class ChangePositionEvent implements IEvent {
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
         if (currPhase != Phase.MAIN){
-            throw new InvalidOperationException("Change Position Character", "Not in the Main Phase");
-        }
-
-        if (card.hasAttacked){
-            throw new InvalidOperationException("Change Position Character", "Cannot change position after a attack");
-        }
-
-        if (currPlayer!=p){
-            throw new InvalidOperationException("Change Position Character", "Invalid Turn!");
+            throw new InvalidPhaseException(new InvalidPhaseCause(card.getCard().getType()));
         }
 
         Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).switchPosition();

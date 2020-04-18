@@ -13,11 +13,6 @@ public class NextPhaseEvent implements IEvent {
     @Override
     public void execute() throws InvalidOperationException {
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-
-        if (!(currPhase == Phase.MAIN || currPhase == Phase.BATTLE)){
-            throw new InvalidOperationException("Next Phase", "Not in a valid phase to go to the next phase");
-        }
-
         if (currPhase.equals(Phase.BATTLE)){
             IEvent event = new EndTurnEvent();
             event.execute();

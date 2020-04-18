@@ -115,7 +115,7 @@ public class BoardController {
             event.execute();
         } catch (InvalidOperationException e){
             Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Unable to " + e.getOperation());
+            a.setHeaderText(e.getOperation());
             a.setContentText(e.getMessage());
             a.show();
         }

@@ -11,12 +11,7 @@ public class EndTurnEvent implements IEvent {
     public EndTurnEvent() {
     }
     @Override
-    public void execute() throws InvalidOperationException {
-        Phase currPhase = getInstance().getCurrentPhase().getPhase();
-        if (!(currPhase.equals(Phase.MAIN) || currPhase.equals(Phase.BATTLE))){
-            throw new InvalidOperationException("End Turn", "Not in a valid Phase to End Turn");
-        }
-
+    public void execute() {
         while(getInstance().getCurrentPhase().getPhase() != Phase.END) {
             getInstance().nextPhase();
         }

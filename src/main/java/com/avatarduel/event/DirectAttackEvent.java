@@ -1,5 +1,8 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.ExceptionCause.AttackOnTheCreatedTurnCause;
+import com.avatarduel.exception.ExceptionCause.MultipleAttackOnTheSameTurnCause;
+import com.avatarduel.exception.InvalidAttackException;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -31,24 +34,12 @@ public class DirectAttackEvent implements IEvent {
                 .getField()
                 .getCharacterCardByID(attackCharacterId);
 
-        if (!currPhase.equals(Phase.BATTLE)){
-            throw new InvalidOperationException("Direct Attack", "Not in Battle Phase");
-        }
-
-        if (!currPlayer.equals(player)){
-            throw new InvalidOperationException("Direct Attack", "Not A Valid Player Turn");
-        }
-
-        if (f1.getCharacterCardByID(attackCharacterId) == null) {
-            throw new InvalidOperationException("Direct Attack", "Invalid Character!");
-        }
-
         if (f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() == currentTurn){
-            throw new InvalidOperationException("Direct Attack", "Cannot attack the same turn as it is created");
+            throw new InvalidAttackException(new AttackOnTheCreatedTurnCause());
         }
 
         if (f1.getCharacterCardByID(attackCharacterId).hasAttacked) {
-            throw new InvalidOperationException("Direct Attack", "Cannot attack twice in the same turn");
+            throw new InvalidAttackException(new MultipleAttackOnTheSameTurnCause());
         }
 
         attackChar.hasAttacked = true; // change state monster yang uda nyerang
