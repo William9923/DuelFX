@@ -2,7 +2,6 @@ package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.event.*;
 import com.avatarduel.guicontroller.Popup.AttackPopupLoader;
-import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
 import com.avatarduel.guicontroller.RenderRequest.GameStatusRenderRequest;
 import com.avatarduel.guicontroller.RenderRequest.PlayerStatusRenderRequest;
 import com.avatarduel.guicontroller.RenderRequest.CheckWinRequest;
@@ -11,16 +10,8 @@ import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
-import com.sun.javafx.collections.ObservableListWrapper;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
 import java.util.List;

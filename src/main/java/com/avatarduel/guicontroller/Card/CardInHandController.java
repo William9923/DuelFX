@@ -1,26 +1,23 @@
 package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.event.*;
-import com.avatarduel.exception.EmptyFieldException;
-import com.avatarduel.exception.ExceptionCause.NoCharacterCardToDestroyCause;
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Popup.PlayAuraOrPowerupCardLoader;
 import com.avatarduel.guicontroller.Popup.PlayDestroyCardLoader;
 import com.avatarduel.guicontroller.RenderRequest.*;
+import com.avatarduel.model.card.Card;
+import com.avatarduel.model.card.CardInHand;
+import com.avatarduel.model.card.CharacterCardInField;
+import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.*;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Popup;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 

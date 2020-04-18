@@ -5,7 +5,6 @@ import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.exception.InvalidPhaseException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;

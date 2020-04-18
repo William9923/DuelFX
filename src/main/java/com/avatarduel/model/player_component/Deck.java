@@ -3,6 +3,7 @@ package com.avatarduel.model.player_component;
 import com.avatarduel.dao.CSVCardDAO;
 import com.avatarduel.dao.CardDAO;
 import com.avatarduel.factory.CardFactory;
+import com.avatarduel.model.*;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.type.PlayerType;
 

@@ -1,11 +1,11 @@
 package com.avatarduel.util;
 
+import com.avatarduel.model.*;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.type.Element;
 import org.junit.jupiter.api.Test;
 import static  org.junit.Assert.assertEquals;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
 class LoaderTest {

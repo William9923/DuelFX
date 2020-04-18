@@ -1,7 +1,6 @@
 package com.avatarduel.guicontroller.Popup;
 
 import com.avatarduel.event.ActivateDestroyEvent;
-import com.avatarduel.event.ActivateSkillEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.exception.EmptyFieldException;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
@@ -11,7 +10,6 @@ import com.avatarduel.guicontroller.RenderRequest.HandRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.type.CardType;
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;

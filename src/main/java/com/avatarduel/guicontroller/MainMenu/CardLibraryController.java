@@ -1,6 +1,7 @@
 package com.avatarduel.guicontroller.MainMenu;
 
 import com.avatarduel.guicontroller.Card.DisplayCardController;
+import com.avatarduel.model.*;
 import com.avatarduel.model.card.*;
 import com.avatarduel.util.CSVReader;
 import javafx.fxml.FXML;

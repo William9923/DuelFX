@@ -1,22 +1,16 @@
 package com.avatarduel.guicontroller.Popup;
 
-import com.avatarduel.event.ActivateDestroyEvent;
 import com.avatarduel.event.ActivateSkillEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.exception.EmptyFieldException;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.GameStatusRenderRequest;
 import com.avatarduel.guicontroller.RenderRequest.HandRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.PlayerStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.card.SkillCardInField;
-import com.avatarduel.model.type.CardType;
 import com.sun.javafx.collections.ObservableListWrapper;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
@@ -24,8 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.*;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

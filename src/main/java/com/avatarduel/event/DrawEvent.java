@@ -1,12 +1,8 @@
 package com.avatarduel.event;
 
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.Card;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
-
-import java.util.List;
 
 public class DrawEvent implements IEvent {
     private PlayerType playerType;
