@@ -89,21 +89,4 @@ public class ActivateDestroyEvent implements IEvent {
         // send destroy card to graveyard
         player.getHand().remove(destroyCard);
     }
-
-//    @Override
-//    public boolean validate() {
-//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-//        Player opponent = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent());
-//        Player player = Game.getInstance().getPlayerByType(currPlayer);
-//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-//        Card destroyCard = player.getHand().stream()
-//            .filter(card -> card.getId() == skillID)
-//            .findFirst()
-//            .orElse(null);
-//        return ((currPhase.equals(Phase.MAIN))
-//                && currPlayer.equals(playerType)
-//                && opponent.getField().getCharacterCardByID(targetID) != null
-//                && destroyCard != null
-//                && player.getPower().getCurrent(destroyCard.getElement()) >= destroyCard.getPower());
-//    }
 }

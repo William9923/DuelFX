@@ -101,36 +101,4 @@ public class ActivateSkillEvent implements IEvent {
 
     }
 
-//    @Override
-//    public boolean validate(){
-//        SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand()
-//                .stream()
-//                .filter(card1 -> card1.getId() == idCard && (card1.getType().equals(CardType.SKILL_AURA) || (card1.getType().equals(CardType.SKILL_POWER_UP))))
-//                .findFirst()
-//                .orElse(null);
-//
-//        CharacterCardInField characterCardInField =  Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
-//                .stream()
-//                .filter(c -> c.getCard().getId() == idTarget && c.getCard().getType().equals(CardType.CHARACTER))
-//                .findFirst()
-//                .orElse(null);
-//        if (characterCardInField == null) {
-//            characterCardInField =  Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList()
-//                    .stream()
-//                    .filter(c -> c.getCard().getId() == idTarget && c.getCard().getType().equals(CardType.CHARACTER))
-//                    .findFirst()
-//                    .orElse(null);
-//        }
-//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-//        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
-//
-//        return ((currPhase == Phase.MAIN)
-//                && (currPlayer == playerType)
-//                && (characterCardInField != null)
-//                && (skillCard != null)
-//                && (CardType.CHARACTER == characterCardInField.getCard().getType())
-//                && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
-//                && (skillCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())));
-//    }
 }

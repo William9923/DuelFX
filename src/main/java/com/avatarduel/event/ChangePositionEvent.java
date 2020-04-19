@@ -40,18 +40,10 @@ public class ChangePositionEvent implements IEvent {
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
-        if (currPhase != Phase.MAIN){
+        if (currPhase != Phase.MAIN) {
             throw new InvalidPhaseException(new InvalidPhaseCause(card.getCard().getType()));
         }
 
         Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).switchPosition();
     }
-
-//    @Override
-//    public boolean validate() {
-//        CharacterCardInField card = Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId);
-//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-//        return (currPhase.equals(Phase.MAIN)) && card != null && !card.hasAttacked && currPlayer == p;
-//    }
 }

@@ -103,21 +103,4 @@ public class AttackEvent implements IEvent {
             p2.removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
         }
     }
-
-//    @Override
-//    public boolean validate() {
-//        Field f1 = Game.getInstance().getPlayerByType(attacker).getField();
-//        Field f2 = Game.getInstance().getPlayerByType(defender).getField();
-//        int currentTurn = Game.getInstance().getCurrentTurn();
-//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-//        return (currPhase.equals(Phase.BATTLE)
-//                && currentTurn != 1
-//                && currPlayer.equals(attacker)
-//                && f1.getCharacterCardByID(attackCharacterId) != null  // ganti kalo uda ada trycatch
-//                && f2.getCharacterCardByID(defenseCharacterId) != null // ganti kalo uda ada trycatch
-//                && f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() != currentTurn
-//                && !f1.getCharacterCardByID(attackCharacterId).hasAttacked
-//        );
-//    }
 }
