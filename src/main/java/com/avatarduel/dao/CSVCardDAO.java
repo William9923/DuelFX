@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * CSVCardDAO is a database of card which consists of all cards that needed.
+ * @author G10-K03-CardGameOOP
+ */
+
+
 public class CSVCardDAO implements CardDAO {
 
     private List<Card> cardDatabase;
