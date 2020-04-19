@@ -49,3 +49,7 @@ gradle-app.setting
 
 .idea
 *.psd
+build.gradle
+CardGameOOP.iml
+build.gradle
+local.properties
