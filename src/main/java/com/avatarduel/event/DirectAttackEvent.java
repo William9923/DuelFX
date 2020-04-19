@@ -34,6 +34,9 @@ public class DirectAttackEvent implements IEvent {
         this.player = attacker;
     }
 
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute()  throws InvalidOperationException {
         Field f1 = Game.getInstance()

@@ -19,8 +19,12 @@ public class EndTurnEvent implements IEvent {
 
     public EndTurnEvent() {
     }
+
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
-    public void execute() {
+    public void execute()  {
         while(getInstance().getCurrentPhase().getPhase() != Phase.END) {
             getInstance().nextPhase();
         }

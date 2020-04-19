@@ -22,6 +22,9 @@ public class DrawEvent implements IEvent {
         this.playerType = type;
     }
 
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() {
         Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).draw();

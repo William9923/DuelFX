@@ -32,6 +32,9 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
         this.playerType = player;
     }
 
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException{
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();

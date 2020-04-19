@@ -36,6 +36,10 @@ public class ActivateDestroyEvent implements IEvent {
         this.skillID = skillID;
         this.targetID = charID;
     }
+
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException {
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();

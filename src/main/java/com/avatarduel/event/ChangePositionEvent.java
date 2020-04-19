@@ -4,7 +4,6 @@ import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.exception.InvalidRotateException;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
@@ -34,6 +33,9 @@ public class ChangePositionEvent implements IEvent {
         this.characterId = id;
     }
 
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException {
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
