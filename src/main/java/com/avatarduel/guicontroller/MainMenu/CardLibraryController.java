@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * used to manage the card display slideshow on the menu option
+ * @author G10-K03-CardGameOOP
  */
 public class CardLibraryController {
     @FXML private Button see_char;

@@ -19,6 +19,7 @@ import java.util.Map;
 /**
  * Controls setting cardds for each CardInField, swapping the character cards and skill card for player B
  * and setting characters action visible if it's the player's turn
+ * @author G10-K03-CardGameOOP
  */
 public class FieldController {
     /**

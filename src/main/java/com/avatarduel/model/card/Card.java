@@ -1,9 +1,8 @@
 package com.avatarduel.model.card;
 
 import com.avatarduel.factory.CardFactory;
-import com.avatarduel.model.type.Element;
 import com.avatarduel.model.type.CardType;
-import com.avatarduel.util.Loader;
+import com.avatarduel.model.type.Element;
 
 /**
  * Card is the main object of our game application that consists of id, name,
@@ -21,7 +20,6 @@ public class Card  {
     protected CardType type;
     protected int power;
 
-    // constructor
     public Card(int id, String name, Element element, String description, String image) {
         this.id = id;
         this.name = name;
@@ -40,7 +38,6 @@ public class Card  {
         return super.clone();
     }
 
-    // getter & setter
     public Element getElement() {
         return element;
     }
@@ -97,7 +94,6 @@ public class Card  {
         this.type = type;
     }
 
-    // debugging function
     public void show() {
         System.out.println("ID : " + getId() + " Name : " + getName());
         System.out.println("Description : " + getDescription());

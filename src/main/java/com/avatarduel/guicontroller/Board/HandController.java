@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * used for rendering the hand when requested and flipping cards
  * The flipping card method is directly accessed by BoardController for performance reason
+ * @author G10-K03-CardGameOOP
  */
 public class HandController{
     private PlayerType playerType;

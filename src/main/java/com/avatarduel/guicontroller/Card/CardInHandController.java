@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * used to set the card in hand and playing it
+ * @author G10-K03-CardGameOOP
  */
 public class CardInHandController extends CardController{
     @FXML private Button card_play;

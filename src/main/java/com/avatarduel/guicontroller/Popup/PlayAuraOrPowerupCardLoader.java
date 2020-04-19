@@ -19,10 +19,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * {@inheritDoc}
+ * used to show popup when player click play on
+ * skill power up card or skill aura card. Because their behavior
+ * is similar, that is can be attached to any card in field, the popup
+ * is grouped into one.
+ * @author G10-K03-CardGameOOP
+ */
 public class PlayAuraOrPowerupCardLoader extends PopupLoader {
     private CardInHand cardPlayed;
     private ChoiceBox<CharacterCardInField> choiceBox;
 
+    /**
+     * play the card, try to load all of the card on the field
+     * if the field is new, throw an invalid skill activation
+     * if not, laod all options to the choice box
+     * @param cardPlayed the skill card played
+     * @throws InvalidOperationException if list of character card is empty
+     */
     public PlayAuraOrPowerupCardLoader(CardInHand cardPlayed) throws InvalidOperationException {
         super();
         this.choiceBox = (ChoiceBox<CharacterCardInField>) popupGui.lookup("#choice_box");
@@ -39,10 +54,13 @@ public class PlayAuraOrPowerupCardLoader extends PopupLoader {
         this.choiceBox.setItems(new ObservableListWrapper<>(listOfCharacterCards));
     }
 
-    public boolean isChoiceBoxEmpty() {
-        return this.choiceBox.getItems().isEmpty();
-    }
-
+    /**
+     * set up the confirm button, and set up the popup
+     * if there is an invalid operation in the execution of the event,
+     * post the exception to eventbus to get handled by board controller
+     * {@inheritDoc
+     * @author G10-K03-CardGameOOP
+     */
     @Override
     public Popup getPopup() {
         Popup popup = new Popup();

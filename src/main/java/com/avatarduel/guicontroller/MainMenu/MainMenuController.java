@@ -18,6 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * used to manage the main menu scene which has 3 button, start, how to play, and cards ( to show the card library )
+ * @author G10-K03-CardGameOOP
+ */
 public class MainMenuController {
     private Stage stage;
     private MediaPlayer mediaPlayer;
@@ -27,11 +31,19 @@ public class MainMenuController {
     @FXML private Label how_to_play;
     @FXML private Label cards;
 
+    /**
+     * play the theme music
+     */
     @FXML
     public void initialize() {
-        playMainMenuMusic();
+        playMainMenuSong();
     }
 
+    /**
+     * set the stage, used by file AvatarDuel. java to set the main menu on window stage
+     * @param stage avatar duel's stage
+     * @throws IOException if the main menu fxml file is not found
+     */
     public void setStage(Stage stage) throws IOException {
         this.stage = stage;
         this.setStart();
@@ -40,7 +52,12 @@ public class MainMenuController {
         Game.getInstance().getEventBus().register(this);
     }
 
-    public void setStart() {
+    /**
+     * set up the start button, used privately
+     * to start the game and change the music
+     * if there is an error loading the game, it will display an alert
+     */
+    private void setStart() {
         FXMLHandler fxmlHandler = new FXMLHandler("GUI/Board/Board.fxml");
         try {
             FXMLLoader fxmlLoader = fxmlHandler.getFxmlLoader();
@@ -62,7 +79,10 @@ public class MainMenuController {
         }
     }
 
-    public void setHowToPlayPopUp() {
+    /**
+     * set up how to play popup window
+     */
+    private void setHowToPlayPopUp() {
         HowToPlayController howToPlay = new HowToPlayController();
         howToPlay.setStage(stage);
         how_to_play.onMouseClickedProperty().setValue(e -> {
@@ -70,7 +90,10 @@ public class MainMenuController {
         });
     }
 
-    public void setCardsPopUp() throws IOException {
+    /**
+     * set up card library pop up window
+     */
+    private void setCardsPopUp() throws IOException {
         FXMLHandler fxmlHandler = new FXMLHandler("GUI/MainMenu/ShowCards/ShowCards.fxml");
         FXMLLoader fxmlLoader = fxmlHandler.getFxmlLoader();
         fxmlLoader.load();
@@ -81,7 +104,10 @@ public class MainMenuController {
         });
     }
 
-    private void playMainMenuMusic() {
+    /**
+     * play the theme song
+     */
+    private void playMainMenuSong() {
         musicThread = new Thread(() -> {
             try {
                 File musicFile = new File("src/main/resources/com/avatarduel/music/main_song.mp3");

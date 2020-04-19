@@ -27,6 +27,7 @@ import java.net.URL;
  * alert
  * playing song
  * ending turn
+ * @author G10-K03-CardGameOOP
  */
 public class BoardController {
     @FXML private DisplayCardController selectedController;
