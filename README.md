@@ -184,5 +184,18 @@ For this app, the main function lives in `AvatarDuel.java`.
 
 You can explore more about gradle [here](https://guides.gradle.org/creating-new-gradle-builds/)
 
+## APPLICATION
+### Here are fews examples of how the game looks
+* ![Main Menu]()
+* ![Character that use in field]()
+* ![Playing the cards from hand]()
+* ![Player description and Card Description]()
+* ![Defense Position]()
+* ![Error Message]()
+* ![Pop up to use some skills]()
+* ![Skill Card In Use]()
+* ![Game Status and End Button]()
+* ![A Win Message]()
+
 ## Credit
 All images and description are taken from [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)

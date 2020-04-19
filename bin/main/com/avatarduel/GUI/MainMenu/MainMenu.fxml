@@ -6,9 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@styles/MainMenu.css"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.avatarduel.guicontroller.MainMenu.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@styles/MainMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.guicontroller.MainMenu.MainMenuController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0">
          <image>
@@ -17,17 +15,17 @@
       </ImageView>
       <VBox alignment="TOP_CENTER" layoutX="854.0" layoutY="474.0" prefHeight="200.0" prefWidth="213.0" spacing="8.0">
          <children>
-            <Label fx:id="start" styleClass="menu" text="Start">
+            <Label fx:id="start" text="Start">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="how_to_play" styleClass="menu" text="How to play">
+            <Label fx:id="how_to_play" text="How to play">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="cards" styleClass="menu" text="Cards">
+            <Label fx:id="cards" text="Cards">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>

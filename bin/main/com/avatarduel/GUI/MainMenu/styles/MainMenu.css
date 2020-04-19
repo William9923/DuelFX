@@ -1,8 +1,11 @@
-.menu {
-    -fx-color : black;
+.label {
+    -fx-text-fill : black;
     -fx-padding : 0;
     -fx-margin : 0;
 }
-.menu:hover {
-    -fx-color : blue;
+.label:hover {
+    -fx-text-fill : #003382;
+}
+.unavailable {
+    -fx-font-color : grey;
 }

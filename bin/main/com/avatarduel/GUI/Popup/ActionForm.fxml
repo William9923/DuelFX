@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="600.0" styleClass="container" stylesheets="@styles/ActionForm.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutX="32.0" layoutY="25.0" prefHeight="200.0" prefWidth="537.0" spacing="16.0">
+         <children>
+            <Label fx:id="title" styleClass="title" text="Select A Character to Attack">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="choice_box" prefHeight="31.0" prefWidth="235.0" />
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="537.0" spacing="50.0">
+               <children>
+                  <Button fx:id="confirm_button" mnemonicParsing="false" text="Confirm" />
+                  <Button fx:id="cancel_button" mnemonicParsing="false" text="Cancel" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
