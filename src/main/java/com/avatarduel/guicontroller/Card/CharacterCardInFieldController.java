@@ -4,6 +4,8 @@ import com.avatarduel.event.ChangePositionEvent;
 import com.avatarduel.event.DirectAttackEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.event.NextPhaseEvent;
+import com.avatarduel.exception.ExceptionCause.AttackOnTheCreatedTurnCause;
+import com.avatarduel.exception.InvalidAttackException;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Popup.AttackPopupLoader;
 import com.avatarduel.guicontroller.Request.GlobalRequest.GameStatusRenderRequest;
@@ -69,6 +71,10 @@ public class CharacterCardInFieldController extends CardInFieldController {
      */
     @FXML
     public void cardAttack() {
+        if(this.characterCardInField.getCreatedAtTurn() == Game.getInstance().getCurrentTurn()) {
+            Game.getInstance().getEventBus().post(new InvalidAttackException(new AttackOnTheCreatedTurnCause()));
+            return;
+        }
         if(Game.getInstance().getCurrentPhase().getPhase() != Phase.BATTLE) {
             Game.getInstance().getEventBus().post(new NextPhaseEvent());
             Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
