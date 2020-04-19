@@ -4,6 +4,11 @@ import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
+/**
+ * LandCard is one of the card types that has 3 main card atrributes plus 3 others.
+ * This card is the power source for the player according to the element.
+ * @author G10-K03-CardGameOOP
+ */
 
 public class LandCard extends Card {
     private int power;
@@ -24,9 +29,4 @@ public class LandCard extends Card {
     public void setPower(int power) {
         this.power = power;
     }
-
-//    @Override -- > later implement || for debugging purpose
-//    public void show() {
-//
-//    }
 }

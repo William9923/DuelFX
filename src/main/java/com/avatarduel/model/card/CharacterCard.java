@@ -4,6 +4,11 @@ import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
+/**
+ * CharacterCard is one of the card types that has all card atrributes plus defense and attack number.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class CharacterCard extends Card {
     private int attack;
     private int defense;

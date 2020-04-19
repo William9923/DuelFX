@@ -6,6 +6,12 @@ import com.avatarduel.model.type.PlayerType;
 import com.avatarduel.phase.*;
 import com.google.common.eventbus.EventBus;
 
+/**
+ * Game is the main class of the model package.
+ * Game class sets the player, phase, and also event that able to occur in the game.
+ * @author G10-K03-CardGameOOP
+ */
+
 // Singleton Design pattern
 public class Game {
     private static Game game;
