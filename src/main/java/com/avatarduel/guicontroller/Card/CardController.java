@@ -12,6 +12,7 @@ import java.io.File;
 /**
  * used as an abstract class for setting a card's information for GUI, such as
  * its attack, defense, name, image, icon, etc
+ * @author G10-K03-CardGameOOP
  */
 public abstract class CardController {
     protected Card cardData;

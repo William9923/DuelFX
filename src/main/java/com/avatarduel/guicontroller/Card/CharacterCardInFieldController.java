@@ -22,6 +22,7 @@ import javafx.stage.Popup;
 
 /**
  * used to manage data of character card in field, and manage its action such as rotating and attacking
+ * @author G10-K03-CardGameOOP
  */
 public class CharacterCardInFieldController extends CardInFieldController {
     @FXML ImageView card_rotate;

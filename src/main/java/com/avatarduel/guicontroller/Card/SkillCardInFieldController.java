@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 /**
  * used to for controlling the skill card in field and manage its action such as
  * removing it from the field
+ * @author G10-K03-CardGameOOP
  */
 public class SkillCardInFieldController extends CardInFieldController {
     private SkillCardInField skillCardInField;

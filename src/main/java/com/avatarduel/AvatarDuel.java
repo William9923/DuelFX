@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 /**
  * main application
- * @author K10, Lab programming
+ * @author G10-K03-CardGameOOP, Lab programming
  */
 public class AvatarDuel extends Application {
   private MediaPlayer mediaPlayer;
