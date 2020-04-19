@@ -3,6 +3,7 @@ package com.avatarduel.guicontroller.Popup;
 import com.avatarduel.event.AttackEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.guicontroller.Request.SpecificRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.sun.javafx.collections.ObservableListWrapper;
