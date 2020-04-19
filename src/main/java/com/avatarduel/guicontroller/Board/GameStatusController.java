@@ -26,7 +26,7 @@ public class GameStatusController {
     }
 
     /**
-     * @Subscribe method for rendering the game status
+     Subscribe method for rendering the game status
      */
     @Subscribe
     public void update(GameStatusRenderRequest request) {

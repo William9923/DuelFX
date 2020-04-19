@@ -20,8 +20,8 @@ public class FullBoardCause implements ExceptionCause {
 
     /**
      * {@inheritDoc}
-     * @if the cardType is character, returns full character field
-     * @else returns full skill field
+     * if the cardType is character, returns full character field
+     * else returns full skill field
      */
     @Override
     public String getCause() {

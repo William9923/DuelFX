@@ -52,7 +52,7 @@ public class PlayerStatusController  {
     }
 
     /**
-     * @Subscribe method for updating the player status if request's playertype matches this playertype
+     Subscribe method for updating the player status if request's playertype matches this playertype
      */
     @Subscribe
     public void update(PlayerStatusRenderRequest request) {

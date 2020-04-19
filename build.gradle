@@ -29,5 +29,6 @@ dependencies {
 }
 
 task avatarDocs(type: Javadoc) {
+    failOnError(false)
     source = sourceSets.main.allJava
 }
