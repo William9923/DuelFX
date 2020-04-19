@@ -24,23 +24,16 @@ public class PlayDestroyCardLoader extends PopupLoader {
     private CardInHand cardPlayed;
     private ChoiceBox<CharacterCardInField> choiceBox;
 
-    public PlayDestroyCardLoader(CardInHand cardPlayed) {
+    public PlayDestroyCardLoader(CardInHand cardPlayed) throws InvalidOperationException{
         super();
         this.choiceBox = (ChoiceBox<CharacterCardInField>) popupGui.lookup("#choice_box");
-        try {
-            List<CharacterCardInField> opponentCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
-            if (opponentCharactersInField.isEmpty()) {
-                throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
-            }
-            this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
-            this.cardPlayed = cardPlayed;
-            this.choiceBox.setItems(new ObservableListWrapper<>(opponentCharactersInField));
+        List<CharacterCardInField> opponentCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
+        if (opponentCharactersInField.isEmpty()) {
+            throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
         }
-        catch ( InvalidOperationException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getOperation());
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
+        this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
+        this.cardPlayed = cardPlayed;
+        this.choiceBox.setItems(new ObservableListWrapper<>(opponentCharactersInField));
     }
 
     @Override

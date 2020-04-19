@@ -45,8 +45,9 @@ public class DeckController  {
         deck_size.setText("Remaining Card : " + Integer.toString(Game.getInstance().getPlayerByType(playerType).getDeck().size()));
     }
 
-    public void setPlayerType(PlayerType playerType) {
+    public void setPlayerTypeAndRender(PlayerType playerType) {
         this.playerType = playerType;
+        this.render();
     }
 
     public PlayerType getPlayerType() {

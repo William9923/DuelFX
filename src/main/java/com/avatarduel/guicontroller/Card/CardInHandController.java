@@ -4,6 +4,8 @@ import com.avatarduel.event.IEvent;
 import com.avatarduel.event.PlayLandCardEvent;
 import com.avatarduel.event.SummonEvent;
 import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.ExceptionCause.NotEnoughPowerCause;
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.exception.InvalidPlayCardException;
 import com.avatarduel.guicontroller.Popup.PlayAuraOrPowerupCardLoader;
 import com.avatarduel.guicontroller.Popup.PlayDestroyCardLoader;
@@ -88,29 +90,37 @@ public class CardInHandController extends CardController{
             Game.getInstance().getEventBus().post(new InvalidPlayCardException(new InvalidPhaseCause(Phase.MAIN)));
             return;
         }
+        if(Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getPower().getCurrent(this.cardData.getElement()) < this.cardData.getPower()) {
+            Game.getInstance().getEventBus().post(new InvalidPlayCardException(new NotEnoughPowerCause(this.cardData.getElement())));
+            return;
+        }
+
         IEvent event;
-        if(cardData.getType() == CardType.LAND) {
-            event = new PlayLandCardEvent(cardData.getId(), playerType);
-            Game.getInstance().getEventBus().post(event);
-            Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
+        try {
+            if (cardData.getType() == CardType.LAND) {
+                event = new PlayLandCardEvent(cardData.getId(), playerType);
+                Game.getInstance().getEventBus().post(event);
+                Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
+            } else if (cardData.getType() == CardType.CHARACTER) {
+                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
+                Game.getInstance().getEventBus().post(event);
+                Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
+                Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
+            } else if (cardData.getType() == CardType.SKILL_DESTROY) {
+                PlayDestroyCardLoader playDestroyCardLoader = new PlayDestroyCardLoader(this.cardInHand);
+                Popup popup = playDestroyCardLoader.getPopup();
+                popup.show(card_play.getScene().getWindow());
+            } else {
+                // kartu skill aura or power up
+                PlayAuraOrPowerupCardLoader playAuraOrPowerupCardLoader = new PlayAuraOrPowerupCardLoader(this.cardInHand);
+                Popup popup = playAuraOrPowerupCardLoader.getPopup();
+                popup.show(card_play.getScene().getWindow());
+            }
+            Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType));
         }
-        else if(cardData.getType() == CardType.CHARACTER) {
-            event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
-            Game.getInstance().getEventBus().post(event);
-            Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
-            Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
+        catch (InvalidOperationException IOE) {
+            Game.getInstance().getEventBus().post(IOE);
         }
-        else if (cardData.getType() == CardType.SKILL_DESTROY) {
-            PlayDestroyCardLoader playDestroyCardLoader = new PlayDestroyCardLoader(this.cardInHand);
-            Popup popup = playDestroyCardLoader.getPopup();
-            popup.show(card_play.getScene().getWindow());
-        } else {
-            // kartu skill aura or power up
-            PlayAuraOrPowerupCardLoader playAuraOrPowerupCardLoader = new PlayAuraOrPowerupCardLoader(this.cardInHand);
-            Popup popup = playAuraOrPowerupCardLoader.getPopup();
-            popup.show(card_play.getScene().getWindow());
-        }
-        Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(playerType));
     }
 
     private int getSmallestCharacterIndexPossible(PlayerType type) {

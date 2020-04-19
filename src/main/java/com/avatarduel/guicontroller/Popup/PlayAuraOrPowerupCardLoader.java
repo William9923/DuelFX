@@ -26,27 +26,24 @@ public class PlayAuraOrPowerupCardLoader extends PopupLoader {
     private CardInHand cardPlayed;
     private ChoiceBox<CharacterCardInField> choiceBox;
 
-    public PlayAuraOrPowerupCardLoader(CardInHand cardPlayed) {
+    public PlayAuraOrPowerupCardLoader(CardInHand cardPlayed) throws InvalidOperationException {
         super();
         this.choiceBox = (ChoiceBox<CharacterCardInField>) popupGui.lookup("#choice_box");
-        try {
-            List<CharacterCardInField> myCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
-            List<CharacterCardInField> opponentCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
-            List<CharacterCardInField> listOfCharacterCards = Stream.of(myCharactersInField, opponentCharactersInField)
-                    .flatMap(x -> x.stream())
-                    .collect(Collectors.toList());
-            if (listOfCharacterCards.isEmpty()) {
-                throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
-            }
-            this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
-            this.cardPlayed = cardPlayed;
-            this.choiceBox.setItems(new ObservableListWrapper<>(listOfCharacterCards));
+        List<CharacterCardInField> myCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList();
+        List<CharacterCardInField> opponentCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
+        List<CharacterCardInField> listOfCharacterCards = Stream.of(myCharactersInField, opponentCharactersInField)
+                .flatMap(x -> x.stream())
+                .collect(Collectors.toList());
+        if (listOfCharacterCards.isEmpty()) {
+            throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
         }
-        catch ( InvalidOperationException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getOperation());
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
+        this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
+        this.cardPlayed = cardPlayed;
+        this.choiceBox.setItems(new ObservableListWrapper<>(listOfCharacterCards));
+    }
+
+    public boolean isChoiceBoxEmpty() {
+        return this.choiceBox.getItems().isEmpty();
     }
 
     @Override

@@ -6,10 +6,11 @@ import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
 import com.avatarduel.guicontroller.Request.GlobalRequest.GameStatusRenderRequest;
 import com.avatarduel.guicontroller.Request.GlobalRequest.ShowSelectedCardRequest;
-import com.avatarduel.guicontroller.Request.SpecificRequest.*;
+import com.avatarduel.guicontroller.Request.SpecificRequest.CheckWinRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.DeckDrawAndRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRequest;
 import com.avatarduel.guicontroller.util.PlayMusicRequest;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
@@ -20,8 +21,6 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * BoardController is the one big class that controls:
@@ -43,58 +42,30 @@ public class BoardController {
     @FXML private GameStatusController gameStatusController;
 //    private Executor executor;
 
-    private Map<PlayerType, HandController> handControllerMap;
-    private Map<PlayerType, FieldController> fieldControllerMap;
-    private Map<PlayerType, PlayerStatusController> playerStatusControllerMap;
-    private Map<PlayerType, DeckController> deckControllerMap;
-
     private Thread musicThread;
     private MediaPlayer mediaPlayer;
 
     public BoardController() {
-        handControllerMap = new HashMap<>();
-        fieldControllerMap = new HashMap<>();
-        playerStatusControllerMap = new HashMap<>();
-        deckControllerMap = new HashMap<>();
     }
 
     @FXML
     public void initialize() {
         Game.getInstance().getEventBus().register(this);
 
-        // hand mapping setup
-        handControllerMap.put(PlayerType.A, handAController);
-        handControllerMap.put(PlayerType.B, handBController);
-
-        handControllerMap.forEach((playerType ,controller) -> {
-            controller.setPlayerTypeAndRender(playerType);
-        });
-
+        handAController.setPlayerTypeAndRender(PlayerType.A);
+        handBController.setPlayerTypeAndRender(PlayerType.B);
         handBController.flipCards(); // game start, second player need to flip the card
 
-        // field mapping setup
-        fieldControllerMap.put(PlayerType.A, fieldAController);
-        fieldControllerMap.put(PlayerType.B, fieldBController);
-
-        fieldControllerMap.forEach((playerType, fieldController) -> {
-            fieldController.setPlayerType(playerType);
-        });
-
+        fieldAController.setPlayerType(PlayerType.A);
+        fieldBController.setPlayerType(PlayerType.B);
         fieldBController.swapCharactersAndSkillsPosition();
 
-        deckControllerMap.put(PlayerType.A, deckAController);
-        deckControllerMap.put(PlayerType.B, deckBController);
-        deckControllerMap.forEach((playerType, deckController) -> {
-            deckController.setPlayerType(playerType);
-            deckController.render();
-        });
+        deckAController.setPlayerTypeAndRender(PlayerType.A);
+        deckBController.setPlayerTypeAndRender(PlayerType.B);
         Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
 
-        playerStatusControllerMap.put(PlayerType.A, playerAStatusController);
-        playerStatusControllerMap.put(PlayerType.B, playerBStatusController);
-        playerStatusControllerMap.forEach((playerType, playerStatusController) -> {
-            playerStatusController.setPlayerType(playerType);
-        });
+        playerAStatusController.setPlayerType(PlayerType.A);
+        playerBStatusController.setPlayerType(PlayerType.B);
     }
 
     @FXML
@@ -106,14 +77,18 @@ public class BoardController {
         Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
         Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentPlayer()));
 
-        if (canDoIt){
+        if (canDoIt) {
             handAController.flipCards();
             handBController.flipCards();
             PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
-            handControllerMap.get(nextPlayer).render();
-            fieldControllerMap.forEach((playerType, controller) -> {
-                controller.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == playerType);
-            });
+            if(nextPlayer == PlayerType.A) {
+                handAController.render();
+            }
+            else {
+                handBController.render();
+            }
+            fieldAController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.A);
+            fieldBController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.B);
         }
     }
 
@@ -142,11 +117,11 @@ public class BoardController {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         boolean gameEnded = false;
         a.setHeaderText("Congratulation");
-        if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
+        if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
             a.setContentText("Player " + Game.getInstance().getCurrentOpponent() + "Win!!!");
             gameEnded = true;
         }
-        if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getHealthPoint() <= 0) {
+        if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getHealthPoint() <= 0) {
             a.setContentText("Player " + Game.getInstance().getCurrentPlayer() + "Win!!!");
             gameEnded = true;
         }
