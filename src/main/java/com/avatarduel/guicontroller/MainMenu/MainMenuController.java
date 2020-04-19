@@ -2,7 +2,7 @@ package com.avatarduel.guicontroller.MainMenu;
 
 import com.avatarduel.guicontroller.Board.BoardController;
 import com.avatarduel.guicontroller.util.FXMLHandler;
-import com.avatarduel.guicontroller.util.PlayMusicRequest;
+import com.avatarduel.guicontroller.Request.GlobalRequest.PlayMusicRequest;
 import com.avatarduel.model.Game;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

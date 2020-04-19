@@ -17,8 +17,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.stage.Popup;
 
-import java.util.List;
-
 /**
  * used to manage data of character card in field, and manage its action such as rotating and attacking
  */
@@ -80,8 +78,7 @@ public class CharacterCardInFieldController extends CardInFieldController {
             Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentOpponent()));
         }
         else if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
-            List<CharacterCardInField> opponentField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
-            AttackPopupLoader attackPopupLoader = new AttackPopupLoader(this.characterCardInField, opponentField);
+            AttackPopupLoader attackPopupLoader = new AttackPopupLoader(this.characterCardInField);
             Popup attackPopup = attackPopupLoader.getPopup();
             attackPopup.show(card_rotate.getScene().getWindow());
         }

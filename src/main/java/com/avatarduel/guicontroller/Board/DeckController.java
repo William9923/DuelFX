@@ -28,7 +28,7 @@ public class DeckController  {
     }
 
     /**
-     * @Subscribe method for drawing card, and rendering the deck
+     Subscribe method for drawing card, and rendering the deck
      */
     @Subscribe
     public void drawAndRender(DeckDrawAndRenderRequest request) {
@@ -40,7 +40,7 @@ public class DeckController  {
     }
 
     /**
-     * @Subscribe method for drawing card, and rendering the deck
+     Subscribe method for drawing card, and rendering the deck
      */
     @Subscribe
     public void update(DeckRenderRequest renderRequest) {

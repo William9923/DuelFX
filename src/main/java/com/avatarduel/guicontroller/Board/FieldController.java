@@ -160,7 +160,7 @@ public class FieldController {
     }
 
     /**
-     * @Subscribe method for updating the field if the request's playertype matches
+     Subscribe method for updating the field if the request's playertype matches
      */
     @Subscribe
     public void update(FieldRenderRequest request){

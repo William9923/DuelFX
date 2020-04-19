@@ -1,4 +1,5 @@
 package com.avatarduel.model.card;
+
 import com.avatarduel.model.type.Element;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

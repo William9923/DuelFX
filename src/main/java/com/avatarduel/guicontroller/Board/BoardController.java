@@ -9,7 +9,7 @@ import com.avatarduel.guicontroller.Request.GlobalRequest.ShowSelectedCardReques
 import com.avatarduel.guicontroller.Request.SpecificRequest.CheckWinRequest;
 import com.avatarduel.guicontroller.Request.SpecificRequest.DeckDrawAndRenderRequest;
 import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRequest;
-import com.avatarduel.guicontroller.util.PlayMusicRequest;
+import com.avatarduel.guicontroller.Request.GlobalRequest.PlayMusicRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
@@ -94,7 +94,7 @@ public class BoardController {
     }
 
     /**
-     * @Subscribe method for catching exception thrown by smaller component
+     * Subscribe method for catching exception thrown by smaller component
      */
     @Subscribe
     public void catchException(InvalidOperationException exception) {
@@ -105,7 +105,7 @@ public class BoardController {
     }
 
     /**
-     * @Subscribe method for executing event thrown by smaller component
+     * Subscribe method for executing event thrown by smaller component
      * @param event the event executed
      */
     @Subscribe
@@ -121,7 +121,7 @@ public class BoardController {
     }
 
     /**
-     * @Subscribe method for checking if a player is winning or losing
+     Subscribe method for checking if a player is winning or losing
      */
     @Subscribe
     public void checkWinnerGame(CheckWinRequest request) {
@@ -143,7 +143,7 @@ public class BoardController {
     }
 
     /**
-     * @Subscribe method for showing the selected card to the displayer on the left side of the screen
+     * Subscribe method for showing the selected card to the displayer on the left side of the screen
      */
     @Subscribe
     private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {
@@ -151,7 +151,7 @@ public class BoardController {
     }
 
     /**
-     * @Subscribe method for creating in game song thread
+     * Subscribe method for creating in game song thread
      */
     @Subscribe
     public void playInGameSong(PlayMusicRequest playMusicRequest) {

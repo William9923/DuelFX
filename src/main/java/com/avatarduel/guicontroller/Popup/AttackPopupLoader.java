@@ -19,13 +19,14 @@ public class AttackPopupLoader extends PopupLoader {
     private CharacterCardInField attacker;
     private ChoiceBox<CharacterCardInField> choiceBox;
 
-    public AttackPopupLoader(CharacterCardInField attacker, List<CharacterCardInField> characterCardInFieldList) {
+    public AttackPopupLoader(CharacterCardInField attacker) {
         super();
         try {
             this.attacker = attacker;
             popupGui = fxmlHandler.getParent();
+            List<CharacterCardInField> opponentField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
             choiceBox = (ChoiceBox<CharacterCardInField>) popupGui.lookup("#choice_box");
-            choiceBox.setItems(new ObservableListWrapper<>(characterCardInFieldList));
+            choiceBox.setItems(new ObservableListWrapper<>(opponentField));
         }
         catch(Exception e) {
             System.out.println("AttackPopupLoader.java : constructor : " + e.getMessage());

@@ -109,7 +109,7 @@ public class HandController{
     }
 
     /**
-     * @Subscribe method for updating the hand if the request's playertype
+     Subscribe method for updating the hand if the request's playertype
      */
     @Subscribe
     public void update(HandRenderRequest request) {
