@@ -31,11 +31,11 @@ public class ChangePositionEvent implements IEvent {
         Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).switchPosition();
     }
 
-    @Override
-    public boolean validate() {
-        CharacterCardInField card = Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId);
-        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-        return (currPhase.equals(Phase.MAIN)) && card != null && !card.hasAttacked && currPlayer == p;
-    }
+//    @Override
+//    public boolean validate() {
+//        CharacterCardInField card = Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId);
+//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
+//        return (currPhase.equals(Phase.MAIN)) && card != null && !card.hasAttacked && currPlayer == p;
+//    }
 }

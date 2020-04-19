@@ -48,22 +48,22 @@ public class PlayLandCardEvent implements IEvent {
         player.hasPlayLand = true;
     }
 
-    @Override
-    public boolean validate() {
-        LandCard landCard = (LandCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()
-                .filter(card -> card.getId() == landCardID && card.getType().equals(CardType.LAND))
-                .findFirst()
-                .orElse(null);
-        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
-
-        return (((currPhase == Phase.MAIN))
-                        && (currPlayer == playerType)
-                        && (landCard != null)
-                        && (CardType.LAND == landCard.getType())
-                        && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
-                        && !(Game.getInstance().getPlayerByType(currPlayer).hasPlayLand)
-                );
-    }
+//    @Override
+//    public boolean validate() {
+//        LandCard landCard = (LandCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()
+//                .filter(card -> card.getId() == landCardID && card.getType().equals(CardType.LAND))
+//                .findFirst()
+//                .orElse(null);
+//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
+//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
+//        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
+//
+//        return (((currPhase == Phase.MAIN))
+//                        && (currPlayer == playerType)
+//                        && (landCard != null)
+//                        && (CardType.LAND == landCard.getType())
+//                        && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
+//                        && !(Game.getInstance().getPlayerByType(currPlayer).hasPlayLand)
+//                );
+//    }
 }

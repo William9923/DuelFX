@@ -17,7 +17,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -97,7 +96,7 @@ public class BoardController {
 
     @FXML
     public void endTurn() {
-        IEvent event = new EndTurnEvent();
+        EndTurnEvent event = new EndTurnEvent();
         boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
         Game.getInstance().getEventBus().post(new GameStatusRenderRequest());

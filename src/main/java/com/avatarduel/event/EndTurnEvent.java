@@ -1,8 +1,6 @@
 package com.avatarduel.event;
 
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.model.type.Phase;
-import com.avatarduel.model.type.PlayerType;
 
 import static com.avatarduel.model.Game.getInstance;
 
@@ -21,7 +19,6 @@ public class EndTurnEvent implements IEvent {
         getInstance().getPlayerByType(getInstance().getCurrentPlayer()).refreshState();  // refresh state pemain pada draw phase
     }
 
-    @Override
     public boolean validate() {
         Phase currPhase = getInstance().getCurrentPhase().getPhase();
         return (currPhase.equals(Phase.MAIN) || currPhase.equals(Phase.BATTLE));
