@@ -90,10 +90,6 @@ public class CardInHandController extends CardController{
             Game.getInstance().getEventBus().post(new InvalidPlayCardException(new InvalidPhaseCause(Phase.MAIN)));
             return;
         }
-        if(Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getPower().getCurrent(this.cardData.getElement()) < this.cardData.getPower()) {
-            Game.getInstance().getEventBus().post(new InvalidPlayCardException(new NotEnoughPowerCause(this.cardData.getElement())));
-            return;
-        }
 
         IEvent event;
         try {
@@ -101,7 +97,12 @@ public class CardInHandController extends CardController{
                 event = new PlayLandCardEvent(cardData.getId(), playerType);
                 Game.getInstance().getEventBus().post(event);
                 Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
-            } else if (cardData.getType() == CardType.CHARACTER) {
+            }
+            else if(Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getPower().getCurrent(this.cardData.getElement()) < this.cardData.getPower()) {
+                Game.getInstance().getEventBus().post(new InvalidPlayCardException(new NotEnoughPowerCause(this.cardData.getElement())));
+                return;
+            }
+            else if (cardData.getType() == CardType.CHARACTER) {
                 event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
                 Game.getInstance().getEventBus().post(event);
                 Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));

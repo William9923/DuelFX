@@ -40,17 +40,22 @@ public class BoardController {
     @FXML private PlayerStatusController playerBStatusController;
     @FXML private Button end_turn;
     @FXML private GameStatusController gameStatusController;
-//    private Executor executor;
-
-    private Thread musicThread;
+    /**
+     * to play the in game music
+     */
     private MediaPlayer mediaPlayer;
 
-    public BoardController() {
-    }
-
+    /**
+     * initialize all objects in board controller, such as hand controller, field controller,
+     * player status controller and deck controller
+     */
     @FXML
     public void initialize() {
         Game.getInstance().getEventBus().register(this);
+        deckAController.setPlayerTypeAndRender(PlayerType.A);
+        deckBController.setPlayerTypeAndRender(PlayerType.B);
+        Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
+        Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
 
         handAController.setPlayerTypeAndRender(PlayerType.A);
         handBController.setPlayerTypeAndRender(PlayerType.B);
@@ -60,38 +65,37 @@ public class BoardController {
         fieldBController.setPlayerType(PlayerType.B);
         fieldBController.swapCharactersAndSkillsPosition();
 
-        deckAController.setPlayerTypeAndRender(PlayerType.A);
-        deckBController.setPlayerTypeAndRender(PlayerType.B);
-        Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
-
         playerAStatusController.setPlayerType(PlayerType.A);
         playerBStatusController.setPlayerType(PlayerType.B);
     }
 
+    /**
+     * End the turn, render the other player hand, render gamestatus,render player status and post endturn event
+     */
     @FXML
     public void endTurn() {
-        EndTurnEvent event = new EndTurnEvent();
-        boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
-        Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
         Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
         Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentPlayer()));
+        Game.getInstance().getEventBus().post(new CheckWinRequest());
+        Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
 
-        if (canDoIt) {
-            handAController.flipCards();
-            handBController.flipCards();
-            PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
-            if(nextPlayer == PlayerType.A) {
-                handAController.render();
-            }
-            else {
-                handBController.render();
-            }
-            fieldAController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.A);
-            fieldBController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.B);
+        handAController.flipCards();
+        handBController.flipCards();
+        PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
+        if(nextPlayer == PlayerType.A) {
+            handAController.render();
         }
+        else {
+            handBController.render();
+        }
+        fieldAController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.A);
+        fieldBController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.B);
     }
 
+    /**
+     * @Subscribe method for catching exception thrown by smaller component
+     */
     @Subscribe
     public void catchException(InvalidOperationException exception) {
         Alert a = new Alert(Alert.AlertType.ERROR);
@@ -100,11 +104,15 @@ public class BoardController {
         a.show();
     }
 
+    /**
+     * @Subscribe method for executing event thrown by smaller component
+     * @param event the event executed
+     */
     @Subscribe
     public void executeEvent(IEvent event) {
         try{
             event.execute();
-        } catch (InvalidOperationException e){
+        } catch (InvalidOperationException e) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setHeaderText(e.getOperation());
             a.setContentText(e.getMessage());
@@ -112,6 +120,9 @@ public class BoardController {
         }
     }
 
+    /**
+     * @Subscribe method for checking if a player is winning or losing
+     */
     @Subscribe
     public void checkWinnerGame(CheckWinRequest request) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -131,14 +142,20 @@ public class BoardController {
         }
     }
 
+    /**
+     * @Subscribe method for showing the selected card to the displayer on the left side of the screen
+     */
     @Subscribe
     private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {
         selectedController.setCard(selectCardRequest.getCard());
     }
 
+    /**
+     * @Subscribe method for creating in game song thread
+     */
     @Subscribe
-    public void playOnGameSong(PlayMusicRequest playMusicRequest) {
-        musicThread = new Thread(() -> {
+    public void playInGameSong(PlayMusicRequest playMusicRequest) {
+        Thread musicThread = new Thread(() -> {
             try {
                 File musicFile = new File("src/main/resources/com/avatarduel/music/on_game_song.mp3");
                 URL musicURL = musicFile.toURI().toURL();
