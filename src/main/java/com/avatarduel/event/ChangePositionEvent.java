@@ -14,7 +14,7 @@ import com.avatarduel.model.type.PlayerType;
  * If the character targeted is in Attack Position, it will be switched to the Defense Position, vice versa
  * NOTE :
  * If the character being targeted by attack event in Attack Position, then the stats that counted were the Atk
- * While if the character being targeted by attack event in Defense Position, then the stats that counted were the Def  
+ * While if the character being targeted by attack event in Defense Position, then the stats that counted were the Def
  *
  * IMPORTANT NOTE:
  * This event will communicate with game singleton instantly, so there are no need to validate
