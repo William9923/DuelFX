@@ -28,19 +28,29 @@ import javafx.stage.Popup;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * used to set the card in hand and playing it
+ */
 public class CardInHandController extends CardController{
     @FXML private Button card_play;
     private String borderStyle;
     private PlayerType playerType;
     private CardInHand cardInHand;
 
+    /**
+     * initizlizing the card in hand, set the button to no visible and borderstyle to null
+     */
     @FXML
     public void initialize() {
         card_play.setVisible(false);
         borderStyle = "null_card";
     }
 
+    /**
+     * {@inheritDoc}
+     * set the card and the borderstyle
+     * @param card for calling parent's setcard and setting new cardInhand for this object
+     */
     @Override
     public void setCard(Card card) {
         super.setCard(card);
@@ -48,14 +58,21 @@ public class CardInHandController extends CardController{
         this.cardInHand = new CardInHand(card, playerType);
     }
 
+    /**
+     * {@inheritDoc}
+     * set null card and set this.cardinhand to null
+     */
     @Override
     public void setNullCard() {
         super.setNullCard();
         this.cardInHand = null;
     }
 
+    /**
+     * flip the cards, hiding the information
+     * if it's on closed position, then open it
+     */
     public void flipCard() {
-        // kalo udah di flip, buka
         boolean isFlipped = Game.getInstance().getCurrentPlayer() == playerType;
         card_name.setVisible(isFlipped);
         card_icon.setVisible(isFlipped);
@@ -72,10 +89,17 @@ public class CardInHandController extends CardController{
         }
     }
 
+    /**
+     * set player type
+     * @param playerType the player type
+     */
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
     }
 
+    /**
+     * show the play button if it's the player turn and this cardInHand is not null
+     */
     @FXML
     public void showPlayButton() {
         if (playerType == Game.getInstance().getCurrentPlayer() && cardInHand != null) {
@@ -83,11 +107,18 @@ public class CardInHandController extends CardController{
         }
     }
 
+    /**
+     * hide the play button
+     */
     @FXML
     public void hidePlayButton() {
         card_play.setVisible(false);
     }
 
+    /**
+     * method for creating playing card event , executing it
+     * if execution failed, post the exception to eventbus so the boardController can display the alert message
+     */
     @FXML
     public void playIsClicked() {
         if(Game.getInstance().getCurrentPhase().getPhase() != Phase.MAIN) {
@@ -99,7 +130,7 @@ public class CardInHandController extends CardController{
         try {
             if (cardData.getType() == CardType.LAND) {
                 event = new PlayLandCardEvent(cardData.getId(), playerType);
-                Game.getInstance().getEventBus().post(event);
+                event.execute();
                 Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
             }
             else if(Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getPower().getCurrent(this.cardData.getElement()) < this.cardData.getPower()) {
@@ -107,8 +138,8 @@ public class CardInHandController extends CardController{
                 return;
             }
             else if (cardData.getType() == CardType.CHARACTER) {
-                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, getSmallestCharacterIndexPossible(Game.getInstance().getCurrentPlayer()));
-                Game.getInstance().getEventBus().post(event);
+                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, getSmallestCharacterIndexPossible());
+                event.execute();
                 Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
             } else if (cardData.getType() == CardType.SKILL_DESTROY) {
@@ -128,14 +159,20 @@ public class CardInHandController extends CardController{
         }
     }
 
-    private int getSmallestCharacterIndexPossible(PlayerType type) {
-        List<CharacterCardInField> listOfCharacter = Game.getInstance().getPlayerByType(type).getField().getCharCardList();
+    /**
+     * get the smallest character index to display on field
+     */
+    private int getSmallestCharacterIndexPossible() {
+        List<CharacterCardInField> listOfCharacter = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList();
         List<Integer> indexList = listOfCharacter.stream()
                 .map(c -> c.getIndex())
                 .collect(Collectors.toList());
         return getSmallestIndex(indexList);
     }
 
+    /**
+     * get smallest index from a sequence of integer
+     */
     private int getSmallestIndex(List<Integer> sequence) {
         for (int i = 0; i < sequence.size() + 1; i++){
             if (!sequence.contains(i)){
@@ -145,6 +182,9 @@ public class CardInHandController extends CardController{
         return -1;
     }
 
+    /**
+     * method for posting the selected card to the boardcontroller for display
+     */
     public void showSelectedCard() {
         if(cardData != null && this.playerType == Game.getInstance().getCurrentPlayer()) {
             Game.getInstance().getEventBus().post(new ShowSelectedCardRequest(this.cardData));
