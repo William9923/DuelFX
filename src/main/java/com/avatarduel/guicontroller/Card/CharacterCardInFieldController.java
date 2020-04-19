@@ -9,6 +9,7 @@ import com.avatarduel.exception.InvalidAttackException;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Popup.AttackPopupLoader;
 import com.avatarduel.guicontroller.Request.GlobalRequest.GameStatusRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.CheckWinRequest;
 import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -83,6 +84,7 @@ public class CharacterCardInFieldController extends CardInFieldController {
         if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() == 0){
             Game.getInstance().getEventBus().post(new DirectAttackEvent(this.getCardData().getId(), playerType));
             Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentOpponent()));
+            Game.getInstance().getEventBus().post(new CheckWinRequest());
         }
         else if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList().size() > 0) {
             AttackPopupLoader attackPopupLoader = new AttackPopupLoader(this.characterCardInField);
