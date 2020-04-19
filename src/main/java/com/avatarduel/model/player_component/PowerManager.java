@@ -87,14 +87,6 @@ public class PowerManager {
         this.current_energy = current_energy;
     }
 
-    public void setTotal_fire(int total_Fire){ this.total_fire = total_Fire; }
-
-    public void setTotal_water(int total_Water){ this.total_water = total_Water; }
-
-    public void setTotal_earth(int total_Earth){ this.total_earth = total_Earth; }
-
-    public void setTotal_air(int total_Air){ this.total_air = total_Air; }
-
     //To add power
     public void add(Element type, int power){
         switch (type) {
@@ -104,10 +96,6 @@ public class PowerManager {
             case AIR: total_air += power; current_air += power; break;
             case ENERGY: total_energy += power; current_energy += power; break;
         }
-    }
-
-    public int getTotal() {
-        return total_air + total_fire + total_earth + total_water +total_energy;
     }
 
     //To reduce or or delete power

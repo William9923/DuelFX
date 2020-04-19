@@ -99,7 +99,7 @@ public class BoardController {
 
     @FXML
     public void endTurn() {
-        IEvent event = new EndTurnEvent();
+        EndTurnEvent event = new EndTurnEvent();
         boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
         Game.getInstance().getEventBus().post(new GameStatusRenderRequest());

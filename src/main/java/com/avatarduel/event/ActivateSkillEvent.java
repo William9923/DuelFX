@@ -11,7 +11,20 @@ import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
-public class ActivateSkillEvent implements IEvent { // has not implemented yet
+/**
+ * ActivateSkillEvent is a event for activating aura or power up skill cards.
+ *
+ * This event connect the card to the character specify by player, and will be destroyed in 2 (two) cases :
+ * 1. The player who played this card removed it from field
+ * 2. The character the card is attached to is removed from field (either destroyed or lose in battle)
+ * IMPORTANT NOTE:
+ * This event will communicate with game singleton instantly, so there are no need to validate
+ * In case where event is not possible to do, we throw exception so that the GUI Board can give the
+ * error message to the player playing the games
+ * @author G10-K03-CardGameOOP
+ */
+
+public class ActivateSkillEvent implements IEvent {
 
     private PlayerType playerType;
     private int index;
@@ -77,6 +90,10 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
             throw new InvalidSkillActivationException(new NotEnoughPowerCause(skillCard.getElement()));
         }
 
+        if (skillCard.getType() == CardType.SKILL_POWER_UP) {
+            System.out.println("Activate Power Up");
+        }
+
         Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());
         p.getHand().remove(skillCard);
         p.getField().addSkillCard(skillCard, index, Game.getInstance().getCurrentTurn());
@@ -85,36 +102,4 @@ public class ActivateSkillEvent implements IEvent { // has not implemented yet
 
     }
 
-    @Override
-    public boolean validate(){
-        SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand()
-                .stream()
-                .filter(card1 -> card1.getId() == idCard && (card1.getType().equals(CardType.SKILL_AURA) || (card1.getType().equals(CardType.SKILL_POWER_UP))))
-                .findFirst()
-                .orElse(null);
-
-        CharacterCardInField characterCardInField =  Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getField().getCharCardList()
-                .stream()
-                .filter(c -> c.getCard().getId() == idTarget && c.getCard().getType().equals(CardType.CHARACTER))
-                .findFirst()
-                .orElse(null);
-        if (characterCardInField == null) {
-            characterCardInField =  Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList()
-                    .stream()
-                    .filter(c -> c.getCard().getId() == idTarget && c.getCard().getType().equals(CardType.CHARACTER))
-                    .findFirst()
-                    .orElse(null);
-        }
-        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
-
-        return ((currPhase == Phase.MAIN)
-                && (currPlayer == playerType)
-                && (characterCardInField != null)
-                && (skillCard != null)
-                && (CardType.CHARACTER == characterCardInField.getCard().getType())
-                && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
-                && (skillCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())));
-    }
 }

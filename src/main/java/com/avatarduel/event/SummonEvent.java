@@ -14,6 +14,16 @@ import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
+/**
+ * SummonEvent is a event for summoning character from player hands.
+ * Event will only executed if there are enough space in the field, else it will throw exception.
+ *
+ * IMPORTANT NOTE:
+ * This event will communicate with game singleton instantly, so there are no need to validate
+ * In case where event is not possible to do, we throw exception so that the GUI Board can give the
+ * error message to the player playing the games
+ * @author G10-K03-CardGameOOP
+ */
 
 public class SummonEvent implements IEvent {
     private PlayerType playerType;
@@ -59,24 +69,6 @@ public class SummonEvent implements IEvent {
         p.getHand().remove(charCard);
         p.getField().addCharacterCard((CharacterCardInField) factory.createCardInField(charCard, currTurn, index,position));
         p.getPower().reduce(charCard.getElement(), charCard.getPower());
-    }
-
-    @Override
-    public boolean validate(){
-        CharacterCard charCard = (CharacterCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()
-                .filter(card -> card.getId() == idCard)
-                .findFirst()
-                .orElse(null);
-        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList().size();
-
-        return ((currPhase == Phase.MAIN)
-                && (currPlayer == playerType)
-                && (charCard != null)
-                && (CardType.CHARACTER == charCard.getType())
-                && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
-                && (charCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(charCard.getElement())));
     }
 
     public PlayerType getPlayerType() {

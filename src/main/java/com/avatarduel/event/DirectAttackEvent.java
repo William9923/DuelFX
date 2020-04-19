@@ -11,6 +11,19 @@ import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
+/**
+ * DirectAttackEvent is a event for attacking other opponent directly.
+ *
+ * Only valid when there are no character in opponent field
+ *
+ * IMPORTANT NOTE:
+ * This event will communicate with game singleton instantly, so there are no need to validate
+ * In case where event is not possible to do, we throw exception so that the GUI Board can give the
+ * error message to the player playing the games
+ *
+ * @author G10-K03-CardGameOOP
+ */
+
 public class DirectAttackEvent implements IEvent {
 
     private PlayerType player;
@@ -45,22 +58,5 @@ public class DirectAttackEvent implements IEvent {
         attackChar.hasAttacked = true; // change state monster yang uda nyerang
         Player p2 = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()); // ambil reference player 2
         p2.setHealthPoint(p2.getHealthPoint() - attackChar.getTotalAttack()); // kurangin health point player lawan
-    }
-
-    @Override
-    public boolean validate() {
-        Field f1 = Game.getInstance()
-                .getPlayerByType(player)
-                .getField();
-        int currentTurn = Game.getInstance().getCurrentTurn();
-        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-        return (currPhase.equals(Phase.BATTLE)
-                && currentTurn != 1 // not first turn
-                && currPlayer.equals(player)
-                && f1.getCharacterCardByID(attackCharacterId) != null  // ganti kalo uda ada trycatch
-                && f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() != currentTurn
-                && !f1.getCharacterCardByID(attackCharacterId).hasAttacked
-        );
     }
 }

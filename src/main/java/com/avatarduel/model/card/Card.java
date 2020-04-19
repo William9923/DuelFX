@@ -5,7 +5,7 @@ import com.avatarduel.model.type.Element;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.util.Loader;
 
-public abstract class Card  {
+public class Card  {
     protected int id;
     protected String name;
     protected Element element;

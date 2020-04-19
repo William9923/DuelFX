@@ -39,6 +39,7 @@ public class AttackPopupLoader extends PopupLoader {
                 Game.getInstance().getEventBus().post(event);
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
+                Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentOpponent()));
             }
             popup.hide();
         });

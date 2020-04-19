@@ -8,7 +8,6 @@ import java.util.*;
 import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.type.CardType;
-import com.avatarduel.model.type.Element;
 
 /**
  * Loader is a class to load the data from CSVReader into card objects

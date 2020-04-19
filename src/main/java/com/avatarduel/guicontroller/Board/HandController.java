@@ -88,8 +88,6 @@ public class HandController{
         }
     }
 
-
-
     public void flipCards() {
         for(CardInHandController cardInHandController : cards) {
             if(cardInHandController.getCardData() != null) {

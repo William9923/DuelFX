@@ -11,6 +11,16 @@ import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
+/**
+ * PlayLandCardEvent is a event for activating land card.
+ *
+ * IMPORTANT NOTE:
+ * This event will communicate with game singleton instantly, so there are no need to validate
+ * In case where event is not possible to do, we throw exception so that the GUI Board can give the
+ * error message to the player playing the games
+ * @author G10-K03-CardGameOOP
+ */
+
 public class PlayLandCardEvent implements IEvent {
     private PlayerType playerType;
     private int landCardID;
@@ -47,22 +57,4 @@ public class PlayLandCardEvent implements IEvent {
         player.hasPlayLand = true;
     }
 
-    @Override
-    public boolean validate() {
-        LandCard landCard = (LandCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()
-                .filter(card -> card.getId() == landCardID && card.getType().equals(CardType.LAND))
-                .findFirst()
-                .orElse(null);
-        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
-
-        return (((currPhase == Phase.MAIN))
-                        && (currPlayer == playerType)
-                        && (landCard != null)
-                        && (CardType.LAND == landCard.getType())
-                        && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
-                        && !(Game.getInstance().getPlayerByType(currPlayer).hasPlayLand)
-                );
-    }
 }

@@ -1,5 +1,6 @@
 package com.avatarduel.guicontroller.Card;
 
+import com.avatarduel.model.*;
 import com.avatarduel.model.card.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

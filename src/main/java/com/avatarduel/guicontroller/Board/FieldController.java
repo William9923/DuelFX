@@ -123,16 +123,14 @@ public class FieldController {
             controller.setPlayerType(playerType);
         });
     }
-
-    @FXML
-    public void submitAttackRequestForm() {
-    }
+//
+//    @FXML
+//    public void submitAttackRequestForm() {
+//    }
 
     @Subscribe
     public void update(FieldRenderRequest request){
         if (request.getPlayerType().equals(playerType)){
-            System.out.println("Updating Field");
-            System.out.println(playerType);
             this.render();
         }
     }
