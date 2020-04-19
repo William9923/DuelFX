@@ -10,6 +10,6 @@ public class MultipleLandCardPlayedOnTheSameTurnCause implements ExceptionCause 
      */
     @Override
     public String getCause() {
-        return "you can only play one land card per turn ";
+        return "you can only play one land card per turn";
     }
 }

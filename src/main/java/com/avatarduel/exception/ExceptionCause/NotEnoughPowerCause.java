@@ -23,6 +23,6 @@ public class NotEnoughPowerCause implements ExceptionCause {
      */
     @Override
     public String getCause() {
-        return "not enough " + element.toString().toLowerCase() + " power";
+        return "not enough " + element.toString().toLowerCase() + " element power";
     }
 }
