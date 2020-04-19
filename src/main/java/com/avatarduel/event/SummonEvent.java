@@ -1,12 +1,9 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.*;
 import com.avatarduel.exception.ExceptionCause.FullBoardCause;
 import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.ExceptionCause.NotEnoughPowerCause;
-import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.exception.InvalidPhaseException;
-import com.avatarduel.exception.NotEnoughPowerException;
-import com.avatarduel.exception.NotEnoughSpaceException;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCard;
@@ -58,15 +55,15 @@ public class SummonEvent implements IEvent {
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
         if (currPhase != Phase.MAIN){
-            throw new InvalidPhaseException(new InvalidPhaseCause(charCard.getType()));
+            throw new InvalidSummonException(new InvalidPhaseCause(Phase.MAIN));
         }
 
         if (currentFieldSize >= Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()){
-            throw new NotEnoughSpaceException(new FullBoardCause(charCard.getType()));
+            throw new InvalidSummonException(new FullBoardCause(charCard.getType()));
         }
 
         if (charCard.getPower() > Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(charCard.getElement())){
-            throw new NotEnoughPowerException(new NotEnoughPowerCause(charCard.getElement()));
+            throw new InvalidSummonException(new NotEnoughPowerCause(charCard.getElement()));
         }
 
         p.getHand().remove(charCard);

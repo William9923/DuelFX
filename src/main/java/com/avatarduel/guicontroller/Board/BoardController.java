@@ -4,10 +4,13 @@ import com.avatarduel.event.EndTurnEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Card.DisplayCardController;
-import com.avatarduel.guicontroller.RenderRequest.*;
+import com.avatarduel.guicontroller.Request.GlobalRequest.GameStatusRenderRequest;
+import com.avatarduel.guicontroller.Request.GlobalRequest.ShowSelectedCardRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.CheckWinRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.DeckDrawAndRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRequest;
 import com.avatarduel.guicontroller.util.PlayMusicRequest;
 import com.avatarduel.model.Game;
-import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
@@ -18,9 +21,13 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * BoardController is the one big class that controls:
+ * alert
+ * playing song
+ * ending turn
+ */
 public class BoardController {
     @FXML private DisplayCardController selectedController;
     @FXML private FieldController fieldAController;
@@ -33,94 +40,79 @@ public class BoardController {
     @FXML private PlayerStatusController playerBStatusController;
     @FXML private Button end_turn;
     @FXML private GameStatusController gameStatusController;
-//    private Executor executor;
-
-    private Map<PlayerType, HandController> handControllerMap;
-    private Map<PlayerType, FieldController> fieldControllerMap;
-    private Map<PlayerType, PlayerStatusController> playerStatusControllerMap;
-    private Map<PlayerType, DeckController> deckControllerMap;
-
-    private Thread musicThread;
+    /**
+     * to play the in game music
+     */
     private MediaPlayer mediaPlayer;
 
-    public BoardController() {
-        handControllerMap = new HashMap<>();
-        fieldControllerMap = new HashMap<>();
-        playerStatusControllerMap = new HashMap<>();
-        deckControllerMap = new HashMap<>();
-        Game.getInstance().getEventBus().register(this);
-    }
-
+    /**
+     * initialize all objects in board controller, such as hand controller, field controller,
+     * player status controller and deck controller
+     */
     @FXML
     public void initialize() {
+        Game.getInstance().getEventBus().register(this);
+        deckAController.setPlayerTypeAndRender(PlayerType.A);
+        deckBController.setPlayerTypeAndRender(PlayerType.B);
+        Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
+        Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
 
-        // hand mapping setup
-        handControllerMap.put(PlayerType.A, handAController);
-        handControllerMap.put(PlayerType.B, handBController);
-
-        handControllerMap.forEach((playerType ,controller) -> {
-            controller.setPlayerTypeAndRender(playerType);
-            Game.getInstance().getEventBus().register(controller);
-        });
-
+        handAController.setPlayerTypeAndRender(PlayerType.A);
+        handBController.setPlayerTypeAndRender(PlayerType.B);
         handBController.flipCards(); // game start, second player need to flip the card
 
-        // field mapping setup
-        fieldControllerMap.put(PlayerType.A, fieldAController);
-        fieldControllerMap.put(PlayerType.B, fieldBController);
-
-        fieldControllerMap.forEach((playerType, fieldController) -> {
-            fieldController.setPlayerType(playerType);
-            Game.getInstance().getEventBus().register(fieldController);
-        });
-
-        Game.getInstance().getEventBus().register(gameStatusController);
+        fieldAController.setPlayerType(PlayerType.A);
+        fieldBController.setPlayerType(PlayerType.B);
         fieldBController.swapCharactersAndSkillsPosition();
 
-        deckControllerMap.put(PlayerType.A, deckAController);
-        deckControllerMap.put(PlayerType.B, deckBController);
-        deckControllerMap.forEach((playerType, deckController) -> {
-            deckController.setPlayerType(playerType);
-            deckController.render();
-            Game.getInstance().getEventBus().register(deckController);
-        });
-        Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
-
-        playerStatusControllerMap.put(PlayerType.A, playerAStatusController);
-        playerStatusControllerMap.put(PlayerType.B, playerBStatusController);
-        playerStatusControllerMap.forEach((playerType, playerStatusController) -> {
-            playerStatusController.setPlayerType(playerType);
-            Game.getInstance().getEventBus().register(playerStatusController);
-        });
+        playerAStatusController.setPlayerType(PlayerType.A);
+        playerBStatusController.setPlayerType(PlayerType.B);
     }
 
+    /**
+     * End the turn, render the other player hand, render gamestatus,render player status and post endturn event
+     */
     @FXML
     public void endTurn() {
-        EndTurnEvent event = new EndTurnEvent();
-        boolean canDoIt = event.validate();
         Game.getInstance().getEventBus().post(new EndTurnEvent());
-        Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
         Game.getInstance().getEventBus().post(new DeckDrawAndRenderRequest(Game.getInstance().getCurrentPlayer()));
         Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentPlayer()));
+        Game.getInstance().getEventBus().post(new CheckWinRequest());
+        Game.getInstance().getEventBus().post(new GameStatusRenderRequest());
 
-        if (canDoIt){
-            // gw bikin kek gini karena blom bisa request Flip Card dkk gitu
-            handAController.flipCards();
-            handBController.flipCards();
-            PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
-            handControllerMap.get(nextPlayer).render();
-            // dis kode di bawah ini so smart actually KWKW
-            fieldControllerMap.forEach((playerType, controller) -> {
-                controller.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == playerType);
-            });
+        handAController.flipCards();
+        handBController.flipCards();
+        PlayerType nextPlayer = Game.getInstance().getCurrentPlayer();
+        if(nextPlayer == PlayerType.A) {
+            handAController.render();
         }
+        else {
+            handBController.render();
+        }
+        fieldAController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.A);
+        fieldBController.setCharactersActionsVisible(Game.getInstance().getCurrentPlayer() == PlayerType.B);
     }
 
+    /**
+     * @Subscribe method for catching exception thrown by smaller component
+     */
+    @Subscribe
+    public void catchException(InvalidOperationException exception) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setHeaderText(exception.getOperation());
+        a.setContentText(exception.getMessage());
+        a.show();
+    }
+
+    /**
+     * @Subscribe method for executing event thrown by smaller component
+     * @param event the event executed
+     */
     @Subscribe
     public void executeEvent(IEvent event) {
         try{
             event.execute();
-        } catch (InvalidOperationException e){
+        } catch (InvalidOperationException e) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setHeaderText(e.getOperation());
             a.setContentText(e.getMessage());
@@ -128,16 +120,19 @@ public class BoardController {
         }
     }
 
+    /**
+     * @Subscribe method for checking if a player is winning or losing
+     */
     @Subscribe
     public void checkWinnerGame(CheckWinRequest request) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         boolean gameEnded = false;
         a.setHeaderText("Congratulation");
-        if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.DRAW) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
+        if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getDeck().size() <= 0){
             a.setContentText("Player " + Game.getInstance().getCurrentOpponent() + "Win!!!");
             gameEnded = true;
         }
-        if (Game.getInstance().getCurrentPhase().getPhase().equals(Phase.BATTLE) && Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getHealthPoint() <= 0) {
+        if (Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getHealthPoint() <= 0) {
             a.setContentText("Player " + Game.getInstance().getCurrentPlayer() + "Win!!!");
             gameEnded = true;
         }
@@ -147,20 +142,27 @@ public class BoardController {
         }
     }
 
+    /**
+     * @Subscribe method for showing the selected card to the displayer on the left side of the screen
+     */
     @Subscribe
     private void showSelectCard(ShowSelectedCardRequest selectCardRequest) {
         selectedController.setCard(selectCardRequest.getCard());
     }
 
+    /**
+     * @Subscribe method for creating in game song thread
+     */
     @Subscribe
-    public void playOnGameSong(PlayMusicRequest playMusicRequest) {
-        musicThread = new Thread(() -> {
+    public void playInGameSong(PlayMusicRequest playMusicRequest) {
+        Thread musicThread = new Thread(() -> {
             try {
                 File musicFile = new File("src/main/resources/com/avatarduel/music/on_game_song.mp3");
                 URL musicURL = musicFile.toURI().toURL();
                 Media media = new Media(musicURL.toString());
                 this.mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.setVolume(0.1);
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                 mediaPlayer.play();
             }
             catch(Exception e) { }

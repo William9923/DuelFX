@@ -3,12 +3,17 @@ package com.avatarduel.guicontroller.Card;
 import com.avatarduel.model.card.Card;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-
+/**
+ * used to for controlling the displayed card in the boardcontroller
+ */
 public class DisplayCardController extends CardController {
     @FXML private Label card_desc;
-    @FXML private HBox card_attributes;
 
+    /**
+     * {@inheritDoc}
+     * @param card the card
+     *             add the description to display
+     */
     @Override
     public void setCard(Card card) {
         super.setCard(card);

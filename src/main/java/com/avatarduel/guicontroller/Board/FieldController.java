@@ -2,7 +2,7 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Card.CharacterCardInFieldController;
 import com.avatarduel.guicontroller.Card.SkillCardInFieldController;
-import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.FieldRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCardInField;
@@ -16,8 +16,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controls setting cardds for each CardInField, swapping the character cards and skill card for player B
+ * and setting characters action visible if it's the player's turn
+ */
 public class FieldController {
+    /**
+     * map to contain all character card in field controller
+     */
     private Map<String, CharacterCardInFieldController> characters;
+    /**
+     * map to contain all skill card in field controller
+     */
     private Map<String, SkillCardInFieldController> skills;
     private PlayerType playerType;
 
@@ -49,8 +59,14 @@ public class FieldController {
     @FXML
     SkillCardInFieldController skill6Controller;
 
+
+    /**
+     * put all skillcard controller and character controller to a map, and registering this to eventbus
+     * setting every card as null card in the beginning of the game
+     */
     @FXML
     public void initialize() {
+        Game.getInstance().getEventBus().register(this);
         this.characters = new HashMap<>();
         this.skills = new HashMap<>();
         characters.put("0", character1Controller);
@@ -73,18 +89,9 @@ public class FieldController {
         });
     }
 
-    private void setNullCharacter() {
-        characters.forEach((key, controller) -> {
-            controller.setNullCard();
-        });
-    }
-
-    private void setNullSkill() {
-        skills.forEach((key, controller) -> {
-            controller.setNullCard();
-        });
-    }
-
+    /**
+     * render each character, and each skill card in field
+     */
     public void render() {
         setNullCharacter();
         setNullSkill();
@@ -99,11 +106,36 @@ public class FieldController {
         }
     }
 
+    /**
+     * set all character in field null
+     */
+    private void setNullCharacter() {
+        characters.forEach((key, controller) -> {
+            controller.setNullCard();
+        });
+    }
+
+
+    /**
+     * set all skill in field null
+     */
+    private void setNullSkill() {
+        skills.forEach((key, controller) -> {
+            controller.setNullCard();
+        });
+    }
+
+    /**
+     * swapping the position of skill and character card for player B
+     */
     public void swapCharactersAndSkillsPosition() {
         card_container.getChildren().remove(character_container);
         card_container.getChildren().add(character_container);
     }
 
+    /**
+     * set character action visible if value is true
+     */
     public void setCharactersActionsVisible(boolean value) {
         this.characters.values().forEach( controller -> {
             controller.setActionVisible(value);
@@ -113,6 +145,10 @@ public class FieldController {
         });
     }
 
+    /**
+     * method for setting playerType
+     * @param playerType the player type
+     */
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
         characters.values().forEach( controller -> {
@@ -122,11 +158,10 @@ public class FieldController {
             controller.setPlayerType(playerType);
         });
     }
-//
-//    @FXML
-//    public void submitAttackRequestForm() {
-//    }
 
+    /**
+     * @Subscribe method for updating the field if the request's playertype matches
+     */
     @Subscribe
     public void update(FieldRenderRequest request){
         if (request.getPlayerType().equals(playerType)){

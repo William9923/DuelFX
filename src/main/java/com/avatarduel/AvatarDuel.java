@@ -16,9 +16,17 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 
+/**
+ * main application
+ * @author K10, Lab programming
+ */
 public class AvatarDuel extends Application {
   private MediaPlayer mediaPlayer;
 
+  /**
+   * Start the game
+   * @param stage stage for the application to show
+   */
   @Override
   public void start(Stage stage) {
     // Load Main Menu
@@ -42,10 +50,17 @@ public class AvatarDuel extends Application {
     }
   }
 
+  /**
+   * Load main menu from MainMenu.fzml
+   * @return fxmlLoader of mainmenu
+   */
   private FXMLLoader getMainMenu() {
     return new FXMLLoader(getClass().getResource("GUI/MainMenu/MainMenu.fxml"));
   }
 
+  /**
+   * main program
+   */
   public static void main(String[] args) {
     launch();
   }

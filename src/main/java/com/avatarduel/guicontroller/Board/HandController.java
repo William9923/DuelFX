@@ -1,7 +1,7 @@
 package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Card.CardInHandController;
-import com.avatarduel.guicontroller.RenderRequest.HandRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.HandRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.player_component.Hand;
@@ -12,6 +12,10 @@ import javafx.fxml.FXML;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * used for rendering the hand when requested and flipping cards
+ * The flipping card method is directly accessed by BoardController for performance reason
+ */
 public class HandController{
     private PlayerType playerType;
     private List<CardInHandController> cards;
@@ -38,11 +42,12 @@ public class HandController{
     @FXML
     CardInHandController card10Controller;
 
-    public HandController() {
-    }
-
+    /**
+     * Initialize the hand, setting all the card null
+     */
     @FXML
     public void initialize() {
+        Game.getInstance().getEventBus().register(this);
         cards = new ArrayList<CardInHandController>();
         cards.add(card1Controller);
         cards.add(card2Controller);
@@ -59,6 +64,10 @@ public class HandController{
         }
     }
 
+    /**
+     * method for setting playerType and rendering the hand
+     * @param playerType the player type
+     */
     public void setPlayerTypeAndRender(PlayerType playerType) {
         this.playerType = playerType;
         this.isFlipped = false;
@@ -68,11 +77,11 @@ public class HandController{
         this.render();
     }
 
+    /**
+     * render the hand, set all card to for CardInHandController
+     */
     public void render() {
         if (!this.isFlipped) {
-            for(int i = 0 ; i < 10 ; i++) {
-                cards.get(i).setNullCard();
-            }
             Hand currentHand = Game.getInstance().getPlayerByType(this.playerType).getHand();
 
             int i = 0;
@@ -87,6 +96,9 @@ public class HandController{
         }
     }
 
+    /**
+     * flip the card, so the other player cannot see it
+     */
     public void flipCards() {
         for(CardInHandController cardInHandController : cards) {
             if(cardInHandController.getCardData() != null) {
@@ -96,8 +108,13 @@ public class HandController{
         this.isFlipped = !this.isFlipped;
     }
 
+    /**
+     * @Subscribe method for updating the hand if the request's playertype
+     */
     @Subscribe
     public void update(HandRenderRequest request) {
-        this.render();
+        if(request.getPlayerType() == this.playerType) {
+            this.render();
+        }
     }
 }

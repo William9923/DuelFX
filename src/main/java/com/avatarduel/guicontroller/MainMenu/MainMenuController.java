@@ -4,14 +4,12 @@ import com.avatarduel.guicontroller.Board.BoardController;
 import com.avatarduel.guicontroller.util.FXMLHandler;
 import com.avatarduel.guicontroller.util.PlayMusicRequest;
 import com.avatarduel.model.Game;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -77,7 +75,7 @@ public class MainMenuController {
         FXMLLoader fxmlLoader = fxmlHandler.getFxmlLoader();
         fxmlLoader.load();
         CardLibraryController cardLibraryController = fxmlLoader.getController();
-        cardLibraryController.setStage(stage);
+        cardLibraryController.setWindow(stage);
         cards.onMouseClickedProperty().setValue(e -> {
             cardLibraryController.start();
         });

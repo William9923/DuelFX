@@ -1,8 +1,8 @@
-package com.avatarduel.guicontroller.RenderRequest;
+package com.avatarduel.guicontroller.Request.GlobalRequest;
 
 import com.avatarduel.model.card.Card;
 
-public class ShowSelectedCardRequest {
+public class ShowSelectedCardRequest extends GlobalRequest{
     private final Card card;
 
     public ShowSelectedCardRequest(Card card) {

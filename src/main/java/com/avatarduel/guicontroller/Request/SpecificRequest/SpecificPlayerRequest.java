@@ -1,14 +1,15 @@
-package com.avatarduel.guicontroller.RenderRequest;
+package com.avatarduel.guicontroller.Request.SpecificRequest;
 
+import com.avatarduel.guicontroller.Request.Request;
 import com.avatarduel.model.type.PlayerType;
 
-public abstract class RenderRequest {
+public abstract class SpecificPlayerRequest implements Request {
     protected PlayerType playerType;
 
-    public RenderRequest(PlayerType playerType) {
+    public SpecificPlayerRequest(PlayerType playerType) {
         this.playerType = playerType;
     }
-    public RenderRequest() {
+    public SpecificPlayerRequest() {
         this(PlayerType.A);
     }
 

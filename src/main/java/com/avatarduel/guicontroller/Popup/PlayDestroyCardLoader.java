@@ -2,11 +2,11 @@ package com.avatarduel.guicontroller.Popup;
 
 import com.avatarduel.event.ActivateDestroyEvent;
 import com.avatarduel.event.IEvent;
-import com.avatarduel.exception.EmptyFieldException;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
 import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.HandRenderRequest;
+import com.avatarduel.exception.InvalidSkillActivationException;
+import com.avatarduel.guicontroller.Request.SpecificRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.HandRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -24,23 +24,16 @@ public class PlayDestroyCardLoader extends PopupLoader {
     private CardInHand cardPlayed;
     private ChoiceBox<CharacterCardInField> choiceBox;
 
-    public PlayDestroyCardLoader(CardInHand cardPlayed) {
+    public PlayDestroyCardLoader(CardInHand cardPlayed) throws InvalidOperationException{
         super();
         this.choiceBox = (ChoiceBox<CharacterCardInField>) popupGui.lookup("#choice_box");
-        try {
-            List<CharacterCardInField> opponentCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
-            if (opponentCharactersInField.isEmpty()) {
-                throw new EmptyFieldException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
-            }
-            this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
-            this.cardPlayed = cardPlayed;
-            this.choiceBox.setItems(new ObservableListWrapper<>(opponentCharactersInField));
+        List<CharacterCardInField> opponentCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
+        if (opponentCharactersInField.isEmpty()) {
+            throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
         }
-        catch ( InvalidOperationException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getOperation());
-            alert.setContentText(e.getMessage());
-            alert.show();
-        }
+        this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
+        this.cardPlayed = cardPlayed;
+        this.choiceBox.setItems(new ObservableListWrapper<>(opponentCharactersInField));
     }
 
     @Override
