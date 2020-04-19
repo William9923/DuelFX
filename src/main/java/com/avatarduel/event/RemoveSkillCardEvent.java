@@ -12,6 +12,17 @@ import com.avatarduel.model.type.PlayerType;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * RemoveSkillCardEvent is a event for removing skill card that are on the field.
+ * 
+ * IMPORTANT NOTE:
+ * Only able to remove the card that are already equipped / placed in the field
+ * This event will communicate with game singleton instantly, so there are no need to validate
+ * In case where event is not possible to do, we throw exception so that the GUI Board can give the
+ * error message to the player playing the games
+ * @author G10-K03-CardGameOOP
+ */
+
 public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
 
     private int idTarget;
