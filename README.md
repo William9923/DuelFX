@@ -186,8 +186,8 @@ You can explore more about gradle [here](https://guides.gradle.org/creating-new-
 
 ## APPLICATION
 ### Here are fews examples of how the game looks
-* ![Main Menu]()
-* ![Character that use in field](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/tampilan%20utama.jpg)
+* ![Main Menu](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/tampilan%20utama.jpg "Main Menu")
+* ![Character that use in field](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/characterinfield.jpg "Character that use in field")
 * ![Playing the cards from hand](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/mainin%20kartu%20dari%20tangan.jpg)
 * ![Player description and Card Description](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Player%20and%20card%20desc.jpg)
 * ![Defense Position](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Defense%20Position.jpg)
