@@ -2,9 +2,8 @@ package com.avatarduel.event;
 
 import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.ExceptionCause.MultipleLandCardPlayedOnTheSameTurnCause;
-import com.avatarduel.exception.UniquePlayCardException;
+import com.avatarduel.exception.InvalidPlayLandCardException;
 import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.exception.InvalidPhaseException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.LandCard;
 import com.avatarduel.model.player_component.Player;
@@ -32,11 +31,11 @@ public class PlayLandCardEvent implements IEvent {
         int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList().size();
 
         if (currPhase != Phase.MAIN) {
-            throw new InvalidPhaseException(new InvalidPhaseCause(landCard.getType()));
+            throw new InvalidPlayLandCardException(new InvalidPhaseCause(Phase.MAIN));
         }
 
         if (Game.getInstance().getPlayerByType(currPlayer).hasPlayLand) {
-            throw new UniquePlayCardException(new MultipleLandCardPlayedOnTheSameTurnCause());
+            throw new InvalidPlayLandCardException(new MultipleLandCardPlayedOnTheSameTurnCause());
         }
 
         Player player = Game.getInstance().getPlayerByType(playerType);

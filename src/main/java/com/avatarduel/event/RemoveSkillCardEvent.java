@@ -2,10 +2,9 @@ package com.avatarduel.event;
 
 import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.exception.InvalidPhaseException;
+import com.avatarduel.exception.InvalidRemoveSkillcardException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
@@ -48,7 +47,7 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
         }
 
         if (currPhase != Phase.MAIN){
-            throw new InvalidPhaseException(new InvalidPhaseCause(card.getCard().getType()));
+            throw new InvalidRemoveSkillcardException(new InvalidPhaseCause(Phase.MAIN));
         }
 
         pairedCharacter.setConnectedCard(pairedCharacter.getConnectedCard().stream()

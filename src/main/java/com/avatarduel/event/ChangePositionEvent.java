@@ -2,7 +2,7 @@ package com.avatarduel.event;
 
 import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.exception.InvalidPhaseException;
+import com.avatarduel.exception.InvalidRotateException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.Phase;
@@ -20,12 +20,10 @@ public class ChangePositionEvent implements IEvent {
 
     @Override
     public void execute() throws InvalidOperationException {
-        CharacterCardInField card = Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId);
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
         if (currPhase != Phase.MAIN){
-            throw new InvalidPhaseException(new InvalidPhaseCause(card.getCard().getType()));
+            throw new InvalidRotateException(new InvalidPhaseCause(Phase.MAIN));
         }
 
         Game.getInstance().getPlayerByType(p).getField().getCharacterCardByID(characterId).switchPosition();

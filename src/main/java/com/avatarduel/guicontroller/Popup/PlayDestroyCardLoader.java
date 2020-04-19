@@ -1,17 +1,16 @@
 package com.avatarduel.guicontroller.Popup;
 
 import com.avatarduel.event.ActivateDestroyEvent;
-import com.avatarduel.event.ActivateSkillEvent;
 import com.avatarduel.event.IEvent;
-import com.avatarduel.exception.EmptyFieldException;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidPlayCardException;
+import com.avatarduel.exception.InvalidSkillActivationException;
 import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
 import com.avatarduel.guicontroller.RenderRequest.HandRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.type.CardType;
 import com.sun.javafx.collections.ObservableListWrapper;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -32,7 +31,7 @@ public class PlayDestroyCardLoader extends PopupLoader {
         try {
             List<CharacterCardInField> opponentCharactersInField = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentOpponent()).getField().getCharCardList();
             if (opponentCharactersInField.isEmpty()) {
-                throw new EmptyFieldException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
+                throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
             }
             this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
             this.cardPlayed = cardPlayed;

@@ -1,6 +1,5 @@
 package com.avatarduel.util;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,6 +10,11 @@ import com.avatarduel.model.card.Card;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
+/**
+ * Loader is a class to load the data from CSVReader into card objects
+ *
+ * @author K10
+ */
 public class Loader {
     public static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";
     public static final String CHARACTER_CSV_FILE_PATH = "../card/data/character.csv";
@@ -18,14 +22,21 @@ public class Loader {
     public static final String SKILL_DESTROY_CSV_FILE_PATH = "../card/data/skill_destroy.csv";
     public static final String SKILL_POWER_UP_CSV_FILE_PATH = "../card/data/skill_power_up.csv";
 
+    /**
+     * CardFactory is used to craete cards from the data from csvreader
+     */
     private CardFactory cardFactory;
 
     public Loader() {
         cardFactory = new CardFactory();
     }
 
+    /**
+     * Load cards with csvReader and returns its data and skip header
+     * @param filename name of the file
+     * @return List of string array, each represents a card's data
+     */
     public List<String[]> loadCards(String filename) throws IOException, URISyntaxException {
-
         File urlCSVFile = new File(getClass().getResource(filename).toURI());
         CSVReader csvReader = new CSVReader(urlCSVFile, "\t");
         csvReader.setSkipHeader(true);
@@ -33,6 +44,10 @@ public class Loader {
         return csvRows;
     }
 
+    /**
+     * Load land cards from land.csv
+     * @return list of land cards
+     */
     public List<Card> loadLand() {
         try{
             List<String[]> list =  loadCards(LAND_CSV_FILE_PATH);
@@ -50,6 +65,10 @@ public class Loader {
         return null;
     }
 
+    /**
+     * Load character cards from character.csv
+     * @return list of character cards
+     */
     public List<Card> loadCharacter() {
         try{
             List<String[]> list =  loadCards(CHARACTER_CSV_FILE_PATH);
@@ -67,6 +86,10 @@ public class Loader {
         return null;
     }
 
+    /**
+     * Load skill aura cards from skill_aura.csv
+     * @return list of skill aura cards
+     */
     public List<Card> loadSkillAura() {
         try{
             List<String[]> list =  loadCards(SKILL_AURA_CSV_FILE_PATH);
@@ -84,7 +107,10 @@ public class Loader {
         return null;
     }
 
-    // cannot be used -> still have not implemented file for Destroy Skill Card
+    /**
+     * Load skill destroy cards from skill_destroy.csv
+     * @return list of skill dsetroy cards
+     */
     public List<Card> loadSkillDestroy() {
         try{
             List<String[]> list =  loadCards(SKILL_DESTROY_CSV_FILE_PATH);
@@ -102,7 +128,10 @@ public class Loader {
         return null;
     }
 
-    // cannot be used -> still have not implemented file for PowerUp Skill Card
+    /**
+     * Load skill power up cards from skill_power_up.csv
+     * @return list of skill power up cards
+     */
     public List<Card> loadSkillPowerUp() {
         try{
             List<String[]> list =  loadCards(SKILL_POWER_UP_CSV_FILE_PATH);
@@ -119,11 +148,4 @@ public class Loader {
         }
         return null;
     }
-    // debugging function
-    public void printLoadResult(List<Card> arr) {
-        for (Card card : arr){
-            card.show();
-        }
-    }
-
 }

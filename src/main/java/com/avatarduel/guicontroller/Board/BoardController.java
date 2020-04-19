@@ -118,6 +118,14 @@ public class BoardController {
     }
 
     @Subscribe
+    public void catchException(InvalidOperationException exception) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setHeaderText(exception.getOperation());
+        a.setContentText(exception.getMessage());
+        a.show();
+    }
+
+    @Subscribe
     public void executeEvent(IEvent event) {
         try{
             event.execute();
@@ -162,6 +170,7 @@ public class BoardController {
                 Media media = new Media(musicURL.toString());
                 this.mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.setVolume(0.1);
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                 mediaPlayer.play();
             }
             catch(Exception e) { }

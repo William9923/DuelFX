@@ -1,7 +1,15 @@
 package com.avatarduel.exception.ExceptionCause;
 
-public class AttackCause implements ExceptionCause {
 
+/**
+ * Defines an exception cause, caused by attacking
+ */
+
+public abstract class AttackCause implements ExceptionCause {
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCause() {
         return "cannot attack";

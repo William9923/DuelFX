@@ -1,12 +1,9 @@
 package com.avatarduel.event;
 
+import com.avatarduel.exception.*;
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.ExceptionCause.InvalidTargetCause;
 import com.avatarduel.exception.ExceptionCause.NotEnoughPowerCause;
-import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
-import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.exception.InvalidPhaseException;
-import com.avatarduel.exception.InvalidTargetException;
-import com.avatarduel.exception.NotEnoughPowerException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -44,15 +41,15 @@ public class ActivateDestroyEvent implements IEvent {
         assert destroyCard != null;
 
         if (!currPhase.equals(Phase.MAIN)){
-            throw new InvalidPhaseException(new InvalidPhaseCause(destroyCard.getType()));
+            throw new InvalidSkillActivationException(new InvalidPhaseCause(Phase.MAIN));
         }
 
         if (opponent.getField().getCharacterCardByID(targetID) == null){
-            throw new InvalidTargetException(new InvalidTargetCause(destroyCard.getType()));
+            throw new InvalidSkillActivationException(new InvalidTargetCause(destroyCard.getType()));
         }
 
         if (player.getPower().getCurrent(destroyCard.getElement()) < destroyCard.getPower()){
-            throw new NotEnoughPowerException(new NotEnoughPowerCause(destroyCard.getElement()));
+            throw new InvalidSkillActivationException(new NotEnoughPowerCause(destroyCard.getElement()));
         }
         // reduce power
         player.getPower().reduce(destroyCard.getElement(),destroyCard.getPower());

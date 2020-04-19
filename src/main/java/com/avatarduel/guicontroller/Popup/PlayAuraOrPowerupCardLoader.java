@@ -1,22 +1,17 @@
 package com.avatarduel.guicontroller.Popup;
 
-import com.avatarduel.event.ActivateDestroyEvent;
 import com.avatarduel.event.ActivateSkillEvent;
 import com.avatarduel.event.IEvent;
-import com.avatarduel.exception.EmptyFieldException;
 import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
 import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidPlayCardException;
+import com.avatarduel.exception.InvalidSkillActivationException;
 import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.GameStatusRenderRequest;
 import com.avatarduel.guicontroller.RenderRequest.HandRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.PlayerStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.card.SkillCardInField;
-import com.avatarduel.model.type.CardType;
 import com.sun.javafx.collections.ObservableListWrapper;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
@@ -24,8 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.*;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -44,7 +37,7 @@ public class PlayAuraOrPowerupCardLoader extends PopupLoader {
                     .flatMap(x -> x.stream())
                     .collect(Collectors.toList());
             if (listOfCharacterCards.isEmpty()) {
-                throw new EmptyFieldException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
+                throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(cardPlayed.getCard().getType()));
             }
             this.title.setText("Select Character to Use " + StringUtils.capitalize(cardPlayed.getCard().getType().toString()) + " Card");
             this.cardPlayed = cardPlayed;

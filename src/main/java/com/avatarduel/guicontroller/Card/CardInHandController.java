@@ -1,9 +1,8 @@
 package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.event.*;
-import com.avatarduel.exception.EmptyFieldException;
-import com.avatarduel.exception.ExceptionCause.NoCharacterCardToDestroyCause;
-import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.InvalidPlayCardException;
 import com.avatarduel.guicontroller.Popup.PlayAuraOrPowerupCardLoader;
 import com.avatarduel.guicontroller.Popup.PlayDestroyCardLoader;
 import com.avatarduel.guicontroller.RenderRequest.*;
@@ -11,16 +10,14 @@ import com.avatarduel.model.Game;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
+import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Popup;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -79,6 +76,10 @@ public class CardInHandController extends CardController{
 
     @FXML
     public void playIsClicked() {
+        if(Game.getInstance().getCurrentPhase().getPhase() != Phase.MAIN) {
+            Game.getInstance().getEventBus().post(new InvalidPlayCardException(new InvalidPhaseCause(Phase.MAIN)));
+            return;
+        }
         IEvent event;
         if(cardData.getType() == CardType.LAND) {
             event = new PlayLandCardEvent(cardData.getId(), playerType);
