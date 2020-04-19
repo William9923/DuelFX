@@ -74,24 +74,6 @@ public class SummonEvent implements IEvent {
         p.getPower().reduce(charCard.getElement(), charCard.getPower());
     }
 
-//    @Override
-//    public boolean validate(){
-//        CharacterCard charCard = (CharacterCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()
-//                .filter(card -> card.getId() == idCard)
-//                .findFirst()
-//                .orElse(null);
-//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-//        int currentFieldSize = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList().size();
-//
-//        return ((currPhase == Phase.MAIN)
-//                && (currPlayer == playerType)
-//                && (charCard != null)
-//                && (CardType.CHARACTER == charCard.getType())
-//                && (currentFieldSize < Game.getInstance().getPlayerByType(playerType).getField().getFieldSize())
-//                && (charCard.getPower() <= Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(charCard.getElement())));
-//    }
-
     public PlayerType getPlayerType() {
         return playerType;
     }

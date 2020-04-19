@@ -71,18 +71,4 @@ public class RemoveSkillCardEvent implements IEvent { // has not implemented yet
                 .collect(Collectors.toList()));
     }
 
-//    @Override
-//    public boolean validate() {
-//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-//        PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
-//        SkillCardInField card = Game.getInstance().getPlayerByType(playerType).getField().getSkillCardList()
-//                .stream()
-//                .filter(c -> c.getCard().getId() == idTarget)
-//                .findFirst()
-//                .orElse(null);
-//        return (((currPhase == Phase.MAIN))
-//                && (currPlayer == playerType)
-//                && (card != null));
-//
-//    }
 }

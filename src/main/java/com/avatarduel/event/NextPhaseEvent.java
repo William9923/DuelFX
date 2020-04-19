@@ -34,9 +34,4 @@ public class NextPhaseEvent implements IEvent {
         }
     }
 
-//    @Override
-//    public boolean validate() {
-//        Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();
-//        return (currPhase == Phase.MAIN || currPhase == Phase.BATTLE); // cuman bisa pas MainPhase 1 atau battle, kalo MainPhase2 pake tombol
-//    }
 }
