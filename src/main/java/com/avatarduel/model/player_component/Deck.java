@@ -3,7 +3,6 @@ package com.avatarduel.model.player_component;
 import com.avatarduel.dao.CSVCardDAO;
 import com.avatarduel.dao.CardDAO;
 import com.avatarduel.factory.CardFactory;
-import com.avatarduel.model.*;
 import com.avatarduel.model.card.*;
 import com.avatarduel.model.type.PlayerType;
 
@@ -54,28 +53,15 @@ public class Deck extends Stack<Card>{
         shuffle();
     }
 
-    public int getTotalCard() {
-        return deckSize;
-    }
-
     private Card selectRandom(List<Card> cardList) {
         return cardList.get(new Random().nextInt(cardList.size()));
     }
 
-    // shuffle
     public void shuffle() {
         Collections.shuffle(this);
     }
 
-    // draw
     public Card draw() throws EmptyStackException{
         return super.pop();
-    }
-
-    // printDeck : debugging function
-    public void printDeck() {
-        List<Card> listCard = new ArrayList<Card>(this);
-        Collections.reverse(listCard);
-        listCard.forEach(card -> card.show());
     }
 }

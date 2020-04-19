@@ -1,7 +1,6 @@
 package com.avatarduel.model.player_component;
 
 import com.avatarduel.factory.CardInFieldFactory;
-import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.card.SkillCardInField;
@@ -39,10 +38,6 @@ public class Field {
         return charCardList.contains(c);
     }
 
-    private boolean isContainSkill(Card s) {
-        return skillCardList.contains(s);
-    }
-
     public boolean isAbleToAddChar() {
         return charCardList.size() < fieldSize;
     }
@@ -65,29 +60,12 @@ public class Field {
                 .orElse(null);
     }
 
-
-    public SkillCardInField getSkillCardByID(int cardID) {
-        return skillCardList.stream()
-                .filter(cardInField -> cardInField.getCard().getId() == cardID)
-                .findFirst()
-                .orElse(null);
-    }
-
     public void setSkillCardList(List<SkillCardInField> skillCardList) {
         this.skillCardList = skillCardList;
     }
 
-
-    public void connectCards(CharacterCardInField card1, SkillCard card2, int index, int createdAt)  {
-        if (isAbleToAddSkill()) {
-            card1.pair(card2);
-            addSkillCard(card2, index, createdAt);
-        }
-    }
-
     public void addSkillCard(SkillCard card, int index, int createdAt){
         if (isAbleToAddSkill()) {
-            System.out.println("Added skill card");
            skillCardList.add((SkillCardInField) cardFactory.createCardInField(card, createdAt,index, null));
         } else {
             System.out.println("Unable to add skill card");
