@@ -6,6 +6,9 @@ import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
+/**
+ * used for controlling the card in field, has 2 children : skillcardinfield and charactercardinfield
+ */
 public abstract class CardInFieldController extends CardController {
     protected PlayerType playerType;
     protected boolean isActionEnabled;

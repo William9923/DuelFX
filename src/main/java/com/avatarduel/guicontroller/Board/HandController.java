@@ -65,7 +65,8 @@ public class HandController{
     }
 
     /**
-     * set the hand player type and render the cards
+     * method for setting playerType and rendering the hand
+     * @param playerType the player type
      */
     public void setPlayerTypeAndRender(PlayerType playerType) {
         this.playerType = playerType;

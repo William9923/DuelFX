@@ -17,13 +17,11 @@ import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CardInHand;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Popup;
 
@@ -50,6 +48,12 @@ public class CardInHandController extends CardController{
         this.cardInHand = new CardInHand(card, playerType);
     }
 
+    @Override
+    public void setNullCard() {
+        super.setNullCard();
+        this.cardInHand = null;
+    }
+
     public void flipCard() {
         // kalo udah di flip, buka
         boolean isFlipped = Game.getInstance().getCurrentPlayer() == playerType;
@@ -68,9 +72,13 @@ public class CardInHandController extends CardController{
         }
     }
 
+    public void setPlayerType(PlayerType playerType) {
+        this.playerType = playerType;
+    }
+
     @FXML
     public void showPlayButton() {
-        if (playerType == Game.getInstance().getCurrentPlayer()) {
+        if (playerType == Game.getInstance().getCurrentPlayer() && cardInHand != null) {
             card_play.setVisible(true);
         }
     }
@@ -78,10 +86,6 @@ public class CardInHandController extends CardController{
     @FXML
     public void hidePlayButton() {
         card_play.setVisible(false);
-    }
-
-    public void setPlayerType(PlayerType playerType) {
-        this.playerType = playerType;
     }
 
     @FXML
@@ -139,21 +143,6 @@ public class CardInHandController extends CardController{
             }
         }
         return -1;
-    }
-
-    private int getSmallestSkillIndexPossible(PlayerType type) {
-        List<SkillCardInField> listOfSkill = Game.getInstance().getPlayerByType(type).getField().getSkillCardList();
-        List<Integer> indexList = listOfSkill.stream()
-                .map(c -> c.getIndex())
-                .collect(Collectors.toList());
-        return getSmallestIndex(indexList);
-    }
-
-    private Alert createInfoAlert(String header, String text){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(header);
-        alert.setContentText(text);
-        return alert;
     }
 
     public void showSelectedCard() {

@@ -57,7 +57,8 @@ public class DeckController  {
     }
 
     /**
-     * set deck player type and render the deck
+     * method for setting playerType and render the deck
+     * @param playerType the player type
      */
     public void setPlayerTypeAndRender(PlayerType playerType) {
         this.playerType = playerType;

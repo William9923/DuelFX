@@ -146,7 +146,8 @@ public class FieldController {
     }
 
     /**
-     * set private PlayerType playerType
+     * method for setting playerType
+     * @param playerType the player type
      */
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
