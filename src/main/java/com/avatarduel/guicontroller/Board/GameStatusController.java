@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 
 /**
  * show the game status, such as phase, turn number, and current player
+ * @author G10-K03-CardGameOOP
  */
 public class GameStatusController {
     @FXML private Label game_turn;

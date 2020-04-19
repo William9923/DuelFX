@@ -3,7 +3,6 @@ package com.avatarduel.guicontroller.Board;
 import com.avatarduel.event.DrawEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.guicontroller.Request.SpecificRequest.DeckDrawAndRenderRequest;
-import com.avatarduel.guicontroller.Request.SpecificRequest.DeckRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
@@ -13,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * used for rendering each player deck, render the remaining card from each player deck
+ * @author G10-K03-CardGameOOP
  */
 public class DeckController  {
     private PlayerType playerType;
@@ -35,16 +35,6 @@ public class DeckController  {
         if(playerType == request.getPlayerType()) {
             IEvent event = new DrawEvent(playerType);
             Game.getInstance().getEventBus().post(event);
-            this.render();
-        }
-    }
-
-    /**
-     Subscribe method for drawing card, and rendering the deck
-     */
-    @Subscribe
-    public void update(DeckRenderRequest renderRequest) {
-        if (renderRequest.getPlayerType() == playerType){
             this.render();
         }
     }

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 /**
  * used to for controlling the displayed card in the boardcontroller
+ * @author G10-K03-CardGameOOP
  */
 public class DisplayCardController extends CardController {
     @FXML private Label card_desc;

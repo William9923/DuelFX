@@ -14,6 +14,7 @@ import java.io.File;
 /**
  * used for managing the player status which consists of :
  * player's health, player's name, player's image, and player's powers
+ * @author G10-K03-CardGameOOP
  */
 public class PlayerStatusController  {
     private static int numOfPlayer = 0;

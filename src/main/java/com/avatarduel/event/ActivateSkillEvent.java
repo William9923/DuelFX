@@ -1,8 +1,11 @@
 package com.avatarduel.event;
 
-import com.avatarduel.exception.*;
-import com.avatarduel.exception.ExceptionCause.*;
-import com.avatarduel.factory.CardInFieldFactory;
+import com.avatarduel.exception.ExceptionCause.FullBoardCause;
+import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
+import com.avatarduel.exception.ExceptionCause.NotEnoughPowerCause;
+import com.avatarduel.exception.InvalidOperationException;
+import com.avatarduel.exception.InvalidSkillActivationException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
@@ -28,18 +31,14 @@ public class ActivateSkillEvent implements IEvent {
 
     private PlayerType playerType;
     private int index;
-    private CardInFieldFactory factory;
-    private int currTurn;
     private int idCard;
     private int idTarget;
 
     public ActivateSkillEvent(int idCard, int idTarget, PlayerType playerType, int index) {
         this.playerType = playerType;
         this.index = index;
-        this.factory = new CardInFieldFactory();
         this.idCard = idCard;
         this.idTarget = idTarget;
-        this.currTurn = Game.getInstance().getCurrentTurn();
     }
     public ActivateSkillEvent(int idCard, int idTarget, PlayerType playerType) {
         this(idCard, idTarget, playerType, Game.getInstance().getPlayerByType(playerType).getField().getEmptySkillCardIndex());
@@ -92,10 +91,6 @@ public class ActivateSkillEvent implements IEvent {
 
         if (skillCard.getPower() > Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())) {
             throw new InvalidSkillActivationException(new NotEnoughPowerCause(skillCard.getElement()));
-        }
-
-        if (skillCard.getType() == CardType.SKILL_POWER_UP) {
-            System.out.println("Activate Power Up");
         }
 
         Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());

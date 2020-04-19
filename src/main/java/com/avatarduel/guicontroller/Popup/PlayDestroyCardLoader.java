@@ -20,10 +20,23 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ * popup when trying to play a destroy card.
+ * Put all of the targetable character, which is enemy characters to a list
+ * and then load them all into the choice box
+ * If there is no card to destroy, throws an exception
+ * @author G10-K03-CardGameOOP
+ */
 public class PlayDestroyCardLoader extends PopupLoader {
     private CardInHand cardPlayed;
     private ChoiceBox<CharacterCardInField> choiceBox;
 
+    /**
+     * initiate the list of cards and choice box
+     * @param cardPlayed the destroy card played
+     * @throws InvalidOperationException if enemy field is empty
+     */
     public PlayDestroyCardLoader(CardInHand cardPlayed) throws InvalidOperationException{
         super();
         this.choiceBox = (ChoiceBox<CharacterCardInField>) popupGui.lookup("#choice_box");
@@ -36,6 +49,13 @@ public class PlayDestroyCardLoader extends PopupLoader {
         this.choiceBox.setItems(new ObservableListWrapper<>(opponentCharactersInField));
     }
 
+    /**
+     * {@inheritDoc}
+     * set up the confirm and cancel button
+     * confirm button will try to execute the event, and will
+     * throw an exception to eventbus if exception occured
+     * to get handled by board controller
+     */
     @Override
     public Popup getPopup() {
         Popup popup = new Popup();

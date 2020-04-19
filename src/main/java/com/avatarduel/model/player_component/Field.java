@@ -76,8 +76,6 @@ public class Field {
     public void addSkillCard(SkillCard card, int index, int createdAt){
         if (isAbleToAddSkill()) {
            skillCardList.add((SkillCardInField) cardFactory.createCardInField(card, createdAt,index, null));
-        } else {
-            System.out.println("Unable to add skill card");
         }
     }
 
@@ -95,14 +93,12 @@ public class Field {
     }
 
     public int getEmptySkillCardIndex()  {
-        System.out.println("Getting the skill index");
         List<Integer> notAvailableIndex = new ArrayList<>();
         for(SkillCardInField skillCardInField : skillCardList) {
             notAvailableIndex.add(skillCardInField.getIndex());
         }
         for(int i = 0 ; i < 6 ; i++) {
             if(!notAvailableIndex.contains(i)) {
-                System.out.println(i);
                 return i;
             }
         }

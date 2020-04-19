@@ -63,14 +63,27 @@ public class Deck extends Stack<Card>{
         shuffle();
     }
 
+    /**
+     * select 1 random card from the list of cards
+     * @param cardList list of cards
+     * @return a card
+     */
     private Card selectRandom(List<Card> cardList) {
         return cardList.get(new Random().nextInt(cardList.size()));
     }
 
+    /**
+     * shuffle the deck using collections.shuffle
+     */
     public void shuffle() {
         Collections.shuffle(this);
     }
 
+    /**
+     * draw the card, using the operation pop() from stack
+     * @return card
+     * @throws EmptyStackException if there is no card left
+     */
     public Card draw() throws EmptyStackException{
         return super.pop();
     }

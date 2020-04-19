@@ -9,16 +9,30 @@ import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRe
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.sun.javafx.collections.ObservableListWrapper;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Popup;
 
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ * used to manage attack pop up when the attack button is clicked
+ * on character card in play
+ * @author G10-K03-CardGameOOP
+ */
 public class AttackPopupLoader extends PopupLoader {
     private CharacterCardInField attacker;
     private ChoiceBox<CharacterCardInField> choiceBox;
 
+    /**
+     * Load the enemy field and put them on a list, and then
+     * show them as options to attack
+     * if there is an exception, post it to the eventbus
+     * to get handled by board controller
+     * @param attacker the card that attacks
+     */
     public AttackPopupLoader(CharacterCardInField attacker) {
         super();
         try {
@@ -29,10 +43,15 @@ public class AttackPopupLoader extends PopupLoader {
             choiceBox.setItems(new ObservableListWrapper<>(opponentField));
         }
         catch(Exception e) {
-            System.out.println("AttackPopupLoader.java : constructor : " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "AttackPopupLoader : cannot load fxml for attack popup");
+            alert.show();
         }
     }
 
+    /**
+     * set up the attack popup and returns it
+     * @return the popup
+     */
     public Popup getPopup() {
         Popup popup = new Popup();
         popup.getContent().add(popupGui);

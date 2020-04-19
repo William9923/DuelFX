@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * used for controlling the card in field's actions, has 2 children : skillcardinfield and charactercardinfield
+ * @author G10-K03-CardGameOOP
  */
 public abstract class CardInFieldController extends CardController {
     protected PlayerType playerType;
