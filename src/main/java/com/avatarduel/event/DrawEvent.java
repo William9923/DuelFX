@@ -6,7 +6,7 @@ import com.avatarduel.model.type.PlayerType;
 /**
  * DrawEvent is a event for drawing card from own deck.
  * Only valid in Draw Phase
- * 
+ *
  * IMPORTANT NOTE:
  * This event will communicate with game singleton instantly, so there are no need to validate
  * In case where event is not possible to do, we throw exception so that the GUI Board can give the
