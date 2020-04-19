@@ -8,6 +8,8 @@ import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
+
+
 public class ChangePositionEvent implements IEvent {
 
     private int characterId;

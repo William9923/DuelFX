@@ -19,6 +19,22 @@ import com.avatarduel.model.type.PlayerType;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * AttackEvent is a event for attacking other opponent character.
+ *
+ * If other opponent Attack / Defense is higher, the attack will still count, but the attacker character will not be destroyed
+ * This event only valid in Battle Phase
+ * If other opponent character that being attacked destroyed, all skill card equipped to that card will be destroyed
+ *
+ * IMPORTANT NOTE:
+ * This event will communicate with game singleton instantly, so there are no need to validate
+ * In case where event is not possible to do, we throw exception so that the GUI Board can give the
+ * error message to the player playing the games
+ *
+ * Also, this event only handle attack other monster case. In case for direct attack, it will be handled by DirectAttackEvent
+ * @author G10-K03-CardGameOOP
+ */
+
 public class AttackEvent implements IEvent {
 
     private int attackCharacterId;
