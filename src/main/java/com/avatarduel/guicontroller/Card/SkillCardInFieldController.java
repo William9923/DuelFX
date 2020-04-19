@@ -1,9 +1,8 @@
 package com.avatarduel.guicontroller.Card;
 
 import com.avatarduel.event.RemoveSkillCardEvent;
-import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Board.FieldController;
-import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.FieldRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.type.PlayerType;

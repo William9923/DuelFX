@@ -13,5 +13,5 @@ public interface ExceptionCause {
      * get the cause of the exception
      * @return String that describe the exception
      */
-    public String getCause();
+    String getCause();
 }

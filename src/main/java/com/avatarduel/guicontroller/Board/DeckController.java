@@ -2,8 +2,9 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.event.DrawEvent;
 import com.avatarduel.event.IEvent;
-import com.avatarduel.guicontroller.RenderRequest.DeckRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.*;
+import com.avatarduel.guicontroller.Request.GlobalRequest.GameStatusRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.DeckRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.*;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
@@ -17,7 +18,9 @@ public class DeckController  {
     @FXML Rectangle shape;
 
     @FXML
-    public void initialize() { }
+    public void initialize() {
+        Game.getInstance().getEventBus().register(this);
+    }
 
     @Subscribe
     public void drawAndRender(DeckDrawAndRenderRequest request) {

@@ -1,6 +1,6 @@
 package com.avatarduel.guicontroller.Board;
 
-import com.avatarduel.guicontroller.RenderRequest.GameStatusRenderRequest;
+import com.avatarduel.guicontroller.Request.GlobalRequest.GameStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
@@ -13,6 +13,7 @@ public class GameStatusController {
 
     @FXML
     public void initialize() {
+        Game.getInstance().getEventBus().register(this);
         game_turn.setText(Integer.toString(Game.getInstance().getCurrentTurn()));
         current_player.setText(Game.getInstance().getCurrentPlayer().toString());
         game_phase.setText(Game.getInstance().getCurrentPhase().getPhase().toString());

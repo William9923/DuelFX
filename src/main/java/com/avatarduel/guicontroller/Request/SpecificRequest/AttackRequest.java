@@ -1,10 +1,9 @@
-package com.avatarduel.guicontroller.RenderRequest;
+package com.avatarduel.guicontroller.Request.SpecificRequest;
 
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
-import com.avatarduel.model.type.PlayerType;
 
-public class AttackRequest extends RenderRequest{
+public class AttackRequest extends SpecificPlayerRequest {
     private CharacterCardInField attacker;
     public AttackRequest(CharacterCardInField attacker) {
         super(Game.getInstance().getCurrentPlayer());

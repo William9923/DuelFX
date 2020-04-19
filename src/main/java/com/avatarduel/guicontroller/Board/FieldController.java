@@ -2,7 +2,7 @@ package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Card.CharacterCardInFieldController;
 import com.avatarduel.guicontroller.Card.SkillCardInFieldController;
-import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.FieldRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCardInField;
@@ -51,6 +51,7 @@ public class FieldController {
 
     @FXML
     public void initialize() {
+        Game.getInstance().getEventBus().register(this);
         this.characters = new HashMap<>();
         this.skills = new HashMap<>();
         characters.put("0", character1Controller);

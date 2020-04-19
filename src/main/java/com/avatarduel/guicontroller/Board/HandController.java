@@ -1,7 +1,7 @@
 package com.avatarduel.guicontroller.Board;
 
 import com.avatarduel.guicontroller.Card.CardInHandController;
-import com.avatarduel.guicontroller.RenderRequest.HandRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.HandRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.player_component.Hand;
@@ -43,6 +43,7 @@ public class HandController{
 
     @FXML
     public void initialize() {
+        Game.getInstance().getEventBus().register(this);
         cards = new ArrayList<CardInHandController>();
         cards.add(card1Controller);
         cards.add(card2Controller);
