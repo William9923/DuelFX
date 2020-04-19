@@ -186,35 +186,36 @@ You can explore more about gradle [here](https://guides.gradle.org/creating-new-
 
 ## APPLICATION
 ### Here are fews examples of how the game looks
+
+**Main Menu**
 * ![Main Menu](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/tampilan%20utama.jpg)
-*Main Menu*
 
+**Character that use in field**
 * ![Character that use in field](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/characterinfield.jpg)
-*Character that use in field*
 
+**Playing the cards from hand**
 * ![Playing the cards from hand](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/mainin%20kartu%20dari%20tangan.jpg)
-*Playing the cards from hand*
 
+**Player description and Card Description**
 * ![Player description and Card Description](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Player%20and%20card%20desc.jpg)
-*Player description and Card Description*
 
+**Defense Position**
 * ![Defense Position](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Defense%20Position.jpg)
-*Defense Position*
 
+**Error Message**
 * ![Error Message](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/error%20message.jpg)
-*Error Message*
 
+**Pop up to use some skills**
 * ![Pop up to use some skills](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Pop%20Up%20to%20use%20skill.jpg)
-*Pop up to use some skills*
 
+**Skill Card In Use**
 * ![Skill Card In Use](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/skill%20card%20in%20use.jpg)
-*Skill Card In Use*
 
+**Game Status and End Button**
 * ![Game Status and End Button](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/game%20status%20and%20end%20button.jpg)
-*Game Status and End Button*
 
+**A Win Message**
 * ![A Win Message](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/win%20message.jpg)
-*A Win Message*
 
 ## Credit
 All images and description are taken from [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)
