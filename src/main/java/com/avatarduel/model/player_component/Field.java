@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Field is one of component that used for to put all the cards that we used to play the game
+ *
+ * IMPORTANT NOTE:
+ * Field able to filter which card can be in field which can't.
+ * Also there is limit number card in Field.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class Field {
     private List<CharacterCardInField> charCardList;
     private List<SkillCardInField> skillCardList;

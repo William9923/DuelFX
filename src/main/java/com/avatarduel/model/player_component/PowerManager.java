@@ -2,6 +2,13 @@ package com.avatarduel.model.player_component;
 
 import com.avatarduel.model.type.Element;
 
+/**
+ * PowerManager is one of component that used to manage the power for each element that
+ * can be added or reduced according to the situation and also when
+ * the phase got reset the power will also got reset.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class PowerManager {
     protected int current_fire;
     protected int current_water;

@@ -9,6 +9,16 @@ import com.avatarduel.model.type.PlayerType;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Deck is one of component that used for to put stacks of cards before move to hands
+ *
+ * IMPORTANT NOTE:
+ * Deck maximum number is 60 and minimum 40 cards.
+ * If one of player that loses all the cards in the deck first
+ * That player will automatically lose.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class Deck extends Stack<Card>{
     private CardDAO csvDao;
     private int deckSize;

@@ -4,6 +4,14 @@ import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
+/**
+ * SkillPowerUpCard is one the unique SkillCard types that able to increase or decrease the attack
+ * and defense of the character.
+ * But if the targeted player attack the enemy which in defense state, the enemy's HP most likely
+ * still got decreased/attacked.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class SkillPowerUpCard extends SkillCard {
 
     public SkillPowerUpCard(int id, String name, Element element, String description, String image, String power) {

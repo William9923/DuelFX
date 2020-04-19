@@ -4,6 +4,11 @@ import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
+/**
+ * SkillDestoryCard is one the SkillCard types that able to kill the targeted player.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class SkillDestroyCard extends SkillCard {
 
     // Destroy Skill Card

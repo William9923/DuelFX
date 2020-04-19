@@ -1,5 +1,10 @@
 package com.avatarduel.model.type;
 
+/**
+ * An enum class only to distinguish the type of cards
+ * @author G10-K03-CardGameOOP
+ */
+
 public enum CardType {
     CHARACTER("character"),
     SKILL_AURA("skill aura"),

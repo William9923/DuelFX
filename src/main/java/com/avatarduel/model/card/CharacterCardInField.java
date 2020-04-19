@@ -8,6 +8,13 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+/**
+ * CharacterCardInField is a class for the character that in field states.
+ * CharacterCardInField also has 2 states which are attack or defense that will
+ * determine the process of the game.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class CharacterCardInField implements IField{
     private CharacterCard card;
     public boolean hasAttacked;

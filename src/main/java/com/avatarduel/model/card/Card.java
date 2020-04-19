@@ -5,6 +5,13 @@ import com.avatarduel.model.type.Element;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.util.Loader;
 
+/**
+ * Card is the main object of our game application that consists of id, name,
+ * element, description, image, type, and power.
+ * Each attribute also have its own types.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class Card  {
     protected int id;
     protected String name;

@@ -4,6 +4,12 @@ import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Element;
 
+/**
+ * SkillAuraCard is one the SkillCard types that able to increase or decrease the attack
+ * and defense of the character.
+ * @author G10-K03-CardGameOOP
+ */
+
 public class SkillAuraCard extends SkillCard {
 
     private int attack;

@@ -6,6 +6,15 @@ import com.avatarduel.model.type.PlayerType;
 
 import java.util.EmptyStackException;
 
+/**
+ * Player is one of component that play the game itself
+ *
+ * IMPORTANT NOTE:
+ * Each player can draw cards from deck and put it in Hand then in Field
+ * Player also has HP that will determine the winner of this game
+ * @author G10-K03-CardGameOOP
+ */
+
 public class Player {
     protected Deck deck;
     protected Field field;
