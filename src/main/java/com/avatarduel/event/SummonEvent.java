@@ -38,9 +38,10 @@ public class SummonEvent implements IEvent {
         this.index = index;
         this.factory = new CardInFieldFactory();
     }
-    public SummonEvent(int idCard, PlayerType playerType) throws InvalidOperationException {
-        this(idCard,playerType,CharacterState.ATTACK,Game.getInstance().getPlayerByType(playerType).getField().getEmptyCharacterIndex());
-    }
+
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException {
         CharacterCard charCard = (CharacterCard) Game.getInstance().getPlayerByType(playerType).getHand()

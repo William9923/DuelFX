@@ -12,5 +12,8 @@ import com.avatarduel.exception.InvalidOperationException;
  */
 
 public interface IEvent {
+    /**
+     * execute method to run the event invoked by user action
+     */
     public void execute() throws InvalidOperationException;
 }

@@ -47,6 +47,9 @@ public class AttackEvent implements IEvent {
         this.defender = defender;
     }
 
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException{
         CharacterCardInField attackChar = Game.getInstance()

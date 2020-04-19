@@ -30,6 +30,9 @@ public class PlayLandCardEvent implements IEvent {
         this.landCardID = idCard;
     }
 
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException {
         LandCard landCard = (LandCard) Game.getInstance().getPlayerByType(playerType).getHand().stream()

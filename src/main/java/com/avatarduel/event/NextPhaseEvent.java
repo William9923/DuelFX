@@ -20,9 +20,11 @@ import com.avatarduel.model.type.Phase;
 public class NextPhaseEvent implements IEvent {
 
     public NextPhaseEvent() {
-        // untuk sementara, validasi next phase cukup gini saja
     }
 
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException {
         Phase currPhase = Game.getInstance().getCurrentPhase().getPhase();

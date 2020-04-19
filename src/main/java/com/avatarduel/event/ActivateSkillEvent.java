@@ -44,6 +44,10 @@ public class ActivateSkillEvent implements IEvent {
     public ActivateSkillEvent(int idCard, int idTarget, PlayerType playerType) {
         this(idCard, idTarget, playerType, Game.getInstance().getPlayerByType(playerType).getField().getEmptySkillCardIndex());
     }
+
+    /**
+     * execute method to run the event invoked by user action
+     */
     @Override
     public void execute() throws InvalidOperationException {
         SkillCard skillCard = (SkillCard) Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer()).getHand()
