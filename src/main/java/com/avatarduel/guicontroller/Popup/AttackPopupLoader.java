@@ -9,6 +9,7 @@ import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRe
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.sun.javafx.collections.ObservableListWrapper;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Popup;
@@ -42,7 +43,8 @@ public class AttackPopupLoader extends PopupLoader {
             choiceBox.setItems(new ObservableListWrapper<>(opponentField));
         }
         catch(Exception e) {
-            System.out.println("AttackPopupLoader.java : constructor : " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "AttackPopupLoader : cannot load fxml for attack popup");
+            alert.show();
         }
     }
 

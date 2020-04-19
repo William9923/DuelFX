@@ -88,10 +88,7 @@ public class AttackEvent implements IEvent {
         attackChar.hasAttacked = true; // nandain dia uda attack jd ga bisa attack lagi
         // artinya menang
         if (diff >= 0) {
-            System.out.println("Attack Difference : " + diff);
-            System.out.println("Defender : " + defender);
             if (defenseChar.getPosition().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) { // pierce effect
-                System.out.println("Reducing Health Point");
                 Game.getInstance().getPlayerByType(defender).setHealthPoint(Game.getInstance().getPlayerByType(defender).getHealthPoint()- diff);
             }
 

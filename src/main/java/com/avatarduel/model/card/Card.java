@@ -93,10 +93,4 @@ public class Card  {
     public void setType(CardType type) {
         this.type = type;
     }
-
-    public void show() {
-        System.out.println("ID : " + getId() + " Name : " + getName());
-        System.out.println("Description : " + getDescription());
-        System.out.println("Type : " + getType());
-    }
 }

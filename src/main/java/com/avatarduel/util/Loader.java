@@ -1,18 +1,18 @@
 package com.avatarduel.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.*;
-
 import com.avatarduel.factory.CardFactory;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.type.CardType;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Loader is a class to load the data from CSVReader into card objects
- *
- * @author K10
+ * @author G10-K03-CardGameOOP
  */
 public class Loader {
     public static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";

@@ -6,7 +6,6 @@ import com.avatarduel.model.type.CharacterState;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 /**
  * CharacterCardInField is a class for the character that in field states.
@@ -34,7 +33,6 @@ public class CharacterCardInField implements IField{
 
 
     public void refresh() {
-        System.out.println(this + "refreshed");
         hasAttacked = false;
     }
 
@@ -84,9 +82,13 @@ public class CharacterCardInField implements IField{
         return bonus.get();
     }
 
+    /**
+     * check if there is any skill card associated with this character
+     * if yes return true, else return false
+     * @return boolean
+     */
     public boolean isPowerUp() {
         for (Card card : connectedCard) {
-            System.out.println(card.getType());
             if (card.getType() == CardType.SKILL_POWER_UP) {
                 return true;
             }
@@ -94,16 +96,18 @@ public class CharacterCardInField implements IField{
         return false;
     }
 
+    /**
+     * add a skill card to this character card
+     * @param card the card attached
+     */
     public void pair(SkillCard card) {
         connectedCard.add(card);
     }
 
-    public void removePair(Card card) {
-        connectedCard = connectedCard.stream()
-                .filter(c -> !card.equals(c))
-                .collect(Collectors.toList());
-    }
-
+    /**
+     * @return total attack if the character is on attack state, else
+     * return the total defense
+     */
     public int getCurrentTotal() {
         if (getPosition().equals(CharacterState.ATTACK)) {
             return getTotalAttack();
@@ -112,6 +116,12 @@ public class CharacterCardInField implements IField{
         }
     }
 
+    /**
+     * this is actually important. Used for the upper class to tell whether
+     * a character has passed a turn or not, if the character has passed a turn, then
+     * it can attack, else throw an exception
+     * @return the turn this card is created
+     */
     public int getCreatedAtTurn() {
         return createdAtTurn;
     }
@@ -120,14 +130,25 @@ public class CharacterCardInField implements IField{
         return connectedCard;
     }
 
+    /**
+     * get total attack from buffs and debuff from other skill card
+     * @return the total attack
+     */
     public int getTotalAttack() {
         return Math.max(0, card.getAttack() + getBonusAttack());
     }
 
+    /**
+     * get total defense from buffs and debuff from other skill card
+     * @return the total defense
+     */
     public int getTotalDefense() {
         return Math.max(0, card.getDefense() + getBonusDefense());
     }
 
+    /**
+     * rotate the character from attack to defense or vice versa
+     */
     public void switchPosition() {
         if (CharacterState.ATTACK.equals(position)) {
             position = CharacterState.DEFENSE;
@@ -136,6 +157,10 @@ public class CharacterCardInField implements IField{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string that specifies this card
+     */
     @Override
     public String toString() {
         return "ID:" + Integer.toString(this.getCard().getId()) + " | " + this.getCard().getName();

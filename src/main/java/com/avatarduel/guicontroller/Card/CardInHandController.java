@@ -16,7 +16,6 @@ import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRe
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.Card;
 import com.avatarduel.model.card.CardInHand;
-import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
@@ -24,9 +23,6 @@ import com.avatarduel.model.type.PlayerType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Popup;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * used to set the card in hand and playing it
@@ -139,7 +135,7 @@ public class CardInHandController extends CardController{
                 return;
             }
             else if (cardData.getType() == CardType.CHARACTER) {
-                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, getSmallestCharacterIndexPossible());
+                event = new SummonEvent(cardData.getId(), Game.getInstance().getCurrentPlayer(), CharacterState.ATTACK, Game.getInstance().getPlayerByType(playerType).getField().getEmptyCharacterIndex());
                 event.execute();
                 Game.getInstance().getEventBus().post(new HandRenderRequest(playerType));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(playerType));
@@ -158,29 +154,6 @@ public class CardInHandController extends CardController{
         catch (InvalidOperationException IOE) {
             Game.getInstance().getEventBus().post(IOE);
         }
-    }
-
-    /**
-     * get the smallest character index to display on field
-     */
-    private int getSmallestCharacterIndexPossible() {
-        List<CharacterCardInField> listOfCharacter = Game.getInstance().getPlayerByType(playerType).getField().getCharCardList();
-        List<Integer> indexList = listOfCharacter.stream()
-                .map(c -> c.getIndex())
-                .collect(Collectors.toList());
-        return getSmallestIndex(indexList);
-    }
-
-    /**
-     * get smallest index from a sequence of integer
-     */
-    private int getSmallestIndex(List<Integer> sequence) {
-        for (int i = 0; i < sequence.size() + 1; i++){
-            if (!sequence.contains(i)){
-                return i;
-            }
-        }
-        return -1;
     }
 
     /**

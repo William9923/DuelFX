@@ -2,6 +2,7 @@ package com.avatarduel.guicontroller.Popup;
 
 import com.avatarduel.guicontroller.util.FXMLHandler;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Popup;
@@ -21,7 +22,7 @@ public abstract class PopupLoader {
     protected Label title;
 
     /**
-     * load the fxml, if fail, will print line into the console.
+     * load the fxml, if fail, will send an alert
      * if success, inject the fxml button and label into this card
      * protected components
      */
@@ -34,7 +35,8 @@ public abstract class PopupLoader {
             this.cancelButton = (Button) popupGui.lookup("#cancel_button");
         }
         catch (IOException IOE) {
-            System.out.println("ActionForm.fxml path is wrong, check file popuploader.java ");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "PopupLoader.java : cannot load fxml file");
+            alert.show();
         }
     }
 
