@@ -12,6 +12,16 @@ import com.avatarduel.model.type.CardType;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
 
+/**
+ * PlayLandCardEvent is a event for activating land card.
+ *
+ * IMPORTANT NOTE:
+ * This event will communicate with game singleton instantly, so there are no need to validate
+ * In case where event is not possible to do, we throw exception so that the GUI Board can give the
+ * error message to the player playing the games
+ * @author G10-K03-CardGameOOP
+ */
+
 public class PlayLandCardEvent implements IEvent {
     private PlayerType playerType;
     private int landCardID;
