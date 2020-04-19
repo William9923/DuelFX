@@ -38,7 +38,7 @@ public class SummonEvent implements IEvent {
         this.index = index;
         this.factory = new CardInFieldFactory();
     }
-    
+
     /**
      * execute method to run the event invoked by user action
      */
