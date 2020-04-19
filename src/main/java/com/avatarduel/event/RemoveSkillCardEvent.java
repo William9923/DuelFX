@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  * RemoveSkillCardEvent is a event for removing skill card that are on the field.
- * 
+ *
  * IMPORTANT NOTE:
  * Only able to remove the card that are already equipped / placed in the field
  * This event will communicate with game singleton instantly, so there are no need to validate
