@@ -17,3 +17,5 @@ id	name	element	description	imagepath
 16	Fire Fountain City	FIRE	A large industrial city located in the Fire Nation.	src/res/image/land/Fire Fountain City.png
 17	Lion Turtle	ENERGY	A large Lion Turtle Animal that always moves.	src/res/image/land/Lion Turtle.png
 18	Spirit's World	ENERGY	A new realm that consists of spirits.	src/res/image/land/Spirit's World.png
+100	Energy core	ENERGY	Core of the energy	src/res/image/land/Energy Core.png
+101	Morioh	ENERGY	The homeland of Yoshikage Kira	src/res/image/land/Morioh.png

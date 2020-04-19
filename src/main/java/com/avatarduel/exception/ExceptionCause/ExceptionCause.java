@@ -1,11 +1,17 @@
 package com.avatarduel.exception.ExceptionCause;
 
 /**
- * ExceptionCause is an interface to use in varies exception that usually
- * other classes will overide due to many causes of the exception.
- * @author G10-K03-CardGameOOP
+ * Defines the cause of an exception
+ * The difference between Exception and cause is,
+ * the exception defines what the player cannot do
+ * The cause describe why the player cannot do it
  */
 
 public interface ExceptionCause {
-    public String getCause();
+
+    /**
+     * get the cause of the exception
+     * @return String that describe the exception
+     */
+    String getCause();
 }

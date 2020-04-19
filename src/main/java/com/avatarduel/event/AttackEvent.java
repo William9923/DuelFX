@@ -5,7 +5,6 @@ import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
 import com.avatarduel.exception.ExceptionCause.MultipleAttackOnTheSameTurnCause;
 import com.avatarduel.exception.InvalidAttackException;
 import com.avatarduel.exception.InvalidOperationException;
-import com.avatarduel.exception.InvalidPhaseException;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
@@ -67,7 +66,7 @@ public class AttackEvent implements IEvent {
         PlayerType currPlayer = Game.getInstance().getCurrentPlayer();
 
         if (!currPhase.equals(Phase.BATTLE)){
-            throw new InvalidPhaseException(new InvalidPhaseCause(attackChar.getCard().getType()));
+            throw new InvalidAttackException(new InvalidPhaseCause(Phase.BATTLE));
         }
 
         if (f1.getCharacterCardByID(attackCharacterId).getCreatedAtTurn() == currentTurn) {

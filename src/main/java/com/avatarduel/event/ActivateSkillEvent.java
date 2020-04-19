@@ -1,10 +1,7 @@
 package com.avatarduel.event;
 
 import com.avatarduel.exception.*;
-import com.avatarduel.exception.ExceptionCause.FullBoardCause;
-import com.avatarduel.exception.ExceptionCause.NoCharacterCardInFieldCause;
-import com.avatarduel.exception.ExceptionCause.NotEnoughPowerCause;
-import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.ExceptionCause.*;
 import com.avatarduel.factory.CardInFieldFactory;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
@@ -78,19 +75,19 @@ public class ActivateSkillEvent implements IEvent {
 
 
         if (currPhase != Phase.MAIN) {
-            throw new InvalidPhaseException(new InvalidPhaseCause(skillCard.getType()));
+            throw new InvalidSkillActivationException(new InvalidPhaseCause(Phase.MAIN));
         }
 
         if (inField == null) {
-            throw new EmptyFieldException(new NoCharacterCardInFieldCause(skillCard.getType()));
+            throw new InvalidSkillActivationException(new NoCharacterCardInFieldCause(skillCard.getType()));
         }
 
         if (currentFieldSize >= Game.getInstance().getPlayerByType(playerType).getField().getFieldSize()) {
-            throw new NotEnoughSpaceException(new FullBoardCause(skillCard.getType()));
+            throw new InvalidSkillActivationException(new FullBoardCause(skillCard.getType()));
         }
 
         if (skillCard.getPower() > Game.getInstance().getPlayerByType(playerType).getPower().getCurrent(skillCard.getElement())) {
-            throw new NotEnoughPowerException(new NotEnoughPowerCause(skillCard.getElement()));
+            throw new InvalidSkillActivationException(new NotEnoughPowerCause(skillCard.getElement()));
         }
 
         if (skillCard.getType() == CardType.SKILL_POWER_UP) {

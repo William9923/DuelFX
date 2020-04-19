@@ -1,10 +1,13 @@
 package com.avatarduel.guicontroller.Card;
 
-import com.avatarduel.event.*;
+import com.avatarduel.event.ChangePositionEvent;
+import com.avatarduel.event.DirectAttackEvent;
+import com.avatarduel.event.IEvent;
+import com.avatarduel.event.NextPhaseEvent;
+import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.guicontroller.Popup.AttackPopupLoader;
-import com.avatarduel.guicontroller.RenderRequest.GameStatusRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.PlayerStatusRenderRequest;
-import com.avatarduel.guicontroller.RenderRequest.CheckWinRequest;
+import com.avatarduel.guicontroller.Request.GlobalRequest.GameStatusRenderRequest;
+import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.type.CharacterState;
@@ -16,16 +19,17 @@ import javafx.stage.Popup;
 
 import java.util.List;
 
+/**
+ * used to manage data of character card in field, and manage its action such as rotating and attacking
+ */
 public class CharacterCardInFieldController extends CardInFieldController {
     @FXML ImageView card_rotate;
     @FXML ImageView card_attack;
     private CharacterCardInField characterCardInField;
 
-    @FXML
-    public void initialize() {
-        card_actions.setVisible(false);
-    }
-
+    /**
+     * set the text, image, etc of the card in field
+     */
     public void setCard(CharacterCardInField cardInField) {
         super.setCard(cardInField.getCard());
         this.characterCardInField = cardInField;
@@ -33,13 +37,24 @@ public class CharacterCardInFieldController extends CardInFieldController {
         super.card_def.setText("DEF : " +  characterCardInField.getTotalDefense());
     }
 
+    /**
+     * rotate the card
+     */
     @FXML
     public void rotateCard() {
-        IEvent event = new ChangePositionEvent(playerType, characterCardInField.getCard().getId());
-        Game.getInstance().getEventBus().post(event);
-        this.renderRotate();
+        try {
+            IEvent event = new ChangePositionEvent(playerType, characterCardInField.getCard().getId());
+            event.execute();
+            this.renderRotate();
+        }
+        catch (InvalidOperationException e) {
+            Game.getInstance().getEventBus().post(e);
+        }
     }
 
+    /**
+     * render the card rotation
+     */
     public void renderRotate() {
         if(characterCardInField.getPosition() == CharacterState.DEFENSE) {
             card_border.rotateProperty().setValue(90);
@@ -51,6 +66,9 @@ public class CharacterCardInFieldController extends CardInFieldController {
         }
     }
 
+    /**
+     * method to show attack popup loader, and posting exception render request
+     */
     @FXML
     public void cardAttack() {
         if(Game.getInstance().getCurrentPhase().getPhase() != Phase.BATTLE) {
@@ -67,10 +85,12 @@ public class CharacterCardInFieldController extends CardInFieldController {
             Popup attackPopup = attackPopupLoader.getPopup();
             attackPopup.show(card_rotate.getScene().getWindow());
         }
-        Game.getInstance().getEventBus().post(new CheckWinRequest());
-        Game.getInstance().getEventBus().post(this.characterCardInField);
     }
 
+    /**
+     * set player type
+     * @param playerType the player type
+     */
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
     }
