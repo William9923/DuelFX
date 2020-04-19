@@ -1,29 +1,40 @@
 package com.avatarduel.phase;
 
-import com.avatarduel.event.DrawEvent;
 import com.avatarduel.model.type.Phase;
+
+/**
+ * DrawPhase is a representation of end phase in the game.
+ * IMPORTANT NOTE:
+ * Player are not going to play in this phase.
+ * This phase only a representation to refresh the game state and draw from the deck
+ * @author G10-K03-CardGameOOP
+ */
+
 
 public class DrawPhase implements IPhase{
 
     private Phase phase;
 
-    //Constructor for DrawPhase
+    /**
+     * DrawPhase Constructor
+     */
     public DrawPhase() {
         phase = Phase.DRAW;
     }
 
-//    public void drawCardAndGoToNextPhase() {
-//        DrawEvent drawEvent = new DrawEvent();
-//        drawEvent.execute();
-//    }
-
-    //Method to return current Phase
+    /**
+     * Get the Phase Enum
+     * @return Phase Object Representation
+     */
     @Override
     public Phase getPhase() {
         return phase;
     }
 
-    //Method to get to the next phase
+    /**
+     * Change the phase into next phase using state design pattern
+     * @return IPhase -> representation of next phase
+     */
     @Override
     public IPhase next() {
         return new MainPhase();
