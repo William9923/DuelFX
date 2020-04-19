@@ -14,9 +14,9 @@ import java.util.List;
  */
 
 public interface CardDAO {
-    public List<Card> getAllCard();
-    public Card getCardById(int id);
-    public List<Card> getAllCharacterCard();
-    public List<Card> getAllSkillCard();
-    public List<Card> getAllLandCard();
+     List<Card> getAllCard();
+     Card getCardById(int id);
+     List<Card> getAllCharacterCard();
+     List<Card> getAllSkillCard();
+     List<Card> getAllLandCard();
 }

@@ -9,7 +9,7 @@ import com.avatarduel.guicontroller.Request.GlobalRequest.ShowSelectedCardReques
 import com.avatarduel.guicontroller.Request.SpecificRequest.CheckWinRequest;
 import com.avatarduel.guicontroller.Request.SpecificRequest.DeckDrawAndRenderRequest;
 import com.avatarduel.guicontroller.Request.SpecificRequest.PlayerStatusRenderRequest;
-import com.avatarduel.guicontroller.util.PlayMusicRequest;
+import com.avatarduel.guicontroller.Request.GlobalRequest.PlayMusicRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.type.PlayerType;
 import com.google.common.eventbus.Subscribe;
