@@ -79,7 +79,8 @@ public class CharacterCardInField implements IField{
 
     public boolean isPowerUp() {
         for (Card card : connectedCard) {
-            if (card.getType().equals(CardType.SKILL_POWER_UP)) {
+            System.out.println(card.getType());
+            if (card.getType() == CardType.SKILL_POWER_UP) {
                 return true;
             }
         }

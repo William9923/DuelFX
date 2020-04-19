@@ -1,8 +1,8 @@
 package com.avatarduel.event;
 
 import com.avatarduel.exception.ExceptionCause.AttackOnTheCreatedTurnCause;
-import com.avatarduel.exception.ExceptionCause.MultipleAttackOnTheSameTurnCause;
 import com.avatarduel.exception.ExceptionCause.InvalidPhaseCause;
+import com.avatarduel.exception.ExceptionCause.MultipleAttackOnTheSameTurnCause;
 import com.avatarduel.exception.InvalidAttackException;
 import com.avatarduel.exception.InvalidOperationException;
 import com.avatarduel.exception.InvalidPhaseException;
@@ -11,7 +11,6 @@ import com.avatarduel.model.card.CharacterCardInField;
 import com.avatarduel.model.card.SkillCard;
 import com.avatarduel.model.card.SkillCardInField;
 import com.avatarduel.model.player_component.Field;
-import com.avatarduel.model.player_component.Player;
 import com.avatarduel.model.type.CharacterState;
 import com.avatarduel.model.type.Phase;
 import com.avatarduel.model.type.PlayerType;
@@ -79,13 +78,19 @@ public class AttackEvent implements IEvent {
             throw new InvalidAttackException(new MultipleAttackOnTheSameTurnCause());
         }
 
+        if (defender != Game.getInstance().getCurrentOpponent()) {
+            throw new InvalidAttackException(new AttackOnTheCreatedTurnCause());
+        }
+
         int diff = attackChar.getCurrentTotal() - defenseChar.getCurrentTotal();
         attackChar.hasAttacked = true; // nandain dia uda attack jd ga bisa attack lagi
         // artinya menang
         if (diff >= 0) {
-            Player p2 = Game.getInstance().getPlayerByType(defender);
+            System.out.println("Attack Difference : " + diff);
+            System.out.println("Defender : " + defender);
             if (defenseChar.getPosition().equals(CharacterState.ATTACK) || attackChar.isPowerUp()) { // pierce effect
-                p2.setHealthPoint(p2.getHealthPoint() - diff);
+                System.out.println("Reducing Health Point");
+                Game.getInstance().getPlayerByType(defender).setHealthPoint(Game.getInstance().getPlayerByType(defender).getHealthPoint()- diff);
             }
 
             List<SkillCard> pairedSkillCard = defenseChar.getConnectedCard();
@@ -100,7 +105,7 @@ public class AttackEvent implements IEvent {
                         .filter(c -> c.getCard().getId() != card.getId())
                         .collect(Collectors.toList()));
             }
-            p2.removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
+            Game.getInstance().getPlayerByType(defender).removeCharacterFromFieldByID(defenseCharacterId); // hancurin kartu lawan
         }
     }
 }

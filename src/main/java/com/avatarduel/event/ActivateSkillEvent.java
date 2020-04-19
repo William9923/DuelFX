@@ -93,6 +93,10 @@ public class ActivateSkillEvent implements IEvent {
             throw new NotEnoughPowerException(new NotEnoughPowerCause(skillCard.getElement()));
         }
 
+        if (skillCard.getType() == CardType.SKILL_POWER_UP) {
+            System.out.println("Activate Power Up");
+        }
+
         Player p = Game.getInstance().getPlayerByType(Game.getInstance().getCurrentPlayer());
         p.getHand().remove(skillCard);
         p.getField().addSkillCard(skillCard, index, Game.getInstance().getCurrentTurn());

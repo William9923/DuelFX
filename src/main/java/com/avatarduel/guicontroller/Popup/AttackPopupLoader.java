@@ -3,6 +3,7 @@ package com.avatarduel.guicontroller.Popup;
 import com.avatarduel.event.AttackEvent;
 import com.avatarduel.event.IEvent;
 import com.avatarduel.guicontroller.RenderRequest.FieldRenderRequest;
+import com.avatarduel.guicontroller.RenderRequest.PlayerStatusRenderRequest;
 import com.avatarduel.model.Game;
 import com.avatarduel.model.card.CharacterCardInField;
 import com.sun.javafx.collections.ObservableListWrapper;
@@ -39,6 +40,7 @@ public class AttackPopupLoader extends PopupLoader {
                 Game.getInstance().getEventBus().post(event);
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentOpponent()));
                 Game.getInstance().getEventBus().post(new FieldRenderRequest(Game.getInstance().getCurrentPlayer()));
+                Game.getInstance().getEventBus().post(new PlayerStatusRenderRequest(Game.getInstance().getCurrentOpponent()));
             }
             popup.hide();
         });
