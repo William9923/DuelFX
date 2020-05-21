@@ -9,6 +9,7 @@
 * 13518138 / William
 
 ## Code Structure
+```
 CardGameOOP
 ├───src
 ├───main
@@ -158,7 +159,7 @@ CardGameOOP
             └───phase
             └───util
                 └───LoaderTest.java
-
+```
 ## How To Compile & Run
 
 ### Requirements
