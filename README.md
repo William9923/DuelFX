@@ -1,13 +1,5 @@
-# IF2210 Project Template
-## Semester 2 Tahun 2019/2020
-
-## Kelompok 10 / K03
-* 13518090 / Arthur Edgar Yunanto
-* 13518108 / Vincent Hasiholan
-* 13518111 / Muhamad Mirza Fathan Al Arsyad
-* 13518114 / Mario Gunawan
-* 13518138 / William
-
+# DuelFX
+---
 ## Code Structure
 ```
 CardGameOOP
@@ -220,3 +212,8 @@ You can explore more about gradle [here](https://guides.gradle.org/creating-new-
 
 ## Credit
 All images and description are taken from [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)
+
+## Contributor
+* [Arthur Edgar Yunanto](https://github.com/arthuredgary24)
+* [Mario Gunawan](https://github.com/margunwa123)
+* [William](https://github.com/William9923)
