@@ -1,5 +1,7 @@
 # DuelFX
 ---
+A Duel - based card game that were created using JavaFX. Similar to how duel monster game works, but you will play with avatar character ^^
+
 ## Code Structure
 ```
 CardGameOOP
