@@ -1,55 +1,6 @@
-<p align="center">
-    <img src="docs/thumbnail.gif" width="400">
-    <h2 align="center">Duel FX</h2>
-</p> 
-<p align="center">A trading card game built using javafx to learn OOP in medium sized application based on the famous cartoon <code>Avatar Aang Series</code></p>
-
-> Notes: The game mechanics itself is highly inspired by YugiOh Trading Card Game System. For the detail of how to play the game please refer to this [link](https://en.wikipedia.org/wiki/Yu-Gi-Oh!_Trading_Card_Game).
-
-## ✨ Features
-
-- Main Menu / Lobby
-- Arena / Duel
-- Various Card Type
-- Zones
-- Phase
-- End Battle
-
-### Here are fews examples of how the game looks
-
-**Main Menu**
-* ![Main Menu](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/tampilan%20utama.jpg)
-
-**Character that use in field**
-* ![Character that use in field](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/characterinfield.jpg)
-
-**Playing the cards from hand**
-* ![Playing the cards from hand](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/mainin%20kartu%20dari%20tangan.jpg)
-
-**Player description and Card Description**
-* ![Player description and Card Description](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Player%20and%20card%20desc.jpg)
-
-**Defense Position**
-* ![Defense Position](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Defense%20Position.jpg)
-
-**Error Message**
-* ![Error Message](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/error%20message.jpg)
-
-**Pop up to use some skills**
-* ![Pop up to use some skills](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Pop%20Up%20to%20use%20skill.jpg)
-
-**Skill Card In Use**
-* ![Skill Card In Use](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/skill%20card%20in%20use.jpg)
-
-**Game Status and End Button**
-* ![Game Status and End Button](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/game%20status%20and%20end%20button.jpg)
-
-**A Win Message**
-* ![A Win Message](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/win%20message.jpg)
-
-## Credit
-All images and description are taken from [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)
-
+# DuelFX
+---
+A Duel - based card game that were created using JavaFX. Similar to how duel monster game works, but you will play with avatar character ^^
 
 ## Code Structure
 ```
@@ -57,7 +8,7 @@ CardGameOOP
 ├───src
 ├───main
     ├───java
-        └───com.avatarduel
+    |   └───com.avatarduel
             └───dao
                 └───CardDAO.java
                 └───CSVCardDAO.java
@@ -203,19 +154,68 @@ CardGameOOP
             └───util
                 └───LoaderTest.java
 ```
+## How To Compile & Run
 
-## 📚 Tech Stack
-- Java
-- JavaFx (GUI)
+### Requirements
+1. Download and Install Java 8 (JDK 1.8) [here](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
+
+### How to Run
+Here is an example of project using gradle as the build tools.
+Try running these commands in your terminals : <br>
+Linux : <br>
+```bash
+./gradlew run
+```
+Windows : <br>
+```bash
+gradlew run
+```
+
+You will notice that it will open a window that display 'Avatar Duel'.
+In the command line you can see the data that is being read by `CSVReader.java`
+
+What happen is when you use `./gradlew run`, it will start the main function in your app.
+For this app, the main function lives in `AvatarDuel.java`.
+
+You can explore more about gradle [here](https://guides.gradle.org/creating-new-gradle-builds/)
+
+## APPLICATION
+### Here are fews examples of how the game looks
+
+**Main Menu**
+* ![Main Menu](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/tampilan%20utama.jpg)
+
+**Character that use in field**
+* ![Character that use in field](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/characterinfield.jpg)
+
+**Playing the cards from hand**
+* ![Playing the cards from hand](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/mainin%20kartu%20dari%20tangan.jpg)
+
+**Player description and Card Description**
+* ![Player description and Card Description](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Player%20and%20card%20desc.jpg)
+
+**Defense Position**
+* ![Defense Position](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Defense%20Position.jpg)
+
+**Error Message**
+* ![Error Message](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/error%20message.jpg)
+
+**Pop up to use some skills**
+* ![Pop up to use some skills](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/Pop%20Up%20to%20use%20skill.jpg)
+
+**Skill Card In Use**
+* ![Skill Card In Use](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/skill%20card%20in%20use.jpg)
+
+**Game Status and End Button**
+* ![Game Status and End Button](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/game%20status%20and%20end%20button.jpg)
+
+**A Win Message**
+* ![A Win Message](https://github.com/William9923/CardGameOOP/blob/master/src/main/resources/com/avatarduel/win%20message.jpg)
 
 ## Credit
 All images and description are taken from [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)
 
 ## Contributor
-* [William](https://github.com/William9923)
 * [Arthur Edgar Yunanto](https://github.com/arthuredgary24)
 * [Mario Gunawan](https://github.com/margunwa123)
-
-## ❤️ Support
-If you feel that this repo have helped you provide more example on learning software engineering, then it is enough for me! Wanna contribute more? Please ⭐ this repo so other can see it too!
-
+* [William](https://github.com/William9923)
